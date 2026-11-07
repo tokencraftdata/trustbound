@@ -25,3 +25,13 @@ Provider references and the distinction between actual test-mode work and
 documentation review are in [provider evidence](PROVIDERS.md). The extra
 foundational references and repository diagrams do not silently revise the
 manuscript currently under author review.
+
+## Missing nearest neighbors added in the Option B revision
+
+The manuscript now also cites EffectBound (2609.02866v1), Salas (2609.31490v1),
+AcquireBound (2609.14744v2), Jiang et al. (2609.00060v1), Santos-Grueiro's
+commit-time authorization (2607.10487v2), and the individual closure Internet-Draft
+`draft-watts-oauth-agent-revocation-closure-03`. Source definitions and their
+relevance to the tested dependency are recorded in the
+[flight–hotel comparison](../research/flight_hotel/README.md). The draft is a
+work in progress, not an IETF standard. All were inspected on 6 November 2026.

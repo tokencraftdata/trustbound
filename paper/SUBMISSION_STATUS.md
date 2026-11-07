@@ -2,14 +2,15 @@
 
 Target: **submit by 30 November 2026**. This is our target date, not an arXiv
 deadline or a guaranteed announcement date. The current paper remains a
-conditional trusted-service payment-epoch case study. Trip-level coupling,
-profile composition and fee-bearing compensation are candidate future work.
+conditional trusted-service payment-epoch mechanization note. The tested
+flight–hotel candidate did not establish a new completeness result. A larger
+trip paper is contingent on a different, demonstrated contribution, not promised.
 
 ## Prepared
 
 - Updated draft with two vector diagrams, bounded captions and cross-references.
-- Two additional primary references clarifying existing composition and
-  compensation-accounting results; no claim of a new general closure principle.
+- All six previously missing nearest-neighbor references added and a focused
+  flight–hotel candidate tested and rejected as a novel completeness result.
 - Self-contained LaTeX source archive with both figures and embedded bibliography.
 - Existing proof/test evidence, with the separate 6 November local export checks
   distinguished from historical provider observations.

@@ -1,4 +1,11 @@
-# Trip closure: candidate, not an established result
+# Trip closure: tested candidate rejected as a new completeness result
+
+**Update, 6 November 2026:** the concrete flight–hotel dependency was checked in
+18 finite trace records. It produced an existing stale-authorization failure
+and a distinct final business-condition failure, but no exact-closure
+composition counterexample. See the [executed check and source comparison](../research/flight_hotel/README.md).
+The exploratory assessment below is retained as history, not a claim that its
+suggested novelty survived.
 
 Assessment recorded 6 November 2026. The supplied research report is a proposal
 for a separate multi-provider extension; its heading is dated 7 November. That

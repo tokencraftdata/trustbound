@@ -1,0 +1,51 @@
+{
+  "revision": "Option B mechanization note",
+  "date": "2026-11-06",
+  "pages": 11,
+  "figures": 2,
+  "references": 12,
+  "all_citations_resolved": true,
+  "theorem_statement_and_proof_unchanged": true,
+  "previous_scientific_files_unchanged": 70,
+  "new_checker_executed": {
+    "trace_records": 18,
+    "distinct_event_orders": 3,
+    "profiles": 3,
+    "prefix_records_checked": 72,
+    "suffix_replays_checked": 120,
+    "joint_exact_closure_counterexamples": 0,
+    "early_hotel_closure_rejected": true,
+    "real_provider_calls": 0,
+    "machine_checked_theorems_added": 0,
+    "comparison": "Local encodings of two rules, not implementations or reproductions of cited systems.",
+    "source_sha256": "2a524efaeb462bfc675504383df3e5d835aa8ad6f7535b839e06b9b51e4291c7",
+    "by_mode": {
+      "approval_snapshot": {
+        "traces": 9,
+        "commit_policy_violating_traces": 3,
+        "final_business_property_failures": 6
+      },
+      "atomic_current_guard": {
+        "traces": 9,
+        "commit_policy_violating_traces": 0,
+        "final_business_property_failures": 3
+      }
+    }
+  },
+  "extracted_archive_build_passed": true,
+  "extracted_build_text_equal": true,
+  "typesetter": "Tectonic 0.17.0",
+  "visual_review": "All 11 rendered pages inspected; figure/footnote and reference pages also inspected at full size.",
+  "layout_or_reference_warnings": [],
+  "full_regression_suite_rerun_for_this_revision": false,
+  "prior_lean_checks_rerun_for_this_revision": false,
+  "new_provider_calls": 0,
+  "new_machine_checked_theorems": 0,
+  "sha256": {
+    "paper/TrustBound_Draft.pdf": "9955e3c0cd64b9321fe64db67760574eb4ee2bee460cef8284904128a48a07ee",
+    "paper/TrustBound_arXiv_Source.zip": "92aaff1f2aaed85ba73d66b99e3cf85eee82787d0f9ba0277a3c41d4fcef8cd6",
+    "research/flight_hotel/check_example.py": "2a524efaeb462bfc675504383df3e5d835aa8ad6f7535b839e06b9b51e4291c7",
+    "research/flight_hotel/result.json": "d7054f87a0af14a9bb11a1b6ae7a82b5fbcb43d27f6fda95e0655f67a544b7ef"
+  },
+  "verdict": "This finite flight-hotel candidate establishes no new payment-completeness gap; source mappings are conceptual, not verified reductions or reproduced prior systems."
+}

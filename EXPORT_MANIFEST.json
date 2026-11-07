@@ -570,6 +570,12 @@
         "paper/TrustBound_Draft.pdf"
       ],
       "audit": "paper/REVISION_2026-11-06.json"
+    },
+    {
+      "date": "2026-11-06",
+      "revision": "Option B note and finite flight-hotel candidate check",
+      "audit": "paper/OPTION_B_AUDIT_2026-11-06.json",
+      "description": "Six missing references, concise diagnostic discussion, unchanged core theorem and sources, finite candidate negative result. Current hashes are SHA256SUMS.json; import and earlier revision hashes remain historical."
     }
   ]
 }

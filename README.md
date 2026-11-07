@@ -111,7 +111,9 @@ are included. [Export manifest](EXPORT_MANIFEST.json).
 
 ## Paper and release status
 
-The paper remains a mechanized case study focused on payment completeness.
+The paper is now an Option B mechanization note focused on payment completeness.
+The [flight–hotel candidate check](research/flight_hotel/README.md) found no new
+exact-closure composition counterexample for its declared finite scope.
 Calling the codebase a research framework does not strengthen its theorem,
 novelty, conformance or deployment claims. The author is reviewing the paper;
 the target arXiv submission date is **30 November 2026**, with author metadata,

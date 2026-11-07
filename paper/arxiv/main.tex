@@ -31,8 +31,9 @@ establishes future stability; truthful per-identity outcomes additionally
 establish exact identity-level accounting. A constrained provider model permits
 unregistered inert objects while mediating every activation. Reproduction checks
 14 exported results and rejects eight premise-removal mutations. A finite
-shared-rule diagnostic documents the evidence boundary, and a small flight--hotel
-example separates payment closure from commit-time policy and trip usability.
+diagnostic, whose two strong comparator labels share the same fence-and-contiguity
+acceptance rule, documents the evidence boundary; a small flight--hotel example
+separates payment closure from commit-time policy and trip usability.
 The contribution is an auditable assumption contract, a checked construction,
 and reproducible examples that specialize existing closure and authorization
 principles to payment epochs.
@@ -113,6 +114,7 @@ including in-flight delivery and provider recovery.
 journal and truthful outcomes for the same declared scope and cut.
 \end{description}
 
+\begin{samepage}
 A1 does not imply A2. The state machines enforce abstract ordering in A3; no
 refinement from executable Python and storage to those machines is proved.
 A4 is a semantic source contract, not a conclusion from a terminal-looking
@@ -121,13 +123,14 @@ A separately obtained view from the same processor is not an independently
 trusted issuer. Successful API tests do not establish these premises universally.
 Agents need not trust one another's assertions. Trust is placed in the service's
 enforcement and durable state and in the qualified provider evidence; the model
-does not establish those parties' trustworthiness.
+does not establish those parties' trustworthiness.\par
+\end{samepage}
 
 Figure~\ref{fig:architecture} locates these trust assumptions. The two travel
 agents motivate the request interface; both feed the one trusted payment path
 studied here. The drawing does not assert independent-provider composition.
 
-\begin{figure}[!t]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{figures/architecture.pdf}
 \caption{Conceptual trusted-service architecture. A1--A3 are deployment
@@ -206,6 +209,9 @@ discharge erases a past effect or represents a refund.
 
 \begin{samepage}
 \subsection{Conditional theorem}
+The proof is a direct induction on single transitions followed by disabling
+effect-producing transitions after drainage; the note's value lies in the
+explicit premises and mutation checks rather than proof complexity.
 \begin{theorem}[Fenced identity coverage and exact closure]
 Let $s$ be reachable from the initial state with $F(s)=\mathrm{true}$, and let
 $t$ be reachable from $s$ by any finite permitted run. Then
@@ -404,6 +410,8 @@ end-to-end UCP/AP2 conformance result is claimed.
 Distributed snapshots connect observation of global state to stable
 properties~\cite{chandy}. TrustBound specializes this established distinction
 into a small identity-level payment model and explicit deployment obligations.
+The comparisons below locate that specialization; differences in scope or
+terminology alone establish neither novelty nor weaker trust assumptions.
 
 \paragraph{EffectBound.}
 Santos-Grueiro's EffectBound separates future-use closure, policy-relative effect
@@ -412,7 +420,7 @@ certificates~\cite{effectbound}. Its Kafka evaluation shows earlier authorized
 work surviving an applied-state fence. These directly anticipate our
 fence-without-drain distinction. TrustBound's stronger no-new-effect predicate
 and truthful past-accounting obligation serve a different exact-accounting
-question, without establishing a new closure principle. Both analyses depend
+question. Both analyses depend
 on the adequacy of the modeled provider boundary.
 
 \paragraph{Commit-time authority and mediation.}
@@ -422,16 +430,16 @@ proposal computation from authoritative admission and explains why the authority
 ledger cannot discover effects that bypass all its records~\cite{salas}. Salas's
 admission-to-outbox contract also preserves an admitted decision across a later
 amendment; it should not be confused with rechecking a changing business premise
-at a remote effect. Our ledger and diagnostic instantiate these known mediation
-and observation issues rather than solve them with signatures.
+at a remote effect. Our ledger and diagnostic make those mediation and
+observation obligations explicit for the payment epoch.
 
 \paragraph{AcquireBound and AID-Guard.}
 AcquireBound quarantines acquired outputs before current-state activation and
 checks single-use permits at the effect boundary~\cite{acquirebound}. That is
 close to our inert-object/activation separation. AID-Guard likewise conditions
 safe recovery on qualified terminal evidence and delivery fencing~\cite{aid}.
-The narrower TrustBound models expose the journal, fence and discharge
-obligations directly; their model mapping does not reduce these trust premises.
+The TrustBound models expose the journal, fence and discharge obligations
+directly in the admission-to-provider mapping.
 
 \paragraph{Composition and monetary accounting.}
 Zhu and Wang compose provider frontiers through a shared cut and exact channel
@@ -439,7 +447,7 @@ accounting~\cite{quiescence}; their budget work treats compensation as a separat
 authorized effect~\cite{budget}. Their partition result rules out both local
 availability for a shared unallocated unit and global conservation; it addresses
 spending authority, not a characterization of an auditor's exact-closure
-evidence. This difference in question alone is not a new result.
+evidence.
 Op distinguishes remaining execution rights,
 provider outcomes, finality and subsequent compensation~\cite{op}. These are
 closer foundations than a receipts-only comparison. The flight--hotel check in
@@ -450,8 +458,8 @@ The Op comparison uses its unversioned author manuscript accessed 6 November
 \paragraph{Payment protocols, profiles and closure receipts.}
 Jiang et al. analyze x402, MPP, ACP and AP2 in Tamarin, including correspondence,
 authorization, finality and compensation questions~\cite{protocolanalysis}.
-Their protocol properties and our epoch-wide accounting predicate have different
-scopes; that distinction alone establishes no novelty. HoldSpec's bounded hold
+Their protocol properties concern different scopes from our epoch-wide
+accounting predicate. HoldSpec's bounded hold
 lifecycle checks make provider profiles explicit~\cite{hold}. Watts's closure
 Internet-Draft requires stated coverage and resolution of outstanding and
 unknown relevant work; an authenticated receipt does not prove complete
@@ -535,6 +543,10 @@ part of the 14-export count, and establish no new general security claim.
 
 \section{One flight--hotel candidate check}
 \label{app:trip}
+The tested dependency permits hotel capture only while the flight remains
+active. The two failure modes found were a commit-time policy violation and
+an unusable final trip; neither was a payment-completeness failure.
+
 A synthetic flight has already cost 300 units. A hotel capture of 200 is
 permitted only while the flight remains active. The model orders hotel
 preparation before hotel commit and interleaves flight cancellation; cancellation

@@ -8,7 +8,7 @@ produce another effect? A receipt, an empty client queue, or a signed report is
 not sufficient on its own.
 
 This repository contains a research prototype, Lean models, local tests,
-reproducible diagnostics, and a manuscript under author review. It is **not a
+reproducible diagnostics, and an author-reviewed manuscript. It is **not a
 production payment service**, an independently certified completeness system,
 or evidence of a new general closure principle. The Python implementation is
 not proved to refine the Lean models.
@@ -70,7 +70,7 @@ that comparison. [Artifact instructions and provenance](docs/CORE_ARTIFACT.md).
 | `protocol.py` and related modules | Pinned UCP/AP2 artifact generation and verification | Local SDK usage, not merchant-server or live counterparty conformance |
 | `tests/` | Local unit, fault, crash and synthetic interface checks | Passing tests do not establish all deployment premises |
 | `scripts/` | Reproduction, offline checks and explicit provider probes | Provider probes are opt-in and can perform test-account operations |
-| `paper/` | Reviewed draft PDF and LaTeX source | Author metadata pending; not submitted |
+| `paper/` | Author-reviewed note, anonymous workshop cut and LaTeX sources | Author metadata supplied; not submitted |
 
 For the broader SDK-dependent tests, install the pinned project dependencies:
 
@@ -119,9 +119,12 @@ the trusted-service scope and records one unpromised auditor-evidence question.
 The [research decision and stop rule](docs/TRIP_CLOSURE_CANDIDATE.md) set aside
 trip expansion and reserve optimization. The note does not depend on new research.
 Calling the codebase a research framework does not strengthen its theorem,
-novelty, conformance or deployment claims. The author is reviewing the paper;
-the target arXiv submission date is **30 November 2026**, with author metadata,
-account eligibility, category and licenses still to be finalized.
+novelty, conformance or deployment claims. The author-reviewed note names
+**Sandip Nandi — Independent Researcher**. The target arXiv submission date is
+**30 November 2026**, or earlier once account eligibility, category, licensing
+and artifact access are resolved. The separate
+[anonymous workshop cut](paper/workshop/README.md) is seven pages including
+references in the official AAAI-2027 style; no submission is implied.
 
 This is a private research repository. No open-source license has been selected
 or granted; see [rights status](RIGHTS_PENDING.txt). No public publication or

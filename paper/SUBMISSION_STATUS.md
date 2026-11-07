@@ -1,6 +1,7 @@
 # Submission status — 6 November 2026
 
-Target: **submit by 30 November 2026**. This is our target date, not an arXiv
+Target: **submit by 30 November 2026**, or earlier once submission requirements
+are resolved. This is our target date, not an arXiv
 deadline or a guaranteed announcement date. The current paper remains a
 conditional trusted-service payment-epoch mechanization note. The tested
 flight–hotel candidate did not establish a new completeness result. A larger
@@ -11,6 +12,13 @@ theorem is a prerequisite for completing this note.
 
 ## Prepared
 
+- Author-reviewed text finalized with **Sandip Nandi — Independent Researcher**,
+  supplied by the author. The anonymous workshop review version omits both.
+- Final editorial changes: repeated novelty disclaimers consolidated in Section 6;
+  proof simplicity stated in Section 3.2; Appendix B given a two-sentence result
+  summary; abstract's shared acceptance rule explained; Figure 1 placement repaired.
+- Watts reference verified on Datatracker: revision -03, document date 30 October
+  2026, sections 9–11. The record's 31 October update is not the document date.
 - Updated draft with two vector diagrams, bounded captions and cross-references.
 - All six previously missing nearest-neighbor references added and a focused
   flight–hotel candidate tested and rejected as a novel completeness result.
@@ -27,16 +35,15 @@ theorem is a prerequisite for completing this note.
   link cannot yet serve as a publicly accessible reproducibility artifact.
 
 Current editorial verification is recorded in
-`SCOPE_FRAMING_AUDIT_2026-11-06.json`: 12 rendered pages, 12 resolved references,
-source archive rebuilt after extraction, and unchanged theorem/proof and 75
-scientific source/record files. Earlier revision audits remain historical; no
+`FINAL_EDITORIAL_AUDIT_2026-11-06.json`. Earlier revision audits remain historical;
+the theorem/proof and 75 scientific source/record files are unchanged, and no
 proof or experiment was rerun for this editorial revision.
 
 ## Still required
 
-1. **Author details and review:** exact sole-author publication name and
-   affiliation, if any; final content/ownership review and any corrections.
-   Replace the empty author field and preparation notice only when resolved.
+1. **Author rights declaration:** author name, affiliation and substantive review
+   are resolved. Complete the submission system's authorship/rights declarations;
+   no declaration has been made on the author's behalf.
 2. **Account and category:** confirm the author's arXiv account and select the
    appropriate category; resolve any required endorsement early.
    [Official endorsement guidance](https://info.arxiv.org/help/endorsement.html).
@@ -55,8 +62,10 @@ proof or experiment was rerun for this editorial revision.
 
 ## Practical sequence
 
-- By 12 November: author metadata, account/endorsement and release decisions.
-- By 19 November: complete author review and freeze the supported claims.
+- By 12 November: account/endorsement and release decisions; author metadata done.
+- Author substantive review is complete; preserve the supported claims.
+- By 20 November, 23:59 AoE: optional anonymous AgenticSE workshop submission,
+  subject to account/form requirements and the in-person presentation commitment.
 - 20–25 November: final corrections and source/artifact packaging.
 - 26–29 November: check arXiv processing, metadata and preview.
 - By 30 November: author submission when the above requirements are satisfied.
@@ -65,3 +74,14 @@ No additional provider integration or infrastructure is required for the present
 conditional claim. Real-world completeness, concrete refinement and a novel
 trip-level theorem remain unestablished and must not be implied by publication.
 Submission does not guarantee moderation acceptance or scientific novelty.
+
+## Workshop option verified 6 November
+
+The [AgenticSE CFP](https://agenticse-aaai.github.io/) lists up to eight pages
+excluding references, the AAAI-2027 template, double-blind review, and a
+20 November 2026 deadline at 23:59 AoE. It is non-archival and permits work under
+review elsewhere, but later venues' eligibility rules still need checking.
+At least one author must register and present in person. See
+[the separate review version](workshop/README.md). No workshop submission,
+registration or attendance commitment has been made. The arXiv author line must
+not be copied into the anonymous submission.

@@ -1,0 +1,65 @@
+\begin{thebibliography}{12}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Chandy and Lamport(1985)}]{chandy}
+Chandy, K.~M.; and Lamport, L. 1985.
+\newblock Distributed Snapshots: Determining Global States of Distributed Systems.
+\newblock \emph{ACM Transactions on Computer Systems}, 3(1): 63--75.
+
+\bibitem[{Jiang et~al.(2026)Jiang, Yu, Chang, Jangid, Niu, Wang, and Zhang}]{protocolanalysis}
+Jiang, K.; Yu, M.; Chang, Y.; Jangid, M.~K.; Niu, J.; Wang, C.; and Zhang, Y. 2026.
+\newblock A Formal Analysis of Agent Payment Protocols.
+\newblock ArXiv:2609.00060v1. Table II and Section IV.
+
+\bibitem[{Lorgat(2026)}]{op}
+Lorgat, R. 2026.
+\newblock {Op}: Compliance-Carrying Operations.
+\newblock \url{https://research.momentum.inc/papers/op.html}.
+\newblock Unversioned author manuscript; accessed 6 November 2026. Sections 5.2, 5.8--5.10; Proposition 5.7. Live text may change.
+
+\bibitem[{Salas(2026)}]{salas}
+Salas, J. 2026.
+\newblock Authority at Commit Time: Reject-and-Rerun Semantics for Governed Agentic Systems.
+\newblock ArXiv:2609.31490v1. Sections 2.2, 3.2, 6.2 and 7.
+
+\bibitem[{Santos-Grueiro(2026{\natexlab{a}})}]{cta}
+Santos-Grueiro, I. 2026{\natexlab{a}}.
+\newblock Temporary Authority, Permanent Effects: Commit-Time Authorization for {LLM} Agents.
+\newblock ArXiv:2607.10487v2. Sections 3--4, especially 4.2--4.3.
+
+\bibitem[{Santos-Grueiro(2026{\natexlab{b}})}]{effectbound}
+Santos-Grueiro, I. 2026{\natexlab{b}}.
+\newblock When Does Authorization End? Effect Closure at Provider Boundaries.
+\newblock ArXiv:2609.02866v1. Sections II--III, V-C and Appendix C.
+
+\bibitem[{Sharma(2026)}]{hold}
+Sharma, A. 2026.
+\newblock {HoldSpec}: A Machine-Checked Model and Conformance Suite for the Payment Authorization Hold Lifecycle.
+\newblock ArXiv:2610.14419v1. Sections III-D, V, VIII.
+
+\bibitem[{Tong, Dai, and Guo(2026)}]{aid}
+Tong, Y.; Dai, L.; and Guo, S. 2026.
+\newblock {AID-Guard}: Stateful Authorization for Delegated Agent Effects.
+\newblock ArXiv:2608.21159v1. Sections II--IV, especially III-E.
+
+\bibitem[{Watts(2026)}]{closuredraft}
+Watts, D.~O. 2026.
+\newblock Revocation Closure and Authority Epochs for Agent Delegation.
+\newblock Individual Internet-Draft, draft-watts-oauth-agent-revocation-closure-03, 30 October 2026. Sections 9--11; verified on Datatracker 6 November 2026. Work in progress; not an IETF standard.
+
+\bibitem[{Zhu and Wang(2026{\natexlab{a}})}]{quiescence}
+Zhu, G.; and Wang, C. 2026{\natexlab{a}}.
+\newblock Authorization Revocation for Long-Running {AI} Agents: Root-Scoped Quiescence under Delegation and Asynchronous Execution.
+\newblock ArXiv:2609.21284v1. Sections 2.4 and 5.
+
+\bibitem[{Zhu and Wang(2026{\natexlab{b}})}]{budget}
+Zhu, G.; and Wang, C. 2026{\natexlab{b}}.
+\newblock Fault-Tolerant Budget Conservation in Distributed Multi-Agent Delegation.
+\newblock ArXiv:2610.00349v1. Sections 4.7--4.8 and 7.6.
+
+\bibitem[{Zhu and Wang(2026{\natexlab{c}})}]{acquirebound}
+Zhu, G.; and Wang, C. 2026{\natexlab{c}}.
+\newblock Runtime Authorization for Resources Acquired by {AI} Agents ({AcquireBound}).
+\newblock ArXiv:2609.14744v2. Sections 4.5, 5.6--5.7; Theorem 14.
+
+\end{thebibliography}

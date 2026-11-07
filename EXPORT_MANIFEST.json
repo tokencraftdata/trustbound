@@ -582,6 +582,12 @@
       "revision": "Scope rationale and bounded characterization question",
       "audit": "paper/SCOPE_FRAMING_AUDIT_2026-11-06.json",
       "description": "Scope rationale, consolidated limitations, unpromised auditor-evidence question, and bounded research stop rule. Proofs, results and positive abstract unchanged. Current hashes are SHA256SUMS.json; earlier audits are historical."
+    },
+    {
+      "date": "2026-11-06",
+      "revision": "Final editorial note and anonymous workshop cut",
+      "audit": "paper/FINAL_EDITORIAL_AUDIT_2026-11-06.json",
+      "description": "Final editorial requests and explicit author metadata; verified Watts source and workshop CFP; separate anonymous official-template cut. No scientific source or result changes. Older audits are historical."
     }
   ]
 }

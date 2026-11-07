@@ -3,6 +3,24 @@
 “Framework” describes the organization of models, code, evidence contracts and
 validation tools. It is not an assertion of production maturity or novelty.
 
+## What trust means for travel agents
+
+TrustBound does not create mutual trust between a flight agent and a hotel agent.
+They propose requests under the user's delegated authority; their assertions do
+not themselves authorize spending or establish provider outcomes. The trusted
+service enforces the scoped authorization and records and reconciles effects.
+This scope assumes agents cannot bypass that service or obtain its credentials.
+
+The trust assumptions concern the service's enforcement and durable state, the
+coverage and meaning of provider evidence, and truthful source outcomes. Agent
+identity and signed requests support attribution and authorization checks;
+signatures do not prove that a booking succeeded or that no payment is missing.
+No reputation system, negotiation-based trust mechanism, or trust-free
+cross-provider deployment has been established.
+
+Travel is the application setting. Mutual agent trust is not an additional
+theorem or a solution to the payment-completeness boundary.
+
 ## Assumptions
 
 - **A1:** agents are request-only and cannot access the trusted service host,

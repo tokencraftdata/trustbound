@@ -4,18 +4,33 @@ Target: **submit by 30 November 2026**. This is our target date, not an arXiv
 deadline or a guaranteed announcement date. The current paper remains a
 conditional trusted-service payment-epoch mechanization note. The tested
 flight–hotel candidate did not establish a new completeness result. A larger
-trip paper is contingent on a different, demonstrated contribution, not promised.
+trip paper is contingent on a distinguishing auditor-evidence characterization,
+not promised. The bounded comparison and stop rule are recorded in
+[the research decision](../docs/TRIP_CLOSURE_CANDIDATE.md); neither it nor a new
+theorem is a prerequisite for completing this note.
 
 ## Prepared
 
 - Updated draft with two vector diagrams, bounded captions and cross-references.
 - All six previously missing nearest-neighbor references added and a focused
   flight–hotel candidate tested and rejected as a novel completeness result.
+- Scope rationale added: the restricted-view bypass diagnostic motivates the
+  explicit trust contract. The withdrawn comparison is identified as a
+  methodological correction, not a general impossibility proof.
+- Positive abstract retained, general exclusions consolidated in one limitations
+  paragraph, and one unpromised characterization question recorded. EffectBound's
+  formal-appendix pointer corrected from B to C.
 - Self-contained LaTeX source archive with both figures and embedded bibliography.
 - Existing proof/test evidence, with the separate 6 November local export checks
   distinguished from historical provider observations.
 - Private repository containing the codebase, diagrams and evidence. Its private
   link cannot yet serve as a publicly accessible reproducibility artifact.
+
+Current editorial verification is recorded in
+`SCOPE_FRAMING_AUDIT_2026-11-06.json`: 12 rendered pages, 12 resolved references,
+source archive rebuilt after extraction, and unchanged theorem/proof and 75
+scientific source/record files. Earlier revision audits remain historical; no
+proof or experiment was rerun for this editorial revision.
 
 ## Still required
 

@@ -52,6 +52,23 @@ trusted. Travel is a motivating application, not a claim of verified composition
 across booking providers or independent issuers. Removing an itinerary
 coordinator does not remove trust in the payment authority.
 
+\paragraph{Why this scope.}
+Authenticating separate parties' reports establishes their origin, not that
+their combined contents cover every in-scope effect or remaining right. In the
+restricted view of our bypass diagnostic, an execution with an omitted effect
+and one without it supply identical evidence. An auditor restricted to that
+evidence cannot accept one as complete while rejecting the other. This motivates
+an explicit coverage contract rather than treating signatures as a substitute
+for it, consistent with the mediation and boundary-adequacy requirements in
+Salas and EffectBound~\cite{salas,effectbound}. Section~\ref{sec:diagnostic}
+also records the withdrawal of a 27 October comparison that exposed a hidden
+effect flag to the verifier. That methodological correction removed a purported
+advantage; it is not evidence of a general impossibility theorem. Richer
+observations or enforceable coverage contracts may distinguish the executions.
+The note therefore fixes one mediated service and makes coverage, terminality
+and export obligations explicit, rather than inferring cross-party completeness
+from authentic reports alone.
+
 The contribution is assumption hygiene: A1--A5 separate operational trust
 premises from the ordering and coverage facts derived by the model. Two small
 Lean modules and eight premise-removal checks make the boundary inspectable.
@@ -102,6 +119,9 @@ A4 is a semantic source contract, not a conclusion from a terminal-looking
 client status. A signature authenticates an assertion without proving A5.
 A separately obtained view from the same processor is not an independently
 trusted issuer. Successful API tests do not establish these premises universally.
+Agents need not trust one another's assertions. Trust is placed in the service's
+enforcement and durable state and in the qualified provider evidence; the model
+does not establish those parties' trustworthiness.
 
 Figure~\ref{fig:architecture} locates these trust assumptions. The two travel
 agents motivate the request interface; both feed the one trusted payment path
@@ -184,6 +204,7 @@ this model. Permanent terminal-identity exclusion is an additional rule of
 the provider model in Section~\ref{sec:mapping}. Neither cancellation nor
 discharge erases a past effect or represents a refund.
 
+\begin{samepage}
 \subsection{Conditional theorem}
 \begin{theorem}[Fenced identity coverage and exact closure]
 Let $s$ be reachable from the initial state with $F(s)=\mathrm{true}$, and let
@@ -200,6 +221,7 @@ i\in E(t)&\ \Longleftrightarrow\ i\in J(s)\land\mathrm{reported}(i).
 \label{eq:exact}
 \end{align}
 \end{theorem}
+\end{samepage}
 
 \begin{samepage}
 \begin{proof}
@@ -337,6 +359,7 @@ Expected rejection logs are distinct from accepted proof logs. They may contain
 Lean's error-recovery markers and are not counted as accepted proofs.
 
 \subsection{Evidence-rule diagnostic}
+\label{sec:diagnostic}
 The saved generator produces 2,048 Cartesian records across four labels and
 512 assignments per label, reusing 64 distinct public evidence inputs per arm.
 All labels receive the same reports, row sequences and claimed fences. The two
@@ -413,7 +436,11 @@ obligations directly; their model mapping does not reduce these trust premises.
 \paragraph{Composition and monetary accounting.}
 Zhu and Wang compose provider frontiers through a shared cut and exact channel
 accounting~\cite{quiescence}; their budget work treats compensation as a separate
-authorized effect~\cite{budget}. Op distinguishes remaining execution rights,
+authorized effect~\cite{budget}. Their partition result rules out both local
+availability for a shared unallocated unit and global conservation; it addresses
+spending authority, not a characterization of an auditor's exact-closure
+evidence. This difference in question alone is not a new result.
+Op distinguishes remaining execution rights,
 provider outcomes, finality and subsequent compensation~\cite{op}. These are
 closer foundations than a receipts-only comparison. The flight--hotel check in
 Appendix~\ref{app:trip} finds no new completeness gap for the tested dependency.
@@ -437,21 +464,32 @@ The theorem is conditional on a correct transition abstraction. Every
 effect-capable route and source-side right must be represented, including
 delayed deliveries and recovery. Matching reports, signatures, known-object
 reads, and successful tests do not independently discharge these obligations.
-The source and the payment service remain trusted.
-
-No end-to-end monetary composition, multi-worker crash-recovery proof,
+The source and the payment service remain trusted. The note establishes neither
+a new general completeness principle nor a strictly weaker trust contract than
+the closest work. No end-to-end monetary composition, multi-worker crash-recovery proof,
 independent-issuer completeness certificate, account-wide audit, hostile-host
 security property, or finite completion deadline is established. Unresolved
 operations may remain pending indefinitely. The finite baseline is neither
 a throughput study nor evidence of deployment error rates.
+
+\paragraph{What would distinguish a further result.}
+A separate question is which semantic coverage and binding conditions let an
+auditor certify exact closure from per-party evidence, for a fixed scope and
+observation interface. A distinguishing characterization would need both
+necessary conditions and a sufficient construction, compared under the same
+assumptions with mediation, partition-indistinguishability and finite-boundary
+realizability results~\cite{salas,budget,effectbound}. Shared journals, exclusive
+mediation and cross-party binding are candidate ways to supply conditions, not
+an established exhaustive list of necessary mechanisms. The generic requirement
+that all evidence-compatible executions satisfy the claimed property is an
+existing observation principle; restating it would not distinguish this work.
+No such further characterization or novelty claim is established here.
 
 The supported claim is that record-before-authority and a serialized fence
 derive a fixed covered identity population under the specified rules; complete
 source discharge and truthful reconciliation then establish exact closure for
 every permitted finite continuation. The checked construction, constrained
 mapping, and explicitly limited evaluation support a mechanization note.
-They do not establish a new general completeness principle or a strictly
-weaker trust contract than the closest work.
 
 \appendix
 \section{Artifact and reproduction}

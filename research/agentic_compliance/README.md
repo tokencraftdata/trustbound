@@ -1,3 +1,15 @@
+# Current review revision (0.4)
+
+The corrected pilot is in `output/pdf/agentic_compliance_corrected.pdf`. See
+[review changes and reproduction](REVIEW_REVISION.md),
+[full-paper experiment infrastructure](experiments/README.md), and
+[commercial assessment and customer validation](COMMERCIAL_VALIDATION.md).
+The original 0.2 code and 960-episode evidence below are preserved. The new
+2,160-episode repair study is exploratory; the 32-episode experiment smoke grid
+uses mock responses only. No LLM inference or customer validation is claimed.
+
+---
+
 # Agentic compliance order book pilot
 
 A reproducible **offline, scripted simulation pilot** for the research question in

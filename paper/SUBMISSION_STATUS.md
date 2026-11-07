@@ -1,4 +1,4 @@
-# Submission status — 6 November 2026
+# Submission status — 7 November 2026
 
 Target: **submit by 30 November 2026**, or earlier once submission requirements
 are resolved. This is our target date, not an arXiv
@@ -34,26 +34,41 @@ theorem is a prerequisite for completing this note.
 - Private repository containing the codebase, diagrams and evidence. Its private
   link cannot yet serve as a publicly accessible reproducibility artifact.
 
-Current editorial verification is recorded in
-`FINAL_EDITORIAL_AUDIT_2026-11-06.json`. Earlier revision audits remain historical;
-the theorem/proof and 75 scientific source/record files are unchanged, and no
-proof or experiment was rerun for this editorial revision.
+Current preparation verification is recorded in
+`SUBMISSION_PREP_AUDIT_2026-11-07.json`. The 7 November revision states the goal
+and the meaning of running the artifact in both papers and the repository.
+The author PDF has 13 pages; the anonymous conference PDF has seven including
+references. The extracted 41-file selected-core archive was run with existing
+tools: 14 exports checked, eight mutations rejected, nine tests passed, 2,048
+records reproduced, and zero provider requests. All 74 tracked scientific
+source/result files covered by this revision's integrity check are unchanged.
+The earlier 75-file audit used a different inventory; neither number is a count
+of proofs or experiments. Earlier audits remain historical.
+
+The author confirmed **no arXiv account yet** on 7 November. Recommendations:
+**cs.CR primary**, **cs.LO cross-list**, and the **arXiv perpetual, non-exclusive
+paper license**. These are prepared choices, not completed form selections or
+license grants. [Submission guide](ARXIV_SUBMISSION_GUIDE.md).
 
 ## Still required
 
 1. **Author rights declaration:** author name, affiliation and substantive review
    are resolved. Complete the submission system's authorship/rights declarations;
    no declaration has been made on the author's behalf.
-2. **Account and category:** confirm the author's arXiv account and select the
-   appropriate category; resolve any required endorsement early.
+2. **Account and category:** create and verify the author's account; start a
+   cs.CR submission to find the endorsement requirement. Category choices remain
+   recommendations subject to moderation; resolve endorsement early.
    [Official endorsement guidance](https://info.arxiv.org/help/endorsement.html).
 3. **Manuscript license:** the author must choose the distribution license and
    confirm the right to grant it. Code/data release terms are a separate choice;
    an open-source code release is not a prerequisite implied by this checklist.
    [Official license guidance](https://info.arxiv.org/help/license/index.html).
-4. **Artifact access:** decide whether to publish a sanitized artifact, supply
-   ancillary files, or accurately state limited availability. The current private
-   repository has not been made public and no release license was selected.
+4. **Artifact access:** the selected-core archive is prepared and extraction-tested.
+   Recommend a frozen public release of that package with MIT terms for its
+   author-owned software and documentation, while retaining the broader private
+   working repository. Confirm the release terms and destination before publishing;
+   the package currently retains its rights-pending notice. Add the public URL
+   only after signed-out access is verified. Ancillary files are an alternative.
 5. **Final source and upload check:** freeze the reviewed text and metadata,
    rebuild the archive, and inspect arXiv's processed PDF before author submission.
    A local Tectonic build does not establish arXiv compilation success.

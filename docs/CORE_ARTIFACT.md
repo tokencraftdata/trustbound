@@ -10,6 +10,21 @@ of Payment-Epoch Completeness*. This is a preparation package, not an arXiv
 submission or a provider certification. Release licensing is pending; see
 RIGHTS_PENDING.txt. No provider account or credentials are needed to run it.
 
+## What a successful run gives you
+
+The goal is a reproducible check of the paper's conditional payment-completeness
+model. `summary.json` records `checks_passed: true` only after the selected
+checks pass. Inspect the proof and mutation logs, `baseline-tests.xml`, and
+`baseline/closure_benchmark.json` alongside it. An expected rejected mutation
+is a successful negative check, not a passing proof.
+
+This is a reproduction report, not a certificate that a real merchant epoch
+has closed. The runner accepts source files and tools, not a merchant journal
+and independently established provider-discharge evidence. A1–A5 and an
+implementation-to-model correspondence remain obligations of any deployment.
+The current manuscript title is *TrustBound: A Mechanized Note on Payment-Epoch
+Completeness*; the older package title below is historical provenance.
+
 ## Supported claim
 
 Under the modeled trusted-service rules, record-before-authority and serialized

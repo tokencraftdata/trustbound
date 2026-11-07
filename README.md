@@ -7,6 +7,37 @@ account for every admitted payment and establish that earlier authority cannot
 produce another effect? A receipt, an empty client queue, or a signed report is
 not sufficient on its own.
 
+## Goal and what you achieve by running it
+
+**Goal: make the evidence needed to close one agent-initiated payment epoch
+explicit and checkable.** Exact closure means every in-scope effect identity is
+accounted for and no outstanding authority can create another such effect.
+The paper establishes this conditionally for a trusted payment service with
+complete mediation, truthful source terminality and a faithful export.
+
+For the travel example, stopping flight and hotel requests is only the first
+step. If an earlier hotel payment can still execute, the epoch remains open.
+If execution has stopped but its outcome is unknown, exact accounting is still
+unavailable. This is the payment-completeness question the framework isolates.
+
+Running the **paper core** below produces a reproducibility report:
+
+| Output | What it establishes |
+|---|---|
+| `summary.json` with `checks_passed: true` | All selected reproduction checks passed for the recorded source snapshot and local tools |
+| `admission/` and `provider_contract/` | Lean accepted 14 exported model results and rejected eight altered proofs |
+| `baseline-tests.xml` | Nine diagnostic tests passed |
+| `baseline/closure_benchmark.json` | 2,048 synthetic records reproduce the saved evidence-rule diagnostic; equal-information strong labels agree |
+| Logs and source hashes | The inputs and execution behind those results can be inspected |
+
+**The deliverable is a checked conditional model and an auditable account of
+its assumptions.** A successful run is not a closure certificate for a real
+merchant: it neither queries a processor nor establishes A1–A5 for a deployment.
+Applying the result would additionally require evidence that each real effect
+and remaining right is represented and that the service implements the model.
+The existing Python service is an experimental implementation, not that verified
+refinement. See [the paper-core guide](docs/CORE_ARTIFACT.md).
+
 This repository contains a research prototype, Lean models, local tests,
 reproducible diagnostics, and an author-reviewed manuscript. It is **not a
 production payment service**, an independently certified completeness system,
@@ -125,6 +156,11 @@ novelty, conformance or deployment claims. The author-reviewed note names
 and artifact access are resolved. The separate
 [anonymous workshop cut](paper/workshop/README.md) is seven pages including
 references in the official AAAI-2027 style; no submission is implied.
+
+[arXiv submission steps and recommended choices](paper/ARXIV_SUBMISSION_GUIDE.md)
+record the account, endorsement, license and artifact-access work. The
+[selected-core archive](paper/TrustBound_Core_Artifact.zip) is prepared for
+release review; public access and reuse terms are still pending.
 
 This is a private research repository. No open-source license has been selected
 or granted; see [rights status](RIGHTS_PENDING.txt). No public publication or

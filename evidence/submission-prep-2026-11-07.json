@@ -1,0 +1,35 @@
+{
+  "checks_passed": true,
+  "exported_results_checked": 14,
+  "premise_removal_mutations_rejected": 8,
+  "baseline_test_counts": {
+    "tests": 9,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "baseline_records": 2048,
+  "same_public_evidence_groups_checked": 512,
+  "per_state_strong_baseline_tie": true,
+  "historical_result_semantically_equal": true,
+  "sources_sha256": {
+    "formal/Admission.lean": "96c0afed87ea032553f74825a7c13e92050872d4c33e0b91a980ae06b5cab559",
+    "formal/StripeGate.lean": "f6847101a28783749b4703e3c406b895b5db05fe2396f92ecec1fc89cb3fd5fb",
+    "formal/check_admission.py": "d6ba6f7eb4ed6ec33b6739cd1b7c2ddacf53391112948b8e42aa40c5731e1e9b",
+    "formal/check_stripe_gate.py": "acb1d78501d246574dd3f347200c52f0957b1a79fa10d895e4de2553b4ce5dc5",
+    "formal/lean-toolchain": "55e97be96000b5e9e290c9e74482e5e317861499a5540353ce845471bded8cea",
+    "src/trustbound/__init__.py": "19940aa8912a955e87014463bf3c78bcef9ad9b39f4d79e9072b43617d1b03a1",
+    "src/trustbound/closure_experiment.py": "aeb2f415d19f431eaf3e50e103c51095066ed37e5ce7a0647344b4817bd4cd55",
+    "tests/test_closure_experiment.py": "5067fd9cdb5f73b52d0b1493690e2006d008b6b41aa869aaa9173ba5d5e8c034"
+  },
+  "provider_requests": 0,
+  "new_theorems": 0,
+  "full_regression_suite_run": false,
+  "new_dependencies_installed": false,
+  "lean": "Lean (version 4.19.0, arm64-apple-darwin23.6.0, commit 6caaee842e94, Release)",
+  "client_date": "2026-11-07",
+  "scope": "Selected-core ZIP independently extracted and executed using existing local Lean/Python tools; no clean-machine installation test.",
+  "raw_summary_sha256": "13e6c2ca294593ecffcd2f54ca0b7083c40bfffc5b65b0a32775dfc68bf4ba5b",
+  "summary_projection": "Tool execution paths and unrelated log hashes omitted; original local run retained.",
+  "archive_sha256": "768933629948f9abccacdf4a13e180e818afc21e393fd4e35c87064ed92deaf9"
+}

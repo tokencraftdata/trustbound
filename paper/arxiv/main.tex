@@ -53,6 +53,17 @@ trusted. Travel is a motivating application, not a claim of verified composition
 across booking providers or independent issuers. Removing an itinerary
 coordinator does not remove trust in the payment authority.
 
+\paragraph{Objective and operational meaning.}
+The goal is an auditable criterion for closing one agent-initiated payment epoch:
+every in-scope effect identity is accounted for and no remaining authority can
+produce another such effect. Running the artifact checks this conditional model,
+its premise-sensitive proofs, and a finite evidence diagnostic. It produces a
+reproduction report, not a closure certificate for a merchant. For a flight--hotel
+request pair, an earlier hotel payment that can still execute prevents closure;
+an unknown past outcome prevents exact accounting even after execution stops.
+Applying the criterion requires the deployment to satisfy A1--A5 and a justified
+mapping of its effects and rights to the model.
+
 \paragraph{Why this scope.}
 Authenticating separate parties' reports establishes their origin, not that
 their combined contents cover every in-scope effect or remaining right. In the
@@ -207,7 +218,6 @@ this model. Permanent terminal-identity exclusion is an additional rule of
 the provider model in Section~\ref{sec:mapping}. Neither cancellation nor
 discharge erases a past effect or represents a refund.
 
-\begin{samepage}
 \subsection{Conditional theorem}
 The proof is a direct induction on single transitions followed by disabling
 effect-producing transitions after drainage; the note's value lies in the
@@ -227,9 +237,7 @@ i\in E(t)&\ \Longleftrightarrow\ i\in J(s)\land\mathrm{reported}(i).
 \label{eq:exact}
 \end{align}
 \end{theorem}
-\end{samepage}
 
-\begin{samepage}
 \begin{proof}
 Every transition preserves coverage $R\cup E\subseteq J$: a grant needs a
 journal entry, delivery consumes an existing right, and cancellation introduces
@@ -240,7 +248,6 @@ journaled identity imply $R(s)=\varnothing$. No subsequent transition can
 reintroduce rights or deliver an effect, yielding~\eqref{eq:stable}. Truthful
 reports identify precisely the executed journal entries, giving~\eqref{eq:exact}.
 \end{proof}
-\end{samepage}
 
 The checked declarations implement these four obligations.\footnote{\raggedright In
 \code{Admission.lean}: \code{fenced\_population\_immutable},
@@ -343,6 +350,8 @@ installation or a real-deployment verification.
 
 A separate 6 November export check repeated the selected core and the local
 simulator successfully; implementation-suite details are in Appendix~\ref{app:artifact}.
+On 7 November, rerunning the extracted selected-core archive reproduced the
+same core totals with existing tools and no provider requests.
 
 \subsection{Formal checks}
 All eight exported admission results and all six provider-contract results
@@ -511,6 +520,9 @@ full-suite run. These implementation tests do not prove A1--A5 or executable
 refinement; the nine diagnostic tests are included in the 222, not additional.
 
 
+A selected-core archive is prepared; public release and reuse terms remain
+pending. The private working repository is not public artifact access.
+
 The accompanying minimal artifact contains the two Lean modules, their
 checkers, the finite comparator and its nine tests, a reproduction runner,
 reference output, and saved evidence. No payment credentials or provider SDK
@@ -528,6 +540,11 @@ output and a result summary. Expected totals are 14 exported results, eight
 rejected mutations, nine passing tests, 2,048 records, and per-case strong-arm
 agreement. No other historical module or full regression suite is silently
 included in these counts.
+
+In particular, \code{checks\_passed: true} in \code{summary.json} reports
+successful reproduction for the recorded inputs and tools. It does not report
+that a merchant epoch is closed. The journal and source-terminal evidence of a
+real deployment are not inputs to this runner.
 
 Saved public logs replace local paths with declared tokens; the original
 workspace evidence remains unchanged. A provenance file identifies original

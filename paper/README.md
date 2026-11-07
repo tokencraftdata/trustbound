@@ -1,43 +1,41 @@
-# Manuscript under review
+# Publication manuscripts
 
-`TrustBound_Draft.pdf` is the 11-page **Option B mechanization note**, revised
-6 November 2026: **TrustBound: A Mechanized Note on Payment-Epoch Completeness**.
-The current contribution is the explicit A1–A5 contract and checked artifact,
-with existing closure principles correctly attributed. Both diagrams remain.
+**TrustBound: A Mechanized Note on Payment-Epoch Completeness**
 
-This revision adds the six missing nearest-neighbor references: EffectBound,
-Salas, AcquireBound, the formal agent-payment analysis, commit-time authorization,
-and the individual IETF closure draft. Op is explicitly unversioned with an access
-date. Table 2 is replaced by a short diagnostic account; suite retry details are
-in the appendix; the Lean declaration list is a footnote.
+Author: **Sandip Nandi — Independent Researcher**. The 7 November 2026 revision
+adds an explicit research objective and explains the outcome of running the
+artifact. It preserves the conditional trusted-service claim, checked theorem,
+nearest-work comparisons and negative flight–hotel finding.
 
-A new finite flight–hotel diagnostic tested 18 trace records and 120 continuation
-replays. It found no new exact-closure composition counterexample. The stale
-capture maps to current-premise authorization; an unusable trip after cancellation
-is a different business property. See [the executed comparison](../research/flight_hotel/README.md).
-The existing Lean theorem and 70 previously tracked scientific source files are
-unchanged. No provider calls or new machine-checked theorem were added.
+- `TrustBound_Draft.pdf`: author version for arXiv, with two diagrams.
+- `TrustBound_arXiv_Source.zip`: three LaTeX files and two PDF figures.
+- `TrustBound_Workshop_Anonymous.pdf`: separate anonymous two-column conference
+  review version in the official AAAI-2027 style, with one diagram.
+- `TrustBound_Workshop_Source.zip`: conference sources, bibliography and template.
+- `TrustBound_Core_Artifact.zip`: selected reproduction package, with release
+  rights pending; this is not the entire research repository.
 
-`arxiv/` contains three LaTeX files and two vector PDF figures.
-`TrustBound_arXiv_Source.zip` contains those five files only, with relative paths.
-It is a preparation package: exact author metadata is still pending.
+The goal is to make the premises for exact identity-level payment closure
+inspectable. Running the core produces a checked reproduction report, not a
+real merchant closure certificate. It does not establish deployment assumptions.
 
-The executed typesetting check uses Tectonic 0.17.0. From `arxiv/`:
+See [submission steps and recommendations](ARXIV_SUBMISSION_GUIDE.md),
+[copyable metadata](arxiv-metadata.json), [submission status](SUBMISSION_STATUS.md),
+[conference build instructions](workshop/README.md), and
+[the current verification record](SUBMISSION_PREP_AUDIT_2026-11-07.json).
+Earlier audits and execution records remain historical evidence.
+
+To compile the author version, run from `arxiv/`:
 
 ```sh
 tectonic --untrusted --keep-logs main.tex
 ```
 
-The bibliography is embedded in `references.tex`; no BibTeX run is required.
-Standard graphics packages and the included `figures/` directory are required.
-The source archive was extracted and compiled separately with the existing
-toolchain. arXiv's own processing remains to be checked during submission.
+The bibliography is embedded in `references.tex`; no BibTeX step is needed.
+The source archive has relative figure paths. Local builds do not replace the
+required arXiv processing check. The conference template instead requires
+PDFLaTeX and BibTeX; its README gives the commands.
 
-See [remaining submission work](SUBMISSION_STATUS.md) and the
-[current revision audit](OPTION_B_AUDIT_2026-11-06.json). Sole authorship is confirmed; exact
-publication name/affiliation, category, account eligibility and licenses remain
-pending. No arXiv submission has occurred. The repository is private.
-
-The [earlier candidate assessment](../docs/TRIP_CLOSURE_CANDIDATE.md) is retained
-as history and points to the negative result. The previous diagram-revision audit
-is historical; the current audit records this Option B revision.
+Neither version has been submitted. The repository remains private and no
+public paper/code license has been granted. Author details and substantive
+review are complete; account/endorsement, rights and artifact access remain.

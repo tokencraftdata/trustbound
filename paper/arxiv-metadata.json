@@ -1,0 +1,24 @@
+{
+  "status": "Prepared; not submitted. Category and license are recommendations.",
+  "prepared_date": "2026-11-07",
+  "title": "TrustBound: A Mechanized Note on Payment-Epoch Completeness",
+  "authors": [
+    {
+      "name": "Sandip Nandi",
+      "affiliation": "Independent Researcher"
+    }
+  ],
+  "primary_category_recommended": "cs.CR",
+  "cross_list_recommended": [
+    "cs.LO"
+  ],
+  "manuscript_license_recommended": "arXiv.org perpetual, non-exclusive license 1.0",
+  "license_granted": false,
+  "abstract": "A payment receipt establishes an observed outcome; exact epoch closure also requires complete accounting and exclusion of later effects under earlier authority. This note makes those obligations explicit for request-only agents using a trusted payment service. In a Lean transition model, recording before granting authority and serializing both with an admission fence derive a fixed journal covering effects and remaining rights. Complete source-side discharge establishes future stability; truthful per-identity outcomes additionally establish exact identity-level accounting. A constrained provider model permits unregistered inert objects while mediating every activation. Reproduction checks 14 exported results and rejects eight premise-removal mutations. A finite diagnostic, whose two strong comparator labels share the same fence-and-contiguity acceptance rule, documents the evidence boundary; a small flight–hotel example separates payment closure from commit-time policy and trip usability. The contribution is an auditable assumption contract, a checked construction, and reproducible examples that specialize existing closure and authorization principles to payment epochs.",
+  "comments": "13 pages, 2 figures; mechanization note. Confirm page count against final processed PDF.",
+  "journal_reference": null,
+  "doi": null,
+  "arxiv_id": null,
+  "artifact_public_url": null,
+  "author_account_status": "No account yet (author reply 7 November 2026)."
+}

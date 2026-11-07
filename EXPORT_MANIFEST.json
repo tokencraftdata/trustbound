@@ -588,6 +588,12 @@
       "revision": "Final editorial note and anonymous workshop cut",
       "audit": "paper/FINAL_EDITORIAL_AUDIT_2026-11-06.json",
       "description": "Final editorial requests and explicit author metadata; verified Watts source and workshop CFP; separate anonymous official-template cut. No scientific source or result changes. Older audits are historical."
+    },
+    {
+      "date": "2026-11-07",
+      "revision": "Goal and run outcomes, arXiv guidance, conference update and selected-core archive",
+      "audit": "paper/SUBMISSION_PREP_AUDIT_2026-11-07.json",
+      "description": "Documentation and manuscript clarification; fresh selected-core ZIP extraction check passed; science sources unchanged; no provider calls or new results. Public release and licenses pending."
     }
   ]
 }

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="750" viewBox="0 0 1200 750" role="img"><title>Premises for exact identity-level payment closure</title><rect width="100%" height="100%" fill="white"/>
+<text x="40" y="45" dominant-baseline="middle" text-anchor="start" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#142c43">The payment completeness boundary</text>
+<text x="40" y="83" dominant-baseline="middle" text-anchor="start" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#142c43">Arrows show logical dependencies, not automatic progress or a completion deadline.</text>
+<rect x="35" y="135" width="350" height="150" rx="14" fill="#edf4fb" stroke="#52799d" stroke-width="2"/>
+<text x="210.0" y="166" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#142c43">Fixed covered population</text>
+<text x="210.0" y="199" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">Reachable mediated journal J</text>
+<text x="210.0" y="226" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">Admission and grants fenced</text>
+<text x="210.0" y="253" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">No omitted in-scope routes</text>
+<rect x="425" y="135" width="350" height="150" rx="14" fill="#edf4fb" stroke="#52799d" stroke-width="2"/>
+<text x="600.0" y="166" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#142c43">All rights discharged</text>
+<text x="600.0" y="199" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">R is empty at the source</text>
+<text x="600.0" y="226" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">Includes in-flight / recovery</text>
+<text x="600.0" y="253" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">An empty client queue is not enough</text>
+<rect x="815" y="135" width="350" height="150" rx="14" fill="#edf4fb" stroke="#52799d" stroke-width="2"/>
+<text x="990.0" y="166" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#142c43">Truthful outcome evidence</text>
+<text x="990.0" y="199" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">Every journaled identity accounted</text>
+<text x="990.0" y="226" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">Faithful journal export</text>
+<text x="990.0" y="253" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">No missing past outcome</text>
+<polyline points="210,285 210,350 400,350" fill="none" stroke="#52799d" stroke-width="3"/>
+<polygon points="400,350 387.7138441335348,356.71195754045885 387.7138441335348,343.28804245954115" fill="#52799d"/>
+<polyline points="600,285 600,320 585,320 585,350" fill="none" stroke="#52799d" stroke-width="3"/>
+<polygon points="585,350 578.2880424595412,337.7138441335348 591.7119575404588,337.7138441335348" fill="#52799d"/>
+<rect x="400" y="350" width="370" height="120" rx="14" fill="#edf7f0" stroke="#52799d" stroke-width="2"/>
+<text x="585.0" y="381" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#142c43">Execution stopped</text>
+<text x="585.0" y="414" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">No permitted continuation adds</text>
+<text x="585.0" y="441" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">a modeled attributable effect</text>
+<polyline points="585,470 585,540" fill="none" stroke="#52799d" stroke-width="3"/>
+<polygon points="585,540 578.2880424595412,527.7138441335347 591.7119575404588,527.7138441335347" fill="#52799d"/>
+<polyline points="990,285 990,600 800,600" fill="none" stroke="#52799d" stroke-width="3"/>
+<polygon points="800,600 812.2861558664653,593.2880424595412 812.2861558664653,606.7119575404588" fill="#52799d"/>
+<rect x="375" y="540" width="425" height="125" rx="14" fill="#edf7f0" stroke="#52799d" stroke-width="2"/>
+<text x="587.5" y="571" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#142c43">Exact identity-level closure</text>
+<text x="587.5" y="604" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">Known effect identities + stable history</text>
+<text x="587.5" y="631" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">Both inputs are required</text>
+<text x="40" y="710" dominant-baseline="middle" text-anchor="start" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">Conditional model result. No claim of real-world coverage, exact amounts or independent-issuer evidence.</text>
+</svg>

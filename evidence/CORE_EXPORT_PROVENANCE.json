@@ -1,0 +1,275 @@
+{
+  "date": "2026-11-05",
+  "scope": "selected core only",
+  "redaction": "Local project/home/temporary paths and JUnit hostname replaced in evidence only. Sources unchanged.",
+  "hash_interpretation": "Original summary log hashes refer to originals; exported hashes are listed here and in SHA256SUMS.json.",
+  "historical_provider_replay_included": false,
+  "files": [
+    {
+      "source": "formal/Admission.lean",
+      "export": "formal/Admission.lean",
+      "original_sha256": "96c0afed87ea032553f74825a7c13e92050872d4c33e0b91a980ae06b5cab559",
+      "export_sha256": "96c0afed87ea032553f74825a7c13e92050872d4c33e0b91a980ae06b5cab559",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "formal/StripeGate.lean",
+      "export": "formal/StripeGate.lean",
+      "original_sha256": "f6847101a28783749b4703e3c406b895b5db05fe2396f92ecec1fc89cb3fd5fb",
+      "export_sha256": "f6847101a28783749b4703e3c406b895b5db05fe2396f92ecec1fc89cb3fd5fb",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "formal/check_admission.py",
+      "export": "formal/check_admission.py",
+      "original_sha256": "d6ba6f7eb4ed6ec33b6739cd1b7c2ddacf53391112948b8e42aa40c5731e1e9b",
+      "export_sha256": "d6ba6f7eb4ed6ec33b6739cd1b7c2ddacf53391112948b8e42aa40c5731e1e9b",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "formal/check_stripe_gate.py",
+      "export": "formal/check_stripe_gate.py",
+      "original_sha256": "acb1d78501d246574dd3f347200c52f0957b1a79fa10d895e4de2553b4ce5dc5",
+      "export_sha256": "acb1d78501d246574dd3f347200c52f0957b1a79fa10d895e4de2553b4ce5dc5",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "formal/lean-toolchain",
+      "export": "formal/lean-toolchain",
+      "original_sha256": "55e97be96000b5e9e290c9e74482e5e317861499a5540353ce845471bded8cea",
+      "export_sha256": "55e97be96000b5e9e290c9e74482e5e317861499a5540353ce845471bded8cea",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "src/trustbound/__init__.py",
+      "export": "src/trustbound/__init__.py",
+      "original_sha256": "19940aa8912a955e87014463bf3c78bcef9ad9b39f4d79e9072b43617d1b03a1",
+      "export_sha256": "19940aa8912a955e87014463bf3c78bcef9ad9b39f4d79e9072b43617d1b03a1",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "src/trustbound/closure_experiment.py",
+      "export": "src/trustbound/closure_experiment.py",
+      "original_sha256": "aeb2f415d19f431eaf3e50e103c51095066ed37e5ce7a0647344b4817bd4cd55",
+      "export_sha256": "aeb2f415d19f431eaf3e50e103c51095066ed37e5ce7a0647344b4817bd4cd55",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "tests/test_closure_experiment.py",
+      "export": "tests/test_closure_experiment.py",
+      "original_sha256": "5067fd9cdb5f73b52d0b1493690e2006d008b6b41aa869aaa9173ba5d5e8c034",
+      "export_sha256": "5067fd9cdb5f73b52d0b1493690e2006d008b6b41aa869aaa9173ba5d5e8c034",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "scripts/reproduce_core_claim.py",
+      "export": "scripts/reproduce_core_claim.py",
+      "original_sha256": "9e7384a66c668efd857cb34d58a3af4a4a9116e637a731c92df5d6509d736489",
+      "export_sha256": "9e7384a66c668efd857cb34d58a3af4a4a9116e637a731c92df5d6509d736489",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/evidence_only_2026-11-01/closure_benchmark.json",
+      "export": "results/evidence_only_2026-11-01/closure_benchmark.json",
+      "original_sha256": "7691868b89f498a05aa279b064d7910720051a66e84c00c4b59baf1a532726e8",
+      "export_sha256": "7691868b89f498a05aa279b064d7910720051a66e84c00c4b59baf1a532726e8",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/admission/admission-check.log",
+      "export": "evidence/core/admission/admission-check.log",
+      "original_sha256": "927dbb37ef148b44408a439e4b7cb2a8d741c7ef8a046457be7eb4b1e365233c",
+      "export_sha256": "927dbb37ef148b44408a439e4b7cb2a8d741c7ef8a046457be7eb4b1e365233c",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/admission/deliver_without_right.log",
+      "export": "evidence/core/admission/deliver_without_right.log",
+      "original_sha256": "5353d247505e4590b61ba0d346b378891e79fe1f10dfb5599a7b76fc33edea65",
+      "export_sha256": "5353d247505e4590b61ba0d346b378891e79fe1f10dfb5599a7b76fc33edea65",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/admission/grant_after_fence.log",
+      "export": "evidence/core/admission/grant_after_fence.log",
+      "original_sha256": "84c1a9ada608c86095139ec9e6a8819d93d7007b30fbe9152c4d6cef5c8ee54a",
+      "export_sha256": "84c1a9ada608c86095139ec9e6a8819d93d7007b30fbe9152c4d6cef5c8ee54a",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/admission/grant_without_record.log",
+      "export": "evidence/core/admission/grant_without_record.log",
+      "original_sha256": "42cb3e2cf50d4582fd8f339cb4c7779cb63b490d5f7da1c094e2b07873affe41",
+      "export_sha256": "42cb3e2cf50d4582fd8f339cb4c7779cb63b490d5f7da1c094e2b07873affe41",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/admission/record_after_fence.log",
+      "export": "evidence/core/admission/record_after_fence.log",
+      "original_sha256": "5d7d93501c1d584af46d37ff2b2bd61524e1a0e832bb06c67a5dd2a3a40ef811",
+      "export_sha256": "5d7d93501c1d584af46d37ff2b2bd61524e1a0e832bb06c67a5dd2a3a40ef811",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/admission/summary.json",
+      "export": "evidence/core/admission/summary.json",
+      "original_sha256": "28b287aa48585762809f0c205ca5680626533342ead698c1b4710d79084ce5cf",
+      "export_sha256": "28b287aa48585762809f0c205ca5680626533342ead698c1b4710d79084ce5cf",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/admission.log",
+      "export": "evidence/core/admission.log",
+      "original_sha256": "28b287aa48585762809f0c205ca5680626533342ead698c1b4710d79084ce5cf",
+      "export_sha256": "28b287aa48585762809f0c205ca5680626533342ead698c1b4710d79084ce5cf",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/baseline/closure_benchmark.json",
+      "export": "evidence/core/baseline/closure_benchmark.json",
+      "original_sha256": "7691868b89f498a05aa279b064d7910720051a66e84c00c4b59baf1a532726e8",
+      "export_sha256": "7691868b89f498a05aa279b064d7910720051a66e84c00c4b59baf1a532726e8",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/baseline-tests.xml",
+      "export": "evidence/core/baseline-tests.xml",
+      "original_sha256": "f40f04e0fa014d8c853b4e08ba63a6d5fb7640e37753da30ec181ecab489dacc",
+      "export_sha256": "b44faec579453bc98cc6579960a8fef9d4390a612a90041a9270a19a7c10f606",
+      "local_metadata_redacted": true
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/baseline.log",
+      "export": "evidence/core/baseline.log",
+      "original_sha256": "035401b641beff5b31cedc3bdfa984ec574e3d9fb6e9dafedf93985205bb73b9",
+      "export_sha256": "035401b641beff5b31cedc3bdfa984ec574e3d9fb6e9dafedf93985205bb73b9",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/baseline_tests.log",
+      "export": "evidence/core/baseline_tests.log",
+      "original_sha256": "45f342b06ddfec11398f7048452e09802f765a8be91964958508e643d9760915",
+      "export_sha256": "45f342b06ddfec11398f7048452e09802f765a8be91964958508e643d9760915",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/provider_contract/admission-dependency.log",
+      "export": "evidence/core/provider_contract/admission-dependency.log",
+      "original_sha256": "927dbb37ef148b44408a439e4b7cb2a8d741c7ef8a046457be7eb4b1e365233c",
+      "export_sha256": "927dbb37ef148b44408a439e4b7cb2a8d741c7ef8a046457be7eb4b1e365233c",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/provider_contract/cancel_without_source_discharge.log",
+      "export": "evidence/core/provider_contract/cancel_without_source_discharge.log",
+      "original_sha256": "ad110157f6d330a36dddf78e9232178f673993e8f5b7464785b58b6b5c988876",
+      "export_sha256": "ad110157f6d330a36dddf78e9232178f673993e8f5b7464785b58b6b5c988876",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/provider_contract/dispatch_after_terminal.log",
+      "export": "evidence/core/provider_contract/dispatch_after_terminal.log",
+      "original_sha256": "a9ceff7472d13804bb3906960139f2e2f444a3ff3235c264de8aa10d6efa205c",
+      "export_sha256": "a9ceff7472d13804bb3906960139f2e2f444a3ff3235c264de8aa10d6efa205c",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/provider_contract/effectful_unknown_creation.log",
+      "export": "evidence/core/provider_contract/effectful_unknown_creation.log",
+      "original_sha256": "c2969e470760d2ca83ccc0146783334f86d81750b0c2f76443ea368a271aa00d",
+      "export_sha256": "c2969e470760d2ca83ccc0146783334f86d81750b0c2f76443ea368a271aa00d",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/provider_contract/stripe-gate-check.log",
+      "export": "evidence/core/provider_contract/stripe-gate-check.log",
+      "original_sha256": "edaf5bd759c155a13980c4e58bdd83f335a04cb6e164e924729a815fd2cf9564",
+      "export_sha256": "edaf5bd759c155a13980c4e58bdd83f335a04cb6e164e924729a815fd2cf9564",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/provider_contract/summary.json",
+      "export": "evidence/core/provider_contract/summary.json",
+      "original_sha256": "878f097e4ff379ad32d31f8cbe089fb61b3a47992b02b93fd581d462b8540ba3",
+      "export_sha256": "878f097e4ff379ad32d31f8cbe089fb61b3a47992b02b93fd581d462b8540ba3",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/provider_contract/unregistered_dispatch.log",
+      "export": "evidence/core/provider_contract/unregistered_dispatch.log",
+      "original_sha256": "70d4fde28560cdaaa5ba4d7d3a782ca1a4d75559e7c1346703b9e2bc96796a4a",
+      "export_sha256": "70d4fde28560cdaaa5ba4d7d3a782ca1a4d75559e7c1346703b9e2bc96796a4a",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/provider_contract.log",
+      "export": "evidence/core/provider_contract.log",
+      "original_sha256": "878f097e4ff379ad32d31f8cbe089fb61b3a47992b02b93fd581d462b8540ba3",
+      "export_sha256": "878f097e4ff379ad32d31f8cbe089fb61b3a47992b02b93fd581d462b8540ba3",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/run-input.json",
+      "export": "evidence/core/run-input.json",
+      "original_sha256": "157c5fd99f7b9a3e21aa20a14f67b7b4682f99c2b4f7be6603c2b72f90715518",
+      "export_sha256": "1687a714ba90a5c30bce716c0c244ea8930d0ec390d23f3a2f98a1dda3a02143",
+      "local_metadata_redacted": true
+    },
+    {
+      "source": "results/core_reproduction_2026-11-05/summary.json",
+      "export": "evidence/core/summary.json",
+      "original_sha256": "4539f01d00f81296f0fee2567c8d4d80c80c8afc426d4d37f678f5e628754346",
+      "export_sha256": "4539f01d00f81296f0fee2567c8d4d80c80c8afc426d4d37f678f5e628754346",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/controlled_merchant_2026-11-03/summary.json",
+      "export": "evidence/historical/processor-summary.json",
+      "original_sha256": "b27c9c82a4ab3c9d502feaf91c3b5cdb49074b5fb6f136d749e8d3c07319cb5c",
+      "export_sha256": "b27c9c82a4ab3c9d502feaf91c3b5cdb49074b5fb6f136d749e8d3c07319cb5c",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/docker_free_boundary_2026-11-03/report.json",
+      "export": "evidence/historical/local-boundary-report.json",
+      "original_sha256": "e6257c61b4e3c5afa92d16016a42dc6e4508baec3f495ca832560ffb5a8aec74",
+      "export_sha256": "e6257c61b4e3c5afa92d16016a42dc6e4508baec3f495ca832560ffb5a8aec74",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "publication/ARTIFACT_README.md",
+      "export": "README.md",
+      "original_sha256": "cb50dcc13df4ebcc259246c44313bb4adf295e85eff5b38a805941aeccbf14ee",
+      "export_sha256": "cb50dcc13df4ebcc259246c44313bb4adf295e85eff5b38a805941aeccbf14ee",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "publication/RIGHTS_PENDING.txt",
+      "export": "RIGHTS_PENDING.txt",
+      "original_sha256": "81d9f928b9d07fbcf4820d42303192a7fa8dbfaaf53b617e2a176b2319c1c40c",
+      "export_sha256": "81d9f928b9d07fbcf4820d42303192a7fa8dbfaaf53b617e2a176b2319c1c40c",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "publication/review/AdmissionSemantics.lean",
+      "export": "review/AdmissionSemantics.lean",
+      "original_sha256": "31d74df1d37189bf277e53c720cbb075e1c5cb6f1fac3af15fc28068deaec0bf",
+      "export_sha256": "31d74df1d37189bf277e53c720cbb075e1c5cb6f1fac3af15fc28068deaec0bf",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/critical_review_2026-11-05/summary.json",
+      "export": "review/summary.json",
+      "original_sha256": "bde74a66569f87f78862185be33e58ebeb7e18e65da8632bb901053ca73a413d",
+      "export_sha256": "bde74a66569f87f78862185be33e58ebeb7e18e65da8632bb901053ca73a413d",
+      "local_metadata_redacted": false
+    },
+    {
+      "source": "results/critical_review_2026-11-05/admission-semantics.log",
+      "export": "review/admission-semantics.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "export_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "local_metadata_redacted": false
+    }
+  ]
+}

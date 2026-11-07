@@ -1,0 +1,6 @@
+Running selected sources from a fresh snapshot
+baseline: exit 0
+baseline_tests: exit 0
+provider_contract: exit 0
+admission: exit 0
+{"checks_passed": true, "exported_results_checked": 14, "premise_removal_mutations_rejected": 8, "baseline_test_counts": {"tests": 9, "failures": 0, "errors": 0, "skipped": 0}, "baseline_records": 2048, "per_state_strong_baseline_tie": true, "verification_error": null}

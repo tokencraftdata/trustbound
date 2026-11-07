@@ -1,0 +1,34 @@
+..............................................F......................... [ 32%]
+........................................................................ [ 64%]
+........................................................................ [ 97%]
+......                                                                   [100%]
+=================================== FAILURES ===================================
+_____________ test_separate_process_rpc_is_not_same_user_isolation _____________
+
+    def test_separate_process_rpc_is_not_same_user_isolation():
+        # Short path for macOS AF_UNIX. Uses a synthetic canary, never a provider key.
+        with tempfile.TemporaryDirectory(prefix="ipc-", dir=os.environ.get("TMPDIR")) as directory:
+            root = Path(directory)
+            state = root / "state"
+            state.mkdir()
+            credential = root / "key"
+            credential.write_text("TB_BOUNDARY_CANARY_PROCESS_TEST")
+            credential.chmod(0o400)
+            path = root / "s"
+            child = subprocess.Popen([sys.executable, "-m", "trustbound.credential_service",
+                                      "--socket", str(path), "--state", str(state), "--credential", str(credential)],
+                                     stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            try:
+                deadline = time.monotonic() + 5
+                while not path.exists() and child.poll() is None and time.monotonic() < deadline:
+                    time.sleep(0.02)
+>               assert path.exists(), "service did not start"
+E               AssertionError: service did not start
+E               assert False
+E                +  where False = exists()
+E                +    where exists = PosixPath('/tmp/ipc-894j89hm/s').exists
+
+tests/test_credential_boundary_runtime.py:80: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_credential_boundary_runtime.py::test_separate_process_rpc_is_not_same_user_isolation
+1 failed, 221 passed in 3.46s

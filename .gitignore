@@ -1,0 +1,33 @@
+# Credentials and environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+stripe.toml
+credentials*
+secrets/
+private/
+**/private/
+# Local state and generated runs
+*.db
+*.db-*
+*.sqlite*
+results/*
+!results/evidence_only_2026-11-01/
+results/evidence_only_2026-11-01/*
+!results/evidence_only_2026-11-01/closure_benchmark.json
+tmp/
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.DS_Store
+*.olean
+*.ilean
+*.aux
+*.out
+*.synctex.gz
+review/build/

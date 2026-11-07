@@ -1,0 +1,5 @@
+Preparation copy. The author has not yet selected a public code/data license or
+the arXiv manuscript license. This notice does not grant an open-source license.
+The archive is prepared for author review and local reproduction; choose the
+appropriate release terms before external publication. No third-party compiler,
+SDK, Python dependency, paper PDF, or Lean distribution is bundled.

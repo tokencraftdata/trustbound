@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820" role="img"><title>TrustBound trusted-service architecture</title><rect width="100%" height="100%" fill="white"/>
+<text x="40" y="45" dominant-baseline="middle" text-anchor="start" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#142c43">TrustBound | trusted-service research scope</text>
+<text x="40" y="82" dominant-baseline="middle" text-anchor="start" font-family="Arial, sans-serif" font-size="21" font-weight="400" fill="#142c43">Conceptual architecture. Placement does not establish isolation or complete mediation.</text>
+<rect x="35" y="230" width="225" height="100" rx="14" fill="#edf4fb" stroke="#52799d" stroke-width="2"/>
+<text x="147.5" y="261" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#142c43">Flight agent</text>
+<text x="147.5" y="294" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">Request proposer</text>
+<rect x="35" y="380" width="225" height="100" rx="14" fill="#edf4fb" stroke="#52799d" stroke-width="2"/>
+<text x="147.5" y="411" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#142c43">Hotel agent</text>
+<text x="147.5" y="444" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">Request proposer</text>
+<rect x="325" y="140" width="500" height="485" rx="14" fill="#f7fafc" stroke="#52799d" stroke-width="3"/>
+<text x="575" y="175" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#142c43">TRUSTED PAYMENT SERVICE</text>
+<rect x="360" y="205" width="430" height="110" rx="14" fill="#edf4fb" stroke="#52799d" stroke-width="2"/>
+<text x="575.0" y="236" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#142c43">Admission + serialized fence</text>
+<text x="575.0" y="269" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">Record before granting authority</text>
+<text x="575.0" y="296" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">A1-A3 are deployment premises</text>
+<rect x="360" y="345" width="430" height="100" rx="14" fill="#edf4fb" stroke="#52799d" stroke-width="2"/>
+<text x="575.0" y="376" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#142c43">Durable journal + dispatch</text>
+<text x="575.0" y="409" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">Existing rights may survive the fence</text>
+<rect x="360" y="475" width="430" height="110" rx="14" fill="#edf4fb" stroke="#52799d" stroke-width="2"/>
+<text x="575.0" y="506" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#142c43">Outcome reconciliation</text>
+<text x="575.0" y="539" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">Unknown outcomes stay unresolved</text>
+<text x="575.0" y="566" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">No inference from silence alone</text>
+<polyline points="260,280 310,280 310,250 360,250" fill="none" stroke="#52799d" stroke-width="3"/>
+<polygon points="360,250 347.7138441335348,256.71195754045885 347.7138441335348,243.28804245954115" fill="#52799d"/>
+<polyline points="260,430 300,430 300,280 360,280" fill="none" stroke="#52799d" stroke-width="3"/>
+<polygon points="360,280 347.7138441335348,286.71195754045885 347.7138441335348,273.28804245954115" fill="#52799d"/>
+<polyline points="575,315 575,345" fill="none" stroke="#52799d" stroke-width="3"/>
+<polygon points="575,345 568.2880424595412,332.7138441335348 581.7119575404588,332.7138441335348" fill="#52799d"/>
+<polyline points="575,445 575,475" fill="none" stroke="#52799d" stroke-width="3"/>
+<polygon points="575,475 568.2880424595412,462.7138441335348 581.7119575404588,462.7138441335348" fill="#52799d"/>
+<rect x="900" y="275" width="265" height="175" rx="14" fill="#edf4fb" stroke="#52799d" stroke-width="2"/>
+<text x="1032.5" y="306" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#142c43">Processor</text>
+<text x="1032.5" y="339" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">Trusted outcomes / A4</text>
+<text x="1032.5" y="366" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">All remaining effective</text>
+<text x="1032.5" y="393" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">rights must be represented</text>
+<polyline points="790,380 900,380" fill="none" stroke="#52799d" stroke-width="3"/>
+<polygon points="900,380 887.7138441335347,386.71195754045885 887.7138441335347,373.28804245954115" fill="#52799d"/>
+<text x="845" y="345" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="400" fill="#142c43">dispatch</text>
+<polyline points="1030,450 1030,530 790,530" fill="none" stroke="#52799d" stroke-width="3"/>
+<polygon points="790,530 802.2861558664653,523.2880424595412 802.2861558664653,536.7119575404588" fill="#52799d"/>
+<text x="1010" y="495" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" font-weight="400" fill="#142c43">qualified outcomes</text>
+<rect x="360" y="675" width="430" height="100" rx="14" fill="#edf7f0" stroke="#52799d" stroke-width="2"/>
+<text x="575.0" y="706" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="23" font-weight="700" fill="#142c43">Auditor / researcher</text>
+<text x="575.0" y="739" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">Faithful complete export assumed / A5</text>
+<polyline points="575,585 575,675" fill="none" stroke="#52799d" stroke-width="3"/>
+<polygon points="575,675 568.2880424595412,662.7138441335347 581.7119575404588,662.7138441335347" fill="#52799d"/>
+<text x="40" y="660" dominant-baseline="middle" text-anchor="start" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#142c43">No agent access to</text>
+<text x="40" y="690" dominant-baseline="middle" text-anchor="start" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">service keys, host</text>
+<text x="40" y="720" dominant-baseline="middle" text-anchor="start" font-family="Arial, sans-serif" font-size="20" font-weight="400" fill="#142c43">or journal is assumed.</text>
+</svg>

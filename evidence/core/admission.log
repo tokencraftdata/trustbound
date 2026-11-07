@@ -1,0 +1,67 @@
+{
+  "checked_at_utc": "2026-11-05T22:27:47.478593+00:00",
+  "lean": "Lean (version 4.19.0, arm64-apple-darwin23.6.0, commit 6caaee842e94, Release)",
+  "source_sha256": "96c0afed87ea032553f74825a7c13e92050872d4c33e0b91a980ae06b5cab559",
+  "checker_sha256": "d6ba6f7eb4ed6ec33b6739cd1b7c2ddacf53391112948b8e42aa40c5731e1e9b",
+  "check_exit_code": 0,
+  "exported_theorems": [
+    "reachable_coverage",
+    "fenced_population_immutable",
+    "post_fence_coverage",
+    "drained_fence_effects_stable",
+    "reconciled_fence_complete",
+    "fence_without_drain",
+    "bypass_breaks_coverage",
+    "refinement_transfers_coverage"
+  ],
+  "axioms_by_theorem": {
+    "reachable_coverage": [
+      "propext",
+      "Quot.sound"
+    ],
+    "fenced_population_immutable": [
+      "propext"
+    ],
+    "post_fence_coverage": [
+      "propext",
+      "Quot.sound"
+    ],
+    "drained_fence_effects_stable": [
+      "propext"
+    ],
+    "reconciled_fence_complete": [
+      "propext",
+      "Quot.sound"
+    ],
+    "fence_without_drain": [
+      "propext"
+    ],
+    "bypass_breaks_coverage": [
+      "propext"
+    ],
+    "refinement_transfers_coverage": [
+      "propext",
+      "Quot.sound"
+    ]
+  },
+  "mutations": {
+    "grant_without_record": {
+      "proof_rejected": true,
+      "exit_code": 1
+    },
+    "record_after_fence": {
+      "proof_rejected": true,
+      "exit_code": 1
+    },
+    "grant_after_fence": {
+      "proof_rejected": true,
+      "exit_code": 1
+    },
+    "deliver_without_right": {
+      "proof_rejected": true,
+      "exit_code": 1
+    }
+  },
+  "scope": "one path/epoch; conditional identity coverage and drain stability; no provider or Python refinement, monetary accounting, cryptography or liveness",
+  "api_calls_this_check": 0
+}

@@ -1,0 +1,477 @@
+{
+  "checked_at_utc": "2026-11-03T17:25:45.230421+00:00",
+  "all_checks_passed": true,
+  "assertions": 40,
+  "comparisons": {
+    "identical_public_transcripts": true,
+    "identical_final_gate_snapshots": true,
+    "mediated_total_200": true,
+    "bypass_total_300": true,
+    "bypass_effect_after_known_manifest_resolution": true,
+    "complete_provider_ledger_distinguishes_worlds": true
+  },
+  "mediated": {
+    "checks": [
+      {
+        "name": "unregistered_activation_refused_by_gate",
+        "passed": true
+      },
+      {
+        "name": "registration_after_fence_refused",
+        "passed": true
+      },
+      {
+        "name": "grant_after_fence_refused",
+        "passed": true
+      },
+      {
+        "name": "earlier_confirm_can_execute_after_fence",
+        "passed": true
+      },
+      {
+        "name": "caller_supplied_terminal_receipt_refused",
+        "passed": true
+      },
+      {
+        "name": "fence_with_pending_capture_is_not_drain",
+        "passed": true
+      },
+      {
+        "name": "lost_capture_reply_remains_unresolved",
+        "passed": true
+      },
+      {
+        "name": "capture_effect_committed_before_reply_loss",
+        "passed": true
+      },
+      {
+        "name": "failed_read_does_not_certify_terminal",
+        "passed": true
+      },
+      {
+        "name": "uncertain_exposure_retained",
+        "passed": true
+      },
+      {
+        "name": "fence_survives_reopen",
+        "passed": true
+      },
+      {
+        "name": "restart_duplicate_dispatch_refused",
+        "passed": true
+      },
+      {
+        "name": "fresh_known_object_read_resolves_manifest",
+        "passed": true
+      },
+      {
+        "name": "deployment_completeness_not_claimed",
+        "passed": true
+      },
+      {
+        "name": "known_manifest_stays_resolved",
+        "passed": true
+      },
+      {
+        "name": "known_terminal_object_rejects_late_capture",
+        "passed": true
+      }
+    ],
+    "public_transcript": [
+      {
+        "request": {
+          "op": "dispatch",
+          "command_id": 1
+        },
+        "reply": {
+          "ok": true,
+          "result": {
+            "payment_id": "pi_Boundary1",
+            "action": "confirm",
+            "http_status": 200,
+            "requires_authoritative_reconciliation": true
+          }
+        }
+      },
+      {
+        "request": {
+          "op": "observe",
+          "status": "canceled"
+        },
+        "reply": {
+          "ok": false,
+          "error": "request_rejected_or_unresolved"
+        }
+      },
+      {
+        "request": {
+          "op": "reconcile"
+        },
+        "reply": {
+          "ok": true,
+          "result": {
+            "closed": true,
+            "known_manifest_resolved": false,
+            "retained_minor": 200,
+            "deployment_completeness_proved": false
+          }
+        }
+      },
+      {
+        "request": {
+          "op": "dispatch",
+          "command_id": 2
+        },
+        "reply": {
+          "ok": false,
+          "error": "request_rejected_or_unresolved"
+        }
+      },
+      {
+        "request": {
+          "op": "reconcile"
+        },
+        "reply": {
+          "ok": false,
+          "error": "request_rejected_or_unresolved"
+        }
+      },
+      {
+        "request": {
+          "op": "snapshot"
+        },
+        "reply": {
+          "ok": true,
+          "result": {
+            "closed": true,
+            "known_manifest_resolved": false,
+            "retained_minor": 200,
+            "deployment_completeness_proved": false
+          }
+        }
+      },
+      {
+        "request": {
+          "op": "snapshot"
+        },
+        "reply": {
+          "ok": true,
+          "result": {
+            "closed": true,
+            "known_manifest_resolved": false,
+            "retained_minor": 200,
+            "deployment_completeness_proved": false
+          }
+        }
+      },
+      {
+        "request": {
+          "op": "dispatch",
+          "command_id": 2
+        },
+        "reply": {
+          "ok": false,
+          "error": "request_rejected_or_unresolved"
+        }
+      },
+      {
+        "request": {
+          "op": "reconcile"
+        },
+        "reply": {
+          "ok": true,
+          "result": {
+            "closed": true,
+            "known_manifest_resolved": true,
+            "retained_minor": 200,
+            "deployment_completeness_proved": false
+          }
+        }
+      },
+      {
+        "request": {
+          "op": "reconcile"
+        },
+        "reply": {
+          "ok": true,
+          "result": {
+            "closed": true,
+            "known_manifest_resolved": true,
+            "retained_minor": 200,
+            "deployment_completeness_proved": false
+          }
+        }
+      }
+    ],
+    "public_final_snapshot": {
+      "closed": true,
+      "records": [
+        {
+          "id": "pi_Boundary1",
+          "amount": 200,
+          "status": "succeeded",
+          "received": 200,
+          "capturable": 0
+        }
+      ],
+      "known_manifest_resolved": true,
+      "deployment_completeness_proved": false,
+      "retained_minor": 200
+    },
+    "grader_only_before": [
+      {
+        "id": "pi_Boundary1",
+        "amount": 200
+      }
+    ],
+    "grader_only_after": [
+      {
+        "id": "pi_Boundary1",
+        "amount": 200
+      }
+    ]
+  },
+  "bypass": {
+    "checks": [
+      {
+        "name": "unregistered_activation_refused_by_gate",
+        "passed": true
+      },
+      {
+        "name": "registration_after_fence_refused",
+        "passed": true
+      },
+      {
+        "name": "grant_after_fence_refused",
+        "passed": true
+      },
+      {
+        "name": "earlier_confirm_can_execute_after_fence",
+        "passed": true
+      },
+      {
+        "name": "caller_supplied_terminal_receipt_refused",
+        "passed": true
+      },
+      {
+        "name": "fence_with_pending_capture_is_not_drain",
+        "passed": true
+      },
+      {
+        "name": "lost_capture_reply_remains_unresolved",
+        "passed": true
+      },
+      {
+        "name": "capture_effect_committed_before_reply_loss",
+        "passed": true
+      },
+      {
+        "name": "failed_read_does_not_certify_terminal",
+        "passed": true
+      },
+      {
+        "name": "uncertain_exposure_retained",
+        "passed": true
+      },
+      {
+        "name": "fence_survives_reopen",
+        "passed": true
+      },
+      {
+        "name": "restart_duplicate_dispatch_refused",
+        "passed": true
+      },
+      {
+        "name": "fresh_known_object_read_resolves_manifest",
+        "passed": true
+      },
+      {
+        "name": "deployment_completeness_not_claimed",
+        "passed": true
+      },
+      {
+        "name": "bypass_confirm_executed",
+        "passed": true
+      },
+      {
+        "name": "bypass_capture_executed",
+        "passed": true
+      },
+      {
+        "name": "known_manifest_stays_resolved",
+        "passed": true
+      },
+      {
+        "name": "known_terminal_object_rejects_late_capture",
+        "passed": true
+      }
+    ],
+    "public_transcript": [
+      {
+        "request": {
+          "op": "dispatch",
+          "command_id": 1
+        },
+        "reply": {
+          "ok": true,
+          "result": {
+            "payment_id": "pi_Boundary1",
+            "action": "confirm",
+            "http_status": 200,
+            "requires_authoritative_reconciliation": true
+          }
+        }
+      },
+      {
+        "request": {
+          "op": "observe",
+          "status": "canceled"
+        },
+        "reply": {
+          "ok": false,
+          "error": "request_rejected_or_unresolved"
+        }
+      },
+      {
+        "request": {
+          "op": "reconcile"
+        },
+        "reply": {
+          "ok": true,
+          "result": {
+            "closed": true,
+            "known_manifest_resolved": false,
+            "retained_minor": 200,
+            "deployment_completeness_proved": false
+          }
+        }
+      },
+      {
+        "request": {
+          "op": "dispatch",
+          "command_id": 2
+        },
+        "reply": {
+          "ok": false,
+          "error": "request_rejected_or_unresolved"
+        }
+      },
+      {
+        "request": {
+          "op": "reconcile"
+        },
+        "reply": {
+          "ok": false,
+          "error": "request_rejected_or_unresolved"
+        }
+      },
+      {
+        "request": {
+          "op": "snapshot"
+        },
+        "reply": {
+          "ok": true,
+          "result": {
+            "closed": true,
+            "known_manifest_resolved": false,
+            "retained_minor": 200,
+            "deployment_completeness_proved": false
+          }
+        }
+      },
+      {
+        "request": {
+          "op": "snapshot"
+        },
+        "reply": {
+          "ok": true,
+          "result": {
+            "closed": true,
+            "known_manifest_resolved": false,
+            "retained_minor": 200,
+            "deployment_completeness_proved": false
+          }
+        }
+      },
+      {
+        "request": {
+          "op": "dispatch",
+          "command_id": 2
+        },
+        "reply": {
+          "ok": false,
+          "error": "request_rejected_or_unresolved"
+        }
+      },
+      {
+        "request": {
+          "op": "reconcile"
+        },
+        "reply": {
+          "ok": true,
+          "result": {
+            "closed": true,
+            "known_manifest_resolved": true,
+            "retained_minor": 200,
+            "deployment_completeness_proved": false
+          }
+        }
+      },
+      {
+        "request": {
+          "op": "reconcile"
+        },
+        "reply": {
+          "ok": true,
+          "result": {
+            "closed": true,
+            "known_manifest_resolved": true,
+            "retained_minor": 200,
+            "deployment_completeness_proved": false
+          }
+        }
+      }
+    ],
+    "public_final_snapshot": {
+      "closed": true,
+      "records": [
+        {
+          "id": "pi_Boundary1",
+          "amount": 200,
+          "status": "succeeded",
+          "received": 200,
+          "capturable": 0
+        }
+      ],
+      "known_manifest_resolved": true,
+      "deployment_completeness_proved": false,
+      "retained_minor": 200
+    },
+    "grader_only_before": [
+      {
+        "id": "pi_Boundary1",
+        "amount": 200
+      }
+    ],
+    "grader_only_after": [
+      {
+        "id": "pi_Boundary1",
+        "amount": 200
+      },
+      {
+        "id": "pi_Hidden1",
+        "amount": 100
+      }
+    ]
+  },
+  "source_sha256": {
+    "scripts/validate_completeness_boundary.py": "4916172ace25ed25f79fbde44867fe8b61688b550fa2c58d5e8daabde5194a5c",
+    "src/trustbound/stripe_gate.py": "e5bffeb90768fa8318325df9b11887cceb7e6fe1984485e99e7e16bea8ea95ec",
+    "src/trustbound/credential_service.py": "08a9047b9079d7073de2f0f67c0773fead99969059f3febf080483611940fd2f"
+  },
+  "provider": "local_toy_simulator",
+  "real_provider_calls": 0,
+  "os_isolation_tested": false,
+  "deployment_completeness_established": false,
+  "interpretation": "Known-ID RPC observations cannot distinguish this alternate-route effect. Full simulated provider-ledger access can; no claim of Stripe API indistinguishability or independent witness validation."
+}

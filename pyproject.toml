@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trustbound-ucp-ap2"
+version = "0.2.0"
+description = "Research framework for payment-epoch completeness under explicit trusted-service assumptions"
+requires-python = ">=3.11"
+dependencies = [
+  "ap2 @ git+https://github.com/google-agentic-commerce/AP2.git@e1ea56db72a6385bce3e5c1112b3a56ce60acb43",
+  "ucp-sdk @ git+https://github.com/Universal-Commerce-Protocol/python-sdk.git@eea5af1f7e569fe0fab1d179ed0786be289bef6f",
+  "rfc8785==0.1.4",
+  "cryptography>=45,<47",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==9.0.2"]
+
+[project.scripts]
+trustbound-experiment = "trustbound.experiment:main"
+trustbound-closure-experiment = "trustbound.closure_experiment:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+

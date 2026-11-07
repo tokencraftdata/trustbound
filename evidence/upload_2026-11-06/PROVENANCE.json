@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-06",
+  "redactions": "Local export/run paths and JUnit hostname replaced; originals retained locally outside repository. Original log hashes in the core summary refer to the original logs, not sanitized files.",
+  "files": [
+    {
+      "source": "core/summary.json",
+      "destination": "evidence/upload_2026-11-06/core-summary.json",
+      "original_sha256": "e1cf6a30bb2ef3eab30c43702b17c51216aad4a3e564197ae1773e798829a124",
+      "export_sha256": "e1cf6a30bb2ef3eab30c43702b17c51216aad4a3e564197ae1773e798829a124"
+    },
+    {
+      "source": "full_tests.log",
+      "destination": "evidence/upload_2026-11-06/full_tests.log",
+      "original_sha256": "b850f0c15640c093c431ecdcfc526b15a8dff0a53d9a0aaa64a6775896277a40",
+      "export_sha256": "b850f0c15640c093c431ecdcfc526b15a8dff0a53d9a0aaa64a6775896277a40"
+    },
+    {
+      "source": "full-tests.xml",
+      "destination": "evidence/upload_2026-11-06/full-tests.xml",
+      "original_sha256": "e6c832ec9e6548f020c8ed5e2cfdb4149de4640834faf488aef5a4ff44646bc0",
+      "export_sha256": "b9e946e305ced7e20acc14753d706224b82ac7fb8ac838a5046cd04c0a5f9411"
+    },
+    {
+      "source": "local-socket-retry.log",
+      "destination": "evidence/upload_2026-11-06/local-socket-retry.log",
+      "original_sha256": "f69b41b567fe2583118441e8e8390afa756eecb8625fa01f5e10bcff2c1cef10",
+      "export_sha256": "f69b41b567fe2583118441e8e8390afa756eecb8625fa01f5e10bcff2c1cef10"
+    },
+    {
+      "source": "local-socket-retry.xml",
+      "destination": "evidence/upload_2026-11-06/local-socket-retry.xml",
+      "original_sha256": "62b198488ba87a58201a5cc3273976a6455879918af818247fd842d3914ec807",
+      "export_sha256": "118d866a48645785a111a7f06f82ceaa82fa1f0e1f97bdf33475376207a548d7"
+    },
+    {
+      "source": "paired_simulation.log",
+      "destination": "evidence/upload_2026-11-06/paired_simulation.log",
+      "original_sha256": "720713cbe0ee45cf6be5603bff02474f84979e72d6d142013f44f38d47dfef0e",
+      "export_sha256": "720713cbe0ee45cf6be5603bff02474f84979e72d6d142013f44f38d47dfef0e"
+    },
+    {
+      "source": "core.log",
+      "destination": "evidence/upload_2026-11-06/core.log",
+      "original_sha256": "6f9df62f16a74f57e92c598509c80fca911864bc2601907a5956b1af780d6c8a",
+      "export_sha256": "6f9df62f16a74f57e92c598509c80fca911864bc2601907a5956b1af780d6c8a"
+    },
+    {
+      "source": "exit-codes.json",
+      "destination": "evidence/upload_2026-11-06/exit-codes.json",
+      "original_sha256": "dc4a6ab29ccf5d1805a22f18d1fdbfbdeb3ddfd99ce47bf4b0e04028e5d1caac",
+      "export_sha256": "dc4a6ab29ccf5d1805a22f18d1fdbfbdeb3ddfd99ce47bf4b0e04028e5d1caac"
+    }
+  ]
+}

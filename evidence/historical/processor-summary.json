@@ -1,0 +1,25 @@
+{
+  "path_checks_passed": 21,
+  "real_test_api_requests": 9,
+  "test_amount_captured_minor": 200,
+  "new_unit_tests_passed": 9,
+  "full_suite_passed": 222,
+  "credential_isolation_established": false,
+  "same_user_boundary_properties_failed": [
+    "credential_unreadable",
+    "journal_unwritable"
+  ],
+  "complete_admission_coverage_established": false,
+  "processor_records_reconciled": true,
+  "independent_issuer_evidence": false,
+  "formal_checks_rerun_this_followup": false,
+  "source_sha256": {
+    "scripts/validate_controlled_merchant.py": "2849417e9a77d679e205cadb7deecc7b2ed966e61b00bc18d4e82a1ade29f205",
+    "scripts/check_controlled_merchant_evidence.py": "844bfeb255be8add85a645f06cde7c11c1c9b256d54b699dd356b87455889a6d",
+    "scripts/validate_stripe_sandbox.py": "6da37690c4d898c66e1429be519d1172ad73737cbcabb9713819dde5c485f55d",
+    "scripts/reconcile_stripe_account.py": "4a18dec2cd50929389f3a3ae6509021582b552c78c18f6efad02668e82ca25b5",
+    "src/trustbound/credential_service.py": "08a9047b9079d7073de2f0f67c0773fead99969059f3febf080483611940fd2f",
+    "src/trustbound/stripe_gate.py": "e5bffeb90768fa8318325df9b11887cceb7e6fe1984485e99e7e16bea8ea95ec",
+    "tests/test_controlled_merchant.py": "d94ed77e7931017ff6cb940aafb7900f533b955d976a602e259b7a275d7e32ba"
+  }
+}

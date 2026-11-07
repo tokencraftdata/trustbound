@@ -1,0 +1,66 @@
+{
+  "signed_closure": {
+    "assumptions_hold": {
+      "traces": 256,
+      "coverage_accepted": 256,
+      "exact_accepted": 144,
+      "false_coverage": 240,
+      "false_exact": 140
+    },
+    "bypass_violation": {
+      "traces": 256,
+      "coverage_accepted": 256,
+      "exact_accepted": 144,
+      "false_coverage": 256,
+      "false_exact": 144
+    }
+  },
+  "witnessed_log": {
+    "assumptions_hold": {
+      "traces": 256,
+      "coverage_accepted": 256,
+      "exact_accepted": 144,
+      "false_coverage": 240,
+      "false_exact": 140
+    },
+    "bypass_violation": {
+      "traces": 256,
+      "coverage_accepted": 256,
+      "exact_accepted": 144,
+      "false_coverage": 256,
+      "false_exact": 144
+    }
+  },
+  "fenced_reconciliation": {
+    "assumptions_hold": {
+      "traces": 256,
+      "coverage_accepted": 16,
+      "exact_accepted": 4,
+      "false_coverage": 0,
+      "false_exact": 0
+    },
+    "bypass_violation": {
+      "traces": 256,
+      "coverage_accepted": 16,
+      "exact_accepted": 4,
+      "false_coverage": 16,
+      "false_exact": 4
+    }
+  },
+  "conventional_reconciliation": {
+    "assumptions_hold": {
+      "traces": 256,
+      "coverage_accepted": 16,
+      "exact_accepted": 4,
+      "false_coverage": 0,
+      "false_exact": 0
+    },
+    "bypass_violation": {
+      "traces": 256,
+      "coverage_accepted": 16,
+      "exact_accepted": 4,
+      "false_coverage": 16,
+      "false_exact": 4
+    }
+  }
+}

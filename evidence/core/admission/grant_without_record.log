@@ -1,0 +1,16 @@
+grant_without_record.lean:61:8: error: type mismatch
+  recorded
+has type
+  True : Prop
+but is expected to have type
+  x ∈
+    { journal := s.journal, issued := x :: s.issued, rights := x :: s.rights, effects := s.effects,
+        closed := s.closed }.journal : Prop
+'TrustBoundAdmission.reachable_coverage' depends on axioms: [propext, sorryAx, Quot.sound]
+'TrustBoundAdmission.fenced_population_immutable' depends on axioms: [propext]
+'TrustBoundAdmission.post_fence_coverage' depends on axioms: [propext, sorryAx, Quot.sound]
+'TrustBoundAdmission.drained_fence_effects_stable' depends on axioms: [propext]
+'TrustBoundAdmission.reconciled_fence_complete' depends on axioms: [propext, sorryAx, Quot.sound]
+'TrustBoundAdmission.fence_without_drain' depends on axioms: [propext]
+'TrustBoundAdmission.bypass_breaks_coverage' depends on axioms: [propext]
+'TrustBoundAdmission.refinement_transfers_coverage' depends on axioms: [propext, sorryAx, Quot.sound]

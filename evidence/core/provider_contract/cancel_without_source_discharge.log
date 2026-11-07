@@ -1,0 +1,36 @@
+cancel_without_source_discharge.lean:51:67: error: application type mismatch
+  Runs.next (Step.cancel s.core id) (Runs.refl ?m.1200)
+argument
+  Runs.refl ?m.1200
+has type
+  Runs ?m.1200 ?m.1200 : Prop
+but is expected to have type
+  Runs
+    { journal := s.core.journal, issued := s.core.issued, rights := List.filter (fun x => x != id) s.core.rights,
+      effects := s.core.effects, closed := s.core.closed }
+    { objects := s.objects,
+        core :=
+          let __src := s.core;
+          { journal := __src.journal, issued := __src.issued, rights := s.core.rights, effects := __src.effects,
+            closed := __src.closed },
+        terminal := id :: s.terminal }.core : Prop
+cancel_without_source_discharge.lean:95:38: error: application type mismatch
+  List.mem_filter.mp right
+argument
+  right
+has type
+  x ∈
+    { objects := s.objects,
+          core :=
+            let __src := s.core;
+            { journal := __src.journal, issued := __src.issued, rights := s.core.rights, effects := __src.effects,
+              closed := __src.closed },
+          terminal := id :: s.terminal }.core.rights : Prop
+but is expected to have type
+  ?m.1810 ∈ List.filter ?m.1808 ?m.1809 : Prop
+'TrustBoundStripeGate.provider_step_refines' depends on axioms: [sorryAx]
+'TrustBoundStripeGate.provider_runs_refine' depends on axioms: [sorryAx]
+'TrustBoundStripeGate.unregistered_objects_inert' depends on axioms: [propext, sorryAx, Quot.sound]
+'TrustBoundStripeGate.fenced_provider_coverage' depends on axioms: [propext, sorryAx, Quot.sound]
+'TrustBoundStripeGate.terminal_manifest_drains' depends on axioms: [propext, sorryAx, Quot.sound]
+'TrustBoundStripeGate.terminal_cut_stable' depends on axioms: [propext, sorryAx, Quot.sound]

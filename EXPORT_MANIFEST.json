@@ -594,6 +594,12 @@
       "revision": "Goal and run outcomes, arXiv guidance, conference update and selected-core archive",
       "audit": "paper/SUBMISSION_PREP_AUDIT_2026-11-07.json",
       "description": "Documentation and manuscript clarification; fresh selected-core ZIP extraction check passed; science sources unchanged; no provider calls or new results. Public release and licenses pending."
+    },
+    {
+      "date": "2026-11-07",
+      "revision": "Final reviewer edits and public DOI artifact preparation",
+      "audit": "paper/DOI_RELEASE_PREP_AUDIT_2026-11-07.json",
+      "description": "Fixed isolated Figure 1, condensed limitations, prepared and extracted-tested DOI release candidate; public deposit and license choice pending. No scientific source changes or new result."
     }
   ]
 }

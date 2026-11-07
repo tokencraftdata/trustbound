@@ -39,7 +39,7 @@ pdflatex -halt-on-error main.tex
 
 The compiled review PDF is `../TrustBound_Workshop_Anonymous.pdf` and the source
 archive is `../TrustBound_Workshop_Source.zip`. Current preparation/build evidence
-is recorded in `../SUBMISSION_PREP_AUDIT_2026-11-07.json`.
+is recorded in `../DOI_RELEASE_PREP_AUDIT_2026-11-07.json`.
 No author account, submission form, attendance commitment, public artifact
 release or upload has been completed. The workshop's online form may impose
 additional declarations or artifact/checklist requirements; those still need
@@ -50,3 +50,7 @@ The 7 November revision adds the research objective and explains that running
 the artifact yields a reproduction report, not a real merchant closure
 certificate. It also states that public artifact access is pending. The review
 PDF remains seven pages including references. No scientific claims were added.
+
+The final reviewer edit condenses Section 7; this remains an anonymous review
+copy. An identifying public-artifact DOI belongs in the author version; the
+conference copy needs the venue-permitted anonymous artifact route.

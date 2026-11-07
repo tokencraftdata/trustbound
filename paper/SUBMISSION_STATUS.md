@@ -10,6 +10,24 @@ not promised. The bounded comparison and stop rule are recorded in
 [the research decision](../docs/TRIP_CLOSURE_CANDIDATE.md); neither it nor a new
 theorem is a prerequisite for completing this note.
 
+## Latest reviewer requests
+
+- Figure 1 now shares page 3 with assumptions and body text; its isolated page
+  is removed. The author PDF is **12 pages**; the anonymous conference PDF is seven.
+- Section 7's limitations paragraph is shorter without expanding the claim.
+  Op's access date remains 6 November in both references and Section 6.
+- A 46-file public-release candidate and Zenodo metadata are prepared in
+  [release/](release/README.md). It includes the existing core and Appendix B
+  diagnostic. Extracted-package checks passed with existing tools; no scientific
+  source was changed and no provider calls were made.
+- **Public artifact and DOI are not complete.** The user authorized a public
+  artifact; Zenodo is signed out and MIT terms remain an unanswered choice.
+  Once deposited, verify public download and its hash, then cite the issued
+  version DOI in Appendix A. A reserved DOI alone is insufficient.
+
+Current audit: [DOI release preparation](DOI_RELEASE_PREP_AUDIT_2026-11-07.json).
+Earlier preparation audits describe earlier file states.
+
 ## Prepared
 
 - Author-reviewed text finalized with **Sandip Nandi — Independent Researcher**,
@@ -37,7 +55,7 @@ theorem is a prerequisite for completing this note.
 Current preparation verification is recorded in
 `SUBMISSION_PREP_AUDIT_2026-11-07.json`. The 7 November revision states the goal
 and the meaning of running the artifact in both papers and the repository.
-The author PDF has 13 pages; the anonymous conference PDF has seven including
+The earlier author PDF had 13 pages; the anonymous conference PDF has seven including
 references. The extracted 41-file selected-core archive was run with existing
 tools: 14 exports checked, eight mutations rejected, nine tests passed, 2,048
 records reproduced, and zero provider requests. All 74 tracked scientific

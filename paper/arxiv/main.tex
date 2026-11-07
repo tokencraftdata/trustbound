@@ -141,9 +141,9 @@ Figure~\ref{fig:architecture} locates these trust assumptions. The two travel
 agents motivate the request interface; both feed the one trusted payment path
 studied here. The drawing does not assert independent-provider composition.
 
-\begin{figure}[htbp]
+\begin{figure}[!t]
 \centering
-\includegraphics[width=\linewidth]{figures/architecture.pdf}
+\includegraphics[width=0.90\linewidth]{figures/architecture.pdf}
 \caption{Conceptual trusted-service architecture. A1--A3 are deployment
 premises, not established isolation or executable-refinement results. A4
 requires truthful outcomes and discharge of all effective authority, including
@@ -477,17 +477,15 @@ standard. These comparisons inspect source definitions; we have not reproduced
 the cited systems or proved reductions between their implementations.
 
 \section{Limitations and conclusion}
-The theorem is conditional on a correct transition abstraction. Every
-effect-capable route and source-side right must be represented, including
-delayed deliveries and recovery. Matching reports, signatures, known-object
-reads, and successful tests do not independently discharge these obligations.
-The source and the payment service remain trusted. The note establishes neither
-a new general completeness principle nor a strictly weaker trust contract than
-the closest work. No end-to-end monetary composition, multi-worker crash-recovery proof,
-independent-issuer completeness certificate, account-wide audit, hostile-host
-security property, or finite completion deadline is established. Unresolved
-operations may remain pending indefinitely. The finite baseline is neither
-a throughput study nor evidence of deployment error rates.
+The result assumes a faithful transition abstraction covering every in-scope
+route and right, including delayed delivery and recovery. The service and source
+remain trusted; signatures, matching reads and successful tests do not establish
+that contract. The scope is conditional identity-level closure: monetary
+composition, multi-worker crash recovery, independent-issuer and account-wide
+completeness, and hostile-host isolation require separate arguments. Pending
+operations need not terminate. The finite diagnostic measures neither throughput
+nor deployment error rates. Existing closure principles and trust requirements
+are specialized here, not weakened.
 
 \paragraph{What would distinguish a further result.}
 A separate question is which semantic coverage and binding conditions let an

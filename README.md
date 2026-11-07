@@ -165,3 +165,9 @@ release review; public access and reuse terms are still pending.
 This is a private research repository. No open-source license has been selected
 or granted; see [rights status](RIGHTS_PENDING.txt). No public publication or
 arXiv submission is implied by this upload.
+
+The final reviewer edit removes Figure 1's isolated page; the author note now
+has 12 pages. A [public DOI release candidate](paper/release/README.md) is
+prepared and reproduction-checked. The DOI deposit is still pending author
+Zenodo access and the software-license choice; this private repository is not
+the public artifact.

@@ -64,8 +64,10 @@ rights-pending notice and must not be described as an open-source release.
 Recommended release: publish this frozen selected-core package with the agreed
 software terms, retain its checksum and version, and add its stable public URL
 to the author manuscript. Keep the broader working repository private unless
-the author deliberately changes that decision. A public release repository is
-sufficient; a DOI archive is optional. Verify access while signed out.
+the author deliberately changes that decision. The final review requests a DOI-backed archive specifically. The Zenodo
+deposit candidate is prepared in `release/`, but account access and MIT license
+selection remain pending. Verify public download and its checksum after
+publication, then cite the issued version DOI in Appendix A.
 
 Alternatively, arXiv supports code/data under an `anc/` folder in a TeX source
 submission. These files become part of the public version; they cannot be

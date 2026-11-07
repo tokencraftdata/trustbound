@@ -1,0 +1,69 @@
+{
+  "date": "2026-11-07",
+  "revision": "Final reviewer edits and public DOI artifact preparation",
+  "publication_ready": false,
+  "arxiv": {
+    "pages": 12,
+    "figure_1_page": 3,
+    "figure_1_shares_page_with_body_text": true,
+    "blank_float_page_removed": true,
+    "figures": 2,
+    "visual_review": "All 12 pages inspected, including full-size Figure 1 placement check",
+    "extracted_source_rebuild_passed": true,
+    "rebuild_text_matches_delivered_pdf": true,
+    "layout_reference_warnings": []
+  },
+  "conference": {
+    "pages": 7,
+    "anonymous": true,
+    "pdf_metadata_removed": true,
+    "visual_review": "All seven pages inspected; no clipping or overlap",
+    "extracted_source_rebuild_passed": true,
+    "rebuild_text_matches_delivered_pdf": true,
+    "layout_reference_warnings": []
+  },
+  "editorial": {
+    "limitations_condensed": true,
+    "op_access_date_retained": "2026-11-06",
+    "op_live_text_rechecked": false,
+    "contact_email_or_orcid_added": false,
+    "theorem_and_proof_unchanged": true
+  },
+  "artifact": {
+    "candidate": "paper/release/TrustBound_Core_Artifact_v1.0.0_candidate.zip",
+    "files": 46,
+    "version": "1.0.0",
+    "scope": "Existing selected core, redacted historical evidence and existing Appendix B diagnostic",
+    "license": "MIT proposed, awaiting author selection",
+    "public": false,
+    "doi": null,
+    "zenodo_state": "Signed out; login tab handed to author",
+    "manifest_verified": true,
+    "targeted_secret_and_local_path_scan_matches": 0,
+    "scan_limit": "Pattern scan plus curated provenance, not universal proof of secret absence",
+    "executed_evidence": "evidence/doi-candidate-2026-11-07.json"
+  },
+  "integrity": {
+    "tracked_scientific_files_checked": 74,
+    "all_unchanged": true
+  },
+  "remaining_blockers": [
+    "Author Zenodo sign-in/registration",
+    "Author MIT license choice",
+    "Public artifact deposit and signed-out download/checksum verification",
+    "Issued version DOI citation in Appendix A"
+  ],
+  "external_actions": {
+    "public_upload": false,
+    "arxiv_submission": false,
+    "conference_submission": false,
+    "private_repository_update_authorized": true
+  },
+  "outputs_sha256": {
+    "paper/TrustBound_Draft.pdf": "163590aec048bbbf86aa6e4a12050e196351f6754769b14b544cd5d349f3f566",
+    "paper/TrustBound_Workshop_Anonymous.pdf": "c53ead47c24c744f74579026d5949e8408f179491bd09f0df20a7e32ab17a3d4",
+    "paper/TrustBound_arXiv_Source.zip": "0ea7f60b4f896f1f915425f8096caef7c4b164304b8b83c818c928770d551f1a",
+    "paper/TrustBound_Workshop_Source.zip": "ed16257b5ebc6bd33043663f8681eb10d0908abd73bb47fe43fa8da96a08af6a",
+    "paper/release/TrustBound_Core_Artifact_v1.0.0_candidate.zip": "e3d1f1f55dbb80193cafcc14b3c864872d62dbd55e0ff22d397e05fd1792f71a"
+  }
+}

@@ -22,7 +22,7 @@ real merchant closure certificate. It does not establish deployment assumptions.
 See [submission steps and recommendations](ARXIV_SUBMISSION_GUIDE.md),
 [copyable metadata](arxiv-metadata.json), [submission status](SUBMISSION_STATUS.md),
 [conference build instructions](workshop/README.md), and
-[the current verification record](SUBMISSION_PREP_AUDIT_2026-11-07.json).
+[the current verification record](DOI_RELEASE_PREP_AUDIT_2026-11-07.json).
 Earlier audits and execution records remain historical evidence.
 
 To compile the author version, run from `arxiv/`:
@@ -39,3 +39,9 @@ PDFLaTeX and BibTeX; its README gives the commands.
 Neither version has been submitted. The repository remains private and no
 public paper/code license has been granted. Author details and substantive
 review are complete; account/endorsement, rights and artifact access remain.
+
+Final reviewer update: Figure 1 shares page 3 with the body text; the author
+PDF is 12 pages. The public DOI deposit remains blocked on Zenodo sign-in and
+software-license selection. The [release candidate](release/README.md) is
+prepared and checked, not published. Appendix A retains an honest pending-access
+statement until an issued DOI and public files can be verified.

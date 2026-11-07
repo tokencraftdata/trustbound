@@ -1,0 +1,22 @@
+{
+  "title": "TrustBound: Payment-Epoch Completeness Reproducibility Artifact",
+  "upload_type": "software",
+  "version": "1.0.0",
+  "creators": [
+    {
+      "name": "Nandi, Sandip",
+      "affiliation": "Independent Researcher"
+    }
+  ],
+  "description": "Selected reproducibility artifact accompanying TrustBound: A Mechanized Note on Payment-Epoch Completeness. Contains the Lean admission and provider-contract models and checkers, eight premise-removal mutations, a finite evidence-rule diagnostic and nine tests, source-isolated reproduction runner, reference results and redacted execution evidence, and the separate finite flight-hotel diagnostic from Appendix B. The core checks 14 exported results and reproduces 2,048 records. It establishes conditional model results under a trusted-service contract, not completeness of a real processor deployment or a new general closure principle. Existing tools are required; no credentials, provider calls, SDK or Docker are needed. Author-owned software and accompanying documentation: MIT. Manuscript distribution terms are separate.",
+  "access_right": "open",
+  "license": "mit",
+  "keywords": [
+    "payment completeness",
+    "authorization",
+    "formal verification",
+    "Lean",
+    "reproducibility",
+    "trusted service"
+  ]
+}

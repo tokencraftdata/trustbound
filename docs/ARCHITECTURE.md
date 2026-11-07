@@ -40,7 +40,8 @@ Unknown inert objects are safe only under the constrained activation contract.
 ## Diagram source
 
 The SVG files are editable vector assets; PNG files provide consistent GitHub
-rendering. `diagrams/render.py` regenerates both with Python and Pillow. This
+rendering. `diagrams/render.py` regenerates SVG, PNG and vector PDF with Python, Pillow and ReportLab. This
 optional authoring dependency is not required to run TrustBound or its proofs.
-The diagrams are new repository documentation; they have not been inserted
-into the manuscript currently under author review.
+Both diagrams were inserted into the 6 November manuscript revision with
+explicit assumption-bounded captions. Vector PDF copies are included in the
+self-contained LaTeX source directory.

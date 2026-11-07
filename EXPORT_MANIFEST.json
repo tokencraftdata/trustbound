@@ -558,5 +558,18 @@
       "path": "docs/CORE_ARTIFACT.md",
       "reason": "Clarify selected-core versus full repository scope and update installation/provenance paths; historical results unchanged."
     }
+  ],
+  "subsequent_revisions": [
+    {
+      "date": "2026-11-06",
+      "description": "Added two vector manuscript figures, two checked prior-art references, correctly labeled existing Nov6 validation, and separate candidate assessment. Original import hashes remain historical; current hashes are SHA256SUMS.json.",
+      "changed_imported_paths": [
+        "paper/arxiv/main.tex",
+        "paper/arxiv/metadata.tex",
+        "paper/arxiv/references.tex",
+        "paper/TrustBound_Draft.pdf"
+      ],
+      "audit": "paper/REVISION_2026-11-06.json"
+    }
   ]
 }

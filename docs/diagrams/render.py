@@ -1,6 +1,6 @@
-"""Render the repository's explanatory diagrams as SVG and PNG.
+"""Render the repository's explanatory diagrams as SVG, PNG and vector PDF.
 
-Optional authoring dependency: Pillow. Not required for proof/test reproduction.
+Optional authoring dependencies: Pillow and ReportLab. Not required for proof/test reproduction.
 The diagrams encode logical assumptions, not validated deployment guarantees.
 """
 from pathlib import Path
@@ -56,6 +56,40 @@ class Diagram:
     def save(self,name):
         (ROOT/(name+".svg")).write_text("\n".join(self.svg)+"\n</svg>\n")
         self.image.save(ROOT/(name+".png"))
+        # Vector PDF for manuscript inclusion; no on-upload SVG conversion needed.
+        import xml.etree.ElementTree as ET
+        from reportlab.pdfgen.canvas import Canvas
+        from reportlab.lib.colors import HexColor
+        from reportlab.pdfbase import pdfmetrics
+        from reportlab.pdfbase.ttfonts import TTFont
+        for bold in (False, True):
+            pdfmetrics.registerFont(TTFont("DiagramBold" if bold else "DiagramRegular", font(20, bold).path))
+        height = self.image.height
+        pdf = Canvas(str(ROOT/(name+".pdf")), pagesize=(W, height), invariant=1)
+        pdf.setTitle(name.replace("_", " ").title())
+        pdf.setAuthor("")
+        for element in ET.fromstring("\n".join(self.svg)+"</svg>"):
+            tag = element.tag.split("}")[-1]; a = element.attrib
+            if tag == "rect":
+                if a.get("width") == "100%": continue
+                pdf.setFillColor(HexColor(a["fill"])); pdf.setStrokeColor(HexColor(a["stroke"]))
+                pdf.setLineWidth(float(a["stroke-width"]))
+                pdf.roundRect(float(a["x"]), height-float(a["y"])-float(a["height"]), float(a["width"]), float(a["height"]), float(a["rx"]), fill=1, stroke=1)
+            elif tag == "text":
+                size = float(a["font-size"])
+                pdf.setFillColor(HexColor(a["fill"]))
+                pdf.setFont("DiagramBold" if a["font-weight"] == "700" else "DiagramRegular", size)
+                draw = pdf.drawCentredString if a["text-anchor"] == "middle" else pdf.drawString
+                draw(float(a["x"]), height-float(a["y"])-size*0.33, element.text or "")
+            elif tag in ("polygon", "polyline"):
+                points = [tuple(map(float, xy.split(","))) for xy in a["points"].split()]
+                path = pdf.beginPath(); path.moveTo(points[0][0], height-points[0][1])
+                for x, y in points[1:]: path.lineTo(x, height-y)
+                if tag == "polygon":
+                    path.close(); pdf.setFillColor(HexColor(a["fill"])); pdf.drawPath(path, fill=1, stroke=0)
+                else:
+                    pdf.setStrokeColor(HexColor(a["stroke"])); pdf.setLineWidth(float(a["stroke-width"])); pdf.drawPath(path, fill=0, stroke=1)
+        pdf.showPage(); pdf.save()
 
 
 def main():

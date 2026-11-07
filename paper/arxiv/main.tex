@@ -5,6 +5,7 @@
 \usepackage{amsmath,amssymb,amsthm,booktabs,tabularx,array}
 \usepackage[hidelinks]{hyperref}
 \usepackage{microtype}
+\usepackage{graphicx}
 \usepackage{enumitem}
 \setlist{nosep,leftmargin=*}
 \setlength{\parskip}{4pt}
@@ -111,6 +112,21 @@ client status. A signature authenticates an assertion without proving A5.
 A separately obtained view from the same processor is not an independently
 trusted issuer. Successful API tests do not establish these premises universally.
 
+Figure~\ref{fig:architecture} locates these trust assumptions. The two travel
+agents motivate the request interface; both feed the one trusted payment path
+studied here. The drawing does not assert independent-provider composition.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\linewidth]{figures/architecture.pdf}
+\caption{Conceptual trusted-service architecture. A1--A3 are deployment
+premises, not established isolation or executable-refinement results. A4
+requires truthful outcomes and discharge of all effective authority, including
+provider recovery; A5 requires a faithful complete export. Separately obtained
+processor observations do not constitute an independently trusted issuer.}
+\label{fig:architecture}
+\end{figure}
+
 \subsection{Four different assertions}
 \emph{Admission closed} means no new records or grants are accepted. Earlier
 rights may still execute. \emph{Exposure covered} means retained liability
@@ -208,6 +224,23 @@ Truthful Boolean reports determine effect membership, not the historical
 ordering of effects. The list equality states that the modeled history remains
 unchanged; it does not reconstruct that ordering from the reports.
 
+Figure~\ref{fig:completeness} separates future stability from knowledge of
+past effects. Each multi-input conclusion requires all its incoming premises;
+the arrows impose no temporal order on observations.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics[width=\linewidth]{figures/completeness.pdf}
+\caption{Logical dependencies of exact identity-level closure under the
+specified transition rules. A fixed covered population, fenced admission and
+grants, and discharge of all remaining effective rights yield future effect
+stability. Truthful outcomes and a faithful complete export additionally identify
+past effects. An empty client queue, silence, or a signed statement alone does
+not establish these premises. No completion deadline, monetary composition,
+or real-provider admission completeness follows.}
+\label{fig:completeness}
+\end{figure}
+
 \subsection{Counterexecutions and transfer obligation}
 The checked \code{fence\_without\_drain} execution records and grants an
 identity, closes admission, and then delivers it. With a completed flight and
@@ -276,6 +309,14 @@ installations. It made no provider requests. The release artifact was also
 extracted into a separate directory and its included runner was executed there
 with the same installed tools. Neither check was an independent clean-machine
 installation or a real-deployment verification.
+
+A separate repository-export check on 6 November repeated the selected core
+successfully and passed all 40 local simulator assertions, without provider
+calls. The broader implementation suite initially passed 221 tests; one local
+socket test passed on a focused retry with socket permission and unchanged
+source. Thus all 222 cases passed across the two invocations, not in the initial
+full-suite run. These implementation tests do not prove A1--A5 or executable
+refinement; the nine diagnostic tests are included in the 222, not additional.
 
 \subsection{Formal checks}
 All eight exported admission results and all six provider-contract results
@@ -405,7 +446,8 @@ isolation were not established. A same-user process could open the credential
 and journal, failing the stronger host-isolation boundary. A1 excludes that
 threat; it does not convert the failed check into success.
 
-These historical experiments were not rerun for this paper package. Only
+The real-provider experiment was not rerun for this revision. The local
+simulator rerun is distinguished above. Only
 non-sensitive saved summaries are included, without raw private provider
 records or provider replay scripts. Their observations are supporting reports,
 not independently reproducible API evidence in the minimal artifact. The core
@@ -436,6 +478,16 @@ quantities. Our guarded model derives population coverage and stability, but
 does not establish Op's external completeness premise for a real processor or
 address its broader monetary obligations and corrections. The text inspected
 on 5 November is a live author manuscript; no earlier cutoff priority is inferred.
+
+\paragraph{Root-scoped quiescence and budget conservation.}
+Zhu and Wang already show why separate provider snapshots do not establish a
+composed cut; their protocol combines provider fences with exact cross-provider
+channel accounting~\cite{quiescence}. Their budget-conservation work separately
+accounts for compensation using its own authority and charge, and makes joint
+identity and fence ordering explicit~\cite{budget}. We do not claim these
+principles as new. Economically coupled provider rights, heterogeneous terminality
+profiles, and fee-bearing compensation are outside our checked theorem; their
+composition is a research question, not an established contribution here.
 
 \paragraph{HoldSpec.}
 HoldSpec checks authorization-hold lifecycle properties under provider profiles

@@ -36,5 +36,6 @@ Sanitized execution summaries, test logs and JUnit results are retained in
 [`evidence/upload_2026-11-06/`](../evidence/upload_2026-11-06/). Its provenance file
 records original and exported hashes and the limited path/hostname substitutions.
 Original logs remain outside the upload. No implementation was changed to obtain
-these results. The manuscript PDF and LaTeX remain the existing author-review
-draft; these upload checks do not change its claims or establish novelty.
+these results. At the initial upload, the manuscript PDF and LaTeX were the existing author-review
+draft. The subsequent diagram revision is documented separately in
+[the revision audit](../paper/REVISION_2026-11-06.json); these checks establish no novelty.

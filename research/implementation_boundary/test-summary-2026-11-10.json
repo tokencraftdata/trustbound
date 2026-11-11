@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-10",
+  "recorded_at_utc": "2026-11-10T18:45:33.842710+00:00",
+  "command": "PYTHONPATH=src python -m pytest -q tests/test_stripe_gate.py tests/test_dispatch_crashes.py",
+  "python": "3.12.14",
+  "pytest": "9.0.2",
+  "sqlite": "3.53.1",
+  "outcome": {
+    "tests": 30,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "reported_elapsed_seconds": 2.29,
+  "return_code": 0,
+  "attempts": 1,
+  "source_sha256": {
+    "src/trustbound/stripe_gate.py": "e5bffeb90768fa8318325df9b11887cceb7e6fe1984485e99e7e16bea8ea95ec",
+    "src/trustbound/credential_service.py": "08a9047b9079d7073de2f0f67c0773fead99969059f3febf080483611940fd2f",
+    "tests/test_stripe_gate.py": "0d5905c9492b0ba12cd40f669e385c936e51fff20c06531c89b0f3be44060429",
+    "tests/test_dispatch_crashes.py": "4ee9a67ffd91cf22e4867ffb0f6a975c08b75305022d26b504b29b3e44a517b7",
+    "tests/dispatch_crash_worker.py": "d418acd2db1f81476638956af0d33fb47e33a50b7f7465f019b27201991a085f"
+  },
+  "junit": {
+    "file": "tests-2026-11-10.xml",
+    "original_sha256": "fee88f6936c6320a4347b60cb394cefd7ac9892c7cd809c5722e416bd5a43cb5",
+    "exported_sha256": "3457f21fd22a917aea4b0f5f15dc0569a3dc6091237c4cee4d3880239b94198f",
+    "redaction": "Only hostname replaced with VALIDATION_HOST"
+  },
+  "provider_calls": 0,
+  "scope": "Existing local gate and crash tests; no new proof, real payment test, credential isolation or exhaustive implementation verification."
+}

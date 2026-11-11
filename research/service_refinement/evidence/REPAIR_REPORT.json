@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-10",
+  "recorded_at_utc": "2026-11-10T21:08:01.380484+00:00",
+  "changes": [
+    "Require an own claimed capture command for a positive received amount",
+    "Commit known-identity scope/provenance/terminal conflicts before raising; preserve through reopen",
+    "Withhold resolved status on any persisted conflict; retain configured reservation",
+    "Block new grants/claims for conflicted payments and export records/commands/conflicts atomically"
+  ],
+  "full_test_outcome": {
+    "tests": 235,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "selected_gate_tests": 66,
+  "new_observation_regression_cases": 11,
+  "crash_points": 15,
+  "full_suite_command": "PYTHONPATH=src python -m pytest -q tests",
+  "full_suite_environment": "Existing Python 3.12.14 full-dependency environment, with local Unix-socket permission; same host, not a clean-machine reproduction",
+  "initial_attempts": {
+    "new_regression_checks_before_fix": "11 failed on original code; includes the newly required conflict-status field",
+    "minimal_environment_broader_attempt": "69 passed, 13 failed, 9 errors; broader imports required rfc8785 absent from the minimal core environment",
+    "full_dependency_sandbox_attempt": "234 passed, 1 failed; Unix socket bind PermissionError",
+    "socket_diagnostic_attempt": "Same sandbox socket bind PermissionError; test now exposes startup stderr",
+    "final_full_suite": "235 passed with local socket access"
+  },
+  "source_sha256": {
+    "src/trustbound/stripe_gate.py": "4fadedca980147d95722b787883776321fbe6e735084ac00e640c51b8bc12dc3",
+    "src/trustbound/credential_service.py": "df865fee133d540e73a0793b9a20724787309e331c6a359cf5ba7d53484f6453",
+    "tests/test_gate_observation_integrity.py": "09ae54a080a9d7168688c6d839552e4e4f9a06cac783049c4bb638b319102f1b",
+    "tests/test_stripe_gate.py": "16ef7f9430e2a14aaf5b755ae0d8230164b417ca1f947579ce9a3948a1ebef2d",
+    "tests/test_dispatch_crashes.py": "12096984fdf3caf468cecbb3c5d326b8d9337d130659b156f01b41a2276c4402",
+    "tests/dispatch_crash_worker.py": "75bf9a21243f51bd1357759d035dda2ea19f212b7c8806e834ccda68f385ce70",
+    "tests/test_credential_service.py": "2f089b6db136f5bcdb4b841bfbbd98dc94996998718f90f49309eb4002daa6bd",
+    "tests/test_credential_boundary_runtime.py": "f5685cc0fc3af046aa9dfb3ab582100dd7c93c1aaca8b311a90d3720b13a7794",
+    "research/service_refinement/check_traces.py": "fb5d0a47982252a286d1343722b95222e990bc1c8c5a5d1619bce9751cf37889"
+  },
+  "junit_provenance": {
+    "original_sha256": "2bd7e1c20f9c43158f71199008065da7df11d5c207478097bbf55ff419113bb4",
+    "export_sha256": "66a8d1883da83f3f1e4083e4656b55a41bb04820321806d31d61f7990a84d9fa",
+    "redaction": "Hostname only replaced with VALIDATION_HOST"
+  },
+  "projected_trace_result": {
+    "executed_service_traces": 6,
+    "projected_steps": 66,
+    "closed_trace_instances": 5,
+    "unresolved_trace_instances": 1,
+    "invalid_trace_inputs_rejected": 2,
+    "accepted_axioms": [
+      "propext",
+      "Quot.sound"
+    ]
+  },
+  "limitations": [
+    "Necessary command provenance does not prove transport invocation, processor execution or source truth",
+    "Conflict protection applies once its SQLite record commits; a crash before commit rolls back the transaction",
+    "In-flight work already claimed is not remotely revoked by the conflict flag",
+    "Configured retention is not a monetary bound for an out-of-contract provider",
+    "Python projection and harness event completeness are trusted; no universal refinement or real-provider conformance"
+  ],
+  "real_provider_requests": 0,
+  "general_theorem_changed": false,
+  "new_general_novelty_established": false,
+  "published": false,
+  "pushed": false
+}

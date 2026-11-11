@@ -1,0 +1,2 @@
+'lost_reply_and_restart.recorded_run' depends on axioms: [propext, Quot.sound]
+'lost_reply_and_restart.checked_exact' depends on axioms: [propext, Quot.sound]

@@ -1,0 +1,5 @@
+paid_without_admission.lean:23:55: error: tactic 'decide' proved that the proposition
+  1 ∈ s3.core.rights
+is false
+'paid_without_admission.recorded_run' depends on axioms: [propext, sorryAx, Quot.sound]
+'paid_without_admission.checked_exact' depends on axioms: [propext, sorryAx, Quot.sound]

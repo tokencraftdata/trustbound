@@ -1,0 +1,2 @@
+'claim_abandoned_before_send.recorded_run' depends on axioms: [propext, Quot.sound]
+'claim_abandoned_before_send.remains_undrained' does not depend on any axioms

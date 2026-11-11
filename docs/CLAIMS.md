@@ -67,3 +67,19 @@ No account-wide payment completeness, independent-issuer certificate, verified
 monetary implementation, production booking, legal finality, guaranteed completion
 deadline or hostile-host security is established. Separate models do not compose
 automatically into one end-to-end theorem.
+
+## Bounded service evidence, 10 November 2026
+
+The repaired gate requires an own claimed capture command before accepting a
+positive received amount. Known-identity scope, terminality and provenance
+conflicts persist once committed and prevent a resolved verdict, including after
+reopen. A command claim does not establish processor execution or truth.
+
+Six actual local gate executions, comprising 66 projected transitions, were
+accepted by the existing Lean provider-contract model. Five final states satisfy
+the existing closure theorem; one remains undrained. Two inconsistent checker
+inputs were rejected. The projection and complete event capture remain trusted;
+this is not a universal implementation refinement or evidence for a real provider's
+contract. A1–A5 and the original theorem are unchanged. The 235 passing local tests
+include 66 selected gate/interface/crash checks; these are not extra independent
+proofs. [Details and reproduction](../research/service_refinement/README.md).

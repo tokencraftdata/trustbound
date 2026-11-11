@@ -77,7 +77,8 @@ def test_separate_process_rpc_is_not_same_user_isolation():
             deadline = time.monotonic() + 5
             while not path.exists() and child.poll() is None and time.monotonic() < deadline:
                 time.sleep(0.02)
-            assert path.exists(), "service did not start"
+            assert path.exists(), "service did not start: " + (
+                child.stderr.read() if child.poll() is not None else "startup timed out")
             def rpc(request):
                 with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as client:
                     client.settimeout(2)

@@ -55,7 +55,8 @@ class CommandService:
                         self.gate.observe(self.provider.retrieve(entry["id"]))
                 snapshot = self.gate.snapshot()
                 result = {key: snapshot[key] for key in
-                          ("closed", "known_manifest_resolved", "retained_minor", "deployment_completeness_proved")}
+                          ("closed", "known_manifest_resolved", "retained_minor",
+                           "has_contract_conflicts", "deployment_completeness_proved")}
             return {"ok": True, "result": result}
         except Exception:
             # Do not serialize provider exception bodies or any raw response.

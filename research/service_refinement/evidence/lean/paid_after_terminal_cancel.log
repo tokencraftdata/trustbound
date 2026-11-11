@@ -1,0 +1,5 @@
+paid_after_terminal_cancel.lean:31:55: error: tactic 'decide' proved that the proposition
+  1 ∈ s5.core.rights
+is false
+'paid_after_terminal_cancel.recorded_run' depends on axioms: [propext, sorryAx, Quot.sound]
+'paid_after_terminal_cancel.checked_exact' depends on axioms: [propext, sorryAx, Quot.sound]

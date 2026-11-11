@@ -21,75 +21,91 @@
 \maketitle
 \begin{center}\small\publicationstatus\end{center}
 \begin{abstract}
-A payment receipt establishes an observed outcome; exact epoch closure also
-requires complete accounting and exclusion of later effects under earlier
-authority. This note makes those obligations explicit for request-only agents
-using a trusted payment service. In a Lean transition model, recording before
-granting authority and serializing both with an admission fence derive a fixed
-journal covering effects and remaining rights. Complete source-side discharge
-establishes future stability; truthful per-identity outcomes additionally
-establish exact identity-level accounting. A constrained provider model permits
-unregistered inert objects while mediating every activation. Reproduction checks
-14 exported results and rejects eight premise-removal mutations. A finite
-diagnostic, whose two strong comparator labels share the same fence-and-contiguity
-acceptance rule, documents the evidence boundary; a small flight--hotel example
-separates payment closure from commit-time policy and trip usability.
-The contribution is an auditable assumption contract, a checked construction,
-and reproducible examples that specialize existing closure and authorization
-principles to payment epochs.
+TrustBound studies payment completeness for AI-assisted travel booking. We
+formalize when a trusted payment service can account for every in-scope payment
+effect and establish that outstanding authority cannot produce further effects.
+Travel agents submit requests to the service without access to its credentials,
+journal, or administration.
+Our Lean admission model records each payment identity before granting
+authority. An admission fence then fixes the journal, which covers all modeled
+effects and outstanding rights. Once those rights are discharged, no later
+effect can occur in the model. Truthful reports for each journaled identity
+then give exact identity-level accounting. Our constrained provider-contract
+model requires registration before activation and keeps unregistered objects
+inert. The artifact checks 14 exported results; eight premise-removal mutations
+fail the proof checks. A finite evidence diagnostic shows how matching reports
+can still leave an effect unaccounted for. The note applies established closure
+principles under an explicit payment trust contract, with checked models and
+reproducible examples.
 \end{abstract}
 
 \section{Introduction}
-A travel business may delegate flight and hotel booking to separate agents.
-A flight payment can be known while a hotel payment has an uncertain response.
-The service may stop admitting new work while the earlier hotel request remains
-able to execute. Booking completion, a balanced reservation ledger, and a signed
-list of observed payments each leave a question unanswered: is the relevant
-payment history complete and unable to grow under earlier authority?
+A travel business has paid for a flight when its hotel payment request times
+out. It stops the booking agents, but the hotel payment may already have
+executed or may still execute under earlier authority. Before closing the
+payment epoch, the business needs to establish which payments completed and
+whether any earlier request can still produce a payment.
 
-This paper fixes one merchant payment path and epoch. Agents are request
-proposers; the service, its journal, and the relevant source contracts are
-trusted. Travel is a motivating application, not a claim of verified composition
-across booking providers or independent issuers. Removing an itinerary
-coordinator does not remove trust in the payment authority.
+An \emph{epoch} groups payment operations under a scope fixed before admission;
+its admitted identities become fixed when the epoch is fenced. An \emph{effect}
+is a modeled payment execution, such as the hotel charge, distinct from its
+request or receipt. An \emph{outstanding right} is authority that can still
+produce an effect, including work already sent to a provider. An \emph{admission
+fence} blocks new journal entries and grants; it does not cancel earlier work.
 
-\paragraph{Objective and operational meaning.}
-The goal is an auditable criterion for closing one agent-initiated payment epoch:
-every in-scope effect identity is accounted for and no remaining authority can
-produce another such effect. Running the artifact checks this conditional model,
-its premise-sensitive proofs, and a finite evidence diagnostic. It produces a
-reproduction report, not a closure certificate for a merchant. For a flight--hotel
-request pair, an earlier hotel payment that can still execute prevents closure;
-an unknown past outcome prevents exact accounting even after execution stops.
-Applying the criterion requires the deployment to satisfy A1--A5 and a justified
-mapping of its effects and rights to the model.
+Mastercard's Agent Pay announcement uses flight, hotel, and transportation
+bookings to illustrate the need for visibility into agent-initiated
+payments~\cite{mastercard2026}. Visa's shopping benchmark examines whether
+agents discover and satisfy customer requirements; checkout and payment testing
+are planned extensions~\cite{visa2026}. An agent can choose the right hotel
+while leaving a payment unresolved, or choose the wrong hotel while every
+payment is accounted for.
 
-\paragraph{Why this scope.}
-Authenticating separate parties' reports establishes their origin, not that
-their combined contents cover every in-scope effect or remaining right. In the
-restricted view of our bypass diagnostic, an execution with an omitted effect
-and one without it supply identical evidence. An auditor restricted to that
-evidence cannot accept one as complete while rejecting the other. This motivates
-an explicit coverage contract rather than treating signatures as a substitute
-for it, consistent with the mediation and boundary-adequacy requirements in
-Salas and EffectBound~\cite{salas,effectbound}. Section~\ref{sec:diagnostic}
-also records the withdrawal of a 27 October comparison that exposed a hidden
-effect flag to the verifier. That methodological correction removed a purported
-advantage; it is not evidence of a general impossibility theorem. Richer
-observations or enforceable coverage contracts may distinguish the executions.
-The note therefore fixes one mediated service and makes coverage, terminality
-and export obligations explicit, rather than inferring cross-party completeness
-from authentic reports alone.
+Throughout the note, a flight-booking agent and a hotel-booking agent send
+requests to one merchant payment service. The service holds the credentials
+and maintains the journal. We trust the service, its durable state, and the
+relevant provider contracts; agents have no access to the service's internals.
+We consider one epoch on this payment path. Exact closure means accounting for
+every in-scope effect identity and establishing that outstanding authority
+cannot produce another effect. Independently controlled booking providers or
+issuers are outside this model's scope.
 
-The contribution is assumption hygiene: A1--A5 separate operational trust
-premises from the ordering and coverage facts derived by the model. Two small
-Lean modules and eight premise-removal checks make the boundary inspectable.
-The checks expose dependence of the supplied proofs, rather than establish a
-minimal or sufficient real-provider contract. Effect closure, commit-time
-validation, and mediation already have close formal treatments
-\cite{effectbound,cta,salas}; this note supplies a payment-epoch specialization
-and a reproducible artifact. Section~\ref{sec:related} positions that artifact
-against the nearest work.
+In this study, the agents are clients that generate requests. We do not test
+their trip planning or booking choices. The travel example makes the separation
+between requests and payment authority concrete; ordinary asynchronous
+applications face the same closure problem.
+
+\paragraph{Why the service must be trusted.}
+An auditor needs evidence that every in-scope payment and outstanding right is
+represented. A signature identifies who made a report, but says nothing about
+work omitted from it. In our bypass diagnostic, two executions give the auditor
+the same input even though one contains an omitted effect. An auditor with
+that restricted view cannot distinguish them. Additional observations or
+enforceable coverage contracts could do so. Salas and EffectBound identify the
+same need for mediation and coverage obligations~\cite{salas,effectbound}.
+
+An earlier comparison gave the verifier access to a hidden-effect flag.
+Removing it eliminated the apparent advantage, and we withdrew the comparison
+(Section~\ref{sec:diagnostic}). That correction and the restricted-view example
+explain our choice of scope. They concern a specified observation interface,
+rather than a general impossibility result. We study one mediated service and
+state what closure requires of its coverage, terminality, and exported evidence.
+
+TrustBound separates five assumptions, A1--A5, from the ordering and coverage
+facts proved in Lean~\cite{lean42021}. Section~\ref{sec:theorem} presents the
+admission model; Section~\ref{sec:mapping} adds the constrained provider contract.
+Eight premise-removal checks identify changes that invalidate the supplied
+proofs; they do not establish a minimal or sufficient contract for a real
+provider. Effect closure, commit-time validation, and mediation are already
+formalized in prior work~\cite{effectbound,cta,salas}. This note contributes a
+payment instance of those principles, with the trust contract, proof, and
+reproduction scripts presented together. Section~\ref{sec:related} gives the
+comparison.
+
+Running the artifact reproduces the model checks, finite evidence diagnostic,
+and selected local service histories. Applying the theorem to a merchant
+requires separate evidence for A1--A5 and a justified mapping of that merchant's
+effects and rights to the model.
 
 \section{Scope and observation contract}
 \label{sec:scope}
@@ -126,20 +142,20 @@ journal and truthful outcomes for the same declared scope and cut.
 \end{description}
 
 \begin{samepage}
-A1 does not imply A2. The state machines enforce abstract ordering in A3; no
-refinement from executable Python and storage to those machines is proved.
-A4 is a semantic source contract, not a conclusion from a terminal-looking
-client status. A signature authenticates an assertion without proving A5.
-A separately obtained view from the same processor is not an independently
-trusted issuer. Successful API tests do not establish these premises universally.
-Agents need not trust one another's assertions. Trust is placed in the service's
-enforcement and durable state and in the qualified provider evidence; the model
-does not establish those parties' trustworthiness.\par
+A1 limits agents' access. A2 separately requires every effect-capable route to
+pass through admission. The model proves the ordering in A3 for abstract steps. Relating those steps to Python and storage remains an implementation
+obligation.
+
+For A4, a terminal status for the hotel payment must rule out a later effect,
+including one caused by delayed delivery or provider recovery. A5 requires the
+complete journal and truthful outcomes. Signatures alone cannot establish
+completeness, and repeated reads from one processor still depend on that source.
+API tests cover the exercised cases. Trust rests in the service and provider
+contracts; the agents need not trust each other's reports.\par
 \end{samepage}
 
-Figure~\ref{fig:architecture} locates these trust assumptions. The two travel
-agents motivate the request interface; both feed the one trusted payment path
-studied here. The drawing does not assert independent-provider composition.
+Figure~\ref{fig:architecture} places these assumptions around the service.
+Both travel agents feed the single trusted payment path studied here.
 
 \begin{figure}[!t]
 \centering
@@ -178,7 +194,7 @@ are not composed into an end-to-end monetary theorem here.
 \section{Admission, fencing, and exact closure}
 \label{sec:theorem}
 \subsection{State and transitions}
-The Lean state is $(J,I,R,E,F)$: the journal, issued identities, remaining
+Our admission model has state $(J,I,R,E,F)$: the journal, issued identities, remaining
 effective rights, effect history, and closed flag. The first four components
 are lists of natural-number identities; the initial lists are empty and $F$ is
 false. Set notation below abbreviates list membership, except that history
@@ -249,6 +265,21 @@ reintroduce rights or deliver an effect, yielding~\eqref{eq:stable}. Truthful
 reports identify precisely the executed journal entries, giving~\eqref{eq:exact}.
 \end{proof}
 
+The stability component has this Lean declaration, with the conjunction
+written as \code{And}:
+\begin{verbatim}
+theorem drained_fence_effects_stable
+    {s t : State} (future : Runs s t)
+    (closed : s.closed = true)
+    (drained : s.rights = []) :
+    And (t.rights = [])
+        (t.effects = s.effects)
+\end{verbatim}
+Here \code{Runs} is the finite transition relation, \code{rights} is $R$, and
+\code{effects} is $E$. The declaration exposes the drainage premise directly.
+Exact accounting additionally takes truthful reports as an input; the proof
+does not obtain them from a processor.
+
 The checked declarations implement these four obligations.\footnote{\raggedright In
 \code{Admission.lean}: \code{fenced\_population\_immutable},
 \code{post\_fence\_coverage}, \code{drained\_fence\_effects\_stable}, and
@@ -306,22 +337,28 @@ and observation facts imply the theorem's premises.
 
 \section{Constrained provider-contract mapping}
 \label{sec:mapping}
-The second model, \code{StripeGate.lean}, adds a collection of provider objects
-and terminal identities around the admission state. Allocation creates an
-inert object. Registration requires an existing object and an open epoch.
+Our constrained provider-contract model extends the admission model with
+provider objects and terminal identities.\footnote{\raggedright The TrustBound artifact
+defines this model in \code{StripeGate.lean}. The filename reflects its original
+motivation in a constrained Stripe payment path.\par}
+Allocation creates an inert object, which has no payment authority and cannot
+produce an effect. Registration requires an existing object and an open epoch.
 Dispatch requires registration, an open epoch, an unused identity, and absence
 of terminal status. A paid transition consumes a right, records an effect,
 and marks terminality. Cancellation removes the right and marks terminality.
 Lost replies, reads, and rejected attempts can leave the model state unchanged;
 any still-effective authority must remain represented in $R$.
 
-\code{provider\_step\_refines} and \code{provider\_runs\_refine} map these
-specified transitions to the admission model. Reachability then implies that
-an unregistered object has neither a right nor an effect.
-\code{terminal\_manifest\_drains} establishes an empty rights list when all
-journal entries are terminal. After a fence, \code{terminal\_cut\_stable}
-gives history stability. Terminality here is defined by permanent exclusion
-of future effects, not inferred from a status name.
+The checked mapping relates each specified provider transition, and each finite
+run of such transitions, to the admission model. Reachability then implies that
+an unregistered object has neither a right nor an effect. The discharge result
+establishes an empty rights list when all journal entries are terminal. After a
+fence, the stability result gives history stability.\footnote{\raggedright The
+mapping declarations are \code{provider\_step\_refines} and
+\code{provider\_runs\_refine}; the discharge and stability declarations are
+\code{terminal\_manifest\_drains} and \code{terminal\_cut\_stable}, respectively.\par}
+Terminality here is defined by permanent exclusion of future effects, not
+inferred from a status name.
 
 The practical motivation is an unconfirmed object with manual confirmation
 and capture, durably registered before activation. Unknown inert objects need
@@ -338,20 +375,38 @@ descendants cannot be mapped to one modeled identity merely by sharing a
 request identifier. Its effect granularity and remaining authority need a
 separate justified representation; this paper supplies no such mapping.
 
-\section{Evaluation and reproduction}
-\label{sec:eval}
-We separate fresh checks of the selected core from historical observations.
-On 5 November 2026, a source-isolated run copied eight selected source and
-configuration files, using existing Lean 4.19.0, Python 3.12.14, and pytest 9.0.2
-installations. It made no provider requests. The release artifact was also
-extracted into a separate directory and its included runner was executed there
-with the same installed tools. Neither check was an independent clean-machine
-installation or a real-deployment verification.
+\paragraph{Connecting the assumptions to a service.}
+For A1--A2, a deployment needs an enforced request-only interface and an inventory
+of effect-capable credentials, operators, endpoints, and recovery routes. Each
+route must pass through admission or be disabled. The prototype restricts caller
+input to approved command identities and status/reconciliation requests; host access and route
+coverage remain assumed.
 
-A separate 6 November export check repeated the selected core and the local
-simulator successfully; implementation-suite details are in Appendix~\ref{app:artifact}.
-On 7 November, rerunning the extracted selected-core archive reproduced the
-same core totals with existing tools and no provider requests.
+For A3, the gate uses SQLite transactions to serialize registration, grants,
+and the fence, and commits a command claim before transport invocation. A
+claimed command is not automatically resent after a timeout or restart. The
+process-kill checks in Section~\ref{sec:service_checks} exercise this ordering;
+they do not establish durability under power loss or storage rollback.
+
+A4 requires provider evidence that discharge excludes delayed delivery and
+provider recovery, together with truthful identity-bound outcomes. A cancellation
+reply or timeout alone does not supply that contract. A5 requires a complete
+journal snapshot and outcome evidence for the same declared cut. The gate reads
+its payment rows, commands, and conflicts in one transaction; its sequential
+provider reads are not an atomic snapshot of the processor.
+
+\section{Evaluation}
+\label{sec:eval}
+We evaluate the Lean models, a finite evidence-rule diagnostic, and selected
+local service behaviors. An earlier Stripe test-mode run supplies a separate
+processor observation; it is the only experiment here that made provider
+requests. We reproduced the formal core and evidence diagnostic from the
+extracted archive in a fresh Python virtual environment, installing pytest
+9.0.2 and its dependencies. The run used Python 3.12.14 and the existing Lean
+4.19.0 compiler on the same macOS host. It checked dependency setup on that host,
+not independent clean-machine reproduction. The repository contains the
+commands, logs, and separate implementation test history
+(Appendix~\ref{app:artifact}).
 
 \subsection{Formal checks}
 All eight exported admission results and all six provider-contract results
@@ -359,9 +414,9 @@ passed. Their accepted axiom reports use only \code{propext} and
 \code{Quot.sound}, or no axioms; no custom axiom or unfinished proof is accepted.
 The provider checker recompiles its admission dependency, which is not counted
 as eight additional results.
-The 14 exports include invariant and mapping results, two counterexecution
-statements, and a conditional transfer bridge; they are not 14 independent
-security guarantees. The two Lean modules use sequential atomic abstract
+The 14 exports are components of the argument: invariant and mapping results,
+two counterexecution statements, and a conditional transfer bridge. Each export
+is a checked declaration; several support the same closure argument. The two Lean modules use sequential atomic abstract
 steps. Arbitrary interleavings of those steps are represented, but concrete
 concurrency, storage linearizability, and crash recovery are not thereby proved.
 
@@ -375,222 +430,245 @@ Lean's error-recovery markers and are not counted as accepted proofs.
 
 \subsection{Evidence-rule diagnostic}
 \label{sec:diagnostic}
-The saved generator produces 2,048 Cartesian records across four labels and
-512 assignments per label, reusing 64 distinct public evidence inputs per arm.
-All labels receive the same reports, row sequences and claimed fences. The two
-strong labels share one acceptance function; the two weak labels share another
-that omits fence and contiguity checks. These are rule checks, rather than
-independent system implementations or executions of the Lean model.
+The diagnostic asks what an auditor can conclude from the evidence it receives.
+The auditor can read reports, record sequences, and fence claims, but cannot
+see whether a bypass has hidden an effect. We apply two rules to that evidence.
+The stricter rule checks the reports, claimed fences, and contiguous record
+sequences; the permissive rule omits the fence and contiguity checks. Each rule
+has two labels in the saved experiment. Labels that call the same function
+agree by construction, so this agreement checks the experiment's bookkeeping.
 
-The stipulated coverage target requires both reports and fences and no hidden
-bypass; exactness additionally excludes pending rows. Its field
-\code{coverage\_true} therefore differs from the Lean membership invariant
-$R\cup E\subseteq J$. The field \code{assumptions\_hold} means no bypass only,
-not all A1--A5. Hidden amounts do not enter grading. In the mediated partition,
-the strong rule matches the target; under bypass, identical supplied evidence
-can still produce an incorrect positive verdict. The source of evidence remains
-a trust premise, as Salas explicitly explains for bypassed effects~\cite{salas}.
+The generator produces 2,048 records: 512 combinations per label, reusing 64
+distinct public evidence inputs for each label. All labels receive the same
+reports, sequences, and fence claims. The generator keeps the bypass fact
+separate from the verifier's input. Its coverage target requires reports,
+fences, and no bypass; its exactness target also requires no pending rows.
+This target differs from the Lean membership invariant $R\cup E\subseteq J$.
 
-All nine diagnostic tests passed, and the regenerated records match the
-corrected 1 November artifact. Shared-rule agreement is a consistency check,
-not comparative superiority. An earlier 27 October result leaked a hidden-effect
-flag into the verifier; that result remains withdrawn. Detailed records and
-counts are retained in the artifact rather than presented as a performance table.
+Without a bypass, the stricter rule matches the stipulated target. With a
+bypass, the same visible evidence can produce a positive verdict while an
+effect is missing. This is the coverage problem identified by
+Salas~\cite{salas}. The comparison is between evidence rules, not independently
+implemented systems. All nine diagnostic tests passed, and the generated
+records match the saved reference. The earlier withdrawn comparison let the
+verifier read the hidden-effect flag. The corrected rules keep that fact from
+the verifier and do not use hidden amounts for grading. The repository retains
+the correction and field definitions.
+
+\subsection{Service repairs and checked traces}
+\label{sec:service_checks}
+The gate accepts a report of received money only when a capture command has
+been claimed for the same payment. Claiming a command does not prove that it
+executed. Conflicting terminal reports, scope mismatches, and missing command
+provenance are recorded before the gate returns an error. Once committed, the
+conflict persists through later reads and database reopen, prevents a resolved
+verdict, and retains the configured reservation. That reservation places no
+bound on charges from a provider that violates its contract. All 66 gate,
+observation, interface and dispatch-crash tests passed, including 11 new
+regression cases and checks around the conflict commit.
+
+We ran the actual Python/SQLite gate through six sequential scenarios with a
+local provider simulator. Table~\ref{tab:service_traces} lists their expected
+and observed outcomes. Lean accepted all six projected histories, comprising
+66 transitions. Five final states instantiate the existing exact-closure
+theorem; the abandoned claim remains undrained. These cases were chosen to
+exercise closure boundaries, not to estimate production workload frequencies.
+
+\begin{table}[ht]
+\centering
+\begin{tabularx}{\linewidth}{@{}p{0.33\linewidth} X@{}}
+\toprule
+Scenario & Expected and observed outcome \\
+\midrule
+Cancel without a command & Closed after observing cancellation; no effect. \\
+Capture across the fence & Unresolved until the post-fence payment is observed; then closed. \\
+Lost reply and reopen & Repeat dispatch rejected; closed after reconciliation. \\
+Two payments resolve separately & Unresolved with one pending; closed after its cancellation. \\
+Claim abandoned before send & No effect yet; one right remains and closure is withheld. \\
+Late capture after cancellation & Simulator rejects the call; closure is preserved. \\
+\bottomrule
+\end{tabularx}
+\caption{Six local service executions. All listed outcomes matched the checks.
+The simulator enforces one payment effect per identity and irreversible
+terminality. These are stipulated provider contracts.}
+\label{tab:service_traces}
+\end{table}
+
+We translate the recorded events into the existing provider-contract model.
+Object creation and service registration become allocation and registration
+steps. The first durable command grant for a payment becomes model dispatch
+and creates one conservative right. Later confirm or capture grants add no
+right under the simulator's one-effect-per-identity contract. The service fence
+becomes the model fence. A simulator payment commit becomes a paid transition
+before the service observes it; irreversible cancellation becomes a canceled
+transition. Claims, confirmation, replies, reads, reopen and rejection leave
+the modeled state unchanged. These are the stuttering steps.
+
+For each recorded event, the checker compares the projected journal with the
+gate's payment rows. It also compares issued identities with payment identities
+in command rows, and effects with the simulator's committed payment events.
+A right remains outstanding for every issued identity without simulator
+terminality. This keeps an abandoned claim visible as unfinished work and
+preserves the effect of a payment whose reply was lost. A resolved verdict
+also requires empty rights and agreement between reported paid identities and
+simulator effects. These checks account for authority and effects in the
+recorded histories. The Python projection and complete event capture remain
+trusted.
+
+Two inconsistent checker inputs, payment without a grant and payment after
+terminal cancellation, were rejected for lack of an effective right. These
+checks do not prove refinement of all Python/SQLite executions or real-processor
+behavior. No provider API was called. Source hashes, per-step snapshots,
+generated Lean terms and compiler results are in the artifact.
 
 \subsection{Historical processor observation}
-The saved controlled-merchant report records 21 assertions over nine real
-Stripe test-mode requests and 200 test cents captured. Rejected forged requests,
-a discarded capture reply, database reopen, duplicate-dispatch rejection and a
-fresh read exercised known-operation recovery. PaymentIntent and Charge lists
-reconciled that operation using the same processor/key and non-atomic reads.
-Complete admission coverage and credential isolation were not established;
-a same-user process could read the key and journal. These observations support
-bounded behavior, not the real-world truth of A1--A5.
+An earlier Stripe test-mode run recorded 21 assertions over nine requests and
+200 test cents captured. It exercised a lost reply, database reopen, duplicate
+rejection, and recovery through fresh reads of a known operation. Reconciliation
+used the same processor and key, with non-atomic reads. A same-user process
+could read the key and journal, so this run did not satisfy the request-only
+boundary in A1 or establish complete admission coverage. It is evidence about
+those exercised paths, not validation of the provider-contract model or A1--A5.
 
-The saved local paired simulator has identical known-object observations but
-200 versus 300 synthetic cents in its broader ledger under an added bypass.
-It demonstrates the restricted-view boundary. The local simulator was rerun on
-6 November; the processor experiment was not. Non-sensitive supporting summaries
-are retained, while raw private records are excluded. No production payment or
-end-to-end UCP/AP2 conformance result is claimed.
+A separate local simulator produced identical known-object observations with
+200 versus 300 synthetic cents when a bypass was added. Its source and saved
+outputs are in the repository. Neither observation establishes production
+behavior or UCP/AP2 conformance.
 
-\section{Closest work and contribution boundary}
+\section{Related work}
 \label{sec:related}
-Distributed snapshots connect observation of global state to stable
-properties~\cite{chandy}. TrustBound specializes this established distinction
-into a small identity-level payment model and explicit deployment obligations.
-The comparisons below locate that specialization; differences in scope or
-terminology alone establish neither novelty nor weaker trust assumptions.
+TrustBound builds on work in authorization, mediation, and distributed systems.
+The comparisons below explain how its payment contract uses those ideas and
+where the questions differ. We compare definitions and assumptions from the
+sources; we have not reproduced their implementations or proved reductions
+between them. The contribution is an explicit payment contract and a checked
+instance of existing closure principles. We claim neither a new general closure
+principle nor weaker trust requirements.
 
 \paragraph{EffectBound.}
 Santos-Grueiro's EffectBound separates future-use closure, policy-relative effect
-closure, and quiescence; Lean checks its finite-contract reduction and
-certificates~\cite{effectbound}. Its Kafka evaluation shows earlier authorized
-work surviving an applied-state fence. These directly anticipate our
-fence-without-drain distinction. TrustBound's stronger no-new-effect predicate
-and truthful past-accounting obligation serve a different exact-accounting
-question. Both analyses depend
-on the adequacy of the modeled provider boundary.
+closure, and quiescence, with Lean checks for its finite-contract reduction and
+certificates~\cite{effectbound}. Its Kafka evaluation shows that previously
+authorized work can survive an applied-state fence. This directly anticipates
+our fence-without-drain example. TrustBound asks for exact accounting:
+its stronger no-new-effect predicate excludes all new in-scope effects, and its
+past-accounting obligation requires truthful outcomes. Both analyses depend on
+the adequacy of the modeled provider boundary.
 
 \paragraph{Commit-time authority and mediation.}
-Santos-Grueiro's commit-time authorization requires a complete current
-justification for the exact effect at an atomic sink~\cite{cta}. Salas separates
-proposal computation from authoritative admission and explains why the authority
-ledger cannot discover effects that bypass all its records~\cite{salas}. Salas's
-admission-to-outbox contract also preserves an admitted decision across a later
-amendment; it should not be confused with rechecking a changing business premise
-at a remote effect. Our ledger and diagnostic make those mediation and
-observation obligations explicit for the payment epoch.
+Santos-Grueiro's commit-time authorization requires a complete, current
+justification for the exact effect at an atomic sink~\cite{cta}.
+Salas separates proposal computation from
+authoritative admission and explains why a ledger cannot discover effects that
+bypass all its records~\cite{salas}. Salas's admission-to-outbox contract preserves
+an admitted decision across a later amendment. Rechecking a changing business
+premise at the remote effect is a different requirement. Our ledger and diagnostic
+state the mediation and observation obligations for a payment epoch.
 
 \paragraph{AcquireBound and AID-Guard.}
-AcquireBound quarantines acquired outputs before current-state activation and
-checks single-use permits at the effect boundary~\cite{acquirebound}. That is
-close to our inert-object/activation separation. AID-Guard likewise conditions
-safe recovery on qualified terminal evidence and delivery fencing~\cite{aid}.
-The TrustBound models expose the journal, fence and discharge obligations
-directly in the admission-to-provider mapping.
+AcquireBound quarantines acquired outputs until current-state activation checks
+and checks single-use permits at the effect boundary~\cite{acquirebound}.
+This is close to the separation between inert objects and activation in our
+provider model. AID-Guard conditions safe recovery on qualified terminal
+evidence and delivery fencing~\cite{aid}. TrustBound makes the journal, fence,
+and discharge obligations explicit in its mapping from the provider model to
+the admission model.
 
 \paragraph{Composition and monetary accounting.}
 Zhu and Wang compose provider frontiers through a shared cut and exact channel
-accounting~\cite{quiescence}; their budget work treats compensation as a separate
-authorized effect~\cite{budget}. Their partition result rules out both local
-availability for a shared unallocated unit and global conservation; it addresses
-spending authority, not a characterization of an auditor's exact-closure
-evidence.
-Op distinguishes remaining execution rights,
-provider outcomes, finality and subsequent compensation~\cite{op}. These are
-closer foundations than a receipts-only comparison. The flight--hotel check in
-Appendix~\ref{app:trip} finds no new completeness gap for the tested dependency.
-The Op comparison uses its unversioned author manuscript accessed 6 November
-2026, and makes no historical priority inference from that mutable text.
+accounting~\cite{quiescence}. Their budget work treats compensation as a separate
+authorized effect~\cite{budget}. Its partition result rules out simultaneously
+providing local availability for a shared unallocated unit and global conservation.
+That result concerns spending authority; it does not characterize the evidence
+an auditor needs for exact closure.
+
+Op distinguishes remaining execution rights, provider outcomes, finality, and
+subsequent compensation~\cite{op}. These treatments provide closer foundations
+for our question than a receipts-only comparison. Our Op comparison uses the unversioned author manuscript accessed 6 November
+2026; we draw no historical priority conclusion from that mutable text.
 
 \paragraph{Payment protocols, profiles and closure receipts.}
-Jiang et al. analyze x402, MPP, ACP and AP2 in Tamarin, including correspondence,
-authorization, finality and compensation questions~\cite{protocolanalysis}.
-Their protocol properties concern different scopes from our epoch-wide
-accounting predicate. HoldSpec's bounded hold
-lifecycle checks make provider profiles explicit~\cite{hold}. Watts's closure
-Internet-Draft requires stated coverage and resolution of outstanding and
-unknown relevant work; an authenticated receipt does not prove complete
-coverage~\cite{closuredraft}. It is an individual work in progress, not an IETF
-standard. These comparisons inspect source definitions; we have not reproduced
-the cited systems or proved reductions between their implementations.
+Jiang et al. analyze x402, MPP, ACP, and AP2 in Tamarin, covering correspondence,
+authorization, finality, and compensation~\cite{protocolanalysis}. Those protocol
+properties have different scopes from our epoch-wide accounting predicate.
+HoldSpec checks a bounded hold lifecycle with explicit provider
+profiles~\cite{hold}. Watts's closure Internet-Draft requires stated coverage
+and resolution of outstanding and unknown relevant work. It also distinguishes
+an authenticated receipt from evidence of complete coverage~\cite{closuredraft}.
+The draft is an individual work in progress, not an IETF standard.
+
+\paragraph{Mediation, stable state, and termination.}
+Saltzer and Schroeder's complete-mediation principle requires checking every
+access~\cite{saltzer1975}. A2 applies that obligation to effect-capable payment
+routes; the trusted service takes the role of a reference monitor. Distributed
+snapshots address observations of global state~\cite{chandy}, and
+Dijkstra--Scholten termination detection accounts for outstanding distributed
+work~\cite{dijkstra1980}. Our rights list abstracts that outstanding work. We
+assume its complete representation and truthful discharge rather than deriving
+them from a distributed detection protocol.
+
+\paragraph{Commit, compensation, and recovery.}
+Atomic commit coordinates participants' commit or abort decisions
+\cite{gray2006}; sagas use compensating transactions to amend partial execution
+\cite{sagas1987}. These questions differ from accounting for every effect after
+admission ends. In particular, a cancelled flight can leave a paid hotel and
+an unusable trip even when every payment is accounted for. Our recorded toy
+check of that dependency found no additional completeness result; its traces
+are retained in the repository.
+
+ARIES establishes recovery mechanisms based on write-ahead logging
+\cite{aries1992}. RIFL uses durable completion records to give retried RPCs
+exactly-once semantics~\cite{rifl2015}. These are relevant foundations for a
+service that must preserve admission and outcomes across failures. TrustBound's
+atomic transitions and issued-identity list do not implement or verify those
+mechanisms: persistence, retry handling, and the representation of every
+effect-capable route remain deployment obligations.
+
+\paragraph{Verified implementations.}
+IronFleet verifies safety and liveness for distributed implementations using
+state-machine refinement and imperative verification~\cite{ironfleet2015}.
+Verdi provides verified distributed implementations with explicit fault models
+\cite{verdi2015}. TrustBound checks two abstract models and their mapping; its
+Python service has no corresponding implementation proof. The membership-only
+transfer result states obligations for such a mapping without discharging them.
 
 \section{Limitations and conclusion}
-The result assumes a faithful transition abstraction covering every in-scope
-route and right, including delayed delivery and recovery. The service and source
-remain trusted; signatures, matching reads and successful tests do not establish
-that contract. The scope is conditional identity-level closure: monetary
-composition, multi-worker crash recovery, independent-issuer and account-wide
-completeness, and hostile-host isolation require separate arguments. Pending
-operations need not terminate. The finite diagnostic measures neither throughput
-nor deployment error rates. Existing closure principles and trust requirements
-are specialized here, not weakened.
+For a travel business, TrustBound separates accounting for past payments from
+excluding future effects. In the model, a serialized fence fixes the covered
+population. Discharging every outstanding right prevents later effects;
+truthful reports for that journal account for the past. The note brings the
+premises for these steps together in a small checked model, so a deployment
+can be assessed against an explicit contract.
 
-\paragraph{What would distinguish a further result.}
-A separate question is which semantic coverage and binding conditions let an
-auditor certify exact closure from per-party evidence, for a fixed scope and
-observation interface. A distinguishing characterization would need both
-necessary conditions and a sufficient construction, compared under the same
-assumptions with mediation, partition-indistinguishability and finite-boundary
-realizability results~\cite{salas,budget,effectbound}. Shared journals, exclusive
-mediation and cross-party binding are candidate ways to supply conditions, not
-an established exhaustive list of necessary mechanisms. The generic requirement
-that all evidence-compatible executions satisfy the claimed property is an
-existing observation principle; restating it would not distinguish this work.
-No such further characterization or novelty claim is established here.
+The result covers one effect per identity on one trusted payment path.
+Applying it to a deployment requires evidence that every real route and
+outstanding right is represented, source terminality is truthful, and the
+auditor receives a faithful export. Partial captures, refund lineages, monetary totals, concrete concurrency, and crash
+recovery need a richer model and an implementation proof. Pending work may
+never terminate. The finite diagnostic and selected traces do not measure
+performance or deployment error rates.
 
-The supported claim is that record-before-authority and a serialized fence
-derive a fixed covered identity population under the specified rules; complete
-source discharge and truthful reconciliation then establish exact closure for
-every permitted finite continuation. The checked construction, constrained
-mapping, and explicitly limited evaluation support a mechanization note.
+A further research question is whether exact closure from per-party evidence
+admits a useful necessary-and-sufficient characterization under a fixed scope
+and observation interface. That would require a difference from the existing
+mediation and closure results~\cite{salas,budget,effectbound}. This note does not
+establish that characterization.
 
 \appendix
-\section{Artifact and reproduction}
+\section{Artifact availability}
 \label{app:artifact}
-A separate repository-export check on 6 November repeated the selected core
-successfully and passed all 40 local simulator assertions, without provider
-calls. The broader implementation suite initially passed 221 tests; one local
-socket test passed on a focused retry with socket permission and unchanged
-source. Thus all 222 cases passed across the two invocations, not in the initial
-full-suite run. These implementation tests do not prove A1--A5 or executable
-refinement; the nine diagnostic tests are included in the 222, not additional.
+The code, Lean models, tests, and reproduction instructions are maintained at
+\url{https://github.com/tokencraftdata/trustbound}.
+The working repository is currently private. Public artifact access and release
+terms remain pending.
 
+\paragraph{Use of generative AI.}
+OpenAI ChatGPT and Codex assisted with literature exploration, code development,
+and manuscript drafting and editing. The reported proof and test outcomes
+come from the recorded tool executions. The author retains responsibility
+for the manuscript and accompanying artifact.
 
-A selected-core archive is prepared; public release and reuse terms remain
-pending. The private working repository is not public artifact access.
-
-The accompanying minimal artifact contains the two Lean modules, their
-checkers, the finite comparator and its nine tests, a reproduction runner,
-reference output, and saved evidence. No payment credentials or provider SDK
-are required. Use Lean 4.19.0 and Python with pytest 9.0.2; the executed Python
-version was 3.12.14. From the artifact root, run:
-\begin{verbatim}
-python3 scripts/reproduce_core_claim.py \
-  --lean /path/to/lean-4.19.0/bin/lean \
-  --output results/new-run
-\end{verbatim}
-The output directory must not already exist. The runner copies the selected
-inputs, supplies a small environment without payment credentials, disables
-automatic pytest plugin loading, and writes command logs, source hashes, JUnit
-output and a result summary. Expected totals are 14 exported results, eight
-rejected mutations, nine passing tests, 2,048 records, and per-case strong-arm
-agreement. No other historical module or full regression suite is silently
-included in these counts.
-
-In particular, \code{checks\_passed: true} in \code{summary.json} reports
-successful reproduction for the recorded inputs and tools. It does not report
-that a merchant epoch is closed. The journal and source-terminal evidence of a
-real deployment are not inputs to this runner.
-
-Saved public logs replace local paths with declared tokens; the original
-workspace evidence remains unchanged. A provenance file identifies original
-and exported hashes. Hashes detect changes relative to the supplied manifest;
-they are not independent witnesses of completeness or authorship. A clean
-directory extraction check exercises the packaged files using the existing
-toolchains, not an independent environment. Historical provider summaries are
-clearly separated from the reproducible core.
-Two additional reviewer examples in \code{review/AdmissionSemantics.lean}
-check cancellation before a first grant and membership coverage without a
-fence. They were separately compiled while reviewing the manuscript, are not
-part of the 14-export count, and establish no new general security claim.
-
-\section{One flight--hotel candidate check}
-\label{app:trip}
-The tested dependency permits hotel capture only while the flight remains
-active. The two failure modes found were a commit-time policy violation and
-an unusable final trip; neither was a payment-completeness failure.
-
-A synthetic flight has already cost 300 units. A hotel capture of 200 is
-permitted only while the flight remains active. The model orders hotel
-preparation before hotel commit and interleaves flight cancellation; cancellation
-has a final refund outcome of 300, 260 or zero units. These are stipulated toy
-profiles, not provider contracts. Under stale approval, preparing the hotel,
-cancelling the flight, and then capturing the hotel violates the commit policy.
-An atomic current-premise guard rejects that capture, matching the shape of
-commit-time authorization~\cite{cta}. An independent provider would need a
-justified enforcement contract for that atomicity; a fresh read alone is
-insufficient.
-
-The local checker executed all three event orders, three refund outcomes and
-two rules: 18 trace records, 72 prefix records and 120 continuation replays.
-Stale approval violates the commit policy in three of nine traces; the atomic
-guard violates it in zero of nine. Capturing before cancellation respects that
-commit policy but leaves a paid hotel without an active flight. That final
-business condition fails in six stale-rule traces and three guarded traces,
-while all final payment scopes are closed and their effects reported. Pending
-hotel work prevents an earlier full closure claim. No case refutes composition
-of exact closure over the common sealed scope. Costs change residual loss, not
-this logical distinction.
-
-The checker uses complete observations, atomic toy actions, a fixed population,
-and no later admissions. It is a finite diagnostic and a conceptual encoding
-comparison, not a new Lean theorem, a reproduced prior implementation, or live
-payment evidence. The tested candidate therefore supplies no established new
-completeness result. Source and records are in
-\code{research/flight\_hotel/}; the existing core proof counts are unchanged.
-
+\clearpage
 \begingroup
 \small
 \raggedright

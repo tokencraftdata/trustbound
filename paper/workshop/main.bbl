@@ -1,4 +1,4 @@
-\begin{thebibliography}{12}
+\begin{thebibliography}{23}
 \providecommand{\natexlab}[1]{#1}
 
 \bibitem[{Chandy and Lamport(1985)}]{chandy}
@@ -6,10 +6,40 @@ Chandy, K.~M.; and Lamport, L. 1985.
 \newblock Distributed Snapshots: Determining Global States of Distributed Systems.
 \newblock \emph{ACM Transactions on Computer Systems}, 3(1): 63--75.
 
+\bibitem[{de~Moura and Ullrich(2021)}]{lean42021}
+de~Moura, L.; and Ullrich, S. 2021.
+\newblock The Lean 4 Theorem Prover and Programming Language.
+\newblock In \emph{Automated Deduction -- CADE 28}, volume 12699 of \emph{Lecture Notes in Computer Science}, 625--635. Springer.
+
+\bibitem[{Dijkstra and Scholten(1980)}]{dijkstra1980}
+Dijkstra, E.~W.; and Scholten, C.~S. 1980.
+\newblock Termination Detection for Diffusing Computations.
+\newblock \emph{Information Processing Letters}, 11(1): 1--4.
+
+\bibitem[{Garcia-Molina and Salem(1987)}]{sagas1987}
+Garcia-Molina, H.; and Salem, K. 1987.
+\newblock Sagas.
+\newblock In \emph{Proceedings of the ACM SIGMOD International Conference on Management of Data}, 249--259. ACM.
+
+\bibitem[{Gray and Lamport(2006)}]{gray2006}
+Gray, J.; and Lamport, L. 2006.
+\newblock Consensus on Transaction Commit.
+\newblock \emph{ACM Transactions on Database Systems}, 31(1): 133--160.
+
+\bibitem[{Hawblitzel et~al.(2015)Hawblitzel, Howell, Kapritsos, Lorch, Parno, Roberts, Setty, and Zill}]{ironfleet2015}
+Hawblitzel, C.; Howell, J.; Kapritsos, M.; Lorch, J.~R.; Parno, B.; Roberts, M.~L.; Setty, S.; and Zill, B. 2015.
+\newblock {IronFleet}: Proving Practical Distributed Systems Correct.
+\newblock In \emph{Proceedings of the 25th ACM Symposium on Operating Systems Principles}. ACM.
+
 \bibitem[{Jiang et~al.(2026)Jiang, Yu, Chang, Jangid, Niu, Wang, and Zhang}]{protocolanalysis}
 Jiang, K.; Yu, M.; Chang, Y.; Jangid, M.~K.; Niu, J.; Wang, C.; and Zhang, Y. 2026.
 \newblock A Formal Analysis of Agent Payment Protocols.
 \newblock ArXiv:2609.00060v1. Table II and Section IV.
+
+\bibitem[{Lee et~al.(2015)Lee, Park, Kejriwal, Matsushita, and Ousterhout}]{rifl2015}
+Lee, C.; Park, S.~J.; Kejriwal, A.; Matsushita, S.; and Ousterhout, J. 2015.
+\newblock Implementing Linearizability at Large Scale and Low Latency.
+\newblock In \emph{Proceedings of the 25th ACM Symposium on Operating Systems Principles}. ACM.
 
 \bibitem[{Lorgat(2026)}]{op}
 Lorgat, R. 2026.
@@ -17,10 +47,26 @@ Lorgat, R. 2026.
 \newblock \url{https://research.momentum.inc/papers/op.html}.
 \newblock Unversioned author manuscript; accessed 6 November 2026. Sections 5.2, 5.8--5.10; Proposition 5.7. Live text may change.
 
+\bibitem[{{Mastercard}(2026)}]{mastercard2026}
+{Mastercard}. 2026.
+\newblock {Mastercard} Advances Agentic Commerce With New Trust and Intelligence Services.
+\newblock \url{https://investor.mastercard.com/investor-news/investor-news-details/2026/Mastercard-Advances-Agentic-Commerce-With-New-Trust-and-Intelligence-Services/default.aspx}.
+\newblock Company announcement, 30 September 2026; accessed 10 November 2026.
+
+\bibitem[{Mohan et~al.(1992)Mohan, Haderle, Lindsay, Pirahesh, and Schwarz}]{aries1992}
+Mohan, C.; Haderle, D.; Lindsay, B.; Pirahesh, H.; and Schwarz, P. 1992.
+\newblock {ARIES}: A Transaction Recovery Method Supporting Fine-Granularity Locking and Partial Rollbacks Using Write-Ahead Logging.
+\newblock \emph{ACM Transactions on Database Systems}, 17(1): 94--162.
+
 \bibitem[{Salas(2026)}]{salas}
 Salas, J. 2026.
 \newblock Authority at Commit Time: Reject-and-Rerun Semantics for Governed Agentic Systems.
 \newblock ArXiv:2609.31490v1. Sections 2.2, 3.2, 6.2 and 7.
+
+\bibitem[{Saltzer and Schroeder(1975)}]{saltzer1975}
+Saltzer, J.~H.; and Schroeder, M.~D. 1975.
+\newblock The Protection of Information in Computer Systems.
+\newblock \emph{Proceedings of the IEEE}, 63(9): 1278--1308.
 
 \bibitem[{Santos-Grueiro(2026{\natexlab{a}})}]{cta}
 Santos-Grueiro, I. 2026{\natexlab{a}}.
@@ -42,10 +88,21 @@ Tong, Y.; Dai, L.; and Guo, S. 2026.
 \newblock {AID-Guard}: Stateful Authorization for Delegated Agent Effects.
 \newblock ArXiv:2608.21159v1. Sections II--IV, especially III-E.
 
+\bibitem[{{Visa}(2026)}]{visa2026}
+{Visa}. 2026.
+\newblock {Visa} Releases First-of-Its-Kind Industry Benchmark for {AI} Shopping; Almost Half of Test Runs Fail.
+\newblock \url{https://investor.visa.com/news/news-details/2026/Visa-Releases-First-of-Its-Kind-Industry-Benchmark-for-AI-Shopping-Almost-Half-of-Test-Runs-Fail/default.aspx}.
+\newblock Company announcement, 5 November 2026; accessed 10 November 2026.
+
 \bibitem[{Watts(2026)}]{closuredraft}
 Watts, D.~O. 2026.
 \newblock Revocation Closure and Authority Epochs for Agent Delegation.
 \newblock Individual Internet-Draft, draft-watts-oauth-agent-revocation-closure-03, 30 October 2026. Sections 9--11; verified on Datatracker 6 November 2026. Work in progress; not an IETF standard.
+
+\bibitem[{Wilcox et~al.(2015)Wilcox, Woos, Panchekha, Tatlock, Wang, Ernst, and Anderson}]{verdi2015}
+Wilcox, J.~R.; Woos, D.; Panchekha, P.; Tatlock, Z.; Wang, X.; Ernst, M.~D.; and Anderson, T. 2015.
+\newblock {Verdi}: A Framework for Implementing and Formally Verifying Distributed Systems.
+\newblock In \emph{Proceedings of the ACM SIGPLAN Conference on Programming Language Design and Implementation}, 357--368. ACM.
 
 \bibitem[{Zhu and Wang(2026{\natexlab{a}})}]{quiescence}
 Zhu, G.; and Wang, C. 2026{\natexlab{a}}.
@@ -59,7 +116,7 @@ Zhu, G.; and Wang, C. 2026{\natexlab{b}}.
 
 \bibitem[{Zhu and Wang(2026{\natexlab{c}})}]{acquirebound}
 Zhu, G.; and Wang, C. 2026{\natexlab{c}}.
-\newblock Runtime Authorization for Resources Acquired by {AI} Agents ({AcquireBound}).
+\newblock Runtime Authorization for Resources Acquired by {AI} Agents.
 \newblock ArXiv:2609.14744v2. Sections 4.5, 5.6--5.7; Theorem 14.
 
 \end{thebibliography}

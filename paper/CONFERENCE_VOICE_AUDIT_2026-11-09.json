@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-09",
+  "scope": "Conference editorial revision in response to mechanical prose and overly detailed Appendix A. No change to the trusted-service scientific claim.",
+  "changes": [
+    "Abstract",
+    "Introduction",
+    "Related-work heading",
+    "Related-work opening",
+    "EffectBound comparison",
+    "Commit-time comparison",
+    "Activation and recovery comparison",
+    "Open-question heading",
+    "Concluding claim",
+    "Flight-hotel scenario",
+    "Appendix A condensed; detailed record moved to repository"
+  ],
+  "appendix_a": {
+    "body_words_before": 381,
+    "body_words_after": 111,
+    "word_count_excludes_unchanged_ai_disclosure": true,
+    "detailed_record_preserved_at": "paper/workshop/REPRODUCTION_DETAILS.md",
+    "public_release_candidate_unchanged": true
+  },
+  "integrity": {
+    "sections_2_through_5_byte_identical": true,
+    "limitations_paragraph_byte_identical": true,
+    "detailed_flight_hotel_results_and_appendix_c_byte_identical": true,
+    "all_citation_keys_and_order_unchanged": true,
+    "ai_use_disclosure_unchanged": true,
+    "scientific_files_hash_checked_unchanged": 114,
+    "arxiv_files_hash_checked_unchanged": 8,
+    "bibliography_figure_and_official_style_unchanged": true
+  },
+  "validation": {
+    "pages": 7,
+    "anonymous_author_and_metadata_checked": true,
+    "source_archive_files": 6,
+    "extracted_archive_rebuild_pdf_text_matches": true,
+    "overfull_boxes": 0,
+    "undefined_references": 0,
+    "underfull_box_warnings": 11,
+    "render_comparison": {
+      "changed": [
+        "page-1.png",
+        "page-2.png",
+        "page-5.png",
+        "page-6.png",
+        "page-7.png"
+      ],
+      "unchanged": [
+        "page-3.png",
+        "page-4.png"
+      ]
+    },
+    "visual_review": "Changed pages 1, 2, 5, 6, 7 visually inspected; pages 3-4 pixel-identical to prior accepted output. No clipping, overlap or extra page. Official template spacing preserved.",
+    "research_tests_rerun": false,
+    "provider_calls": 0
+  },
+  "publication_status": "On hold. No upload, submission, publication, license grant, GitHub push or visibility change.",
+  "existing_manifest_paths_changed": [
+    "paper/README.md",
+    "paper/SUBMISSION_STATUS.md",
+    "paper/TrustBound_Workshop_Anonymous.pdf",
+    "paper/TrustBound_Workshop_Source.zip",
+    "paper/workshop/README.md",
+    "paper/workshop/main.tex"
+  ],
+  "outputs_sha256": {
+    "paper/TrustBound_Workshop_Anonymous.pdf": "ea9abd577c468eb3385b055af0fb9851a56a9bf61ef92251b0a46cf3a338e93b",
+    "paper/TrustBound_Workshop_Source.zip": "ccd4534ba5c34ba537a51bbc71ed49fc871a1111e18338ced3c35822ceba7722",
+    "paper/workshop/REPRODUCTION_DETAILS.md": "1d1da538b938bf0310dafd98be36583b8e6ad624b7552da83ec8ac68d6c397d7"
+  }
+}

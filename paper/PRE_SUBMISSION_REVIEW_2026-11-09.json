@@ -1,0 +1,197 @@
+{
+  "date": "2026-11-09",
+  "scope": "Local pre-submission rereview, authorized AI-use disclosure, bibliographic title correction, and submission-status updates. No scientific changes.",
+  "publication_status": "On hold at author request; no submission, upload, publication, repository visibility change, license grant, or GitHub push.",
+  "changes": [
+    "Added factual OpenAI ChatGPT and Codex use disclosure in Appendix A of both versions; responsibility remains with the author.",
+    "Corrected AcquireBound version-2 title by removing a parenthetical name absent from its official title.",
+    "Updated author-reported account and endorsement status; domain not independently inspected.",
+    "Replaced the non-ASCII dash in copyable submission abstract; metadata text fields checked as ASCII."
+  ],
+  "policy_sources": {
+    "ai_disclosure": "https://info.arxiv.org/help/moderation/index.html",
+    "ascii_metadata": "https://info.arxiv.org/help/prep.html"
+  },
+  "references_checked": [
+    {
+      "name": "Chandy and Lamport",
+      "url": "https://lamport.azurewebsites.net/pubs/chandy.pdf"
+    },
+    {
+      "name": "AID-Guard",
+      "url": "https://arxiv.org/abs/2608.21159v1"
+    },
+    {
+      "name": "Op",
+      "url": "https://research.momentum.inc/papers/op.html"
+    },
+    {
+      "name": "HoldSpec",
+      "url": "https://arxiv.org/abs/2610.14419v1"
+    },
+    {
+      "name": "Root-scoped effect closure",
+      "url": "https://arxiv.org/abs/2609.21284v1"
+    },
+    {
+      "name": "Fault-tolerant budget conservation",
+      "url": "https://arxiv.org/abs/2610.00349v1"
+    },
+    {
+      "name": "EffectBound",
+      "url": "https://arxiv.org/abs/2609.02866v1"
+    },
+    {
+      "name": "Salas",
+      "url": "https://arxiv.org/abs/2609.31490v1"
+    },
+    {
+      "name": "AcquireBound",
+      "url": "https://arxiv.org/abs/2609.14744v2"
+    },
+    {
+      "name": "Formal Analysis of Agent Payment Protocols",
+      "url": "https://arxiv.org/abs/2609.00060v1"
+    },
+    {
+      "name": "Commit-time authorization",
+      "url": "https://arxiv.org/abs/2607.10487v2"
+    },
+    {
+      "name": "Watts draft -03",
+      "url": "https://datatracker.ietf.org/doc/html/draft-watts-oauth-agent-revocation-closure-03"
+    }
+  ],
+  "reference_findings": [
+    "Checked cited version metadata for all 12 references and the relevant closest-work passages; comparisons remain appropriately limited.",
+    "Watts -03 exists, is dated 30 October 2026, and sections 9-11 support the cited fence, closure and receipt discussion. It is an individual draft, not an IETF standard.",
+    "Op live text was rechecked on 9 November; existing manuscript access date remains 6 November for its bounded comparison."
+  ],
+  "scientific_review": {
+    "new_substantive_defect_found": false,
+    "assumptions_and_theorem_changes": false,
+    "only_body_change_in_each_version": "AI-use disclosure; removal yields exact pre-review source.",
+    "scientific_files_hash_checked_unchanged": 114,
+    "scope": "Conditional identity-level completeness under the trusted-service assumptions; no verified deployment or new general closure principle.",
+    "proof_review": "Source-level correspondence checked against the admission and constrained provider-contract models and recorded evidence. Not a fresh Lean execution."
+  },
+  "artifact_review": {
+    "repo_checksums_verified": 170,
+    "release_archive_files": 46,
+    "release_manifest_hashes_verified": 45,
+    "artifact_scientific_files_match_repository": 10,
+    "credential_pattern_scan_hits": 0,
+    "finite_diagnostic_records": 2048,
+    "finite_diagnostic_matches_reference": true,
+    "flight_hotel_matches_reference": true,
+    "lean_or_pytest_rerun": false,
+    "provider_calls": 0,
+    "new_results_claimed": false
+  },
+  "execution_limits": [
+    "Fresh stdlib finite diagnostic and flight-hotel checker ran from the extracted candidate and matched saved JSON outputs exactly.",
+    "Lean and pytest were unavailable in the current environment and were not rerun. Historical 14-export, eight-mutation and nine-test claims were not refreshed.",
+    "Known credential-string pattern scan had zero hits; this is not a comprehensive secrets or security audit.",
+    "No provider requests or new scientific results."
+  ],
+  "build": {
+    "arxiv": {
+      "pages": 12,
+      "archive_files": [
+        "main.tex",
+        "metadata.tex",
+        "references.tex",
+        "figures/architecture.pdf",
+        "figures/completeness.pdf"
+      ],
+      "disclosure_present": true,
+      "only_manuscript_body_change_is_disclosure": true,
+      "anonymous": false
+    },
+    "workshop": {
+      "pages": 7,
+      "archive_files": [
+        "main.tex",
+        "main.bbl",
+        "references.bib",
+        "aaai2027.sty",
+        "aaai2027.bst",
+        "figures/completeness.pdf"
+      ],
+      "disclosure_present": true,
+      "only_manuscript_body_change_is_disclosure": true,
+      "anonymous": true
+    }
+  },
+  "render_and_extracted_source_checks": {
+    "arxiv": {
+      "extracted_pdf_text_matches": true,
+      "pixel_equal_prior_pages": [
+        "page-01.png",
+        "page-02.png",
+        "page-03.png",
+        "page-04.png",
+        "page-05.png",
+        "page-06.png",
+        "page-07.png",
+        "page-08.png",
+        "page-09.png",
+        "page-10.png"
+      ],
+      "changed_pages": [
+        "page-11.png",
+        "page-12.png"
+      ]
+    },
+    "workshop": {
+      "extracted_pdf_text_matches": true,
+      "pixel_equal_prior_pages": [
+        "page-1.png",
+        "page-2.png",
+        "page-3.png",
+        "page-4.png",
+        "page-5.png"
+      ],
+      "changed_pages": [
+        "page-6.png",
+        "page-7.png"
+      ]
+    }
+  },
+  "visual_review": "Changed arXiv pages 11-12 and conference pages 6-7 visually inspected. Other 15 rendered pages are pixel-identical to the previously reviewed final revision. No clipping or overlap found.",
+  "build_warnings": {
+    "arxiv": [],
+    "workshop_underfull_box_warnings": 14,
+    "overfull_boxes": 0,
+    "undefined_references": 0,
+    "official_conference_style_unchanged": true
+  },
+  "existing_manifest_paths_changed": [
+    "paper/ARXIV_SUBMISSION_GUIDE.md",
+    "paper/README.md",
+    "paper/SUBMISSION_STATUS.md",
+    "paper/TrustBound_Draft.pdf",
+    "paper/TrustBound_Workshop_Anonymous.pdf",
+    "paper/TrustBound_Workshop_Source.zip",
+    "paper/TrustBound_arXiv_Source.zip",
+    "paper/arxiv-metadata.json",
+    "paper/arxiv/main.tex",
+    "paper/arxiv/references.tex",
+    "paper/workshop/README.md",
+    "paper/workshop/main.bbl",
+    "paper/workshop/main.tex",
+    "paper/workshop/references.bib"
+  ],
+  "remaining_before_submission": [
+    "Author approval for public artifact release and selection of artifact and manuscript licenses.",
+    "Publish the selected artifact, verify anonymous download and checksum, and add its issued version DOI to Appendix A. Not an arXiv policy requirement for every paper, but required by this note's agreed reproduction plan.",
+    "Confirm the endorsed account supports the chosen category; endorsement itself is author-reported complete.",
+    "After those edits, rebuild sources, inspect arXiv's processed PDF and metadata, and complete author rights declarations and final approval."
+  ],
+  "outputs_sha256": {
+    "paper/TrustBound_Draft.pdf": "ccf65ecddb006bc44a3514f8823ab407786dd093c77287daa28837ba7e412f0e",
+    "paper/TrustBound_arXiv_Source.zip": "d15a92117282f93c4f062ea5d8ccf560011768d28f6d5d1b4ce4a5ff6f22bb56",
+    "paper/TrustBound_Workshop_Anonymous.pdf": "d3febe66799fba73f6b230b8ec6846c13689c2bf5727762948a13e3393ad0212",
+    "paper/TrustBound_Workshop_Source.zip": "e9734619c653b5454ac40bba67d5b270f430872c60f9f1e3484dc09040519412"
+  }
+}

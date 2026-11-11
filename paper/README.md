@@ -1,47 +1,77 @@
-# Publication manuscripts
+# TrustBound manuscripts
 
-**TrustBound: A Mechanized Note on Payment-Epoch Completeness**
+The current versions retain the approved opening and use plainer explanations
+of the model, trust assumptions, diagnostic and trace checks. The hotel-payment
+example carries through the discussion. Formal definitions, A1–A5, theorem
+statements and proofs, result counts, citations and AI disclosure are unchanged.
+[Latest prose audit](READER_PROSE_AUDIT_2026-11-10.json).
 
-Author: **Sandip Nandi — Independent Researcher**. The 7 November 2026 revision
-adds an explicit research objective and explains the outcome of running the
-artifact. It preserves the conditional trusted-service claim, checked theorem,
-nearest-work comparisons and negative flight–hotel finding.
+The scenario table and mapping remain documented in the
+[review response](ASTRA_REVIEW_RESPONSE_2026-11-10.md) and
+[assumption evidence matrix](../docs/ASSUMPTION_EVIDENCE.md).
 
-- `TrustBound_Draft.pdf`: author version for arXiv, with two diagrams.
-- `TrustBound_arXiv_Source.zip`: three LaTeX files and two PDF figures.
-- `TrustBound_Workshop_Anonymous.pdf`: separate anonymous two-column conference
-  review version in the official AAAI-2027 style, with one diagram.
-- `TrustBound_Workshop_Source.zip`: conference sources, bibliography and template.
-- `TrustBound_Core_Artifact.zip`: selected reproduction package, with release
-  rights pending; this is not the entire research repository.
+| Version | PDF | Source | Length |
+|---|---|---|---|
+| Author / arXiv | [Author draft](TrustBound_Draft.pdf) | [LaTeX archive](TrustBound_arXiv_Source.zip) | 14 pages, 2 figures |
+| Anonymous conference review | [Review copy](TrustBound_Workshop_Anonymous.pdf) | [LaTeX archive](TrustBound_Workshop_Source.zip) | 8 pages including references, 1 figure |
 
-The goal is to make the premises for exact identity-level payment closure
-inspectable. Running the core produces a checked reproduction report, not a
-real merchant closure certificate. It does not establish deployment assumptions.
+These are two formats of the same note, not two separate papers. The author
+version names **Sandip Nandi — Independent Researcher**. The conference version
+uses the unchanged official AAAI 2027 template and omits identifying artifact
+links. Both have 23 references and retain the AI-assistance disclosure.
 
-See [submission steps and recommendations](ARXIV_SUBMISSION_GUIDE.md),
-[copyable metadata](arxiv-metadata.json), [submission status](SUBMISSION_STATUS.md),
-[conference build instructions](workshop/README.md), and
-[the current verification record](DOI_RELEASE_PREP_AUDIT_2026-11-07.json).
-Earlier audits and execution records remain historical evidence.
+## Artifact access and reproduction
 
-To compile the author version, run from `arxiv/`:
+Appendix A is now a short availability statement. The author draft links the
+working repository and explicitly says it is private. Reviewer access is still
+pending in the anonymous copy; no anonymous mirror or artifact DOI exists yet.
+
+Runnable instructions are in [the core guide](../docs/CORE_ARTIFACT.md).
+Historical run records, the test retry, field definitions and the flight–hotel
+diagnostic are in [the supplementary record](SUPPLEMENTARY_RECORD.md).
+The selected release candidate retains the original formal core and adds the
+repaired service, selected tests and trace-check evidence. It was extracted and
+rerun. A successful artifact run checks the conditional models and specified
+local traces, not a merchant's real payments.
+
+## Build
+
+From `arxiv/`, run:
 
 ```sh
-tectonic --untrusted --keep-logs main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
 ```
 
-The bibliography is embedded in `references.tex`; no BibTeX step is needed.
-The source archive has relative figure paths. Local builds do not replace the
-required arXiv processing check. The conference template instead requires
-PDFLaTeX and BibTeX; its README gives the commands.
+The author bibliography is embedded in `references.tex`. The conference copy
+also requires BibTeX; see [its build instructions](workshop/README.md).
+Both source archives were extracted and rebuilt. Their page text matches the
+delivered PDFs. This is document-build verification, not a fresh research run
+or a test of arXiv's processing system.
 
-Neither version has been submitted. The repository remains private and no
-public paper/code license has been granted. Author details and substantive
-review are complete; account/endorsement, rights and artifact access remain.
+## Submission state
 
-Final reviewer update: Figure 1 shares page 3 with the body text; the author
-PDF is 12 pages. The public DOI deposit remains blocked on Zenodo sign-in and
-software-license selection. The [release candidate](release/README.md) is
-prepared and checked, not published. Appendix A retains an honest pending-access
-statement until an issued DOI and public files can be verified.
+**Publication remains on hold at the author's request.** No upload, GitHub push,
+public release, DOI deposit, license grant, or submission was performed.
+The author reports an arXiv account and endorsement. Category eligibility,
+license choices, artifact access and DOI, and the final processed-PDF check
+remain to be resolved before submission.
+
+See [submission status](SUBMISSION_STATUS.md),
+[the submission guide](ARXIV_SUBMISSION_GUIDE.md),
+[prepared metadata](arxiv-metadata.json), and
+[the editorial audit](REVIEW_RESPONSE_AUDIT_2026-11-09.json).
+Earlier dated audits describe earlier file states.
+
+The subsequent final-assurance run reproduced the selected research core with
+fresh Python dependency installation and the existing Lean compiler. The bounded
+result is now stated in Section 5; see
+[the executed evidence](../evidence/final_assurance_2026-11-09/README.md) and
+[the final audit](FINAL_ASSURANCE_AUDIT_2026-11-09.json). It does not establish
+independent clean-machine reproduction, deployment correctness or novelty.
+
+An earlier 10 November update cites primary Mastercard and Visa announcements in the
+introduction. These sources motivate the setting; they do not validate the
+model or establish novelty. The existing research evidence is unchanged.
+See [the document audit](INDUSTRY_MOTIVATION_AUDIT_2026-11-10.json).

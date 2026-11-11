@@ -62,6 +62,9 @@ def main():
     elif point.startswith("fence_"):
         gate.active_point = point
         gate.fence()
+    elif point.startswith("conflict_"):
+        gate.active_point = point
+        gate.observe(row("succeeded"))
     else:
         if point.startswith("claim_"):
             gate.active_point = point

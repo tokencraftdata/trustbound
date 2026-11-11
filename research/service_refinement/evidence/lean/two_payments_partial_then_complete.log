@@ -1,0 +1,2 @@
+'two_payments_partial_then_complete.recorded_run' depends on axioms: [propext, Quot.sound]
+'two_payments_partial_then_complete.checked_exact' depends on axioms: [propext, Quot.sound]

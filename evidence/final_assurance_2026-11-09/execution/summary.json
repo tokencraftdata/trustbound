@@ -1,0 +1,137 @@
+{
+  "started_at_utc": "2026-11-10T07:42:06.333070+00:00",
+  "finished_at_utc": "2026-11-10T07:42:08.761448+00:00",
+  "jobs": {
+    "admission": {
+      "exit_code": 0,
+      "seconds": 2.4144639580044895
+    },
+    "provider_contract": {
+      "exit_code": 0,
+      "seconds": 2.401635208996595
+    },
+    "baseline": {
+      "exit_code": 0,
+      "seconds": 0.11029633300495334
+    },
+    "baseline_tests": {
+      "exit_code": 0,
+      "seconds": 0.2776369999992312
+    }
+  },
+  "sources_sha256": {
+    "formal/Admission.lean": "96c0afed87ea032553f74825a7c13e92050872d4c33e0b91a980ae06b5cab559",
+    "formal/StripeGate.lean": "f6847101a28783749b4703e3c406b895b5db05fe2396f92ecec1fc89cb3fd5fb",
+    "formal/check_admission.py": "d6ba6f7eb4ed6ec33b6739cd1b7c2ddacf53391112948b8e42aa40c5731e1e9b",
+    "formal/check_stripe_gate.py": "acb1d78501d246574dd3f347200c52f0957b1a79fa10d895e4de2553b4ce5dc5",
+    "formal/lean-toolchain": "55e97be96000b5e9e290c9e74482e5e317861499a5540353ce845471bded8cea",
+    "src/trustbound/__init__.py": "19940aa8912a955e87014463bf3c78bcef9ad9b39f4d79e9072b43617d1b03a1",
+    "src/trustbound/closure_experiment.py": "aeb2f415d19f431eaf3e50e103c51095066ed37e5ce7a0647344b4817bd4cd55",
+    "tests/test_closure_experiment.py": "5067fd9cdb5f73b52d0b1493690e2006d008b6b41aa869aaa9173ba5d5e8c034"
+  },
+  "snapshot_matches_current_sources": true,
+  "checks_passed": true,
+  "provider_requests": 0,
+  "new_theorems": 0,
+  "full_regression_suite_run": false,
+  "new_dependencies_installed": false,
+  "limitations": "Conditional models and finite synthetic baseline; no provider/source refinement or novelty result. Existing Python and Lean environments reused.",
+  "lean": "Lean (version 4.19.0, arm64-apple-darwin23.6.0, commit 6caaee842e94, Release)",
+  "exported_results_checked": 14,
+  "premise_removal_mutations_rejected": 8,
+  "baseline_test_counts": {
+    "tests": 9,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "baseline_records": 2048,
+  "same_public_evidence_groups_checked": 512,
+  "per_state_strong_baseline_tie": true,
+  "historical_result_semantically_equal": true,
+  "baseline_summary": {
+    "signed_closure": {
+      "assumptions_hold": {
+        "traces": 256,
+        "coverage_accepted": 256,
+        "exact_accepted": 144,
+        "false_coverage": 240,
+        "false_exact": 140
+      },
+      "bypass_violation": {
+        "traces": 256,
+        "coverage_accepted": 256,
+        "exact_accepted": 144,
+        "false_coverage": 256,
+        "false_exact": 144
+      }
+    },
+    "witnessed_log": {
+      "assumptions_hold": {
+        "traces": 256,
+        "coverage_accepted": 256,
+        "exact_accepted": 144,
+        "false_coverage": 240,
+        "false_exact": 140
+      },
+      "bypass_violation": {
+        "traces": 256,
+        "coverage_accepted": 256,
+        "exact_accepted": 144,
+        "false_coverage": 256,
+        "false_exact": 144
+      }
+    },
+    "fenced_reconciliation": {
+      "assumptions_hold": {
+        "traces": 256,
+        "coverage_accepted": 16,
+        "exact_accepted": 4,
+        "false_coverage": 0,
+        "false_exact": 0
+      },
+      "bypass_violation": {
+        "traces": 256,
+        "coverage_accepted": 16,
+        "exact_accepted": 4,
+        "false_coverage": 16,
+        "false_exact": 4
+      }
+    },
+    "conventional_reconciliation": {
+      "assumptions_hold": {
+        "traces": 256,
+        "coverage_accepted": 16,
+        "exact_accepted": 4,
+        "false_coverage": 0,
+        "false_exact": 0
+      },
+      "bypass_violation": {
+        "traces": 256,
+        "coverage_accepted": 16,
+        "exact_accepted": 4,
+        "false_coverage": 16,
+        "false_exact": 4
+      }
+    }
+  },
+  "baseline_sha256": "7691868b89f498a05aa279b064d7910720051a66e84c00c4b59baf1a532726e8",
+  "historical_baseline_sha256": "7691868b89f498a05aa279b064d7910720051a66e84c00c4b59baf1a532726e8",
+  "logs_sha256": {
+    "provider_contract.log": "dd8a7382388c4c8787ea4fe1c41e0ff7b4ff296a1d13558573835a9cde6c2023",
+    "baseline.log": "035401b641beff5b31cedc3bdfa984ec574e3d9fb6e9dafedf93985205bb73b9",
+    "admission.log": "9b391f2197943cf5718cb21c188570f75b1f9d18105a09c1389f6dfbd78a90b6",
+    "baseline_tests.log": "8b8ddcd2e7b63fe945152ea4c56d7e74f75ec09c6df6f5afe0311439df55ede7",
+    "provider_contract/unregistered_dispatch.log": "70d4fde28560cdaaa5ba4d7d3a782ca1a4d75559e7c1346703b9e2bc96796a4a",
+    "provider_contract/stripe-gate-check.log": "edaf5bd759c155a13980c4e58bdd83f335a04cb6e164e924729a815fd2cf9564",
+    "provider_contract/dispatch_after_terminal.log": "a9ceff7472d13804bb3906960139f2e2f444a3ff3235c264de8aa10d6efa205c",
+    "provider_contract/cancel_without_source_discharge.log": "ad110157f6d330a36dddf78e9232178f673993e8f5b7464785b58b6b5c988876",
+    "provider_contract/admission-dependency.log": "927dbb37ef148b44408a439e4b7cb2a8d741c7ef8a046457be7eb4b1e365233c",
+    "provider_contract/effectful_unknown_creation.log": "c2969e470760d2ca83ccc0146783334f86d81750b0c2f76443ea368a271aa00d",
+    "admission/record_after_fence.log": "5d7d93501c1d584af46d37ff2b2bd61524e1a0e832bb06c67a5dd2a3a40ef811",
+    "admission/admission-check.log": "927dbb37ef148b44408a439e4b7cb2a8d741c7ef8a046457be7eb4b1e365233c",
+    "admission/grant_without_record.log": "42cb3e2cf50d4582fd8f339cb4c7779cb63b490d5f7da1c094e2b07873affe41",
+    "admission/grant_after_fence.log": "84c1a9ada608c86095139ec9e6a8819d93d7007b30fbe9152c4d6cef5c8ee54a",
+    "admission/deliver_without_right.log": "5353d247505e4590b61ba0d346b378891e79fe1f10dfb5599a7b76fc33edea65"
+  }
+}

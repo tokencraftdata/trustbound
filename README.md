@@ -35,8 +35,17 @@ its assumptions.** A successful run is not a closure certificate for a real
 merchant: it neither queries a processor nor establishes A1–A5 for a deployment.
 Applying the result would additionally require evidence that each real effect
 and remaining right is represented and that the service implements the model.
-The existing Python service is an experimental implementation, not that verified
-refinement. See [the paper-core guide](docs/CORE_ARTIFACT.md).
+The Python service remains experimental. The 10 November repairs add command
+provenance and persistent observation conflicts. Six service histories, comprising
+66 projected transitions, now check against the existing Lean model: five reach
+the closure theorem and one remains undrained. This connects specified executions
+to the proof, without proving all executions refine it.
+[Service repairs and trace checks](research/service_refinement/README.md) ·
+[Paper-core guide](docs/CORE_ARTIFACT.md).
+Detailed run history and the travel diagnostic are retained in the
+[supplementary record](paper/SUPPLEMENTARY_RECORD.md).
+The [final artifact check](evidence/final_assurance_2026-11-09/README.md) also
+reproduced the core with fresh Python dependency installation on the same host.
 
 This repository contains a research prototype, Lean models, local tests,
 reproducible diagnostics, and an author-reviewed manuscript. It is **not a
@@ -154,7 +163,7 @@ novelty, conformance or deployment claims. The author-reviewed note names
 **Sandip Nandi — Independent Researcher**. The target arXiv submission date is
 **30 November 2026**, or earlier once account eligibility, category, licensing
 and artifact access are resolved. The separate
-[anonymous workshop cut](paper/workshop/README.md) is seven pages including
+[anonymous workshop cut](paper/workshop/README.md) is eight pages including
 references in the official AAAI-2027 style; no submission is implied.
 
 [arXiv submission steps and recommended choices](paper/ARXIV_SUBMISSION_GUIDE.md)
@@ -167,7 +176,21 @@ or granted; see [rights status](RIGHTS_PENDING.txt). No public publication or
 arXiv submission is implied by this upload.
 
 The final reviewer edit removes Figure 1's isolated page; the author note now
-has 12 pages. A [public DOI release candidate](paper/release/README.md) is
+has 14 pages after clarifying the service-to-model connection. A [public DOI release candidate](paper/release/README.md) is
 prepared and reproduction-checked. The DOI deposit is still pending author
 Zenodo access and the software-license choice; this private repository is not
 the public artifact.
+
+The subsequent manuscript review makes the agent role and key terms explicit,
+and adds the six checked scenarios and their implementation-to-model mapping.
+[Review response](paper/ASTRA_REVIEW_RESPONSE_2026-11-10.md) ·
+[Assumptions and implementation evidence](docs/ASSUMPTION_EVIDENCE.md).
+The scientific files and recorded results are unchanged by this clarification.
+
+Both manuscript versions now use a purpose-led opening and revised narrative
+prose. The scientific claim, code and recorded results remain unchanged.
+[Editorial audit](paper/PURPOSE_PROSE_AUDIT_2026-11-10.json).
+
+The latest readability pass keeps the approved opening and simplifies the
+assumption, diagnostic and trace explanations. Code, claims and recorded
+results are unchanged. [Audit](paper/READER_PROSE_AUDIT_2026-11-10.json).

@@ -1,0 +1,63 @@
+{
+  "started_at_utc": "2026-11-10T07:46:57.178561+00:00",
+  "python_version": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+  "platform": "macOS-15.2-arm64-arm-64bit",
+  "commands": {
+    "admission": [
+      "<VALIDATION_ROOT>/venv/bin/python",
+      "formal/check_admission.py",
+      "--lean",
+      "<LOCAL_HOME>/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/formal-tools/lean-4.19.0-darwin_aarch64/bin/lean",
+      "--output",
+      "/private<VALIDATION_ROOT>/execution-final/admission"
+    ],
+    "provider_contract": [
+      "<VALIDATION_ROOT>/venv/bin/python",
+      "formal/check_stripe_gate.py",
+      "--lean",
+      "<LOCAL_HOME>/Documents/Codex/2026-10-27/referenced-chatgpt-conversation-this-is-an/work/formal-tools/lean-4.19.0-darwin_aarch64/bin/lean",
+      "--output",
+      "/private<VALIDATION_ROOT>/execution-final/provider_contract"
+    ],
+    "baseline": [
+      "<VALIDATION_ROOT>/venv/bin/python",
+      "-m",
+      "trustbound.closure_experiment",
+      "--output",
+      "/private<VALIDATION_ROOT>/execution-final/baseline"
+    ],
+    "baseline_tests": [
+      "<VALIDATION_ROOT>/venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_closure_experiment.py",
+      "--junitxml",
+      "/private<VALIDATION_ROOT>/execution-final/baseline-tests.xml"
+    ]
+  },
+  "cwd": "/private<VALIDATION_ROOT>/execution-final/snapshot",
+  "environment_keys": [
+    "PATH",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD",
+    "PYTHONDONTWRITEBYTECODE",
+    "PYTHONHASHSEED",
+    "PYTHONNOUSERSITE",
+    "PYTHONPATH",
+    "TMPDIR"
+  ],
+  "sources_sha256": {
+    "formal/Admission.lean": "96c0afed87ea032553f74825a7c13e92050872d4c33e0b91a980ae06b5cab559",
+    "formal/StripeGate.lean": "f6847101a28783749b4703e3c406b895b5db05fe2396f92ecec1fc89cb3fd5fb",
+    "formal/check_admission.py": "d6ba6f7eb4ed6ec33b6739cd1b7c2ddacf53391112948b8e42aa40c5731e1e9b",
+    "formal/check_stripe_gate.py": "acb1d78501d246574dd3f347200c52f0957b1a79fa10d895e4de2553b4ce5dc5",
+    "formal/lean-toolchain": "55e97be96000b5e9e290c9e74482e5e317861499a5540353ce845471bded8cea",
+    "src/trustbound/__init__.py": "19940aa8912a955e87014463bf3c78bcef9ad9b39f4d79e9072b43617d1b03a1",
+    "src/trustbound/closure_experiment.py": "aeb2f415d19f431eaf3e50e103c51095066ed37e5ce7a0647344b4817bd4cd55",
+    "tests/test_closure_experiment.py": "5067fd9cdb5f73b52d0b1493690e2006d008b6b41aa869aaa9173ba5d5e8c034"
+  },
+  "runner_sha256": "9e7384a66c668efd857cb34d58a3af4a4a9116e637a731c92df5d6509d736489",
+  "scope": "selected core only; existing local toolchains; no provider calls"
+}

@@ -65,19 +65,23 @@ def test_terminal_outcomes_and_no_local_reopen(tmp_path):
     assert not gate.snapshot()["deployment_completeness_proved"]
     with pytest.raises(RuntimeError, match="terminal_observation_changed"):
         gate.observe(intent())
-    assert gate.snapshot()["retained_minor"] == 0
+    assert gate.snapshot()["retained_minor"] == 200
+    assert gate.snapshot()["has_contract_conflicts"]
+    assert not gate.snapshot()["known_manifest_resolved"]
     gate.close()
 
 
 def test_scope_mismatch_never_resolves(tmp_path):
     gate = StripeGate(tmp_path / "gate.db", "epoch")
     gate.register(intent())
+    gate.claim(gate.grant("pi_Test1", "capture"))
     gate.fence()
     with pytest.raises(ValueError, match="scope_mismatch"):
         gate.observe(intent(status="succeeded", amount=201, amount_received=201))
     assert gate.snapshot()["retained_minor"] == 200
     gate.observe(intent(status="succeeded", amount_received=200))
-    assert gate.snapshot()["known_manifest_resolved"]
+    assert not gate.snapshot()["known_manifest_resolved"]
+    assert gate.snapshot()["has_contract_conflicts"]
     assert gate.snapshot()["retained_minor"] == 200
     gate.close()
 

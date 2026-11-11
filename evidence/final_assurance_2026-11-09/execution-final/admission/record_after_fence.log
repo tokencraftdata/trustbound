@@ -1,0 +1,18 @@
+record_after_fence.lean:92:26: error: simp made no progress
+record_after_fence.lean:122:26: error: simp made no progress
+record_after_fence.lean:177:43: error: application type mismatch
+  Step.record initial 7 rfl
+argument
+  rfl
+has type
+  ?m.4824 = ?m.4824 : Prop
+but is expected to have type
+  True : Prop
+'TrustBoundAdmission.reachable_coverage' depends on axioms: [propext, Quot.sound]
+'TrustBoundAdmission.fenced_population_immutable' depends on axioms: [propext, sorryAx]
+'TrustBoundAdmission.post_fence_coverage' depends on axioms: [propext, sorryAx, Quot.sound]
+'TrustBoundAdmission.drained_fence_effects_stable' depends on axioms: [propext, sorryAx]
+'TrustBoundAdmission.reconciled_fence_complete' depends on axioms: [propext, sorryAx, Quot.sound]
+'TrustBoundAdmission.fence_without_drain' depends on axioms: [propext, sorryAx]
+'TrustBoundAdmission.bypass_breaks_coverage' depends on axioms: [propext]
+'TrustBoundAdmission.refinement_transfers_coverage' depends on axioms: [propext, sorryAx, Quot.sound]

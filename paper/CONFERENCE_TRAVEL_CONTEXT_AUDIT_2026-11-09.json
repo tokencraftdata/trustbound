@@ -1,0 +1,62 @@
+{
+  "date": "2026-11-09",
+  "scope": "Apply the same travel-agent context to the anonymous conference introduction and example, with trusted-service scope and results unchanged.",
+  "edited_regions": [
+    {
+      "location": "Introduction opening",
+      "new_text": "Consider a travel business using AI agents to arrange a customer's flight and\nhotel. A flight agent and a hotel agent submit payment requests to one trusted\nmerchant payment service, which controls payment credentials and authority.\nSuppose the flight payment is confirmed, but the hotel payment has an uncertain\noutcome. Stopping new requests leaves two questions: can the earlier hotel\nrequest still execute, and do we know whether it has already done so? A booking\nconfirmation, a balanced reservation ledger, or a signed list of observed\npayments does not by itself answer both.\n\nWe study one epoch on this merchant payment path. Agents propose requests;\nthe payment service, its journal, and the relevant source contracts are trusted.\nExact closure requires both a complete account of in-scope effect identities\nand the exclusion of further effects under outstanding authority. The trust\nboundary lies at the payment service: the agents cannot access its credentials\nor internal state and need not trust each other's assertions. The travel setting\nmotivates the question; we do not verify composition across booking providers\nor independent issuers.\n"
+    },
+    {
+      "location": "Appendix B opening",
+      "new_text": "The toy travel-agent scenario models requests to one trusted payment service.\nHotel capture requires an active flight. Its two failure modes were a commit-time\npolicy violation and an unusable trip; neither was a completeness failure.\n"
+    }
+  ],
+  "wording_note": "Introduction matches the arXiv wording. Appendix B uses completeness failure in place of payment-completeness failure to avoid a dangling syllable in the two-column layout; meaning unchanged.",
+  "integrity": {
+    "only_two_authorized_manuscript_regions_changed": true,
+    "abstract_assumptions_theorem_proofs_and_numerical_results_unchanged": true,
+    "scientific_files_hash_verified_unchanged": 114,
+    "arxiv_files_hash_verified_unchanged": 8,
+    "bibliography_figure_and_official_template_unchanged": true,
+    "core_release_artifact_unchanged": true
+  },
+  "validation": {
+    "pdf_pages": 7,
+    "anonymous_text_and_metadata_checked": true,
+    "build": "PDFLaTeX, BibTeX, PDFLaTeX twice; extracted source archive built by the same sequence.",
+    "archive_files": 6,
+    "archive_pdf_text_matches_delivered_pdf": true,
+    "overfull_boxes": 0,
+    "unresolved_references": 0,
+    "underfull_box_warnings": 14,
+    "render_comparison": {
+      "changed": [
+        "page-1.png",
+        "page-2.png",
+        "page-6.png"
+      ],
+      "unchanged": [
+        "page-3.png",
+        "page-4.png",
+        "page-5.png",
+        "page-7.png"
+      ]
+    },
+    "visual_review": "Changed pages 1, 2 and 6 visually inspected. Four other pages pixel-identical to prior reviewed output. No clipped content, overlapping text, or extra page. Official template spacing preserved.",
+    "research_tests_rerun": false,
+    "provider_calls": 0
+  },
+  "publication_status": "On hold; no submission, publication, upload, GitHub push or license grant.",
+  "existing_manifest_paths_changed": [
+    "paper/README.md",
+    "paper/SUBMISSION_STATUS.md",
+    "paper/TrustBound_Workshop_Anonymous.pdf",
+    "paper/TrustBound_Workshop_Source.zip",
+    "paper/workshop/README.md",
+    "paper/workshop/main.tex"
+  ],
+  "output_sha256": {
+    "paper/TrustBound_Workshop_Anonymous.pdf": "6a11d3c043e6bcf646f40b9d45f83fa8b710c7821d05dc1dcb84b3d161118dcd",
+    "paper/TrustBound_Workshop_Source.zip": "9e023630b44f7b97178d1b72b34957db468d09da8cd43e45c0ab022cb3fa46ec"
+  }
+}

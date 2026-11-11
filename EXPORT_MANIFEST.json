@@ -600,6 +600,102 @@
       "revision": "Final reviewer edits and public DOI artifact preparation",
       "audit": "paper/DOI_RELEASE_PREP_AUDIT_2026-11-07.json",
       "description": "Fixed isolated Figure 1, condensed limitations, prepared and extracted-tested DOI release candidate; public deposit and license choice pending. No scientific source changes or new result."
+    },
+    {
+      "date": "2026-11-09",
+      "revision": "Local conference prose pass",
+      "audit": "paper/CONFERENCE_PROSE_AUDIT_2026-11-09.json",
+      "description": "Simplified abstract, introduction and related work; assumptions, formal sections, evaluation, limitations, appendices, bibliography, scientific sources and results unchanged. Seven-page anonymous PDF visually reviewed; extracted source archive rebuilt. No publication, submission or GitHub push."
+    },
+    {
+      "date": "2026-11-09",
+      "revision": "Local arXiv prose pass",
+      "audit": "paper/ARXIV_PROSE_AUDIT_2026-11-09.json",
+      "description": "Applied the conference prose to the author version; all assumptions, formal sections, evaluation, limitations, appendices, bibliography, figures, scientific sources and results unchanged. Twelve-page PDF visually reviewed and extracted source archive rebuilt. No publication, submission or GitHub push."
+    },
+    {
+      "date": "2026-11-09",
+      "revision": "Model provenance and editorial consistency in both manuscript versions",
+      "audit": "paper/MODEL_CLARITY_AUDIT_2026-11-09.json",
+      "description": "Named both models; moved provider proof filename and declaration names to footnotes; clarified packaged-artifact wording; fixed footnote alignment and arXiv bibliography pagination. Assumptions, theorem, proof, numerical results, citations, figures and scientific sources unchanged. Both PDFs and extracted source archives checked; no publication, submission or GitHub push."
+    },
+    {
+      "date": "2026-11-09",
+      "revision": "Pre-submission rereview and authorized AI-use disclosure",
+      "audit": "paper/PRE_SUBMISSION_REVIEW_2026-11-09.json",
+      "description": "Both manuscripts disclose significant generative-AI assistance; reference title and submission status corrected. All scientific files and results unchanged. Extracted diagnostic and flight-hotel reruns match reference; Lean and pytest not rerun. PDFs and source archives rebuilt and checked. Publication remains on hold."
+    },
+    {
+      "date": "2026-11-09",
+      "revision": "AI travel-agent context in arXiv introduction and example",
+      "audit": "paper/TRAVEL_CONTEXT_AUDIT_2026-11-09.json",
+      "description": "Two editorial regions connect flight and hotel agents to one trusted merchant payment service. Assumptions, theorem, results and scientific files unchanged. Twelve-page PDF and extracted source archive checked. No research tests rerun or publication."
+    },
+    {
+      "date": "2026-11-09",
+      "revision": "AI travel-agent context in conference introduction and example",
+      "audit": "paper/CONFERENCE_TRAVEL_CONTEXT_AUDIT_2026-11-09.json",
+      "description": "Applied the arXiv travel framing to the anonymous conference version. Trusted-service scope, assumptions, theorem, numerical results and scientific files unchanged. Seven-page PDF and extracted source archive checked. No research tests rerun or publication."
+    },
+    {
+      "date": "2026-11-09",
+      "revision": "Conference narrative revision and concise reproduction appendix",
+      "audit": "paper/CONFERENCE_VOICE_AUDIT_2026-11-09.json",
+      "description": "Reworked explanatory prose and moved detailed Appendix A material to repository documentation. Formal sections, scientific files, numerical results, citations and AI-use disclosure unchanged. Anonymous seven-page PDF and extracted source archive checked; no research reruns or publication."
+    },
+    {
+      "date": "2026-11-09",
+      "revision": "Publication-status review and five published reference candidates",
+      "audit": "paper/REFERENCE_PUBLICATION_STATUS_2026-11-09.json",
+      "description": "No conference/journal version verified for the nine recent arXiv references. Confirmed existing Chandy-Lamport journal publication and five additional published candidates. Saved separate BibTeX; manuscripts, PDFs and scientific files unchanged. No publication."
+    },
+    {
+      "date": "2026-11-09",
+      "revision": "Review response, natural prose and concise artifact availability in both manuscripts",
+      "audit": "paper/REVIEW_RESPONSE_AUDIT_2026-11-09.json",
+      "description": "Reworked narrative and evidence-rule explanation; printed existing Lean stability signature; added nine published foundations; moved dated run details and travel diagnostic to repository documentation. A1\u2013A5, theorem, proof, provider model, scientific files and saved results unchanged. Twelve-page author and seven-page anonymous PDFs rendered and checked; source archives rebuilt. No research reruns, GitHub push or publication."
+    },
+    {
+      "date": "2026-11-09",
+      "revision": "Final artifact reproduction with fresh Python dependencies",
+      "audit": "paper/FINAL_ASSURANCE_AUDIT_2026-11-09.json",
+      "description": "Reproduced 14 exported results, eight rejected mutations, nine tests and 2,048 byte-identical diagnostic records from the prepared archive in a new Python virtual environment, reusing the same host and Lean compiler. Updated only evaluation setup in both manuscripts. Release ZIP changed only README and manifest; final candidate was re-extracted and tested. Scientific sources and prior results unchanged. PDFs/source archives rebuilt and visually checked; no provider calls, publication or push."
+    },
+    {
+      "date": "2026-11-10",
+      "revision": "Industry motivation in both manuscripts",
+      "audit": "paper/INDUSTRY_MOTIVATION_AUDIT_2026-11-10.json",
+      "description": "Added one short introduction paragraph and primary Mastercard/Visa references. Preserved assumptions, theorem, proof and results. Moved the unchanged cancellation explanation before the conference theorem for layout. Rebuilt and checked 12-page author and 7-page anonymous PDFs and source archives; no publication or push."
+    },
+    {
+      "date": "2026-11-10",
+      "revision": "Bounded implementation-certification candidate screen",
+      "record": "research/implementation_boundary/README.md",
+      "description": "Executed five synthetic SQLite scenarios and reran 30 existing gate/crash tests (all passed). Identified missing provenance/contract-conflict checks relative to a stronger snapshot certificate. These are out-of-contract inputs, not theorem counterexamples. Closest-work comparison establishes no novelty. Existing implementation, formal models, manuscripts and release archives unchanged; no provider requests, push or publication."
+    },
+    {
+      "date": "2026-11-10",
+      "revision": "Service observation repairs and finite execution checks against the existing model",
+      "audit": "paper/SERVICE_REPAIR_AUDIT_2026-11-10.json",
+      "description": "Require claimed-capture provenance and persist observation conflicts. Full local suite passed 235 cases; six service histories (66 projected transitions) checked in Lean, with five closure instances, one undrained final state and two rejected invalid inputs. Original formal sources and assumptions unchanged. Papers and extracted source archives rebuilt; selected release archive extended and extraction-tested. No universal refinement, new novelty, provider requests, infrastructure, publication or push."
+    },
+    {
+      "date": "2026-11-10",
+      "revision": "Astra review clarification: agent role, terms, deployment obligations and trace mapping",
+      "audit": "paper/ASTRA_REVIEW_AUDIT_2026-11-10.json",
+      "description": "Editorial changes in both manuscripts; added a six-scenario table verified against saved records and an assumption-to-evidence matrix. A1\u2013A5, theorem, proof, code, test sources, results, bibliography and versioned artifact unchanged. Rebuilt and visually checked 14-page author and 8-page anonymous PDFs, plus extracted source archives. No research reruns, publication, push or infrastructure changes."
+    },
+    {
+      "date": "2026-11-10",
+      "revision": "Author-approved positive abstract opening and natural narrative prose",
+      "audit": "paper/PURPOSE_PROSE_AUDIT_2026-11-10.json",
+      "description": "Updated both abstracts, introduction, scope explanation, evaluation prose and conclusion; synchronized metadata abstract. Protected assumptions, mathematical sections, tables, projection, result counts, citations and disclosure are unchanged. Code, checkers, test sources, saved evidence and release candidate unchanged. Rebuilt and visually reviewed 14-page author and 8-page anonymous PDFs and extracted source archives. No research reruns, publication or push."
+    },
+    {
+      "date": "2026-11-10",
+      "revision": "Reader-oriented explanations with approved opening retained",
+      "audit": "paper/READER_PROSE_AUDIT_2026-11-10.json",
+      "description": "Simplified abstract explanation, agent role, interpretation of assumptions, evidence diagnostic and trace projection; removed one repeated qualification. Approved opening, formal definitions, A1\u2013A5, proofs, counts, references and disclosure preserved. Conference paragraph-break repair; templates unchanged. Both PDFs and extracted source archives rebuilt and visually checked. Scientific files, evidence and release candidate unchanged; no research reruns, publication or push."
     }
   ]
 }

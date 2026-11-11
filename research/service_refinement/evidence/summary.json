@@ -1,0 +1,73 @@
+{
+  "executed_at_utc": "2026-11-10T21:04:27.318077+00:00",
+  "python": "3.12.14",
+  "sqlite": "3.53.1",
+  "lean": "Lean (version 4.19.0, arm64-apple-darwin23.6.0, commit 6caaee842e94, Release)",
+  "source_sha256": {
+    "src/trustbound/stripe_gate.py": "4fadedca980147d95722b787883776321fbe6e735084ac00e640c51b8bc12dc3",
+    "src/trustbound/credential_service.py": "df865fee133d540e73a0793b9a20724787309e331c6a359cf5ba7d53484f6453",
+    "formal/Admission.lean": "96c0afed87ea032553f74825a7c13e92050872d4c33e0b91a980ae06b5cab559",
+    "formal/StripeGate.lean": "f6847101a28783749b4703e3c406b895b5db05fe2396f92ecec1fc89cb3fd5fb",
+    "research/service_refinement/check_traces.py": "fb5d0a47982252a286d1343722b95222e990bc1c8c5a5d1619bce9751cf37889"
+  },
+  "executed_service_traces": 6,
+  "projected_steps": 66,
+  "closed_trace_instances": 5,
+  "unresolved_trace_instances": 1,
+  "invalid_trace_inputs_rejected": 2,
+  "compilations": [
+    {
+      "name": "Admission",
+      "expected_accepted": true,
+      "return_code": 0
+    },
+    {
+      "name": "StripeGate",
+      "expected_accepted": true,
+      "return_code": 0
+    },
+    {
+      "name": "canceled_without_command",
+      "expected_accepted": true,
+      "return_code": 0
+    },
+    {
+      "name": "capture_across_fence",
+      "expected_accepted": true,
+      "return_code": 0
+    },
+    {
+      "name": "lost_reply_and_restart",
+      "expected_accepted": true,
+      "return_code": 0
+    },
+    {
+      "name": "two_payments_partial_then_complete",
+      "expected_accepted": true,
+      "return_code": 0
+    },
+    {
+      "name": "claim_abandoned_before_send",
+      "expected_accepted": true,
+      "return_code": 0
+    },
+    {
+      "name": "canceled_then_late_dispatch",
+      "expected_accepted": true,
+      "return_code": 0
+    },
+    {
+      "name": "paid_without_admission",
+      "expected_accepted": false,
+      "return_code": 1
+    },
+    {
+      "name": "paid_after_terminal_cancel",
+      "expected_accepted": false,
+      "return_code": 1
+    }
+  ],
+  "real_provider_calls": 0,
+  "universal_implementation_refinement": false,
+  "scope": "Lean checks projected finite execution histories and instantiates existing closure results. Python projection, event capture, SQLite durability, isolation and real-provider semantics remain unproved."
+}

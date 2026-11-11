@@ -1,0 +1,18 @@
+effectful_unknown_creation.lean:45:16: error: type mismatch
+  Runs.refl ?m.1045
+has type
+  Runs ?m.1045 ?m.1045 : Prop
+but is expected to have type
+  Runs s.core
+    { objects := id✝ :: s.objects,
+        core :=
+          let __src := s.core;
+          { journal := __src.journal, issued := __src.issued, rights := __src.rights, effects := id✝ :: s.core.effects,
+            closed := __src.closed },
+        terminal := s.terminal }.core : Prop
+'TrustBoundStripeGate.provider_step_refines' depends on axioms: [sorryAx]
+'TrustBoundStripeGate.provider_runs_refine' depends on axioms: [sorryAx]
+'TrustBoundStripeGate.unregistered_objects_inert' depends on axioms: [propext, sorryAx, Quot.sound]
+'TrustBoundStripeGate.fenced_provider_coverage' depends on axioms: [propext, sorryAx, Quot.sound]
+'TrustBoundStripeGate.terminal_manifest_drains' depends on axioms: [propext, sorryAx, Quot.sound]
+'TrustBoundStripeGate.terminal_cut_stable' depends on axioms: [propext, sorryAx, Quot.sound]

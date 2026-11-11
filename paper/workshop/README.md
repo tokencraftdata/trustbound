@@ -1,56 +1,78 @@
-# Anonymous workshop cut
+# Anonymous conference review version
 
-Prepared from the author-reviewed arXiv note for a possible Agentic Software
-Engineering workshop submission. This is a separate review version, not a
-submission or a new scientific result.
+This is the review format of the TrustBound mechanization note, prepared with
+the official AAAI 2027 template. It is **eight pages including references**;
+the content ends on page 7. The PDF is `../TrustBound_Workshop_Anonymous.pdf`,
+with a self-contained archive at `../TrustBound_Workshop_Source.zip`.
 
 The [workshop CFP](https://agenticse-aaai.github.io/), checked 6 November 2026,
-lists a 20 November 2026 deadline at 23:59 Anywhere on Earth, a maximum of eight
-pages excluding references for long papers, double-blind review, the AAAI-2027
-Author Kit, non-archival publication, and in-person presentation by a registered
-author. Non-archival status does not guarantee eligibility at a future venue;
-that venue's policies remain controlling. The workshop's rule is distinct from
-the main AAAI track's page limit.
+listed a 20 November deadline at 23:59 Anywhere on Earth, double-blind review,
+eight pages excluding references for long papers, non-archival publication,
+and in-person presentation by a registered author. Recheck the selected venue's
+current rules and form before submission. No submission or attendance commitment
+has been made.
 
-Changes from the arXiv note:
+Differences from the author version:
 
-- The author and affiliation are replaced by Anonymous Submission.
-- Figure 1 and its callout are omitted; the completeness dependency figure is
-  retained and renumbered automatically.
-- Historical processor observations are condensed to three sentences.
-- The membership-only refinement bridge is moved to content Appendix C.
-- The bibliography uses the official author-year style. Content appendices stay
-  before references and count toward the workshop's eight-page content limit.
+- The author line is anonymous and the identifying repository link is omitted.
+- The architecture figure is omitted; the completeness figure remains.
+- The unchanged membership-only transfer obligation is in Appendix B.
+- References use the template's author–year bibliography style.
+
+Appendix A contains only artifact availability and the retained AI-assistance
+disclosure. Detailed commands, run history and the travel diagnostic are in
+[the repository supplement](../SUPPLEMENTARY_RECORD.md), with runnable commands
+in [the core guide](../../docs/CORE_ARTIFACT.md). An anonymous reviewer link is
+pending. Do not insert the author's GitHub URL into this review copy.
 
 `aaai2027.sty` and `aaai2027.bst` are unchanged files from the
 [official author kit](https://aaai.org/authorkit27/), retrieved 6 November 2026.
-Their original notices are preserved. No font sizes, margins or spacing in the
-style file were modified to fit the page limit. The kit requires PDFLaTeX;
-the Tectonic engine used for the arXiv note cannot compile this style.
-
-Build in this directory with PDFLaTeX and BibTeX available:
+Their notices are preserved. Build with PDFLaTeX and BibTeX:
 
 ```sh
-pdflatex -halt-on-error main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
 bibtex main
-pdflatex -halt-on-error main.tex
-pdflatex -halt-on-error main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
+pdflatex -interaction=nonstopmode -halt-on-error main.tex
 ```
 
-The compiled review PDF is `../TrustBound_Workshop_Anonymous.pdf` and the source
-archive is `../TrustBound_Workshop_Source.zip`. Current preparation/build evidence
-is recorded in `../DOI_RELEASE_PREP_AUDIT_2026-11-07.json`.
-No author account, submission form, attendance commitment, public artifact
-release or upload has been completed. The workshop's online form may impose
-additional declarations or artifact/checklist requirements; those still need
-to be checked before submission. The anonymous review PDF is not the copy to
-post publicly on arXiv.
+The 9 November review response clarifies the prose and diagnostic and adds nine
+published foundations. The formal claim, scientific files and recorded results
+are unchanged. See [the response](../REVIEW_RESPONSE_2026-11-09.md) and
+[the build audit](../REVIEW_RESPONSE_AUDIT_2026-11-09.json).
 
-The 7 November revision adds the research objective and explains that running
-the artifact yields a reproduction report, not a real merchant closure
-certificate. It also states that public artifact access is pending. The review
-PDF remains seven pages including references. No scientific claims were added.
+Publication and submission remain on hold. No anonymous mirror, public artifact,
+DOI, license grant or GitHub push was created in this revision.
 
-The final reviewer edit condenses Section 7; this remains an anonymous review
-copy. An identifying public-artifact DOI belongs in the author version; the
-conference copy needs the venue-permitted anonymous artifact route.
+Section 5 now records the final-assurance reproduction in a fresh Python virtual
+environment on the same host, using the existing Lean compiler. The counts and
+claim remain unchanged. [Execution record](../../evidence/final_assurance_2026-11-09/README.md).
+
+The 10 November update adds the same short motivation paragraph and two
+industry references as the author version. The unchanged cancellation paragraph
+now precedes the theorem to avoid stretched column spacing. The review copy
+was seven pages with the official template and anonymous metadata.
+See [the document audit](../INDUSTRY_MOTIVATION_AUDIT_2026-11-10.json).
+
+The subsequent 10 November service repair update adds Section 5.3: 66 selected
+service tests and six histories checked against the existing model, with their
+limits. That service-repair copy was seven pages, including references. The current
+clarified copy is eight pages; Appendix B ends and references begin on page 7. The template, formal claim and assumptions are unchanged.
+[Revision audit](../SERVICE_REPAIR_AUDIT_2026-11-10.json).
+
+The latest editorial review defines the key terms, makes the AI-client role
+explicit, and adds a scenario table and projection explanation. It changes no
+formal claim, implementation or result. Reproduction commands remain in the
+repository. [Response](../ASTRA_REVIEW_RESPONSE_2026-11-10.md) ·
+[Audit](../ASTRA_REVIEW_AUDIT_2026-11-10.json).
+
+The latest prose pass uses the purpose-led abstract opening and a clearer
+introduction, trust-boundary explanation, evaluation and conclusion. The copy
+remains eight pages. Assumptions, formal sections, result tables, citations,
+source mapping and AI disclosure are unchanged. [Audit](../PURPOSE_PROSE_AUDIT_2026-11-10.json).
+
+The subsequent readability pass simplifies the explanations of assumptions,
+evidence and trace mapping, while retaining the approved opening and scientific
+content. Local paragraph-break control avoids a single opening line at the end
+of page 5; the template files are unchanged. The copy remains eight pages.
+[Audit](../READER_PROSE_AUDIT_2026-11-10.json).

@@ -1,0 +1,38 @@
+{
+  "checked_at_utc": "2026-11-10T07:46:59.965831+00:00",
+  "lean": "Lean (version 4.19.0, arm64-apple-darwin23.6.0, commit 6caaee842e94, Release)",
+  "sources_sha256": {
+    "StripeGate.lean": "f6847101a28783749b4703e3c406b895b5db05fe2396f92ecec1fc89cb3fd5fb",
+    "Admission.lean": "96c0afed87ea032553f74825a7c13e92050872d4c33e0b91a980ae06b5cab559",
+    "check_stripe_gate.py": "acb1d78501d246574dd3f347200c52f0957b1a79fa10d895e4de2553b4ce5dc5"
+  },
+  "check_exit_code": 0,
+  "exported_theorems": [
+    "provider_step_refines",
+    "provider_runs_refine",
+    "unregistered_objects_inert",
+    "fenced_provider_coverage",
+    "terminal_manifest_drains",
+    "terminal_cut_stable"
+  ],
+  "mutations": {
+    "effectful_unknown_creation": {
+      "proof_rejected": true,
+      "exit_code": 1
+    },
+    "unregistered_dispatch": {
+      "proof_rejected": true,
+      "exit_code": 1
+    },
+    "dispatch_after_terminal": {
+      "proof_rejected": true,
+      "exit_code": 1
+    },
+    "cancel_without_source_discharge": {
+      "proof_rejected": true,
+      "exit_code": 1
+    }
+  },
+  "provider_implementation_verified": false,
+  "scope": "simulation between two specified transition systems; inert-create and terminal-state provider contracts plus exclusive mediation assumed"
+}

@@ -39,3 +39,31 @@ Original logs remain outside the upload. No implementation was changed to obtain
 these results. At the initial upload, the manuscript PDF and LaTeX were the existing author-review
 draft. The subsequent diagram revision is documented separately in
 [the revision audit](../paper/REVISION_2026-11-06.json); these checks establish no novelty.
+
+## Service repair validation — 10 November 2026
+
+The two observation gaps were repaired in the existing service: a paid report
+requires its own claimed capture command, and committed contract conflicts
+persist instead of allowing a later resolved verdict. The model and A1–A5 did
+not change.
+
+| Executed check | Actual result |
+|---|---|
+| Full local suite with existing dependencies and socket access | 235 passed; zero failures, errors or skips |
+| Selected gate, observation, interface and crash cases, included in that suite | 66 passed, including 11 new observation cases; 15 process-kill points |
+| Six actual service executions projected into existing Lean model | 66 transitions accepted; five closed final states, one undrained |
+| Deliberately inconsistent trace inputs | Two rejected for absent effective right |
+| Extracted release candidate | Core 14/8/9/2,048 reproduced; selected 66 tests passed; same trace counts reproduced |
+
+All runs used existing local tools. Before repair, the 11 new regression cases
+failed (including newly required status fields). An initial broader run in the
+minimal core environment lacked `rfc8785`; the existing full environment fixed
+that setup issue. Inside the execution sandbox, 234 tests passed and one socket
+test failed with a bind-permission error. The whole suite then passed with local
+socket access. These attempts are preserved in the
+[repair report](../research/service_refinement/evidence/REPAIR_REPORT.json).
+
+No provider calls, infrastructure changes or production actions occurred. The
+finite trace projection and event capture remain trusted; no universal Python or
+processor refinement was established. Conflict persistence applies after its
+SQLite commit, not before it. [Reproduction](../research/service_refinement/README.md).

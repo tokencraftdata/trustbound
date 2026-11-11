@@ -1,7 +1,8 @@
 # TrustBound: selected-core reproducibility artifact
 
-Repository note (6 November): this document describes the narrower 5 November
-artifact. The repository also contains the broader historical implementation and
+Repository note: the core instructions below describe the narrower 5 November
+artifact. The 10 November release candidate adds a separately run service-check
+supplement, described at the end; it does not change the original core counts. The repository also contains the broader historical implementation and
 provider probes; those are outside the selected-core checks below. See
 [the repository README](../README.md) and [fresh validation](VALIDATION.md).
 
@@ -56,8 +57,8 @@ Replace the Lean path. Use a new output directory for every attempt. Do not use
 Python's `-O` option, which would disable assertions in the existing checkers.
 Dependency downloads require network access during setup; the checks make no
 network or payment API requests. The author run reused already installed tools;
-the fresh-environment installation commands above have not been executed as a
-cross-platform installation test.
+the selected archive's dependency installation was tested on this macOS host on
+9 November, not across platforms or on an independent clean machine.
 
 Expected outcome: exit 0 and `checks_passed: true` in `results/new-run/summary.json`:
 
@@ -153,3 +154,40 @@ No payment execution, processor SDK, UCP/AP2 conformance, OS isolation, new
 provider, network service, deployment credentials, or production booking is
 needed. Earlier amount, dispatch, observer and alternative-candidate modules
 are intentionally outside this minimal artifact and its reported proof totals.
+
+## Subsequent final assurance
+
+The final 9 November candidate reproduced the same 14/8/9/2,048 totals in a
+new Python virtual environment with freshly downloaded pytest 9.0.2 dependencies
+and the existing Lean 4.19.0 compiler. The source files and expected result were
+unchanged. The archive uses `requirements.txt`; the full working repository uses
+`requirements-core.txt`. See [the execution record](../evidence/final_assurance_2026-11-09/README.md).
+This remains the same host, not an independent clean-machine reproduction.
+
+## Service-check supplement, 10 November
+
+The current release candidate also contains the repaired SQLite gate, request-only
+interface, selected tests and a trace projection checker. From the extracted
+78-file candidate, the original core passed again (14 results, eight rejected
+mutations, nine tests, 2,048 matching records). A separate 66-test service run
+passed. The trace runner reproduced six histories with 66 transitions, five
+closure instances, one undrained instance and two rejected invalid inputs.
+These runs reused the existing tools on the same host.
+
+```sh
+PYTHONPATH=src python -m pytest -q \
+  tests/test_gate_observation_integrity.py tests/test_stripe_gate.py \
+  tests/test_dispatch_crashes.py tests/test_credential_service.py
+python research/service_refinement/check_traces.py \
+  --lean /absolute/path/to/lean-4.19.0/bin/lean \
+  --output /tmp/trustbound-new-service-check
+```
+
+The output directory must be new. The supplement needs no SDK, credentials or
+provider requests. The full repository's 235-test suite is broader and requires
+its existing optional dependencies and local socket permission. The selected
+archive contains only the narrow service tests, not that full suite.
+
+The checker connects finite projected service executions to the existing model.
+It does not prove the Python projection, all implementation executions, storage
+durability or real-provider behavior. [Exact mapping and evidence](../research/service_refinement/README.md).

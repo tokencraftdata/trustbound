@@ -1,0 +1,121 @@
+{
+  "session_date": "2026-11-09",
+  "completed_at_utc": "2026-11-10T09:48:36.039158+00:00",
+  "revision": "Fresh Python-environment reproduction and final publication-package assurance",
+  "documents": {
+    "arxiv": {
+      "pages": 12,
+      "only_evaluation_setup_paragraph_changed": true,
+      "axioms_assumptions_theorem_proof_and_bibliography_unchanged": true,
+      "AI_disclosure_retained": true,
+      "archive_members": 5,
+      "unresolved_references": 0,
+      "overfull_boxes": 0,
+      "underfull_warnings": 0,
+      "pdf": "paper/TrustBound_Draft.pdf",
+      "pdf_sha256": "6f49fcd9c84e83c506677a001d07ae0650016c160b159f8c80e64829c3b9eedf",
+      "extracted_source_rebuild_text_matches": true
+    },
+    "workshop": {
+      "pages": 7,
+      "only_evaluation_setup_paragraph_changed": true,
+      "axioms_assumptions_theorem_proof_and_bibliography_unchanged": true,
+      "AI_disclosure_retained": true,
+      "archive_members": 6,
+      "unresolved_references": 0,
+      "overfull_boxes": 0,
+      "underfull_warnings": 9,
+      "pdf": "paper/TrustBound_Workshop_Anonymous.pdf",
+      "pdf_sha256": "cf9357fd0b5d71121cb0b06dda6ce872c4936e8da933fe17f7dc655ff4ab5991",
+      "extracted_source_rebuild_text_matches": true
+    }
+  },
+  "visual_review": {
+    "changed_pages": {
+      "arxiv": [
+        "page-07.png"
+      ],
+      "workshop": [
+        "page-4.png",
+        "page-5.png",
+        "page-6.png",
+        "page-7.png"
+      ]
+    },
+    "changed_pages_reviewed": true,
+    "remaining_pages_pixel_identical_to_reviewed_prior_draft": true,
+    "layout_defects_found": 0
+  },
+  "execution_report": "evidence/final_assurance_2026-11-09/REPORT.json",
+  "research_tests_run": true,
+  "provider_requests": 0,
+  "new_theorems": 0,
+  "full_implementation_suite_rerun": false,
+  "existing_scientific_files_unchanged": 114,
+  "outcome": {
+    "exported_results_checked": 14,
+    "mutations_rejected": 8,
+    "tests_passed": 9,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "diagnostic_records": 2048,
+    "reference_output_byte_equal": true
+  },
+  "reproduction_boundary": "Fresh pytest/dependency installation in a new Python virtual environment; same macOS host and reused Python runtime/Lean compiler. Not independent clean-machine or real-deployment validation.",
+  "artifact": {
+    "path": "paper/release/TrustBound_Core_Artifact_v1.0.0_candidate.zip",
+    "sha256": "d9b1cde371d8835510f9ffd03c94f1601f7fc93b1f1ff400395d4a479b797631",
+    "members": 46,
+    "internal_manifest_entries": 45,
+    "internal_manifest_valid": true,
+    "initial_archive_sha256": "e3d1f1f55dbb80193cafcc14b3c864872d62dbd55e0ff22d397e05fd1792f71a",
+    "documentation_only_changes": [
+      "README.md",
+      "SHA256SUMS.json"
+    ]
+  },
+  "source_comparisons_rechecked": [
+    {
+      "source": "EffectBound",
+      "url": "https://arxiv.org/html/2609.02866v1",
+      "sections": "II-B, V-C and Appendix C",
+      "finding": "Policy-relative closure can permit safe work. Its Kafka applied-state fence leaves earlier authorized work able to append; the present manuscript comparison remains accurate."
+    },
+    {
+      "source": "Salas",
+      "url": "https://arxiv.org/html/2609.31490v1",
+      "sections": "3.2 and 6.2",
+      "finding": "Admission-to-outbox authority survives a later amendment. Omitted effects cannot be found from records they bypassed; completeness of external journals remains an assumption."
+    },
+    {
+      "source": "AcquireBound",
+      "url": "https://arxiv.org/html/2609.14744v2",
+      "sections": "4.5 and 5.6",
+      "finding": "Quarantine, current-state activation and effect-time single-use permits support the existing comparison."
+    },
+    {
+      "source": "Watts closure draft",
+      "url": "https://datatracker.ietf.org/doc/html/draft-watts-oauth-agent-revocation-closure-03",
+      "sections": "9\u201311",
+      "document_date": "2026-10-30",
+      "status": "Individual Internet-Draft, not an IETF standard",
+      "finding": "Version, date and cited sections confirmed."
+    }
+  ],
+  "novelty_status": "No new general closure characterization established; no novelty upgrade follows from this reproduction.",
+  "export_check": {
+    "path_and_hostname_redactions_verified": true,
+    "targeted_secret_pattern_matches": 0,
+    "scan_limit": "Pattern scan and curated scope, not a universal secret-absence proof."
+  },
+  "publication": {
+    "uploaded": false,
+    "github_push": false,
+    "repository_visibility_changed": false,
+    "license_granted": false,
+    "doi_issued": false,
+    "submitted": false
+  },
+  "remaining": "Public/reviewer artifact access, license approval, DOI-backed deposit and author submission checks remain pending. Publication hold retained."
+}

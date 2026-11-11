@@ -1,6 +1,6 @@
 {
   "status": "Prepared; not submitted. Category and license are recommendations.",
-  "prepared_date": "2026-11-07",
+  "prepared_date": "2026-11-10",
   "title": "TrustBound: A Mechanized Note on Payment-Epoch Completeness",
   "authors": [
     {
@@ -14,11 +14,12 @@
   ],
   "manuscript_license_recommended": "arXiv.org perpetual, non-exclusive license 1.0",
   "license_granted": false,
-  "abstract": "A payment receipt establishes an observed outcome; exact epoch closure also requires complete accounting and exclusion of later effects under earlier authority. This note makes those obligations explicit for request-only agents using a trusted payment service. In a Lean transition model, recording before granting authority and serializing both with an admission fence derive a fixed journal covering effects and remaining rights. Complete source-side discharge establishes future stability; truthful per-identity outcomes additionally establish exact identity-level accounting. A constrained provider model permits unregistered inert objects while mediating every activation. Reproduction checks 14 exported results and rejects eight premise-removal mutations. A finite diagnostic, whose two strong comparator labels share the same fence-and-contiguity acceptance rule, documents the evidence boundary; a small flight–hotel example separates payment closure from commit-time policy and trip usability. The contribution is an auditable assumption contract, a checked construction, and reproducible examples that specialize existing closure and authorization principles to payment epochs.",
-  "comments": "12 pages, 2 figures; mechanization note. Confirm page count against final processed PDF.",
+  "abstract": "TrustBound studies payment completeness for AI-assisted travel booking. We formalize when a trusted payment service can account for every in-scope payment effect and establish that outstanding authority cannot produce further effects. Travel agents submit requests to the service without access to its credentials, journal, or administration. Our Lean admission model records each payment identity before granting authority. An admission fence then fixes the journal, which covers all modeled effects and outstanding rights. Once those rights are discharged, no later effect can occur in the model. Truthful reports for each journaled identity then give exact identity-level accounting. Our constrained provider-contract model requires registration before activation and keeps unregistered objects inert. The artifact checks 14 exported results; eight premise-removal mutations fail the proof checks. A finite evidence diagnostic shows how matching reports can still leave an effect unaccounted for. The note applies established closure principles under an explicit payment trust contract, with checked models and reproducible examples.",
+  "comments": "14 pages, 2 figures, 23 references; mechanization note. Confirm page count against final processed PDF.",
   "journal_reference": null,
   "doi": null,
   "arxiv_id": null,
   "artifact_public_url": null,
-  "author_account_status": "No account yet (author reply 7 November 2026)."
+  "author_account_status": "Account created; endorsement obtained (author-reported).",
+  "endorsement_status": "Obtained (author-reported); endorsement domain not independently inspected."
 }

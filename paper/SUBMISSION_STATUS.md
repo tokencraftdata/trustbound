@@ -1,120 +1,120 @@
-# Submission status — 7 November 2026
+# Submission status — 10 November 2026
 
-Target: **submit by 30 November 2026**, or earlier once submission requirements
-are resolved. This is our target date, not an arXiv
-deadline or a guaranteed announcement date. The current paper remains a
-conditional trusted-service payment-epoch mechanization note. The tested
-flight–hotel candidate did not establish a new completeness result. A larger
-trip paper is contingent on a distinguishing auditor-evidence characterization,
-not promised. The bounded comparison and stop rule are recorded in
-[the research decision](../docs/TRIP_CLOSURE_CANDIDATE.md); neither it nor a new
-theorem is a prerequisite for completing this note.
+**Publication remains on hold at the author's request.** The target is
+30 November 2026; it is an author target, not an arXiv deadline.
 
-## Latest reviewer requests
+## Current documents
 
-- Figure 1 now shares page 3 with assumptions and body text; its isolated page
-  is removed. The author PDF is **12 pages**; the anonymous conference PDF is seven.
-- Section 7's limitations paragraph is shorter without expanding the claim.
-  Op's access date remains 6 November in both references and Section 6.
-- A 46-file public-release candidate and Zenodo metadata are prepared in
-  [release/](release/README.md). It includes the existing core and Appendix B
-  diagnostic. Extracted-package checks passed with existing tools; no scientific
-  source was changed and no provider calls were made.
-- **Public artifact and DOI are not complete.** The user authorized a public
-  artifact; Zenodo is signed out and MIT terms remain an unanswered choice.
-  Once deposited, verify public download and its hash, then cite the issued
-  version DOI in Appendix A. A reserved DOI alone is insufficient.
+- The author draft is 14 pages with two figures and 23 references, naming
+  **Sandip Nandi — Independent Researcher**.
+- The anonymous conference copy is eight pages including references, with
+  content ending on page 7 and one figure. The official template is unchanged.
+- Both now use a more direct travel-payment opening, a short availability
+  appendix, an explicit Lean stability declaration and published classical
+  foundations. Detailed run history and the full toy travel diagnostic have
+  moved to repository documentation.
+- A1–A5, the theorem and proof, and provider-model semantics remain unchanged.
+  Section 5.3 now reports the repaired service and bounded trace checks; earlier
+  results remain identified as historical observations.
 
-Current audit: [DOI release preparation](DOI_RELEASE_PREP_AUDIT_2026-11-07.json).
-Earlier preparation audits describe earlier file states.
+See [the review response](REVIEW_RESPONSE_2026-11-09.md) and
+[the audit](REVIEW_RESPONSE_AUDIT_2026-11-09.json). Earlier dated audits record
+earlier drafts and executions; they are not fresh results from this revision.
 
-## Prepared
+## Latest readability pass
 
-- Author-reviewed text finalized with **Sandip Nandi — Independent Researcher**,
-  supplied by the author. The anonymous workshop review version omits both.
-- Final editorial changes: repeated novelty disclaimers consolidated in Section 6;
-  proof simplicity stated in Section 3.2; Appendix B given a two-sentence result
-  summary; abstract's shared acceptance rule explained; Figure 1 placement repaired.
-- Watts reference verified on Datatracker: revision -03, document date 30 October
-  2026, sections 9–11. The record's 31 October update is not the document date.
-- Updated draft with two vector diagrams, bounded captions and cross-references.
-- All six previously missing nearest-neighbor references added and a focused
-  flight–hotel candidate tested and rejected as a novel completeness result.
-- Scope rationale added: the restricted-view bypass diagnostic motivates the
-  explicit trust contract. The withdrawn comparison is identified as a
-  methodological correction, not a general impossibility proof.
-- Positive abstract retained, general exclusions consolidated in one limitations
-  paragraph, and one unpromised characterization question recorded. EffectBound's
-  formal-appendix pointer corrected from B to C.
-- Self-contained LaTeX source archive with both figures and embedded bibliography.
-- Existing proof/test evidence, with the separate 6 November local export checks
-  distinguished from historical provider observations.
-- Private repository containing the codebase, diagrams and evidence. Its private
-  link cannot yet serve as a publicly accessible reproducibility artifact.
+The approved opening is retained. Both versions use plainer language for the
+abstract's explanation, the agents' role, A1–A5, the evidence diagnostic and
+the trace projection. Formal definitions, assumptions, theorem statements,
+proofs, counts, references and disclosure are unchanged. The conference copy
+also avoids a one-line paragraph fragment at a page break. Both source archives
+rebuilt to matching page text; no research experiment was rerun and nothing was
+published or pushed. [Audit](READER_PROSE_AUDIT_2026-11-10.json).
 
-Current preparation verification is recorded in
-`SUBMISSION_PREP_AUDIT_2026-11-07.json`. The 7 November revision states the goal
-and the meaning of running the artifact in both papers and the repository.
-The earlier author PDF had 13 pages; the anonymous conference PDF has seven including
-references. The extracted 41-file selected-core archive was run with existing
-tools: 14 exports checked, eight mutations rejected, nine tests passed, 2,048
-records reproduced, and zero provider requests. All 74 tracked scientific
-source/result files covered by this revision's integrity check are unchanged.
-The earlier 75-file audit used a different inventory; neither number is a count
-of proofs or experiments. Earlier audits remain historical.
+## Earlier prose revision
 
-The author confirmed **no arXiv account yet** on 7 November. Recommendations:
-**cs.CR primary**, **cs.LO cross-list**, and the **arXiv perpetual, non-exclusive
-paper license**. These are prepared choices, not completed form selections or
-license grants. [Submission guide](ARXIV_SUBMISSION_GUIDE.md).
+Both abstracts now begin with the purpose of TrustBound. The introduction,
+trust-boundary explanation, evaluation and conclusion use more direct prose,
+with repeated defensive framing reduced. The formal sections, assumptions,
+result tables, source mappings, citations and AI-assistance disclosure remain
+unchanged. The metadata abstract matches the author PDF source. Both PDFs and
+extracted source archives rebuilt successfully. No research tests, provider
+calls, release actions or repository push occurred.
+[Prose audit](PURPOSE_PROSE_AUDIT_2026-11-10.json).
 
-## Still required
+## Earlier editorial clarification
 
-1. **Author rights declaration:** author name, affiliation and substantive review
-   are resolved. Complete the submission system's authorship/rights declarations;
-   no declaration has been made on the author's behalf.
-2. **Account and category:** create and verify the author's account; start a
-   cs.CR submission to find the endorsement requirement. Category choices remain
-   recommendations subject to moderation; resolve endorsement early.
-   [Official endorsement guidance](https://info.arxiv.org/help/endorsement.html).
-3. **Manuscript license:** the author must choose the distribution license and
-   confirm the right to grant it. Code/data release terms are a separate choice;
-   an open-source code release is not a prerequisite implied by this checklist.
-   [Official license guidance](https://info.arxiv.org/help/license/index.html).
-4. **Artifact access:** the selected-core archive is prepared and extraction-tested.
-   Recommend a frozen public release of that package with MIT terms for its
-   author-owned software and documentation, while retaining the broader private
-   working repository. Confirm the release terms and destination before publishing;
-   the package currently retains its rights-pending notice. Add the public URL
-   only after signed-out access is verified. Ancillary files are an alternative.
-5. **Final source and upload check:** freeze the reviewed text and metadata,
-   rebuild the archive, and inspect arXiv's processed PDF before author submission.
-   A local Tectonic build does not establish arXiv compilation success.
-   [TeX guidance](https://info.arxiv.org/help/submit_tex.html) and
-   [submission requirements](https://info.arxiv.org/help/submit/index.html).
+Both versions now define epoch, effect, outstanding right and admission fence;
+state that agents are request-generating clients; identify concrete deployment
+obligations; and show the six scenarios, expected/observed outcomes and trace
+projection. The scenario table was checked against the saved records. All
+scientific files, proof assumptions, implementation, results and the 78-file
+release candidate remain unchanged. No new Lean, pytest or provider run is
+claimed for this editorial pass. [Response](ASTRA_REVIEW_RESPONSE_2026-11-10.md) ·
+[Audit](ASTRA_REVIEW_AUDIT_2026-11-10.json).
 
-## Practical sequence
+## Earlier service repair and document update
 
-- By 12 November: account/endorsement and release decisions; author metadata done.
-- Author substantive review is complete; preserve the supported claims.
-- By 20 November, 23:59 AoE: optional anonymous AgenticSE workshop submission,
-  subject to account/form requirements and the in-person presentation commitment.
-- 20–25 November: final corrections and source/artifact packaging.
-- 26–29 November: check arXiv processing, metadata and preview.
-- By 30 November: author submission when the above requirements are satisfied.
+The service now checks capture-command provenance and preserves committed
+observation conflicts. All 235 local tests passed; 66 selected gate/interface/crash
+cases are included in that total. Lean accepted six projected service histories
+with 66 transitions: five final states instantiate the existing closure theorem
+and one remains undrained. Two invalid trace inputs were rejected. The projection
+and event capture remain trusted. This is bounded conformance evidence, not a
+proof of all Python/SQLite executions or provider contracts.
 
-No additional provider integration or infrastructure is required for the present
-conditional claim. Real-world completeness, concrete refinement and a novel
-trip-level theorem remain unestablished and must not be implied by publication.
-Submission does not guarantee moderation acceptance or scientific novelty.
+Both papers report these results in Section 5.3. PDFs and extracted source
+archives were rebuilt and checked. No provider calls, publication or push occurred.
+See [the repair evidence](../research/service_refinement/README.md) and
+[the audit](SERVICE_REPAIR_AUDIT_2026-11-10.json). The earlier industry-motivation
+paragraph remains unchanged.
 
-## Workshop option verified 6 November
+## Final assurance
 
-The [AgenticSE CFP](https://agenticse-aaai.github.io/) lists up to eight pages
-excluding references, the AAAI-2027 template, double-blind review, and a
-20 November 2026 deadline at 23:59 AoE. It is non-archival and permits work under
-review elsewhere, but later venues' eligibility rules still need checking.
-At least one author must register and present in person. See
-[the separate review version](workshop/README.md). No workshop submission,
-registration or attendance commitment has been made. The arXiv author line must
-not be copied into the anonymous submission.
+The selected core now also passed from the frozen artifact with fresh Python
+dependency installation: 14 exported results, eight rejected mutations, nine
+passing tests, and 2,048 byte-identical diagnostic records. The 9 November candidate
+was checked again after a README-only update (plus its checksum). That run left
+proof sources, tests and prior results unchanged. This is same-host reproduction
+with the existing Lean compiler, not an independent machine or provider test.
+See [the execution record](../evidence/final_assurance_2026-11-09/README.md) and
+[the audit](FINAL_ASSURANCE_AUDIT_2026-11-09.json).
+
+## Scientific boundary
+
+This is a conditional mechanization note. It does not establish a new general
+closure principle, verified processor behavior, or a refinement of the Python
+service. Complete mediation, truthful terminality and faithful export remain
+deployment obligations. The tested flight–hotel dependency supplied no new
+completeness gap. Broader research is not promised as part of this submission.
+
+## Account and artifact
+
+The author reports an arXiv account and endorsement. The endorsement domain
+has not been independently inspected. Prepared recommendations remain **cs.CR**
+primary, **cs.LO** cross-list, and arXiv's perpetual non-exclusive paper license;
+these are not completed form selections or granted licenses.
+
+The GitHub repository is private, confirmed with a read-only check. The author
+draft links it with that status; the anonymous draft says reviewer access is
+pending. The selected release candidate now has 78 files: its original formal core plus
+the repaired service, selected tests and bounded trace evidence. The extracted
+package passed the core, 66 selected tests and trace checks. Release terms remain
+pending. No DOI-backed public download or anonymous mirror exists yet.
+
+## Before submission
+
+1. Confirm the endorsed account permits the selected category, and complete
+   the author's rights declarations.
+2. Choose the manuscript license and software release terms.
+3. With the author's approval, make the selected artifact accessible, verify
+   its download and checksum, and cite the issued version DOI requested by the
+   reviewer. A private repository pointer is not public reproducibility access.
+   For anonymous review, prepare and check a venue-permitted anonymous link.
+4. Upload the author LaTeX archive to arXiv, inspect its processed PDF and
+   metadata, and complete submission after approval. Do not upload the anonymous
+   conference PDF as the arXiv version.
+
+These steps are described in [the submission guide](ARXIV_SUBMISSION_GUIDE.md).
+No repository visibility change, remote push, public release, DOI deposit,
+license grant, or submission was performed during this revision.

@@ -16,7 +16,8 @@ from dispatch_crash_worker import LocalProvider, row
 POINTS = ["register_before_commit", "register_after_commit", "grant_before_commit", "grant_after_commit",
           "fence_before_commit", "fence_after_commit", "claim_before_commit", "claim_after_commit",
           "send_before_provider_commit", "send_after_provider_commit", "after_reply",
-          "observation_before_commit", "observation_after_commit"]
+          "observation_before_commit", "observation_after_commit",
+          "conflict_before_commit", "conflict_after_commit"]
 
 
 def effects(path):
@@ -35,6 +36,9 @@ def test_sigkill_boundary(tmp_path, point):
     if point.startswith(("claim_", "send_", "observation_")) or point == "after_reply":
         gate.grant("pi_Crash1", "capture")
         gate.fence()
+    if point.startswith("conflict_"):
+        gate.observe(row("canceled"))
+        gate.fence()
     gate.close()
     child = subprocess.run([sys.executable, str(Path(__file__).with_name("dispatch_crash_worker.py")),
                             str(tmp_path), point], capture_output=True, timeout=20)
@@ -47,6 +51,12 @@ def test_sigkill_boundary(tmp_path, point):
         assert gate.db.execute("SELECT COUNT(*) FROM command").fetchone()[0] == int(point.endswith("after_commit"))
     elif point.startswith("fence_"):
         assert gate.snapshot()["closed"] == point.endswith("after_commit")
+    elif point.startswith("conflict_"):
+        snapshot = gate.snapshot()
+        committed = point.endswith("after_commit")
+        assert snapshot["has_contract_conflicts"] == committed
+        assert snapshot["known_manifest_resolved"] == (not committed)
+        assert snapshot["retained_minor"] == (200 if committed else 0)
     else:
         expected_effects = int(point in {"send_after_provider_commit", "after_reply",
                                          "observation_before_commit", "observation_after_commit"})

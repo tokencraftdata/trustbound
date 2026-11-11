@@ -1,0 +1,98 @@
+{
+  "date": "2026-11-10",
+  "completed_at_utc": "2026-11-10T17:25:38.862324+00:00",
+  "revision": "Short industry motivation with primary Mastercard and Visa references",
+  "purpose": "Motivate travel-agent payment completeness; no product validation or novelty claim",
+  "paragraph": "Mastercard's Agent Pay announcement uses flight, hotel, and transportation\nbookings to illustrate the need for visibility into agent-initiated\npayments~\\cite{mastercard2026}. Visa's shopping benchmark examines whether\nagents discover and satisfy customer requirements; checkout and payment testing\nare planned extensions~\\cite{visa2026}. An agent can choose the right hotel\nwhile leaving a payment unresolved, or choose the wrong hotel while every\npayment is accounted for. TrustBound studies payment completeness.",
+  "sources": [
+    {
+      "key": "mastercard2026",
+      "author": "Mastercard",
+      "title": "Mastercard Advances Agentic Commerce With New Trust and Intelligence Services",
+      "date": "30 September 2026",
+      "url": "https://investor.mastercard.com/investor-news/investor-news-details/2026/Mastercard-Advances-Agentic-Commerce-With-New-Trust-and-Intelligence-Services/default.aspx"
+    },
+    {
+      "key": "visa2026",
+      "author": "Visa",
+      "title": "Visa Releases First-of-Its-Kind Industry Benchmark for AI Shopping; Almost Half of Test Runs Fail",
+      "date": "5 November 2026",
+      "url": "https://investor.visa.com/news/news-details/2026/Visa-Releases-First-of-Its-Kind-Industry-Benchmark-for-AI-Shopping-Almost-Half-of-Test-Runs-Fail/default.aspx"
+    }
+  ],
+  "source_classification": "Two company announcements, not peer-reviewed research; retrieved 10 November 2026",
+  "visa_scope": "Shopping requirement discovery and purchase decisions; checkout, payment and order-placement testing described as planned extensions. No benchmark failure statistic is presented as a payment-completeness failure rate.",
+  "documents": {
+    "arxiv": {
+      "pages": 12,
+      "references": 23,
+      "only_one_motivation_paragraph_added": true,
+      "abstract_and_all_remaining_prose_preserved_verbatim": true,
+      "prior_references_unchanged": true,
+      "layout_only_relocation": null,
+      "AI_disclosure_retained": true,
+      "archive_members": 5,
+      "overfull_boxes": 0,
+      "unresolved_references": 0,
+      "underfull_warnings": 0,
+      "pdf": "paper/TrustBound_Draft.pdf",
+      "pdf_sha256": "e1213a6536c4c93e80bd8dbfaca5ae59e41051dfc0b064bde4e9762a9d5c725e",
+      "extracted_source_rebuild_text_matches": true,
+      "changed_render_pages": [
+        "page-01.png",
+        "page-02.png",
+        "page-03.png",
+        "page-04.png",
+        "page-05.png",
+        "page-06.png",
+        "page-07.png",
+        "page-08.png",
+        "page-09.png",
+        "page-12.png"
+      ]
+    },
+    "workshop": {
+      "pages": 7,
+      "references": 23,
+      "only_one_motivation_paragraph_added": true,
+      "abstract_and_all_remaining_prose_preserved_verbatim": true,
+      "prior_references_unchanged": true,
+      "layout_only_relocation": "Unchanged cancellation paragraph moved before the conditional theorem to prevent stretched spacing",
+      "AI_disclosure_retained": true,
+      "archive_members": 6,
+      "overfull_boxes": 0,
+      "unresolved_references": 0,
+      "underfull_warnings": 16,
+      "pdf": "paper/TrustBound_Workshop_Anonymous.pdf",
+      "pdf_sha256": "4d6694a84c7dd1629059ecee8585343d3b9b4345f62769c28bba85460413d282",
+      "extracted_source_rebuild_text_matches": true,
+      "changed_render_pages": [
+        "page-1.png",
+        "page-2.png",
+        "page-3.png",
+        "page-4.png",
+        "page-5.png",
+        "page-6.png",
+        "page-7.png"
+      ]
+    }
+  },
+  "visual_review": {
+    "all_pages_reviewed_as_rendered_contact_sheets": true,
+    "introductions_theorem_figures_and_new_references_reviewed_at_page_scale": true,
+    "layout_defects_remaining": 0,
+    "conference_vertical_stretch_fixed_by_relocating_unchanged_cancellation_paragraph": true
+  },
+  "assumptions_theorem_proof_and_results_unchanged": true,
+  "existing_scientific_files_unchanged": 159,
+  "research_tests_rerun": false,
+  "provider_requests": 0,
+  "publication": {
+    "published": false,
+    "pushed": false,
+    "submitted": false,
+    "repository_visibility_changed": false,
+    "doi_deposit_created": false,
+    "license_granted": false
+  }
+}

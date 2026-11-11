@@ -20,6 +20,8 @@ class StripeGate:
         CREATE TABLE IF NOT EXISTS command(id INTEGER PRIMARY KEY, payment_id TEXT NOT NULL,
           action TEXT NOT NULL, claimed INTEGER NOT NULL DEFAULT 0,
           UNIQUE(payment_id, action));
+        CREATE TABLE IF NOT EXISTS observation_conflict(payment_id TEXT NOT NULL,
+          reason TEXT NOT NULL, PRIMARY KEY(payment_id, reason));
         """)
         def initialize():
             rows = self.db.execute("SELECT id FROM epoch").fetchall()
@@ -49,6 +51,24 @@ class StripeGate:
         if self.db.execute("SELECT closed FROM epoch").fetchone()[0]:
             raise RuntimeError("epoch_fenced")
 
+    def _capture_claimed(self, payment_id):
+        # Necessary provenance only. A durable claim does not prove that the
+        # transport ran, the provider executed, or the observation is truthful.
+        return self.db.execute(
+            "SELECT 1 FROM command WHERE payment_id=? AND action='capture' AND claimed=1",
+            (payment_id,)).fetchone() is not None
+
+    def _conflict(self, payment_id, reason):
+        # Called inside the same transaction as observation/snapshot validation.
+        # Keep only the identity and fixed reason, never raw provider responses.
+        self.db.execute("INSERT OR IGNORE INTO observation_conflict VALUES (?, ?)",
+                        (payment_id, reason))
+
+    def _unconflicted(self, payment_id):
+        if self.db.execute("SELECT 1 FROM observation_conflict WHERE payment_id=?",
+                           (payment_id,)).fetchone() is not None:
+            raise RuntimeError("payment_contract_conflict")
+
     def register(self, row):
         # Whitelist configuration: no permissive default on absent evidence.
         if (row.get("object") != "payment_intent" or row.get("livemode") is not False
@@ -73,6 +93,7 @@ class StripeGate:
             raise ValueError("unsupported_action")
         def operation():
             self._open()
+            self._unconflicted(payment_id)
             row = self.db.execute("SELECT status FROM payment WHERE id=?", (payment_id,)).fetchone()
             if row != ("uncertain",):
                 raise RuntimeError("unknown_or_terminal_payment")
@@ -89,6 +110,7 @@ class StripeGate:
                                   (command_id,)).fetchone()
             if row is None or row[2]:
                 raise RuntimeError("command_unknown_or_already_claimed")
+            self._unconflicted(row[0])
             self.db.execute("UPDATE command SET claimed=1 WHERE id=?", (command_id,))
             return row[:2]
         return self._transaction(operation)
@@ -117,6 +139,8 @@ class StripeGate:
     def observe(self, row):
         # Caller supplies a fresh authenticated retrieval. This function does
         # not prove that retrieval occurred or that the provider is truthful.
+        # Validation conflicts are committed BEFORE raising; raising inside the
+        # transaction would roll back the very evidence that blocks resolution.
         def operation():
             prior = self.db.execute("SELECT amount,status,received,capturable FROM payment WHERE id=?",
                                     (row.get("id"),)).fetchone()
@@ -131,7 +155,8 @@ class StripeGate:
                     or type(row.get("amount_capturable")) is not int
                     or not 0 <= row["amount_received"] <= prior[0]
                     or not 0 <= row["amount_capturable"] <= prior[0]):
-                raise ValueError("observation_scope_mismatch")
+                self._conflict(row["id"], "observation_scope_mismatch")
+                return ValueError("observation_scope_mismatch")
             status = "uncertain"
             if row.get("status") == "canceled" and row["amount_capturable"] == 0 and row["amount_received"] == 0:
                 status = "canceled"
@@ -139,20 +164,40 @@ class StripeGate:
                 status = "succeeded"
             state = (status, row["amount_received"], row["amount_capturable"])
             if prior[1] != "uncertain" and state != prior[1:]:
-                raise RuntimeError("terminal_observation_changed")
+                self._conflict(row["id"], "terminal_observation_changed")
+                return RuntimeError("terminal_observation_changed")
+            if row["amount_received"] > 0 and not self._capture_claimed(row["id"]):
+                self._conflict(row["id"], "paid_without_claimed_capture")
+                return RuntimeError("paid_without_claimed_capture")
             self.db.execute("UPDATE payment SET status=?,received=?,capturable=? WHERE id=?",
                             (*state, row["id"]))
-        self._transaction(operation)
+        error = self._transaction(operation)
+        if error is not None:
+            raise error
 
     def snapshot(self):
         def operation():
             closed = bool(self.db.execute("SELECT closed FROM epoch").fetchone()[0])
             rows = [dict(zip(("id", "amount", "status", "received", "capturable"), row))
                     for row in self.db.execute("SELECT * FROM payment ORDER BY id")]
-            resolved = all(row["status"] in {"canceled", "succeeded"} for row in rows)
+            # Recheck historical rows too: opening an older database must not
+            # preserve a resolved paid observation lacking capture provenance.
+            for row in rows:
+                if (row["received"] > 0 or row["status"] == "succeeded") and not self._capture_claimed(row["id"]):
+                    self._conflict(row["id"], "paid_without_claimed_capture")
+            conflicts = [dict(zip(("payment_id", "reason"), row)) for row in self.db.execute(
+                "SELECT payment_id,reason FROM observation_conflict ORDER BY payment_id,reason")]
+            conflicted = {row["payment_id"] for row in conflicts}
+            commands = [dict(zip(("id", "payment_id", "action", "claimed"), row))
+                        for row in self.db.execute("SELECT * FROM command ORDER BY id")]
+            resolved = not conflicts and all(row["status"] in {"canceled", "succeeded"} for row in rows)
             return {"closed": closed, "records": rows,
+                    "commands": commands, "contract_conflicts": conflicts,
+                    "has_contract_conflicts": bool(conflicts),
                     "known_manifest_resolved": closed and resolved,
                     "deployment_completeness_proved": False,
-                    "retained_minor": sum(row["received"] if row["status"] != "uncertain"
+                    # A known conflict restores the configured reservation. It
+                    # is not a monetary bound for an out-of-contract provider.
+                    "retained_minor": sum(row["received"] if row["status"] != "uncertain" and row["id"] not in conflicted
                                           else row["amount"] for row in rows)}
         return self._transaction(operation)

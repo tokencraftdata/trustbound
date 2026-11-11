@@ -1,0 +1,2 @@
+'capture_across_fence.recorded_run' depends on axioms: [propext, Quot.sound]
+'capture_across_fence.checked_exact' depends on axioms: [propext, Quot.sound]

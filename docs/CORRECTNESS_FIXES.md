@@ -47,3 +47,19 @@ The authority database and its persisted signing key require trusted storage.
 Legacy databases without claim history are rejected with a migration error,
 rather than guessing whether old tokens can still execute. Tests cover invalid
 inputs, restart, tampering, competing claims, and a retirement/claim race.
+
+## 3. Preserve positive payment evidence
+
+An uncertain observation can still contain a positive received amount. The gate
+now rejects any later decrease, commits a `received_amount_regressed` conflict,
+and leaves the earlier row intact. That conflict survives reopening and blocks
+closure even if a later report again looks valid. Matching or increasing amounts
+remain observable; terminal-state consistency checks still apply.
+
+The constrained service does not interpret a decrease as a refund: refund and
+partial-capture semantics require a different provider contract. Retained capacity
+is conservative within the configured scope, not a bound on a dishonest provider.
+There is no automatic conflict-clearing operation. The change cannot reconstruct
+observations that an older version already discarded. Regression cases cover
+partial positive receipts followed by cancellation or lower reports, with and
+without a restart before the contradiction.

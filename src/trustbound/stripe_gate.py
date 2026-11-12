@@ -264,6 +264,12 @@ class StripeGate:
             if previous_status != "uncertain" and state != previous_state:
                 self._conflict(row["id"], "terminal_observation_changed")
                 return RuntimeError("terminal_observation_changed")
+            # Even an uncertain observation may record money already received.
+            # Refunds are outside this contract: a later smaller receipt must not
+            # erase that evidence or turn a partial paid history into cancellation.
+            if row["amount_received"] < previous_received:
+                self._conflict(row["id"], "received_amount_regressed")
+                return RuntimeError("received_amount_regressed")
             if row["amount_received"] > 0 and not self._capture_claimed(row["id"]):
                 self._conflict(row["id"], "paid_without_claimed_capture")
                 return RuntimeError("paid_without_claimed_capture")

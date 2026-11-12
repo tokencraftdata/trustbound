@@ -1,7 +1,7 @@
 # Reproduce the reviewer artifact
 
 This workflow checks the formal core, selected service tests, six implementation
-histories, their exported evidence, and 864 generated operation schedules. Start with the
+histories, their exported evidence, 864 generated operation schedules, and 40 scripted agent-behavior cases. Start with the
 [research contract](RESEARCH_CONTRACT.md) for the contribution, agent role,
 terminology, assumptions, and event mapping.
 
@@ -49,7 +49,7 @@ Success means exit status 0 and `checks_passed: true` in `summary.json`:
 
 - `core/`: **14 exported Lean results**, **eight rejected premise-removal
   mutations**, **nine diagnostic tests**, and **2,048 synthetic records**.
-- `service-tests.xml`: at least 123 selected gate/interface/crash, observation,
+- `service-tests.xml`: at least 138 selected gate/interface/crash, observation,
   trace-audit, packaging, and generated-checker tests, all passing with no skips.
   The exact count is recorded in `summary.json`.
 - `traces/traces.json`: **six executed histories**, **66 projected transitions**,
@@ -64,6 +64,9 @@ Success means exit status 0 and `checks_passed: true` in `summary.json`:
   traces. These reference traces are not relabeled as new execution evidence.
 - `generated-schedules.json`: 864 finite Python cases with replayable operation
   orders, fault modes, restart choices, and final effect/authority counts.
+- `agent-behaviors.json`: five scripted request-only policies across four provider
+  modes and two restart choices; 40 cases, 12 resolved after the client stops,
+  30 after separately labeled operator reconciliation, and 10 still pending.
 - `summary.json` and job logs: tool versions, selected source hashes, dependency
   versions, test counts, command results, and explicit evidence limits.
 
@@ -118,6 +121,16 @@ check sensitivity to a missing fence, repeated claim, premature closure, and
 missing journal. The six Lean-certified histories and their proof counts are
 unchanged; the 864 cases are Python checks without additional Lean certificates.
 
+## Scripted agent behaviors
+
+The [behavior evaluation](../research/agent_behaviors/README.md) compares a single
+attempt, bounded retries, snapshot polling, authoritative reconciliation, and
+invalid/replayed requests. All use the actual command service through its limited
+request interface. Five policies × four provider modes × two restart choices give
+40 deterministic cases. A separate operator reconciliation phase distinguishes
+client behavior from later recovery. These are Python checks of scripted clients,
+not LLM benchmarks, additional Lean certificates, or a process-isolation proof.
+
 ## Check an exported trace independently of the generator
 
 ```sh
@@ -135,7 +148,7 @@ rejected. Tests also deliberately corrupt traces and require rejection.
 
 ```sh
 .venv/bin/python scripts/build_reviewer_artifact.py \
-  --output results/TrustBound_Reviewer_Artifact_v1.1.0-review.2.zip
+  --output results/TrustBound_Reviewer_Artifact_v1.1.0-review.3.zip
 ```
 
 The builder uses an explicit source list. It includes Lean sources and checkers,
@@ -154,8 +167,8 @@ independent signature or attestation of the author.
 For macOS, verify and extract the package with:
 
 ```sh
-shasum -a 256 -c TrustBound_Reviewer_Artifact_v1.1.0-review.2.zip.sha256
-unzip TrustBound_Reviewer_Artifact_v1.1.0-review.2.zip -d reviewer-artifact
+shasum -a 256 -c TrustBound_Reviewer_Artifact_v1.1.0-review.3.zip.sha256
+unzip TrustBound_Reviewer_Artifact_v1.1.0-review.3.zip -d reviewer-artifact
 cd reviewer-artifact
 ```
 

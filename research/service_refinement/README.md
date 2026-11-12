@@ -30,6 +30,12 @@ They cover bounded serial orderings, not every concurrent or crash execution.
 See the [reviewer guide](../../docs/REVIEWER_GUIDE.md#generated-operation-schedules)
 for bounds, reproduction, failure replay information, and checker mutation tests.
 
+## Scripted client evaluation
+
+A separate [agent-behavior evaluation](../agent_behaviors/README.md) adds 40
+request-only client cases through the actual command service. These cases are
+separate from both the 864 operation schedules and six Lean-checked histories.
+
 ## Original execution record
 
 Executed 10 November 2026. No real provider requests, new infrastructure,

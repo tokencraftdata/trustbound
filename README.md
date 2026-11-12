@@ -123,6 +123,8 @@ directory:
   checking event mappings, authority/effect coverage, and expected outcomes.
 - **`generated-schedules.json`**: 864 bounded Python cases covering operation
   orders, lost replies, abandoned claims, retries, and database reopenings.
+- **`agent-behaviors.json`**: 40 cases comparing five scripted request-only
+  policies, with client outcomes separated from later operator reconciliation.
 
 The diagnostic reuses **64 distinct public inputs per arm**. Both strong labels
 share one acceptance function, and both weak labels share another. Agreement is

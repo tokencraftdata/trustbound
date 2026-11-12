@@ -37,7 +37,10 @@ Agents are request-generating software clients. Their intelligence, plans, and
 booking quality are not evaluated. The setting illustrates delegated requests
 whose lifetime differs from the authority they create. Ordinary asynchronous
 applications have the same problem. The executable scenarios exercise the
-service and simulator; there is no LLM benchmark or agent-performance result.
+service and simulator. A [scripted-client evaluation](../research/agent_behaviors/README.md)
+compares five request policies in 40 bounded cases, with operator recovery
+reported separately. It measures request handling and closure, not LLM capability
+or booking quality.
 
 ## What the formalization contributes
 

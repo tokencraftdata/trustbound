@@ -1,4 +1,32 @@
-# Public artifact release candidate
+# Artifact release candidates
+
+## Reviewer candidate 1.1.0-review.1
+
+The [reviewer ZIP](TrustBound_Reviewer_Artifact_v1.1.0-review.1.zip) and
+[SHA-256 checksum](TrustBound_Reviewer_Artifact_v1.1.0-review.1.zip.sha256) package
+the formal core, selected service code and tests, explicit trace audit, recorded
+reference histories, and the fully pinned reviewer dependencies. The archive has
+32 entries, including its manifest. Its builder is
+[`scripts/build_reviewer_artifact.py`](../../scripts/build_reviewer_artifact.py).
+
+The archive was extracted and the [single reviewer command](../../docs/REVIEWER_GUIDE.md)
+passed in a new virtual environment with freshly downloaded dependencies on the
+same Apple Silicon Mac and the existing Lean 4.19.0 installation. The original
+14/8/9/2,048 core totals reproduced, 93 selected tests passed, and six histories
+with 66 transitions passed both the Lean checks and exported-evidence audit.
+Five final states were closed, one remained undrained, and two invalid Lean trace
+inputs were rejected. The broader repository suite passed 262 tests separately.
+
+[Verification record](reviewer-verification.json) records the tested archive hash,
+content ID, tool versions, and result counts. This is a fresh Python environment
+on the same host, not an independent review or cross-platform execution.
+
+This candidate is available through this repository branch or separate archive
+delivery. It is not a DOI deposit or a new license grant. Reviewer access still
+depends on access to the branch or supplied ZIP; publication and anonymous access
+must be arranged separately if that access is restricted.
+
+## Historical 1.0.0 candidate
 
 Version 1.0.0 candidate, updated 10 November 2026. **Not published.**
 The MIT license remains a proposal. No license choice or public release has been

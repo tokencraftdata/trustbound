@@ -33,6 +33,8 @@ def digest(path):
 
 
 def main():
+    if not __debug__:
+        raise SystemExit("Assertions must be enabled; do not use python -O or PYTHONOPTIMIZE.")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--lean", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)

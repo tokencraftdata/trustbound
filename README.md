@@ -8,7 +8,7 @@ diagnostics, and a manuscript. Its contribution is a checked conditional model
 and an explicit account of the assumptions needed to apply it.
 
 [Problem](#the-problem) · [Supported result](#what-the-model-establishes) ·
-[Quick start](#quick-start-reproduce-the-paper-core) ·
+[Quick start](#quick-start-reproduce-the-reviewer-artifact) ·
 [Code map](#code-map) · [Development](#development-and-local-checks) ·
 [Provider evidence](#provider-evidence) · [Paper and licensing](#paper-and-licensing)
 
@@ -76,25 +76,34 @@ implementation is not proved to refine the Lean models for all executions.
 See the [assumptions and claim boundaries](docs/CLAIMS.md),
 [implementation evidence](docs/ASSUMPTION_EVIDENCE.md), and
 [closure dependency diagram](docs/diagrams/completeness.png).
+The [research contract](docs/RESEARCH_CONTRACT.md) defines the terminology,
+positions the contribution as a mechanization note, and explains the agent role
+and the evidence still needed for deployment.
 
-## Quick start: reproduce the paper core
+## Quick start: reproduce the reviewer artifact
 
-Run these commands from the repository root. You need **Python 3.11+**,
-**pytest 9.0.2**, and a separate **Lean 4.19.0** installation. The recorded
+Run these commands from the repository or extracted reviewer-archive root on
+Linux or macOS. You need **Python 3.11+** and a separate **Lean 4.19.0** installation.
+The requirements file pins pytest 9.0.2 and its runtime dependencies. The recorded
 environment uses Python 3.12.14 on Apple Silicon macOS; this is not a tested
-platform matrix. The core needs no provider account, SDK, Docker, or network
+platform matrix. The workflow needs no provider account, SDK, Docker, or network
 access after dependency setup.
 
 ```sh
 python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements-core.txt
-.venv/bin/python scripts/reproduce_core_claim.py \
+.venv/bin/python -m pip install -r requirements-reviewer.txt
+.venv/bin/python scripts/reproduce_reviewer_artifact.py \
   --lean /absolute/path/to/lean-4.19.0/bin/lean \
-  --output results/my-core-run
+  --output results/my-reviewer-run
 ```
 
 Replace the Lean path with your installed compiler. Use a new output directory
-for each run. Do not invoke Python with `-O`: the research checkers use assertions.
+for each run. Assertion-based checkers reject `-O` and `PYTHONOPTIMIZE`.
+
+[Download the versioned reviewer candidate](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.1.zip)
+and its [SHA-256 checksum](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.1.zip.sha256).
+The [reviewer guide](docs/REVIEWER_GUIDE.md) explains extraction, integrity checks,
+scenario expectations, and how to rebuild the archive.
 
 ### Expected results
 
@@ -102,11 +111,16 @@ A successful run exits with status 0 and writes these outputs under the chosen
 directory:
 
 - **`summary.json`**: `checks_passed: true` records that the selected checks passed.
-- **`admission/` and `provider_contract/`**: proof and mutation logs for **14
+- **`core/admission/` and `core/provider_contract/`**: proof and mutation logs for **14
   exported results** and **eight rejected premise-removal mutations**.
-- **`baseline-tests.xml`**: **nine diagnostic tests** passed.
-- **`baseline/closure_benchmark.json`**: **2,048 synthetic diagnostic records**
+- **`core/baseline-tests.xml`**: **nine diagnostic tests** passed.
+- **`core/baseline/closure_benchmark.json`**: **2,048 synthetic diagnostic records**
   reproduce the saved result. Command logs and source hashes record the run's inputs.
+- **`service-tests.xml`**: selected service, crash, trace-audit, and packaging tests.
+- **`traces/`**: six histories with 66 transitions checked against Lean; five
+  closed cases, one undrained case, and two rejected invalid inputs.
+- **`exported-trace-audit.json`**: a separate audit of the exported histories,
+  checking event mappings, authority/effect coverage, and expected outcomes.
 
 The diagnostic reuses **64 distinct public inputs per arm**. Both strong labels
 share one acceptance function, and both weak labels share another. Agreement is
@@ -115,8 +129,9 @@ theorem soundness; the comparison implements no witnessing protocol.
 
 A successful run is a **reproduction report**, not a closure certificate for a
 real merchant. It makes no processor requests and does not establish deployment
-assumptions A1–A5. See the [core artifact guide](docs/CORE_ARTIFACT.md) for detailed
-instructions, interpretation, and provenance, and the
+assumptions A1–A5. See the [reviewer guide](docs/REVIEWER_GUIDE.md) for the current
+workflow, the [core artifact guide](docs/CORE_ARTIFACT.md) for the narrower original
+core-only command and provenance, and the
 [recorded artifact check](evidence/final_assurance_2026-11-09/README.md) for the
 fresh dependency installation on the same host.
 
@@ -135,6 +150,8 @@ The repository includes a narrow formal core and a broader experimental codebase
   checks six service histories with 66 projected transitions: five reach the
   closure theorem and one remains undrained. These selected executions do not
   prove refinement for all implementation behavior.
+  [trace_evidence.py](src/trustbound/trace_evidence.py) separately checks the
+  supplied snapshots and command/event changes against the declared mapping.
 - **Broader prototype:** [coordinator.py](src/trustbound/coordinator.py),
   [allocation.py](src/trustbound/allocation.py), and [epoch.py](src/trustbound/epoch.py)
   implement travel coordination, signed allocations, and local epoch models.

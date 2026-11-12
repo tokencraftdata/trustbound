@@ -1,4 +1,28 @@
-# Upload validation — 6 November 2026
+# Validation records
+
+## Reviewer workflow validation — 12 November 2026
+
+The broader repository suite passed **262 tests** with the existing development
+dependencies and local socket permission. The versioned reviewer ZIP was then
+extracted separately and run in a new Python virtual environment with freshly
+downloaded, pinned dependencies and the existing Lean 4.19.0 compiler.
+
+The extracted package reproduced **14 exported results**, **eight rejected
+premise-removal mutations**, **nine core tests**, and **2,048 diagnostic records**.
+Its **93 selected service/audit/packaging tests** passed without skips. Six service
+histories with 66 transitions passed the Lean checks and the new projection
+audit; five final states were closed, one remained undrained, and two invalid
+Lean trace inputs were rejected. Separate audits of the written trace JSON and
+historical reference traces passed. Repeated archive builds were byte-identical.
+
+The [verification record](../paper/release/reviewer-verification.json) identifies
+the archive by SHA-256 and content ID and records the environment and counts.
+This was a fresh Python environment on the same Apple Silicon Mac, not an
+independent-machine or cross-platform reproduction. No provider requests were
+made, and no universal refinement or deployment premise was established.
+See the [reviewer guide](REVIEWER_GUIDE.md) for the command and output layout.
+
+## Upload validation — 6 November 2026
 
 Executed against the clean repository export, using the existing Python 3.12.14,
 pytest 9.0.2 and Lean 4.19.0 installations on Apple Silicon macOS. The broader

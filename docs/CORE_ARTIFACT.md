@@ -1,5 +1,11 @@
 # TrustBound: selected-core reproducibility artifact
 
+For the current single-command workflow covering this core, selected service
+tests, Lean-linked histories, and exported-evidence audits, use the
+[reviewer guide](REVIEWER_GUIDE.md). It also describes the versioned archive,
+fully pinned test dependencies, and manifest verification. The original narrow
+core command and historical evidence remain documented below.
+
 Repository note: the core instructions below describe the narrower 5 November
 artifact. The 10 November release candidate adds a separately run service-check
 supplement, described at the end; it does not change the original core counts. The repository also contains the broader historical implementation and

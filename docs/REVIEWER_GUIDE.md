@@ -1,0 +1,141 @@
+# Reproduce the reviewer artifact
+
+This workflow checks the formal core, selected service tests, six implementation
+histories, and the consistency of their exported evidence. Start with the
+[research contract](RESEARCH_CONTRACT.md) for the contribution, agent role,
+terminology, assumptions, and event mapping.
+
+## Setup
+
+Use Linux or macOS, Python 3.11+, and Lean **4.19.0** with its bundled standard
+library. Mathlib, provider SDKs, credentials, Docker, and real payment accounts
+are unnecessary. The exact Python/SQLite/platform versions are recorded in each
+run; testing on one host does not establish a platform compatibility matrix.
+Install Lean separately and substitute its absolute binary path below.
+
+From the repository root or the extracted archive root:
+
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-reviewer.txt
+.venv/bin/python scripts/reproduce_reviewer_artifact.py \
+  --lean /absolute/path/to/lean-4.19.0/bin/lean \
+  --output results/reviewer-run
+```
+
+Use a new output directory. The command checks the pinned Lean version and all
+five pinned Python runtime dependencies. Do not set `PYTHONOPTIMIZE` or use `-O`;
+the assertion-based checkers now reject that mode explicitly. The standalone
+trace-evidence audit uses explicit checks and also works with optimization enabled.
+
+After setup, reproduction makes no network or provider requests. Some selected
+tests use child processes and Unix signals to exercise crashes. The larger,
+SDK-dependent repository suite remains a separate development check.
+
+## Expected outputs
+
+Success means exit status 0 and `checks_passed: true` in `summary.json`:
+
+- `core/`: **14 exported Lean results**, **eight rejected premise-removal
+  mutations**, **nine diagnostic tests**, and **2,048 synthetic records**.
+- `service-tests.xml`: the 66 existing selected gate/interface/crash tests,
+  plus trace-audit and packaging regression tests, all passing with no skips.
+  The exact count is recorded in `summary.json`.
+- `traces/traces.json`: **six executed histories**, **66 projected transitions**,
+  **five closed final states**, and **one undrained final state**.
+- `traces/lean/`: generated Lean certificates and compiler logs, including
+  **two rejected invalid trace inputs**. These are separate from the eight
+  premise-removal mutations in the formal core.
+- `traces/projection-audit.json`: each scenario's description, expected outcome,
+  and the source-event mapping checked before compilation.
+- `exported-trace-audit.json`: a separate replay of the newly written trace JSON.
+- `reference-trace-audit.json`: an audit of the included historical example
+  traces. These reference traces are not relabeled as new execution evidence.
+- `summary.json` and job logs: tool versions, selected source hashes, dependency
+  versions, test counts, command results, and explicit evidence limits.
+
+The original four core numbers remain unchanged. The 2,048 diagnostic records
+reuse only 64 distinct public inputs per arm; the two strong labels share an
+acceptance function. They are not an independent algorithm comparison.
+
+## The six scenarios
+
+1. **Cancellation without a command:** an inert registered object is canceled;
+   closure holds with no paid effect and no outstanding right.
+2. **Capture across a fence:** authority is granted before fencing and payment
+   commits afterward; subsequent observation accounts for one paid identity.
+3. **Lost reply and restart:** payment commits, the reply is lost, the service
+   reopens and rejects redispatch, and reconciliation recovers the outcome.
+4. **Two payments resolving separately:** one payment completes while the other
+   remains unresolved; closure becomes possible only after the second is canceled.
+5. **Abandoned claim:** a command is durably claimed but never sent. Reopening
+   and observing the provider do not discharge its right. The epoch stays open
+   for exact closure even though admission has been fenced.
+6. **Late dispatch after cancellation:** simulator terminality prevents an
+   already-granted capture from producing a new payment.
+
+These are chosen finite cases. The event mapping and assumptions explaining
+their authority accounting are in the [research contract](RESEARCH_CONTRACT.md).
+
+## Check an exported trace independently of the generator
+
+```sh
+.venv/bin/python scripts/check_trace_evidence.py \
+  --traces results/reviewer-run/traces/traces.json \
+  --output results/reviewer-run/separate-audit.json
+```
+
+The output file must be new. This checks consistency of supplied evidence; it
+does not run Lean or certify the completeness of a real merchant's records.
+Unknown events, missing authority/effects, and unjustified final outcomes are
+rejected. Tests also deliberately corrupt traces and require rejection.
+
+## Build and verify a versioned archive
+
+```sh
+.venv/bin/python scripts/build_reviewer_artifact.py \
+  --output results/TrustBound_Reviewer_Artifact_v1.1.0-review.1.zip
+```
+
+The builder uses an explicit source list. It includes Lean sources and checkers,
+the selected Python modules and tests, pinned dependencies, documentation, and
+recorded reference traces. It excludes credentials, local databases, installed
+toolchains, provider probes, and unrelated historical experiments.
+
+It writes a ZIP and a sibling `.sha256` file. Archive entry order, timestamps,
+and permissions are fixed, so repeat builds with the same inputs and compression
+toolchain are byte-identical. `ARTIFACT_MANIFEST.json` lists every included file
+apart from itself and derives a content ID from those hashes. The reviewer
+command verifies that manifest before running checks from an extracted archive.
+Hashes check integrity relative to the supplied manifest; they are not an
+independent signature or attestation of the author.
+
+For macOS, verify and extract the package with:
+
+```sh
+shasum -a 256 -c TrustBound_Reviewer_Artifact_v1.1.0-review.1.zip.sha256
+unzip TrustBound_Reviewer_Artifact_v1.1.0-review.1.zip -d reviewer-artifact
+cd reviewer-artifact
+```
+
+On Linux, use `sha256sum -c` for the checksum check. Then follow the setup commands
+above in a fresh environment. A successful extracted-package run demonstrates
+that the selected package is self-contained; an independent reviewer must still
+execute it on their own machine to establish independent reproduction.
+
+## Access and publication
+
+The repository's `paper/release/` directory holds the versioned reviewer candidate
+and checksum. Access to that branch or to a separately supplied archive is still
+necessary. A private repository link alone does not provide reviewer access.
+Public/anonymous distribution and a permanent archive URL or DOI are publication
+decisions; generating this package does not make those decisions or grant a
+license. Existing terms remain in [RIGHTS_PENDING.txt](../RIGHTS_PENDING.txt).
+
+## Boundaries of the result
+
+A passing run supports conditional abstract proofs and selected implementation
+behaviors. It does not establish real-provider coverage, correctness of every
+amount, a usable trip, host isolation, universal refinement, or eventual drainage.
+The known broader protocol/allocation issues and behavior outside the constrained
+provider contract require separate fixes and evidence.

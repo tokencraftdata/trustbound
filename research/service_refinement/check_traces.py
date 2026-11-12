@@ -21,6 +21,7 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 from trustbound.stripe_gate import StripeGate
+from trustbound.trace_evidence import audit_traces
 
 
 def initial():
@@ -280,16 +281,25 @@ def certificate(name, states, steps, resolved, reported):
 
 
 def main():
+    if not __debug__:
+        raise SystemExit("Assertions must be enabled; do not use python -O or PYTHONOPTIMIZE.")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--lean', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
+    version = subprocess.run([str(args.lean.resolve()), '--version'], capture_output=True,
+                             text=True, check=True).stdout.strip()
+    if 'version 4.19.0,' not in version:
+        raise SystemExit('Use pinned Lean 4.19.0')
     args.output.mkdir(parents=True, exist_ok=False)
     sources = ['src/trustbound/stripe_gate.py', 'src/trustbound/credential_service.py',
-               'formal/Admission.lean', 'formal/StripeGate.lean', 'research/service_refinement/check_traces.py']
+               'src/trustbound/trace_evidence.py', 'formal/Admission.lean',
+               'formal/StripeGate.lean', 'research/service_refinement/check_traces.py']
     hashes = {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in sources}
     with tempfile.TemporaryDirectory(prefix='trustbound-trace-') as tmp:
         traces = scenarios(Path(tmp))
+    audit = audit_traces(traces)
+    (args.output/'projection-audit.json').write_text(json.dumps(audit, indent=2)+'\n')
     (args.output/'traces.json').write_text(json.dumps(traces, indent=2)+'\n')
     build = args.output/'lean'
     build.mkdir()
@@ -333,13 +343,13 @@ def main():
             states.append(advance(states[-1], kind, identity))
         (build/(name+'.lean')).write_text(certificate(name, states, steps, True, [1]))
         compile_file(name, False)
-    version = subprocess.run([str(args.lean.resolve()), '--version'], capture_output=True, text=True, check=True).stdout.strip()
     summary = {'executed_at_utc': datetime.now(timezone.utc).isoformat(), 'python': platform.python_version(),
                'sqlite': sqlite3.sqlite_version, 'lean': version, 'source_sha256': hashes,
                'executed_service_traces': len(traces), 'projected_steps': sum(len(x['steps']) for x in traces),
                'closed_trace_instances': sum(x['claims_resolved'] for x in traces),
                'unresolved_trace_instances': sum(not x['claims_resolved'] for x in traces),
                'invalid_trace_inputs_rejected': 2, 'compilations': results,
+               'checks_passed': True, 'projection_audit_passed': audit['checks_passed'],
                'real_provider_calls': 0, 'universal_implementation_refinement': False,
                'scope': 'Lean checks projected finite execution histories and instantiates existing closure results. Python projection, event capture, SQLite durability, isolation and real-provider semantics remain unproved.'}
     (args.output/'summary.json').write_text(json.dumps(summary, indent=2)+'\n')

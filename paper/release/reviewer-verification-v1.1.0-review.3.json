@@ -1,0 +1,85 @@
+{
+  "artifact_version": "1.1.0-review.3",
+  "code_revision": "aa828267859186abe77d1e15ee18cd6124190177",
+  "archive": "TrustBound_Reviewer_Artifact_v1.1.0-review.3.zip",
+  "archive_sha256": "1e06ae3fae7898d243871de4c8b90e6a4d9ce0b57714fd50952ce54bea674add",
+  "content_id": "bae3b09a3232853a955af72cf155b23bedb80321c34f9a02a73144eef333ae15",
+  "archive_matches_extracted_test_input": true,
+  "checks_passed": true,
+  "executed_at_utc": "2026-11-12T19:51:03.844364+00:00",
+  "python": "3.12.14",
+  "platform": "macOS-26.7.1-arm64-arm-64bit",
+  "lean": "Lean (version 4.19.0, arm64-apple-darwin23.6.0, commit 6caaee842e94, Release)",
+  "dependencies": {
+    "iniconfig": "2.3.1",
+    "packaging": "26.3",
+    "pluggy": "1.7.0",
+    "Pygments": "2.21.0",
+    "pytest": "9.0.2"
+  },
+  "fresh_python_environment": false,
+  "python_environment": "Reused the existing pinned reviewer environment; executed from a new archive extraction outside the checkout.",
+  "existing_lean_installation": true,
+  "independent_machine_reproduction": false,
+  "full_repository_tests_passed": 355,
+  "full_repository_junit_sha256": "fac05a0959561673336c4c5a77e5302f01f5c91949ca21e32a6af8a9e90ae4d6",
+  "selected_service_test_counts": {
+    "tests": 138,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "core_results": {
+    "exported_results_checked": 14,
+    "premise_removal_mutations_rejected": 8,
+    "baseline_records": 2048,
+    "baseline_test_counts": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "trace_results": {
+    "executed_service_traces": 6,
+    "projected_steps": 66,
+    "closed_trace_instances": 5,
+    "unresolved_trace_instances": 1,
+    "invalid_trace_inputs_rejected": 2,
+    "projection_audit_passed": true
+  },
+  "generated_schedule_results": {
+    "generated_cases": 864,
+    "resolved_cases": 768,
+    "unresolved_cases": 96
+  },
+  "agent_behavior_results": {
+    "generated_cases": 40,
+    "resolved_after_agent": 12,
+    "resolved_after_operator": 30,
+    "pending_after_operator": 10,
+    "max_capture_invocations_per_case": 1,
+    "max_paid_effects_per_case": 1
+  },
+  "provider_requests": 0,
+  "deployment_assumptions_established": false,
+  "universal_implementation_refinement": false,
+  "earlier_attempt": {
+    "outcome": "External command time limit reached during generated schedules; no final successful summary.",
+    "timeout_seconds": 180,
+    "completed_components": [
+      "core",
+      "service_tests",
+      "traces",
+      "exported_trace_audit",
+      "reference_trace_audit"
+    ],
+    "counted_as_success": false
+  },
+  "complete_rerun": {
+    "exit_code": 0,
+    "elapsed_seconds": 211.05,
+    "output_summary_sha256": "608311d45a1e532d35f6efe29b882b6e40b5cf4fc02e197f9b3979cae51ba2b8"
+  },
+  "agent_results_sha256": "46f020493129a1a677e369ff7dc9a783df594c2f70e9a2a2a15873279bcce507"
+}

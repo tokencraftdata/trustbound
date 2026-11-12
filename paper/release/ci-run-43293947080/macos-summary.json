@@ -1,0 +1,216 @@
+{
+  "checks_passed": true,
+  "started_at_utc": "2026-11-12T19:49:41.931175+00:00",
+  "python": "3.12.10",
+  "platform": "macOS-15.7.9-x86_64-i386-64bit",
+  "lean": "Lean (version 4.19.0, x86_64-apple-darwin22.6.0, commit 6caaee842e94, Release)",
+  "dependencies": {
+    "iniconfig": "2.3.1",
+    "packaging": "26.3",
+    "pluggy": "1.7.0",
+    "Pygments": "2.21.0",
+    "pytest": "9.0.2"
+  },
+  "source_sha256": {
+    "RIGHTS_PENDING.txt": "8839909db9b6e0a7d75fc0f0d5967e631eed2f1fc5fe66f8e3cafee911876eaf",
+    "requirements-reviewer.txt": "d59fd9229bab2f23a651f04a0b9adf870fec08262d3c50741a515463e5af6b93",
+    "requirements-core.txt": "693d97bdd0fb5283060c3efadf25a90d0c3b59be09b25fac59f5f1c68a1f993b",
+    "docs/REVIEWER_GUIDE.md": "532b1f134e156ecdecf8e316945832b2dbb78b6e8833f212ed0015b699099751",
+    "docs/RESEARCH_CONTRACT.md": "b8d7bf30055763a07efb384e07f66a942357f00e1ef7bba304f14da58847f312",
+    "docs/CORRECTNESS_FIXES.md": "efc6b12b3a3e0b452152fd3a24fa29a4551f1cf946cc383d72d38d665d297ca5",
+    "formal/lean-toolchain": "55e97be96000b5e9e290c9e74482e5e317861499a5540353ce845471bded8cea",
+    "formal/Admission.lean": "96c0afed87ea032553f74825a7c13e92050872d4c33e0b91a980ae06b5cab559",
+    "formal/StripeGate.lean": "f6847101a28783749b4703e3c406b895b5db05fe2396f92ecec1fc89cb3fd5fb",
+    "formal/check_admission.py": "e7299d3a00a721598ea424ab2b527a37928397a2f3ff8897100c75d0c50ac18f",
+    "formal/check_stripe_gate.py": "d75df90c646cb13619ce31f7a43ae0bc5f460f8389502edc05ac3932d2fe33be",
+    "src/trustbound/__init__.py": "19940aa8912a955e87014463bf3c78bcef9ad9b39f4d79e9072b43617d1b03a1",
+    "src/trustbound/closure_experiment.py": "aeb2f415d19f431eaf3e50e103c51095066ed37e5ce7a0647344b4817bd4cd55",
+    "src/trustbound/stripe_gate.py": "1309fec462158661a12d51e206afdaffd7fc45bccd526af162e5cc724183b529",
+    "src/trustbound/credential_service.py": "5fb0ec9da8e8a1d479c306eb2ca1c1c9c23bcf5c78ca4f883823adb94f19ebee",
+    "src/trustbound/trace_evidence.py": "89ae0fbd5ba677261dc6360a6748af21ddc60a59e4cbaf69511cd6ab1d743d34",
+    "scripts/reproduce_core_claim.py": "83f75861f6eef25457a702ff241b0a9504033889a943a4ff6ad81df8ebad5bb6",
+    "scripts/reproduce_reviewer_artifact.py": "9b3ab40e9878a4ca72ffb3aa7413595e4ca429babbf5850b90510875a67a6be2",
+    "scripts/build_reviewer_artifact.py": "aee1e359d980e5485c08600be93b68188fb05422495524f53141638e0655db31",
+    "scripts/check_trace_evidence.py": "307dea3d4cef5b02440a80f7d2c69005917ea28b7d3e8696be4878a27df7c50a",
+    "research/service_refinement/check_traces.py": "878d90a2d05f7971c93e24ec6063b0155ff2966569831b5d5fc74cea39de713c",
+    "research/service_refinement/check_schedules.py": "1e80dbcd1c3d34255336780abdf1dae600f8895cea3f823dafe98a90bcecce93",
+    "tests/test_generated_schedules.py": "f9ec49363a49744d65c3e99f19f724b746793999f018f0032199d50b50fd5d97",
+    "research/agent_behaviors/evaluate.py": "342d4df7a8d36f9050e37d5263f1a14a081c6e44502e60efec076921da53fc6e",
+    "research/agent_behaviors/README.md": "f50914b3a16e4952b4641d35669e964ab50623cb36ecf7a8dc06f8d88f585775",
+    "research/agent_behaviors/evidence/results.json": "46f020493129a1a677e369ff7dc9a783df594c2f70e9a2a2a15873279bcce507",
+    "tests/test_agent_behaviors.py": "a34cbde0770b71c7659c7f6220226fd47ace8d0d22b52a3f5d253580010d484d",
+    "research/service_refinement/evidence/traces.json": "2f5126d54a724ed628a0c018943309dd02c94bdb3a7c2f5fd2db59e930694ec7",
+    "results/evidence_only_2026-11-01/closure_benchmark.json": "7691868b89f498a05aa279b064d7910720051a66e84c00c4b59baf1a532726e8",
+    "tests/test_closure_experiment.py": "5067fd9cdb5f73b52d0b1493690e2006d008b6b41aa869aaa9173ba5d5e8c034",
+    "tests/test_stripe_gate.py": "16ef7f9430e2a14aaf5b755ae0d8230164b417ca1f947579ce9a3948a1ebef2d",
+    "tests/test_gate_observation_integrity.py": "357e9d618059bb5b1974d526b26d073090afbf3b37a61510a2c18864f1c6e0cc",
+    "tests/test_credential_service.py": "2f089b6db136f5bcdb4b841bfbbd98dc94996998718f90f49309eb4002daa6bd",
+    "tests/test_dispatch_crashes.py": "12096984fdf3caf468cecbb3c5d326b8d9337d130659b156f01b41a2276c4402",
+    "tests/dispatch_crash_worker.py": "75bf9a21243f51bd1357759d035dda2ea19f212b7c8806e834ccda68f385ce70",
+    "tests/test_trace_evidence.py": "6082340926e36fff66f28c344010cecda74df7ad404917ff010975f665829b61",
+    "tests/test_reviewer_artifact.py": "f38ab3880d7bc2370e438e3e931c8e51a51e2da79cacc78443737e7d41146216"
+  },
+  "artifact_content_id": "bae3b09a3232853a955af72cf155b23bedb80321c34f9a02a73144eef333ae15",
+  "jobs": {
+    "core": {
+      "command": [
+        "/Users/runner/work/_temp/reviewer-venv/bin/python",
+        "scripts/reproduce_core_claim.py",
+        "--lean",
+        "/Users/runner/work/_temp/lean-4.19.0-darwin/bin/lean",
+        "--output",
+        "/Users/runner/work/_temp/reviewer-results/core"
+      ],
+      "exit_code": 0
+    },
+    "service_tests": {
+      "command": [
+        "/Users/runner/work/_temp/reviewer-venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_gate_observation_integrity.py",
+        "tests/test_stripe_gate.py",
+        "tests/test_dispatch_crashes.py",
+        "tests/test_credential_service.py",
+        "tests/test_trace_evidence.py",
+        "tests/test_reviewer_artifact.py",
+        "tests/test_generated_schedules.py",
+        "tests/test_agent_behaviors.py",
+        "--junitxml",
+        "/Users/runner/work/_temp/reviewer-results/service-tests.xml"
+      ],
+      "exit_code": 0
+    },
+    "traces": {
+      "command": [
+        "/Users/runner/work/_temp/reviewer-venv/bin/python",
+        "research/service_refinement/check_traces.py",
+        "--lean",
+        "/Users/runner/work/_temp/lean-4.19.0-darwin/bin/lean",
+        "--output",
+        "/Users/runner/work/_temp/reviewer-results/traces"
+      ],
+      "exit_code": 0
+    },
+    "exported_trace_audit": {
+      "command": [
+        "/Users/runner/work/_temp/reviewer-venv/bin/python",
+        "scripts/check_trace_evidence.py",
+        "--traces",
+        "/Users/runner/work/_temp/reviewer-results/traces/traces.json",
+        "--output",
+        "/Users/runner/work/_temp/reviewer-results/exported-trace-audit.json"
+      ],
+      "exit_code": 0
+    },
+    "reference_trace_audit": {
+      "command": [
+        "/Users/runner/work/_temp/reviewer-venv/bin/python",
+        "scripts/check_trace_evidence.py",
+        "--traces",
+        "research/service_refinement/evidence/traces.json",
+        "--output",
+        "/Users/runner/work/_temp/reviewer-results/reference-trace-audit.json"
+      ],
+      "exit_code": 0
+    },
+    "generated_schedules": {
+      "command": [
+        "/Users/runner/work/_temp/reviewer-venv/bin/python",
+        "research/service_refinement/check_schedules.py",
+        "--output",
+        "/Users/runner/work/_temp/reviewer-results/generated-schedules.json"
+      ],
+      "exit_code": 0
+    },
+    "agent_behaviors": {
+      "command": [
+        "/Users/runner/work/_temp/reviewer-venv/bin/python",
+        "research/agent_behaviors/evaluate.py",
+        "--output",
+        "/Users/runner/work/_temp/reviewer-results/agent-behaviors.json"
+      ],
+      "exit_code": 0
+    }
+  },
+  "provider_requests": 0,
+  "universal_implementation_refinement": false,
+  "deployment_assumptions_established": false,
+  "scope": "Conditional model proofs, selected service tests, bounded schedules, scripted request-only agent behaviors and finite supplied-evidence consistency checks.",
+  "service_test_counts": {
+    "tests": 138,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "generated_schedule_results": {
+    "generated_cases": 864,
+    "resolved_cases": 768,
+    "unresolved_cases": 96
+  },
+  "agent_behavior_results": {
+    "generated_cases": 40,
+    "resolved_after_agent": 12,
+    "resolved_after_operator": 30,
+    "pending_after_operator": 10,
+    "max_capture_invocations_per_case": 1,
+    "max_paid_effects_per_case": 1
+  },
+  "core_results": {
+    "exported_results_checked": 14,
+    "premise_removal_mutations_rejected": 8,
+    "baseline_records": 2048,
+    "baseline_test_counts": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "trace_results": {
+    "executed_service_traces": 6,
+    "projected_steps": 66,
+    "closed_trace_instances": 5,
+    "unresolved_trace_instances": 1,
+    "invalid_trace_inputs_rejected": 2,
+    "projection_audit_passed": true
+  },
+  "finished_at_utc": "2026-11-12T19:52:52.362876+00:00",
+  "logs_sha256": {
+    "service_tests.log": "284ed6ee3258451f64a0d3606c93ee25349b31b48f9d45c63511961c77971c54",
+    "core.log": "850d9cc51db1bf6937ab61ace6456a6c6a8b628669dff7da2b2a25d3a50d57c1",
+    "exported_trace_audit.log": "fa1daddaf1eef6ed13c6282e909328d9b483da0ec85e763913f63622ee4bcf94",
+    "generated_schedules.log": "0f8e0273e1b0b2868da5074eaedb7cf6d2bebd5fdc16d5fe289107686e81c3ad",
+    "traces.log": "ab037f8128a13d57b0694e12393932215fee670f772a9219fc63db299a0c243d",
+    "reference_trace_audit.log": "fa1daddaf1eef6ed13c6282e909328d9b483da0ec85e763913f63622ee4bcf94",
+    "agent_behaviors.log": "6a4fc6f034db94a7e20bc73acdbbe0dea479db08a1f012190863faef3b7034b1",
+    "core/provider_contract.log": "50a12841806447d63324bd19ca169fccdfcee1b7f2603adf4125807cc4d37431",
+    "core/baseline.log": "035401b641beff5b31cedc3bdfa984ec574e3d9fb6e9dafedf93985205bb73b9",
+    "core/admission.log": "0f7af3993cce0c9407aa7d5ffdcb92947494de8e4371ae2593289ed59ee807a5",
+    "core/baseline_tests.log": "a4b013b327bd3d201abb5c8e8f1482c17138df7ca688683b1806e218ad83cca7",
+    "traces/lean/canceled_without_command.log": "65d5462cc24780082e24ba3141581a32f2f601a90434c3fcc7468ffd0fc67e87",
+    "traces/lean/capture_across_fence.log": "3ff55bb09df6d220d5b41c3e86a925eeeda745baa992759f4c5d60d2f3adf14c",
+    "traces/lean/claim_abandoned_before_send.log": "a6b519691c434ef159101ef880df345b1825ac11db995e95b5720e846c9e15bc",
+    "traces/lean/paid_without_admission.log": "e5929461a9e9464cc3616eebc0a314ef8932e745052f1405c3527b8185cce0a2",
+    "traces/lean/StripeGate.log": "edaf5bd759c155a13980c4e58bdd83f335a04cb6e164e924729a815fd2cf9564",
+    "traces/lean/lost_reply_and_restart.log": "d8995218ba92edaec4921de06ad72d89ec5f0720968a1d14c31809761effb8e1",
+    "traces/lean/canceled_then_late_dispatch.log": "985c77d249b59b0b52bc1041baf23f19c11c3c817a8cd4659b1b5ce1fedc4172",
+    "traces/lean/Admission.log": "927dbb37ef148b44408a439e4b7cb2a8d741c7ef8a046457be7eb4b1e365233c",
+    "traces/lean/paid_after_terminal_cancel.log": "012234da75d4a1735f6883e18c0a941ba1602507af2541d22c9a23103371734f",
+    "traces/lean/two_payments_partial_then_complete.log": "61356962425323cec214c1dccd47bcb4271556e06bda667cb06a666f29857fc4",
+    "core/provider_contract/unregistered_dispatch.log": "70d4fde28560cdaaa5ba4d7d3a782ca1a4d75559e7c1346703b9e2bc96796a4a",
+    "core/provider_contract/stripe-gate-check.log": "edaf5bd759c155a13980c4e58bdd83f335a04cb6e164e924729a815fd2cf9564",
+    "core/provider_contract/dispatch_after_terminal.log": "a9ceff7472d13804bb3906960139f2e2f444a3ff3235c264de8aa10d6efa205c",
+    "core/provider_contract/cancel_without_source_discharge.log": "ad110157f6d330a36dddf78e9232178f673993e8f5b7464785b58b6b5c988876",
+    "core/provider_contract/admission-dependency.log": "927dbb37ef148b44408a439e4b7cb2a8d741c7ef8a046457be7eb4b1e365233c",
+    "core/provider_contract/effectful_unknown_creation.log": "c2969e470760d2ca83ccc0146783334f86d81750b0c2f76443ea368a271aa00d",
+    "core/admission/record_after_fence.log": "5d7d93501c1d584af46d37ff2b2bd61524e1a0e832bb06c67a5dd2a3a40ef811",
+    "core/admission/admission-check.log": "927dbb37ef148b44408a439e4b7cb2a8d741c7ef8a046457be7eb4b1e365233c",
+    "core/admission/grant_without_record.log": "42cb3e2cf50d4582fd8f339cb4c7779cb63b490d5f7da1c094e2b07873affe41",
+    "core/admission/grant_after_fence.log": "84c1a9ada608c86095139ec9e6a8819d93d7007b30fbe9152c4d6cef5c8ee54a",
+    "core/admission/deliver_without_right.log": "5353d247505e4590b61ba0d346b378891e79fe1f10dfb5599a7b76fc33edea65"
+  }
+}

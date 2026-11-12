@@ -1,8 +1,45 @@
 # Artifact release candidates
 
-## Reviewer candidate 1.1.0-review.2
+## Reviewer candidate 1.1.0-review.3
 
-The current [reviewer ZIP](TrustBound_Reviewer_Artifact_v1.1.0-review.2.zip) and
+The current [reviewer ZIP](TrustBound_Reviewer_Artifact_v1.1.0-review.3.zip) and
+[checksum](TrustBound_Reviewer_Artifact_v1.1.0-review.3.zip.sha256) contain 39
+entries, including the manifest. This version adds the
+[scripted-client evaluation](../../research/agent_behaviors/README.md), its
+regression checks, and a labeled reference execution. The five policies run
+through the actual restricted command service in 40 deterministic cases.
+
+The archive was extracted outside the checkout and the complete reviewer command
+passed using the existing pinned Python 3.12.14 reviewer environment and Lean
+4.19.0. It reproduced the unchanged 14/8/9/2,048 core totals, six histories with
+66 transitions, and 864 operation schedules. All 138 selected tests passed.
+The broader repository suite separately passed 355 tests. In the 40 new cases,
+12 resolved after client actions and 30 after separately labeled operator
+reconciliation; all 10 pending-provider cases stayed unresolved. No case produced
+more than one capture invocation or payment effect.
+
+The [verification record](reviewer-verification-v1.1.0-review.3.json) binds the
+run to this archive and records an earlier interrupted attempt: the outer
+180-second command limit expired during the schedule sweep. A complete rerun
+with a longer limit passed; the interrupted attempt is not counted as success.
+This local reproduction reused an existing environment and is not evidence of
+an independent review. Source revision: `aa828267859186abe77d1e15ee18cd6124190177`.
+
+[CI run 43293947080](https://github.com/tokencraftdata/trustbound/actions/runs/43293947080)
+also passed on separate Ubuntu 24.04 and macOS 15 Intel workers. Both reproduced
+the same content ID and all new client outcomes. The
+[retained summaries](ci-run-43293947080/run.json) and full-suite JUnit record bind
+these results to `aa82826`; they are separate from the local verification record.
+
+The archive can be handed directly to a reviewer and used without a repository
+account after dependency setup. It is separate from the manuscript source ZIP.
+An anonymous/public mirror, permanent DOI, and release terms remain pending.
+The earlier packages remain unchanged. These client policies are scripted
+programs, not LLM evaluations, new Lean proofs, or production certification.
+
+## Historical reviewer candidate 1.1.0-review.2
+
+The historical [reviewer ZIP](TrustBound_Reviewer_Artifact_v1.1.0-review.2.zip) and
 [SHA-256 checksum](TrustBound_Reviewer_Artifact_v1.1.0-review.2.zip.sha256) contain
 35 entries, including the manifest. This version adds the positive-receipt fix,
 864 generated operation schedules, checker mutation tests, and updated guidance.

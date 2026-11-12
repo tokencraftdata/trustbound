@@ -1,15 +1,20 @@
 # TrustBound manuscripts
 
-The author draft was revised on **12 November 2026** to explain a $200 hotel
-payment from approval through a timeout, manual review, fencing, and
-reconciliation. The opening explains why the agent is paused and why an
-authorized payment may still complete as intended. Table 1 explains how its
-permission is tracked. The draft documents the implementation repairs, adds
-a claim-to-evidence table, and reports
-the tested `fa218e4` implementation and `1.1.0-review.2` artifact. A1–A5, the
-theorem and proof, the Lean sources, and the 23-reference bibliography are
-unchanged. The abstract uses the research-paper wording approved on 12 November.
-See the [revision audit](PAPER_REVISION_AUDIT_2026-11-12.json).
+The author draft was revised on **12 November 2026** to state three concrete
+contributions, explain Theorem 1 through successive hotel-payment states, and
+separate enforced rules from deployment assumptions. Detailed checkout and
+allowance repairs are now in Appendix B. The abstract describes the proof
+content rather than counting exported declarations.
+
+Section 5.5 reports a new comparison of **five scripted client policies across
+40 cases**, using the actual restricted command service. These are request
+behaviors, not LLM models. The experiment and reviewer artifact are recorded at
+`aa82826`, with **355 full-repository tests**, **138 selected package tests**,
+and the unchanged formal core, six projected histories, and 864 schedules.
+Theorem 1, its proof, A1–A5, and the Lean sources remain unchanged.
+See the [new research-pass audit](PAPER_RESEARCH_PASS_AUDIT_2026-11-12.json);
+the [earlier revision audit](PAPER_REVISION_AUDIT_2026-11-12.json) describes the
+preceding file state.
 
 The scenario table and mapping remain documented in the
 [review response](ASTRA_REVIEW_RESPONSE_2026-11-10.md) and
@@ -17,7 +22,7 @@ The scenario table and mapping remain documented in the
 
 | Version | PDF | Source | Length |
 |---|---|---|---|
-| Author / arXiv, 12 November | [Author draft](TrustBound_Draft.pdf) | [LaTeX archive](TrustBound_arXiv_Source.zip) | 17 pages, 2 figures, 4 tables |
+| Author / arXiv, 12 November | [Author draft](TrustBound_Draft.pdf) | [LaTeX archive](TrustBound_arXiv_Source.zip) | 19 pages, 2 figures, 7 tables |
 | Earlier anonymous review copy, 10 November | [Review copy](TrustBound_Workshop_Anonymous.pdf) | [LaTeX archive](TrustBound_Workshop_Source.zip) | 8 pages including references, 1 figure |
 
 These are versions of the same note. **The anonymous copy has not yet been
@@ -37,20 +42,25 @@ Runnable instructions are in [the reviewer guide](../docs/REVIEWER_GUIDE.md).
 Historical run records, the test retry, field definitions and the flight–hotel
 diagnostic are in [the supplementary record](SUPPLEMENTARY_RECORD.md).
 The [current release candidate](release/README.md) retains the original formal
-core and includes the repaired service and bounded schedule checker. Its
-123 selected tests are a subset of the 340 full-repository tests. The six
-Lean-checked histories remain distinct from the 864 Python schedule cases.
+core and includes the repaired service, schedule checker, and scripted clients.
+Its 138 selected tests are a subset of the 355 full-repository tests. The six
+Lean-checked histories remain distinct from both the 864 Python schedules and
+40 client cases. The current version is `1.1.0-review.3`; its ZIP and checksum
+can be handed directly to a reviewer without granting repository access.
 The SDK-dependent protocol and allocation repairs are outside this selected
 package. A successful run checks conditional models and specified local
 behaviors, not a merchant's real payments.
 
-[CI run 43196526546](https://github.com/tokencraftdata/trustbound/actions/runs/43196526546)
-passed for `fa218e4` on Linux and macOS. The downloaded
-[Ubuntu](release/ci-run-43196526546/ubuntu-summary.json) and
-[macOS](release/ci-run-43196526546/macos-summary.json) summaries are retained here
-because the complete CI attachments expire after 30 days. Their content IDs
-match the selected release. These executions are separate from the earlier
-same-host reproduction and are not independent scientific peer review.
+[CI run 43293947080](https://github.com/tokencraftdata/trustbound/actions/runs/43293947080)
+passed for `aa82826` on Linux and macOS, including all 40 client cases. The full
+355-test suite also passed in a separate Linux job. Downloaded
+[Ubuntu](release/ci-run-43293947080/ubuntu-summary.json) and
+[macOS](release/ci-run-43293947080/macos-summary.json) summaries and the
+[full-suite JUnit record](release/ci-run-43293947080/development-tests.xml) are
+retained because complete CI attachments expire after 30 days. Both package
+content IDs match version `1.1.0-review.3`. These are independent workers,
+not an independent research team's reproduction. The earlier version's CI
+summaries remain historical records in `release/ci-run-43196526546/`.
 
 ## Build
 
@@ -99,5 +109,5 @@ independent clean-machine reproduction, deployment correctness or novelty.
 
 An earlier 10 November update cites primary Mastercard and Visa announcements in the
 introduction. These sources motivate the setting; they do not validate the
-model or establish novelty. The existing research evidence is unchanged.
+model or establish novelty. That historical prose update did not change the research evidence.
 See [the document audit](INDUSTRY_MOTIVATION_AUDIT_2026-11-10.json).

@@ -19,32 +19,40 @@
 \title{TrustBound: A Mechanized Note\\on Payment-Epoch Completeness}
 \begin{document}
 \maketitle
+\vspace{-2\baselineskip}
 \begin{center}\small\publicationstatus\end{center}
 \begin{abstract}
-TrustBound studies payment completeness for AI-assisted travel booking. We
-formalize when a trusted payment service can account for every in-scope payment
-effect and establish that outstanding authority cannot produce further effects.
-Travel agents submit requests to the service without access to its credentials,
-journal, or administration.
-Our Lean admission model records each payment identity before granting
-authority. An admission fence then fixes the journal, which covers all modeled
-effects and outstanding rights. Once those rights are discharged, no later
-effect can occur in the model. Truthful reports for each journaled identity
-then give exact identity-level accounting. Our constrained provider-contract
-model requires registration before activation and keeps unregistered objects
-inert. The artifact checks 14 exported results; eight premise-removal mutations
-fail the proof checks. A finite evidence diagnostic shows how matching reports
-can still leave an effect unaccounted for. The note applies established closure
-principles under an explicit payment trust contract, with checked models and
-reproducible examples.
+Payment operations requested by an AI agent may remain executable, or their
+outcomes unresolved, after the agent has stopped. This paper studies the
+conditions under which a trusted payment service can account for all
+operations within a defined epoch and establish that no previously granted
+authority can produce further payments. We formalize an admission model in
+Lean in which each operation is recorded before execution authority is
+granted, and both actions are serialized with an admission fence. We prove
+that fencing fixes a journal covering all modeled effects and outstanding
+rights. Once those rights are discharged, the effect history remains
+unchanged; truthful outcomes for the recorded identities then establish exact
+identity-level accounting. A complementary provider-contract model requires
+registration before activation and keeps unregistered objects inert. The
+artifact checks 14 formal results and rejects eight premise-removal mutations.
+Implementation evidence comprises six service histories with 66 transitions
+checked in Lean, together with 864 bounded execution schedules checked in
+Python. The contribution is a payment-specific formalization of established
+closure principles, supported by explicit trust assumptions and reproducible
+implementation checks. The results are conditional on the stated contracts and
+do not establish correctness for all implementation executions or real payment
+providers.
 \end{abstract}
 
 \section{Introduction}
-A travel business has paid for a flight when its hotel payment request times
-out. It stops the booking agents, but the hotel payment may already have
-executed or may still execute under earlier authority. Before closing the
-payment epoch, the business needs to establish which payments completed and
-whether any earlier request can still produce a payment.
+A travel business uses software agents to book a flight and a hotel. Its hotel
+agent requests a \$200 payment through a trusted service. The service authorizes
+and sends the request, but no response arrives before timeout. The business
+pauses the agent for manual review, preventing further automated booking
+requests. This pause does not cancel the authorized payment, which may still
+complete as intended. Before closing the trip's payment records, an operator
+must determine whether the charge occurred and whether any previously
+authorized work can still execute.
 
 An \emph{epoch} groups payment operations under a scope fixed before admission;
 its admitted identities become fixed when the epoch is fenced. An \emph{effect}
@@ -52,6 +60,10 @@ is a modeled payment execution, such as the hotel charge, distinct from its
 request or receipt. An \emph{outstanding right} is authority that can still
 produce an effect, including work already sent to a provider. An \emph{admission
 fence} blocks new journal entries and grants; it does not cancel earlier work.
+To \emph{discharge} a right is to establish that it can no longer produce an
+effect, because its permitted effect has completed or its authority has been
+irreversibly removed. A timeout, a stopped agent, or a cancellation request
+alone is not discharge.
 
 Mastercard's Agent Pay announcement uses flight, hotel, and transportation
 bookings to illustrate the need for visibility into agent-initiated
@@ -70,10 +82,10 @@ every in-scope effect identity and establishing that outstanding authority
 cannot produce another effect. Independently controlled booking providers or
 issuers are outside this model's scope.
 
-In this study, the agents are clients that generate requests. We do not test
-their trip planning or booking choices. The travel example makes the separation
-between requests and payment authority concrete; ordinary asynchronous
-applications face the same closure problem.
+Agents are request-generating clients; we do not evaluate their trip planning
+or booking choices. Pausing an agent motivates the example, but closure depends
+on the payment epoch's state. The same problem arises in ordinary asynchronous
+applications and does not require the agent to have stopped.
 
 \paragraph{Why the service must be trusted.}
 An auditor needs evidence that every in-scope payment and outstanding right is
@@ -103,7 +115,7 @@ reproduction scripts presented together. Section~\ref{sec:related} gives the
 comparison.
 
 Running the artifact reproduces the model checks, finite evidence diagnostic,
-and selected local service histories. Applying the theorem to a merchant
+selected local service histories, and bounded Python schedule checks. Applying the theorem to a merchant
 requires separate evidence for A1--A5 and a justified mapping of that merchant's
 effects and rights to the model.
 
@@ -190,6 +202,40 @@ and disputes. Separate amount and dispatch models in the research workspace
 are not composed into an end-to-end monetary theorem here.
 
 \end{samepage}
+
+
+\subsection{Following one hotel payment}
+\label{sec:walkthrough}
+Table~\ref{tab:hotel} follows one illustrative \$200 payment, H1. The amount
+makes the example concrete; the theorem tracks H1's identity, not its dollar
+value. Approval and command creation belong to the trusted service. The agent
+asks that an approved command be executed. This distinction keeps a request
+from becoming authority merely because an agent submitted it.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.28\linewidth} X@{}}
+\toprule
+Event & What the service can conclude \\
+\midrule
+Record H1, then grant its command & H1 is recorded before payment permission is granted. That permission is tracked until payment completes or it is irreversibly cancelled. \\
+Claim durably, then send & A retry must not send the same command again. The claim alone does not establish whether payment occurred. \\
+Timeout: pause agent and fence admission & Fencing blocks new records and grants. H1 may still complete as intended under its earlier permission. \\
+Provider pays; reply is lost & The effect exists even though the service does not yet know its outcome. Silence is not cancellation. \\
+Reopen and reconcile H1 & A truthful, identity-bound terminal observation accounts for the effect and establishes discharge under the provider contract. \\
+Check the whole journal & Exact epoch closure requires this accounting and discharge for every recorded identity, including the flight. \\
+\bottomrule
+\end{tabularx}
+\caption{Illustrative sequence connecting the travel example to the service
+and model. It combines the fence and lost-reply cases; it is not an additional
+measured trace. Payment completion does not itself prove a usable hotel booking.}
+\label{tab:hotel}
+\end{table}
+
+The order also explains a deliberately unresolved case: a command can be
+claimed and then abandoned before it is sent. Seeing no payment at the provider
+does not prove that this earlier authority can never be delivered. The service
+withholds exact closure unless it can justify discharge.
 
 \section{Admission, fencing, and exact closure}
 \label{sec:theorem}
@@ -341,8 +387,9 @@ Our constrained provider-contract model extends the admission model with
 provider objects and terminal identities.\footnote{\raggedright The TrustBound artifact
 defines this model in \code{StripeGate.lean}. The filename reflects its original
 motivation in a constrained Stripe payment path.\par}
-Allocation creates an inert object, which has no payment authority and cannot
-produce an effect. Registration requires an existing object and an open epoch.
+Here, object allocation means creating a provider object, not assigning a
+spending allowance to an agent. The object is inert: it has no payment authority
+and cannot produce an effect. Registration requires an existing object and an open epoch.
 Dispatch requires registration, an open epoch, an unused identity, and absence
 of terminal status. A paid transition consumes a right, records an effect,
 and marks terminality. Cancellation removes the right and marks terminality.
@@ -397,16 +444,38 @@ provider reads are not an atomic snapshot of the processor.
 
 \section{Evaluation}
 \label{sec:eval}
-We evaluate the Lean models, a finite evidence-rule diagnostic, and selected
-local service behaviors. An earlier Stripe test-mode run supplies a separate
-processor observation; it is the only experiment here that made provider
-requests. We reproduced the formal core and evidence diagnostic from the
-extracted archive in a fresh Python virtual environment, installing pytest
-9.0.2 and its dependencies. The run used Python 3.12.14 and the existing Lean
-4.19.0 compiler on the same macOS host. It checked dependency setup on that host,
-not independent clean-machine reproduction. The repository contains the
-commands, logs, and separate implementation test history
-(Appendix~\ref{app:artifact}).
+We evaluate the conditional Lean models and selected local implementation
+behaviors. Table~\ref{tab:evidence} separates proof obligations from finite
+checks. The current results refer to code revision \code{fa218e4} and reviewer
+artifact \code{1.1.0-review.2}; the formal declarations and original diagnostic
+are unchanged. An earlier Stripe test-mode run is reported separately in
+Section~\ref{sec:historical}. It is the only experiment here that made provider
+requests.
+
+\begin{table}[ht]
+\centering\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.25\linewidth} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{0.30\linewidth}@{}}
+\toprule
+Evidence & Recorded result & What remains outside it \\
+\midrule
+Abstract model proofs & 14 exported results; eight premise-removal mutations rejected. & Implementation refinement and truth of A1--A5 in a deployment. \\
+Projected service histories & Six histories, 66 transitions; five closed states and one undrained state. & Other executions and completeness of event capture. \\
+Generated Python schedules & 864 cases pass: 768 resolve, 96 remain unresolved; four broken variants rejected. & Unbounded or concurrent executions; additional Lean certificates. \\
+Regression suites & 123 selected tests in the reviewer package; 340 in the full repository. & Full correctness. The 123 are a subset of 340, not an additional suite total. \\
+Extracted-package reproduction & Same content ID passes on Linux and macOS CI workers with pinned reviewer dependencies. & Independent scientific review and real-provider contract validation. \\
+\bottomrule
+\end{tabularx}
+\caption{Claim-to-evidence map at the recorded code revision. Counts describe
+different kinds of checks and must not be summed as independent results.}
+\label{tab:evidence}
+\end{table}
+
+The extracted package passed locally in a fresh Python 3.12.14 environment on
+macOS with Lean 4.19.0. Separate CI workers on Ubuntu 24.04 and macOS 15 Intel
+also passed, using Python 3.12.16 and 3.12.10 respectively and Lean 4.19.0.
+Their manifests match the release's content ID. These are successful executions
+on separate workers, not an independent research team's reproduction. Appendix~
+\ref{app:artifact} identifies the run, retained summaries, archive, and command.
 
 \subsection{Formal checks}
 All eight exported admission results and all six provider-contract results
@@ -445,9 +514,12 @@ separate from the verifier's input. Its coverage target requires reports,
 fences, and no bypass; its exactness target also requires no pending rows.
 This target differs from the Lean membership invariant $R\cup E\subseteq J$.
 
-Without a bypass, the stricter rule matches the stipulated target. With a
-bypass, the same visible evidence can produce a positive verdict while an
-effect is missing. This is the coverage problem identified by
+Consider two histories with the same visible flight and hotel reports, record
+sequence, and fence claim. One contains only those payments; the other also
+contains a bypass payment absent from the supplied journal. An auditor limited
+to that input gives the same verdict for both. Without a bypass, the stricter
+rule matches the stipulated target. With a bypass, its positive verdict can
+leave an effect unaccounted for. This is the coverage problem identified by
 Salas~\cite{salas}. The comparison is between evidence rules, not independently
 implemented systems. All nine diagnostic tests passed, and the generated
 records match the saved reference. The earlier withdrawn comparison let the
@@ -463,9 +535,13 @@ executed. Conflicting terminal reports, scope mismatches, and missing command
 provenance are recorded before the gate returns an error. Once committed, the
 conflict persists through later reads and database reopen, prevents a resolved
 verdict, and retains the configured reservation. That reservation places no
-bound on charges from a provider that violates its contract. All 66 gate,
-observation, interface and dispatch-crash tests passed, including 11 new
-regression cases and checks around the conflict commit.
+bound on charges from a provider that violates its contract. The revised gate also preserves positive receipts from uncertain reports.
+For a \$200 operation, an uncertain report of \$100 received cannot be replaced
+by a later report of zero. The earlier receipt remains, a durable conflict is
+recorded, and closure stays blocked. This conservative rule does not decide
+which contradictory report is true or interpret a decrease as a refund.
+The 123 selected tests cover gate behavior, observation integrity, interface
+and process-crash cases, trace auditing, packaging, and the schedule checker.
 
 We ran the actual Python/SQLite gate through six sequential scenarios with a
 local provider simulator. Table~\ref{tab:service_traces} lists their expected
@@ -521,7 +597,56 @@ checks do not prove refinement of all Python/SQLite executions or real-processor
 behavior. No provider API was called. Source hashes, per-step snapshots,
 generated Lean terms and compiler results are in the artifact.
 
+\subsection{Generated schedules and adjacent implementation repairs}
+\label{sec:schedules}
+A separate Python checker starts with one registered, confirmed manual-capture
+payment. It enumerates the 24 permutations of grant, fence, dispatch, and
+observation, plus the 120 permutations with cancellation added. Each order runs
+in three modes: normal reply, lost reply after payment commit, and claim
+abandoned before send. Each also runs with and without closing and reopening
+both SQLite databases after every operation. The resulting
+$(24+120)\times3\times2=864$ cases all passed: 768 resolved and 96 correctly
+retained outstanding authority.
+
+A separately maintained, input-driven oracle predicts permitted operations,
+rights, provider effects, observations, and closure. A common suffix checks
+repeat dispatch, admission after fencing, and final reconciliation. Failures
+record the operation order, mode, and executed prefix for replay. Four deliberately
+broken variants---missing fencing, repeated claims, premature closure, and a
+missing journal---are rejected by checker tests. These four checks differ from
+the eight Lean premise-removal mutations and two invalid trace inputs.
+The schedules are bounded serial executions; several reach equivalent states.
+Their database reopen is not a process crash or power failure. Existing
+subprocess tests separately exercise 15 dispatch killpoints. The 864 cases add
+Python evidence, not new Lean-certified histories.
+
+Two adjacent repairs concern authorization and allocation in the broader
+repository. First, decisions now use booking facts derived from the authenticated
+checkout. A signed \$200 checkout paired with separate \$1 booking facts is
+rejected, so a signature cannot authenticate one purchase while policy and
+budget checks use another. This is a constrained local protocol profile,
+not generic UCP/AP2 conformance.
+
+Second, a trusted booking coordinator must atomically claim a spending allowance
+before work starts. For a \$500 trip, a claimed \$300 allowance remains reserved
+after retirement, leaving at most \$200 available for another allowance. An
+unclaimed retired allowance can be released because further claims are blocked.
+The coordinator is software responsible for its admitted cap; it need not be
+an AI agent, and allocating a cap is not transferring money. Claimed capacity
+is not automatically reclaimed after expiry, restart, or a lost response;
+settlement requires additional accounting not implemented here.
+
+The full repository suite passed 340 tests, including these protocol and
+allocation repairs. Their SDK-dependent modules are outside the selected
+reviewer archive, and the admission theorem does not verify their amount or
+budget rules. Remaining work includes direct-input validation in the standalone
+ledger helper, a composed approval-to-dispatch check, and multiple-identity
+concurrency tests. In particular, the helper still accepts a negative reservation
+through its direct API; the checked protocol path rejects negative checkout
+facts. The passing suites therefore do not establish general monetary safety.
+
 \subsection{Historical processor observation}
+\label{sec:historical}
 An earlier Stripe test-mode run recorded 21 assertions over nine requests and
 200 test cents captured. It exercised a lost reply, database reopen, duplicate
 rejection, and recovery through fresh reads of a known operation. Reconciliation
@@ -648,19 +773,67 @@ recovery need a richer model and an implementation proof. Pending work may
 never terminate. The finite diagnostic and selected traces do not measure
 performance or deployment error rates.
 
-A further research question is whether exact closure from per-party evidence
-admits a useful necessary-and-sufficient characterization under a fixed scope
-and observation interface. That would require a difference from the existing
-mediation and closure results~\cite{salas,budget,effectbound}. This note does not
-establish that characterization.
+The immediate formal extension is an outcome-preserving implementation
+refinement: it must represent every effect and remaining right and connect
+concrete drainage and observation evidence to Theorem~1. The current
+membership-only bridge does not do this. A separate initial-state invariant
+would be needed to import work from an earlier epoch. On the implementation
+side, multiple-identity concurrency and fault tests, explicit settlement of
+claimed allowances, and provider-specific recovery evidence would strengthen
+the case for a deployment. None follows from the present finite checks.
 
 \appendix
 \section{Artifact availability}
 \label{app:artifact}
-The code, Lean models, tests, and reproduction instructions are maintained at
-\url{https://github.com/tokencraftdata/trustbound}.
-The working repository is currently private. Public artifact access and release
-terms remain pending.
+The code and instructions are maintained at
+\url{https://github.com/tokencraftdata/trustbound}. The tested code revision is
+\code{fa218e4e2fe54a4c6d1c04e308343773afd49388}. Reviewers need access to this
+private repository or a supplied archive. Anonymous/public distribution, a
+permanent archive URL or DOI, and release terms remain pending.
+
+\paragraph{Versioned reviewer package.}
+The selected package is \path{TrustBound_Reviewer_Artifact_v1.1.0-review.2.zip}
+in \code{paper/release/}, alongside its checksum. It contains 35 entries,
+including a per-file manifest, Lean sources and checkers, selected Python code
+and tests, reference traces, and pinned reviewer dependencies. Its SHA-256 is:
+\begin{quote}\footnotesize\ttfamily
+bac3aaaa295dc411d391c2180f1a321014df9cd3edd118d7ea132adb33636c25
+\end{quote}
+The content ID derived from member hashes is:
+\begin{quote}\footnotesize\ttfamily
+4cd865edd91bb2e565080af07b09b539472cca5430e6913465e735a18cdcabac
+\end{quote}
+Earlier packages remain historical versions. Hashes check integrity, not the
+truth of provider contracts.
+
+\paragraph{Reproduction.}
+After verifying the adjacent checksum and extracting the ZIP, use Python 3.11+
+and Lean 4.19.0. From the extracted directory, run:
+\begin{verbatim}
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements-reviewer.txt
+.venv/bin/python scripts/reproduce_reviewer_artifact.py \
+  --lean /absolute/path/to/lean-4.19.0/bin/lean \
+  --output results/reviewer-run
+\end{verbatim}
+Use a new output directory without Python optimization. Success is exit status
+zero and \code{checks\_passed: true} in \code{summary.json}, with Table~
+\ref{tab:evidence}'s counts, nine diagnostic tests, and 2,048 records. After
+setup no network, credentials, or provider account is needed.
+{\small\path{docs/REVIEWER_GUIDE.md}} explains the traces, Lean terms, logs, schedules,
+and exported-evidence audit; saved reference traces are historical.
+
+\paragraph{Cross-platform evidence and scope.}
+\href{https://github.com/tokencraftdata/trustbound/actions/runs/43196526546}{CI run 43196526546}
+passed on Linux and macOS, with the full suite in a separate Linux job.
+Each package job extracts outside the checkout and uses a fresh environment.
+Downloaded summaries are retained in \code{paper/release/ci-run-43196526546/};
+full CI attachments have 30-day retention. The local record is
+{\small\path{paper/release/reviewer-verification-v1.1.0-review.2.json}}.
+The selected package excludes SDK-dependent protocol and allocation modules;
+the broader suite's dependencies are recorded but not all pinned.
+These runs do not establish universal refinement, real-provider coverage,
+or eventual resolution.
 
 \paragraph{Use of generative AI.}
 OpenAI ChatGPT and Codex assisted with literature exploration, code development,

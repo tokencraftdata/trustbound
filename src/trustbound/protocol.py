@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import time
+from copy import deepcopy
 from dataclasses import dataclass
 from typing import Any
 
@@ -63,6 +64,40 @@ class ProtocolVerification:
     valid: bool
     reason: str
     checkout_hash: str | None = None
+    fact: BookingFact | None = None
+
+
+def _fact_from_checkout(checkout: dict[str, Any]) -> BookingFact:
+    """Decode this harness's single-item checkout after verifying its signatures."""
+    line, = checkout["line_items"]
+    item, travel = line["item"], line["item"]["travel"]
+    totals = [entry["amount"] for entry in checkout["totals"] if entry["type"] == "total"]
+    amount, = totals
+    line_id = line["id"]
+    if (type(amount) is not int or amount < 0
+            or type(item["price"]) is not int or item["price"] != amount
+            or type(line["quantity"]) is not int or line["quantity"] != 1
+            or not isinstance(line_id, str) or not line_id.startswith("line-")
+            or not line_id.removeprefix("line-")):
+        raise ValueError("unsupported_checkout_shape")
+    fact = BookingFact(
+        itinerary_id=travel["itinerary_id"], transaction_id=line_id.removeprefix("line-"),
+        checkout_id=checkout["id"], leg=travel["leg"],
+        merchant_id=checkout["merchant"]["id"], merchant_name=checkout["merchant"]["name"],
+        item_id=item["id"], title=item["title"], amount_minor=amount,
+        currency=checkout["currency"], origin=travel["origin"], destination=travel["destination"],
+        start=travel["start"], end=travel["end"], city=travel["city"], refundable=travel["refundable"],
+    )
+    for field in ("itinerary_id", "transaction_id", "checkout_id", "merchant_id",
+                  "merchant_name", "item_id", "title", "currency"):
+        if type(getattr(fact, field)) is not str or not getattr(fact, field):
+            raise ValueError("invalid_checkout_fact")
+    if fact.leg not in {"flight_out", "hotel", "flight_return"} or type(fact.refundable) is not bool:
+        raise ValueError("invalid_travel_fact")
+    if any(value is not None and type(value) is not str
+           for value in (fact.origin, fact.destination, fact.start, fact.end, fact.city)):
+        raise ValueError("invalid_travel_fact")
+    return fact
 
 
 def _key(kid: str) -> JWK:
@@ -238,9 +273,21 @@ class ProtocolHarness:
 
     def verify(self, artifacts: ProtocolArtifacts, spent_minor: int = 0, total_uses: int = 0) -> ProtocolVerification:
         try:
+            # Verify one snapshot and return immutable facts; later caller mutation
+            # must not change the data used for policy or budget decisions.
+            artifacts = deepcopy(artifacts)
             UcpAp2Checkout.model_validate(artifacts.checkout)
             CheckoutCompleteRequest.model_validate(artifacts.completion_request)
-            merchant_id = artifacts.fact.merchant_id
+            instrument, = artifacts.completion_request["payment"]["instruments"]
+            if (instrument["selected"] is not True or instrument["type"] != "card"
+                    or instrument["credential"]["type"] != "token"):
+                return ProtocolVerification(False, "unsupported_completion_instrument")
+            checkout_mandate = artifacts.completion_request["ap2"]["checkout_mandate"]
+            payment_mandate = instrument["credential"]["token"]
+            if (checkout_mandate != artifacts.checkout_mandate
+                    or payment_mandate != artifacts.payment_mandate):
+                return ProtocolVerification(False, "completion_mandate_mismatch")
+            merchant_id = artifacts.checkout["merchant"]["id"]
             merchant_key = self.merchant_keys[merchant_id]
             ap2 = artifacts.checkout.get("ap2") or {}
             detached_payload = {key: value for key, value in artifacts.checkout.items() if key != "ap2"}
@@ -251,12 +298,17 @@ class ProtocolHarness:
             actual_hash = compute_sha256_b64url(artifacts.checkout_jwt)
             if actual_hash != artifacts.checkout_hash:
                 return ProtocolVerification(False, "checkout_hash_mismatch")
+            fact = _fact_from_checkout(jwt_payload)
+            # Retain the input field for compatibility, but never treat it as
+            # authority. Canonical comparison distinguishes booleans from integers.
+            if rfc8785.dumps(fact.as_dict()) != rfc8785.dumps(artifacts.fact.as_dict()):
+                return ProtocolVerification(False, "booking_fact_mismatch")
 
             checkout_payloads = self.mandates.verify(
-                artifacts.checkout_mandate,
+                checkout_mandate,
                 lambda _token: _public(self.user_issuer_key),
                 expected_aud=merchant_id,
-                expected_nonce=artifacts.fact.checkout_id,
+                expected_nonce=fact.checkout_id,
             )
             checkout_chain = CheckoutMandateChain.parse(checkout_payloads)
             violations = checkout_chain.verify(
@@ -267,10 +319,10 @@ class ProtocolHarness:
                 return ProtocolVerification(False, "checkout:" + "|".join(violations))
 
             payment_payloads = self.mandates.verify(
-                artifacts.payment_mandate,
+                payment_mandate,
                 lambda _token: _public(self.user_issuer_key),
                 expected_aud="payment-processor",
-                expected_nonce=artifacts.fact.transaction_id,
+                expected_nonce=fact.transaction_id,
             )
             payment_chain = PaymentMandateChain.parse(payment_payloads)
             violations = payment_chain.verify(
@@ -279,9 +331,12 @@ class ProtocolHarness:
             )
             if violations:
                 return ProtocolVerification(False, "payment:" + "|".join(violations))
-            checkout_total = next(item["amount"] for item in artifacts.checkout["totals"] if item["type"] == "total")
-            if payment_chain.closed_mandate.payment_amount.amount != checkout_total:
+            payment = payment_chain.closed_mandate
+            if payment.payment_amount.amount != fact.amount_minor:
                 return ProtocolVerification(False, "payment_checkout_amount_mismatch")
-            return ProtocolVerification(True, "verified", actual_hash)
+            if (payment.payment_amount.currency != fact.currency
+                    or payment.payee.id != fact.merchant_id or payment.payee.name != fact.merchant_name):
+                return ProtocolVerification(False, "payment_checkout_identity_mismatch")
+            return ProtocolVerification(True, "verified", actual_hash, fact)
         except Exception as exc:  # verifier must fail closed on malformed evidence
             return ProtocolVerification(False, f"protocol_error:{type(exc).__name__}")

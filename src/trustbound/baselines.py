@@ -31,24 +31,27 @@ class Evaluator:
         verified = self.protocol.verify(artifacts, spent_minor=spent, total_uses=uses)
         if not verified.valid:
             return Decision(False, verified.reason)
+        if verified.fact is None or verified.checkout_hash is None:
+            return Decision(False, "missing_verified_checkout")
+        fact = verified.fact
 
         if self.name in {"ap2_plus_parity_policy", "trustbound"}:
-            violations = itinerary_violations(self.manifest, artifacts.fact)
+            violations = itinerary_violations(self.manifest, fact)
             if violations:
                 return Decision(False, "itinerary:" + "|".join(violations))
 
         reservation = self.ledger.reserve(
             self.manifest.itinerary_id,
-            artifacts.fact.transaction_id,
-            artifacts.fact.amount_minor,
+            fact.transaction_id,
+            fact.amount_minor,
         )
         if not reservation.permitted:
             return reservation
         if self.name == "trustbound":
             commitment = evidence_commitment(
                 self.manifest,
-                artifacts.fact,
-                verified.checkout_hash or artifacts.checkout_hash,
+                fact,
+                verified.checkout_hash,
             )
             return Decision(True, "reserved_with_itinerary_evidence", commitment)
         return Decision(True, "reserved")

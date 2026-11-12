@@ -34,6 +34,17 @@ SDK-dependent repository suite remains a separate development check.
 
 ## Expected outputs
 
+The repository's `Reviewer artifact` GitHub Actions workflow runs on every push,
+pull request, and manual dispatch. Separate Ubuntu 24.04 and macOS 15 Intel workers build
+a package from the revision under test, extract it outside the checkout, install
+only its pinned dependencies in a fresh environment, and run the command above.
+The jobs retain the ZIP, manifest, checksums, summaries, and logs for 30 days.
+The full SDK-dependent regression suite runs in a separate Ubuntu job and records
+its resolved dependency versions; those broader dependencies are not all pinned.
+These jobs test current sources, not the older checked-in release ZIP. A workflow
+definition alone is not evidence of a successful run: consult its run status and
+downloaded results for the exact revision and platform.
+
 Success means exit status 0 and `checks_passed: true` in `summary.json`:
 
 - `core/`: **14 exported Lean results**, **eight rejected premise-removal

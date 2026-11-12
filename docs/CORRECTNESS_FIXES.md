@@ -63,3 +63,16 @@ There is no automatic conflict-clearing operation. The change cannot reconstruct
 observations that an older version already discarded. Regression cases cover
 partial positive receipts followed by cancellation or lower reports, with and
 without a restart before the contradiction.
+
+## 4. Reproduce the artifact on independent CI workers
+
+The reviewer workflow builds and extracts the selected source package on Linux
+and macOS, then checks it in a fresh Python environment outside the checkout.
+Lean 4.19.0 and the reviewer dependencies are pinned. GitHub Actions references
+use full commit hashes. No provider secrets or payment accounts are needed.
+
+Each worker retains its package, manifest, summaries and logs. A separate Linux
+job runs the full repository suite, including the protocol and allocation fixes.
+CI results establish finite checks on those runner versions, not universal
+implementation refinement or a real-provider contract. See the reviewer guide
+for how to distinguish a configured job from an observed successful run.

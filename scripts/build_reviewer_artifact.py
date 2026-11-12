@@ -9,10 +9,10 @@ import re
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.1.0-review.1"
+VERSION = "1.1.0-review.2"
 FILES = (
     "RIGHTS_PENDING.txt", "requirements-reviewer.txt", "requirements-core.txt",
-    "docs/REVIEWER_GUIDE.md", "docs/RESEARCH_CONTRACT.md",
+    "docs/REVIEWER_GUIDE.md", "docs/RESEARCH_CONTRACT.md", "docs/CORRECTNESS_FIXES.md",
     "formal/lean-toolchain", "formal/Admission.lean", "formal/StripeGate.lean",
     "formal/check_admission.py", "formal/check_stripe_gate.py",
     "src/trustbound/__init__.py", "src/trustbound/closure_experiment.py",
@@ -21,6 +21,7 @@ FILES = (
     "scripts/reproduce_core_claim.py", "scripts/reproduce_reviewer_artifact.py",
     "scripts/build_reviewer_artifact.py", "scripts/check_trace_evidence.py",
     "research/service_refinement/check_traces.py",
+    "research/service_refinement/check_schedules.py", "tests/test_generated_schedules.py",
     "research/service_refinement/evidence/traces.json",
     "results/evidence_only_2026-11-01/closure_benchmark.json",
     "tests/test_closure_experiment.py", "tests/test_stripe_gate.py",

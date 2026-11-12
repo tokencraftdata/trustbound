@@ -100,8 +100,8 @@ python3 -m venv .venv
 Replace the Lean path with your installed compiler. Use a new output directory
 for each run. Assertion-based checkers reject `-O` and `PYTHONOPTIMIZE`.
 
-[Download the versioned reviewer candidate](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.1.zip)
-and its [SHA-256 checksum](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.1.zip.sha256).
+[Download the versioned reviewer candidate](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.2.zip)
+and its [SHA-256 checksum](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.2.zip.sha256).
 The [reviewer guide](docs/REVIEWER_GUIDE.md) explains extraction, integrity checks,
 scenario expectations, and how to rebuild the archive.
 
@@ -121,6 +121,8 @@ directory:
   closed cases, one undrained case, and two rejected invalid inputs.
 - **`exported-trace-audit.json`**: a separate audit of the exported histories,
   checking event mappings, authority/effect coverage, and expected outcomes.
+- **`generated-schedules.json`**: 864 bounded Python cases covering operation
+  orders, lost replies, abandoned claims, retries, and database reopenings.
 
 The diagnostic reuses **64 distinct public inputs per arm**. Both strong labels
 share one acceptance function, and both weak labels share another. Agreement is

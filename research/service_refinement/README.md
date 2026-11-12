@@ -17,6 +17,19 @@ The evidence is finite and supplied by trusted instrumentation; omitted real
 routes, universal refinement, and eventual resolution remain unproved. See the
 [research contract](../../docs/RESEARCH_CONTRACT.md) for the exact boundary.
 
+## Generated operation schedules
+
+`check_schedules.py` adds 864 deterministic one-payment cases with a separately
+maintained oracle. It enumerates grant/fence/dispatch/observe orders, optionally
+cancellation, normal/lost-reply/abandoned-claim modes, and reopening after every
+action or no restart. A common suffix checks retries and post-fence admission.
+The reviewer command includes this checker and records every case outcome.
+
+These are Python tests, separate from the six histories certified by Lean.
+They cover bounded serial orderings, not every concurrent or crash execution.
+See the [reviewer guide](../../docs/REVIEWER_GUIDE.md#generated-operation-schedules)
+for bounds, reproduction, failure replay information, and checker mutation tests.
+
 ## Original execution record
 
 Executed 10 November 2026. No real provider requests, new infrastructure,

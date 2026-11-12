@@ -20,6 +20,7 @@ SERVICE_TESTS = (
     "tests/test_gate_observation_integrity.py", "tests/test_stripe_gate.py",
     "tests/test_dispatch_crashes.py", "tests/test_credential_service.py",
     "tests/test_trace_evidence.py", "tests/test_reviewer_artifact.py",
+    "tests/test_generated_schedules.py",
 )
 
 
@@ -57,7 +58,7 @@ def main():
         "artifact_content_id": manifest["content_id"] if manifest else None,
         "jobs": {}, "provider_requests": 0,
         "universal_implementation_refinement": False, "deployment_assumptions_established": False,
-        "scope": "Conditional model proofs, selected service tests and finite supplied-evidence consistency checks.",
+        "scope": "Conditional model proofs, selected service tests, bounded generated schedules and finite supplied-evidence consistency checks.",
     }
     env = dict(os.environ, PYTHONPATH=str(ROOT / "src"), PYTHONNOUSERSITE="1",
                PYTEST_DISABLE_PLUGIN_AUTOLOAD="1", PYTHONDONTWRITEBYTECODE="1")
@@ -72,6 +73,8 @@ def main():
         "reference_trace_audit": ["scripts/check_trace_evidence.py", "--traces",
                                   "research/service_refinement/evidence/traces.json", "--output",
                                   str(output / "reference-trace-audit.json")],
+        "generated_schedules": ["research/service_refinement/check_schedules.py", "--output",
+                                str(output / "generated-schedules.json")],
     }
     try:
         for name, arguments in jobs.items():
@@ -84,18 +87,23 @@ def main():
                 raise RuntimeError(f"{name} failed; inspect {name}.log")
         core = json.loads((output / "core/summary.json").read_text())
         traces = json.loads((output / "traces/summary.json").read_text())
+        schedules = json.loads((output / "generated-schedules.json").read_text())
+        if schedules["checks_passed"] is not True or schedules["generated_cases"] != 864:
+            raise RuntimeError("incomplete generated schedule run")
         if core["checks_passed"] is not True or traces["checks_passed"] is not True:
             raise RuntimeError("a component did not report successful checks")
         suites = list(ET.parse(output / "service-tests.xml").getroot().iter("testsuite"))
         counts = {key: sum(int(suite.get(key, "0")) for suite in suites)
                   for key in ("tests", "failures", "errors", "skipped")}
-        if counts["tests"] < 66 or any(counts[key] for key in ("failures", "errors", "skipped")):
+        if counts["tests"] < 123 or any(counts[key] for key in ("failures", "errors", "skipped")):
             raise RuntimeError(f"incomplete service test run: {counts}")
         if any(hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != digest
                for name, digest in source_hashes.items()):
             raise RuntimeError("selected sources changed during the run")
         report.update({
             "checks_passed": True, "service_test_counts": counts,
+            "generated_schedule_results": {key: schedules[key] for key in (
+                "generated_cases", "resolved_cases", "unresolved_cases")},
             "core_results": {key: core[key] for key in (
                 "exported_results_checked", "premise_removal_mutations_rejected", "baseline_records", "baseline_test_counts")},
             "trace_results": {key: traces[key] for key in (
@@ -108,7 +116,7 @@ def main():
     report["logs_sha256"] = {str(path.relative_to(output)): hashlib.sha256(path.read_bytes()).hexdigest()
                              for path in output.rglob("*.log")}
     (output / "summary.json").write_text(json.dumps(report, indent=2) + "\n")
-    print(json.dumps({key: report.get(key) for key in ("checks_passed", "core_results", "service_test_counts", "trace_results", "error")}))
+    print(json.dumps({key: report.get(key) for key in ("checks_passed", "core_results", "service_test_counts", "trace_results", "generated_schedule_results", "error")}))
     raise SystemExit(0 if report["checks_passed"] else 1)
 
 

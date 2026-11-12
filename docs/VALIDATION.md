@@ -1,6 +1,27 @@
 # Validation records
 
-## Reviewer workflow validation — 12 November 2026
+## Five implementation improvements — 12 November 2026
+
+The current full repository suite passed **340 tests**. The `1.1.0-review.2`
+archive was separately extracted and checked in a new Python 3.12.14 environment
+with pinned dependencies installed from cached wheels and the existing Lean
+4.19.0 installation. All **123 selected tests** passed, along with the original
+14 exported results, eight premise-removal mutations, nine diagnostic tests,
+2,048 records, six Lean-certified histories, and both exported-trace audits.
+
+All **864 generated operation schedules** passed: 768 resolved and 96 correctly
+remained unresolved. The generation bound, fault modes, restart semantics, and
+four broken-implementation checks are described in the
+[reviewer guide](REVIEWER_GUIDE.md#generated-operation-schedules). These cases add
+finite Python evidence without changing the Lean results.
+
+The [versioned verification record](../paper/release/reviewer-verification-v1.1.0-review.2.json)
+records exact archive/source identity and results. This local extracted-package
+run reused the same host; the CI workflow separately builds each pushed revision
+on Linux and macOS and retains its own results. A configured workflow is not
+evidence that a particular revision passed; check that revision's run status.
+
+## Historical reviewer 1.1.0-review.1 validation — 12 November 2026
 
 The broader repository suite passed **262 tests** with the existing development
 dependencies and local socket permission. The versioned reviewer ZIP was then

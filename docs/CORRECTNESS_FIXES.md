@@ -76,3 +76,23 @@ job runs the full repository suite, including the protocol and allocation fixes.
 CI results establish finite checks on those runner versions, not universal
 implementation refinement or a real-provider contract. See the reviewer guide
 for how to distinguish a configured job from an observed successful run.
+
+## 5. Generate operation schedules and challenge the checker
+
+The reviewer command now executes 864 cases across all bounded permutations of
+grant/fence/dispatch/observe, optionally cancellation, three dispatch fault modes,
+and restart after every action or no restart. A separately maintained oracle
+checks each operation and durable snapshot, including invocation counts,
+outstanding rights, paid effects, retained reservations, and exact observations.
+Each case finishes with explicit retry and post-fence admission attempts.
+
+The checker also rejects four intentionally broken implementations: missing
+fencing, repeated claims, premature closure, and missing journal records. These
+tests assess the checker itself. The full generated case list and outcomes are
+included in reproduction output; failed runs preserve a replayable prefix.
+
+The new reviewer candidate is `1.1.0-review.2`; the earlier ZIP is immutable
+historical evidence. The generated cases extend testing but do not change the
+Lean theorems or certify concurrent executions, process isolation, real-provider
+behavior, or eventual resolution. Close/reopen tests are distinguished from the
+existing subprocess crash tests in the reviewer guide.

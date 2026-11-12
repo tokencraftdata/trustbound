@@ -1,6 +1,34 @@
 # Artifact release candidates
 
-## Reviewer candidate 1.1.0-review.1
+## Reviewer candidate 1.1.0-review.2
+
+The current [reviewer ZIP](TrustBound_Reviewer_Artifact_v1.1.0-review.2.zip) and
+[SHA-256 checksum](TrustBound_Reviewer_Artifact_v1.1.0-review.2.zip.sha256) contain
+35 entries, including the manifest. This version adds the positive-receipt fix,
+864 generated operation schedules, checker mutation tests, and updated guidance.
+The protocol and allocation fixes remain in the broader SDK-dependent repository
+suite, outside this selected package.
+
+The extracted ZIP passed the [reviewer command](../../docs/REVIEWER_GUIDE.md) in
+a new Python 3.12.14 environment on the same Apple Silicon Mac. It reproduced
+the unchanged 14/8/9/2,048 formal/diagnostic totals and the six Lean-certified
+histories, with 123 selected tests passing. All 864 generated cases passed;
+768 resolved and 96 correctly retained outstanding authority. The full
+repository suite separately passed 340 tests. Dependencies were freshly
+installed into the new environment using pip's cached pinned wheels; the Lean
+installation was reused.
+
+The [verification record](reviewer-verification-v1.1.0-review.2.json) binds these
+results to this archive's hash and content ID. GitHub's `Reviewer artifact`
+workflow additionally builds each tested revision on independent Linux and
+macOS workers; inspect the corresponding run's status and downloadable results.
+The local record above is not itself independent-machine evidence. The generated
+cases are bounded Python checks, not new Lean proofs or deployment certification.
+
+The earlier archives remain unchanged. Access and licensing limitations below
+continue to apply; creating this candidate does not publish a DOI or grant a license.
+
+## Historical reviewer candidate 1.1.0-review.1
 
 The [reviewer ZIP](TrustBound_Reviewer_Artifact_v1.1.0-review.1.zip) and
 [SHA-256 checksum](TrustBound_Reviewer_Artifact_v1.1.0-review.1.zip.sha256) package

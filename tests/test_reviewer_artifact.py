@@ -7,7 +7,7 @@ import zipfile
 
 import pytest
 
-from scripts.build_reviewer_artifact import FILES, build_archive, verify_manifest
+from scripts.build_reviewer_artifact import FILES, VERSION, build_archive, verify_manifest
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -20,7 +20,7 @@ def test_archive_is_reproducible_and_contains_only_selected_files(tmp_path):
     with zipfile.ZipFile(first) as archive:
         assert set(archive.namelist()) == set(FILES) | {"README.md", "ARTIFACT_MANIFEST.json"}
         archive.extractall(tmp_path / "extracted")
-    assert verify_manifest(tmp_path / "extracted")["artifact_version"] == "1.1.0-review.1"
+    assert verify_manifest(tmp_path / "extracted")["artifact_version"] == VERSION
 
 
 @pytest.mark.parametrize("change", ["source", "missing", "manifest"])

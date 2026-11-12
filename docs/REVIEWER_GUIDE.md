@@ -1,7 +1,7 @@
 # Reproduce the reviewer artifact
 
 This workflow checks the formal core, selected service tests, six implementation
-histories, and the consistency of their exported evidence. Start with the
+histories, their exported evidence, and 864 generated operation schedules. Start with the
 [research contract](RESEARCH_CONTRACT.md) for the contribution, agent role,
 terminology, assumptions, and event mapping.
 
@@ -49,8 +49,8 @@ Success means exit status 0 and `checks_passed: true` in `summary.json`:
 
 - `core/`: **14 exported Lean results**, **eight rejected premise-removal
   mutations**, **nine diagnostic tests**, and **2,048 synthetic records**.
-- `service-tests.xml`: the 66 existing selected gate/interface/crash tests,
-  plus trace-audit and packaging regression tests, all passing with no skips.
+- `service-tests.xml`: at least 123 selected gate/interface/crash, observation,
+  trace-audit, packaging, and generated-checker tests, all passing with no skips.
   The exact count is recorded in `summary.json`.
 - `traces/traces.json`: **six executed histories**, **66 projected transitions**,
   **five closed final states**, and **one undrained final state**.
@@ -62,6 +62,8 @@ Success means exit status 0 and `checks_passed: true` in `summary.json`:
 - `exported-trace-audit.json`: a separate replay of the newly written trace JSON.
 - `reference-trace-audit.json`: an audit of the included historical example
   traces. These reference traces are not relabeled as new execution evidence.
+- `generated-schedules.json`: 864 finite Python cases with replayable operation
+  orders, fault modes, restart choices, and final effect/authority counts.
 - `summary.json` and job logs: tool versions, selected source hashes, dependency
   versions, test counts, command results, and explicit evidence limits.
 
@@ -88,6 +90,34 @@ acceptance function. They are not an independent algorithm comparison.
 These are chosen finite cases. The event mapping and assumptions explaining
 their authority accounting are in the [research contract](RESEARCH_CONTRACT.md).
 
+## Generated operation schedules
+
+The separate schedule checker enumerates all 24 orderings of grant, fence,
+dispatch, and observation, plus all 120 orderings with cancellation added. Each
+ordering runs in three modes (normal reply, reply lost after provider commit,
+or claim abandoned before send), with and without reopening both SQLite databases
+after every action: `(24 + 120) × 3 × 2 = 864` cases.
+
+Each case begins with a registered, confirmed manual-capture payment. A fixed
+suffix tests duplicate dispatch, admission after fencing, and final reconciliation.
+An independent small state machine predicts allowed operations, outstanding
+authority, provider invocations/effects, recorded observations, and closure.
+Checks run after each action and reopen. Failures report the operation order,
+fault, restart choice, and executed prefix so the case can be replayed.
+
+```sh
+.venv/bin/python research/service_refinement/check_schedules.py \
+  --output results/generated-schedules.json
+```
+
+These are bounded serial orderings of one payment, not all concurrent executions.
+Some orders reach the same state. The generated tests simulate lost replies and
+abandoned claims; restart here means close/reopen, not a power failure. The existing
+subprocess crash tests remain separate. Four deliberately broken gate variants
+check sensitivity to a missing fence, repeated claim, premature closure, and
+missing journal. The six Lean-certified histories and their proof counts are
+unchanged; the 864 cases are Python checks without additional Lean certificates.
+
 ## Check an exported trace independently of the generator
 
 ```sh
@@ -105,7 +135,7 @@ rejected. Tests also deliberately corrupt traces and require rejection.
 
 ```sh
 .venv/bin/python scripts/build_reviewer_artifact.py \
-  --output results/TrustBound_Reviewer_Artifact_v1.1.0-review.1.zip
+  --output results/TrustBound_Reviewer_Artifact_v1.1.0-review.2.zip
 ```
 
 The builder uses an explicit source list. It includes Lean sources and checkers,
@@ -124,8 +154,8 @@ independent signature or attestation of the author.
 For macOS, verify and extract the package with:
 
 ```sh
-shasum -a 256 -c TrustBound_Reviewer_Artifact_v1.1.0-review.1.zip.sha256
-unzip TrustBound_Reviewer_Artifact_v1.1.0-review.1.zip -d reviewer-artifact
+shasum -a 256 -c TrustBound_Reviewer_Artifact_v1.1.0-review.2.zip.sha256
+unzip TrustBound_Reviewer_Artifact_v1.1.0-review.2.zip -d reviewer-artifact
 cd reviewer-artifact
 ```
 
@@ -148,5 +178,7 @@ license. Existing terms remain in [RIGHTS_PENDING.txt](../RIGHTS_PENDING.txt).
 A passing run supports conditional abstract proofs and selected implementation
 behaviors. It does not establish real-provider coverage, correctness of every
 amount, a usable trip, host isolation, universal refinement, or eventual drainage.
-The known broader protocol/allocation issues and behavior outside the constrained
-provider contract require separate fixes and evidence.
+The broader protocol/allocation fixes are documented in
+[correctness changes](CORRECTNESS_FIXES.md) and tested by the full repository
+suite; their SDK-dependent code is outside this selected package. Behavior beyond
+the constrained provider contract requires separate mechanisms and evidence.

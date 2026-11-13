@@ -31,18 +31,12 @@ responses were removed from the working tree and remain in the git history.
 
 ## Artifact access and reproduction
 
-Use [the reviewer guide](../docs/REVIEWER_GUIDE.md) and
-[reviewer candidate 1.1.0-review.6](release/README.md). Its 45-entry ZIP includes
-pinned dependencies, a per-file manifest, and a reproduction command. The
-[local verification record](release/reviewer-verification-v1.1.0-review.6.json)
-binds its hashes to the results. Local reproduction used the existing pinned
-Python environment and Lean installation, from a fresh extraction outside the
-checkout. The selected 170 tests are a subset of the full 403 tests.
-
-The archive can be supplied without repository access after setup. The repository remains private; an anonymous/public mirror and DOI are pending.
+The artifact is this repository. Use [the reviewer guide](../docs/REVIEWER_GUIDE.md)
+for the reproduction command and expected outputs; CI reruns it on Ubuntu and
+macOS for every push. The selected 170 tests are a subset of the full 403 tests.
+Before submission, tag the revision the paper describes and cite that tag.
 The existing MIT code license and separate manuscript terms are retained.
-The SDK-dependent protocol/allocation/ledger modules remain outside the selected
-archive. No real-provider request was made by the new checks.
+No real-provider request is made by the reviewer checks.
 
 The repository's `Reviewer artifact` CI workflow rebuilds the package from each
 pushed revision and reproduces it on Ubuntu and macOS workers. Observed results

@@ -51,9 +51,6 @@ The versioned 1.0.0 candidate includes the Lean source, checkers, selected tests
 recorded traces, hashes and reproduction commands. It pins Lean 4.19.0 and
 pytest 9.0.2; the executed Python version is recorded as 3.12.14. Its extraction
 checks ran on the same host with existing tools. That candidate's access status
-is historical. The new versioned reviewer package and checksum are in
-`paper/release/`; its sources and builder are on the review branch. The
+is historical. The artifact is now this repository; the
 [reviewer guide](REVIEWER_GUIDE.md) gives the portable command and expected outputs.
-Access to a private branch would still require an invitation or separate archive
-delivery; packaging alone does not establish public access, a license grant, or
-independent execution by a reviewer.
+Running it does not establish independent execution by a reviewer.

@@ -1,8 +1,7 @@
 # Validation records
 
-Validation of the current reviewer candidate is recorded in
-[paper/release/README.md](../paper/release/README.md) and its
-[verification record](../paper/release/reviewer-verification-v1.1.0-review.6.json).
+The `Reviewer artifact` CI workflow reruns the reviewer command on Ubuntu and
+macOS for every push; check its run for the revision you are using.
 The sections below are earlier, historical validation runs.
 
 ## Upload validation — 6 November 2026

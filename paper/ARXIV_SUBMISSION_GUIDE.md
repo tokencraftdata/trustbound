@@ -53,20 +53,9 @@ The copyable title, abstract, and comments use ASCII characters as required by
 
 ## Artifact access
 
-The private GitHub repository is a working copy, not public reader access.
-The reviewer artifact in `release/` (currently
-`TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip`) isolates the paper's core
-without provider probes, credentials, raw provider records, account details,
-conference template, or unrelated research. Its README explains what running it
-achieves; its manifest pins every packaged file. Code is MIT-licensed.
-
-Recommended release: publish this frozen selected-core package with the agreed
-software terms, retain its checksum and version, and add its stable public URL
-to the author manuscript. Keep the broader working repository private unless
-the author deliberately changes that decision. The final review requests a DOI-backed archive specifically. The Zenodo
-deposit candidate is prepared in `release/`. Publication approval, deposit-account
-access, and the software-license choice remain pending. Verify public download and its checksum after
-publication, then cite the issued version DOI in Appendix A.
+The repository will be made public and is the artifact. Code is MIT-licensed.
+Before submitting, tag the revision the paper describes (for example `v1.0`)
+and cite the repository URL with that tag in Appendix A.
 
 Alternatively, arXiv supports code/data under an `anc/` folder in a TeX source
 submission. These files become part of the public version; they cannot be

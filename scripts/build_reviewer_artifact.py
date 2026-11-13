@@ -9,7 +9,7 @@ import re
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.1.0-review.6"
+VERSION = "0.0.0-dev"
 FILES = (
     "LICENSE", "requirements-reviewer.txt", "requirements-core.txt",
     "docs/REVIEWER_GUIDE.md", "docs/RESEARCH_CONTRACT.md", "docs/CORRECTNESS_FIXES.md",

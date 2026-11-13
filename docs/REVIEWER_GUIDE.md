@@ -169,11 +169,11 @@ does not run Lean or certify the completeness of a real merchant's records.
 Unknown events, missing authority/effects, and unjustified final outcomes are
 rejected. Tests also deliberately corrupt traces and require rejection.
 
-## Build and verify a versioned archive
+## Optional: build a self-contained archive
 
 ```sh
 .venv/bin/python scripts/build_reviewer_artifact.py \
-  --output results/TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip
+  --output results/TrustBound_Reviewer_Artifact.zip
 ```
 
 The builder uses an explicit source list. It includes Lean sources and checkers,
@@ -192,8 +192,8 @@ independent signature or attestation of the author.
 For macOS, verify and extract the package with:
 
 ```sh
-shasum -a 256 -c TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip.sha256
-unzip TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip -d reviewer-artifact
+shasum -a 256 -c TrustBound_Reviewer_Artifact.zip.sha256
+unzip TrustBound_Reviewer_Artifact.zip -d reviewer-artifact
 cd reviewer-artifact
 ```
 
@@ -204,9 +204,9 @@ execute it on their own machine to establish independent reproduction.
 
 ## Access and publication
 
-The repository's `paper/release/` directory holds the versioned reviewer candidate
-and checksum. Access to that branch or to a separately supplied archive is still
-necessary. A private repository link alone does not provide reviewer access.
+The artifact is the public repository itself; cite a tag or commit so readers
+reproduce the same revision. The optional archive above is a self-contained
+subset for offline review and is not published separately. A private repository link alone does not provide reviewer access.
 Public/anonymous distribution and a permanent archive URL or DOI remain
 publication decisions. The existing MIT license covers the packaged code and
 technical documentation; manuscript terms are in paper/LICENSE.md.

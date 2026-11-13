@@ -100,8 +100,8 @@ python3 -m venv .venv
 Replace the Lean path with your installed compiler. Use a new output directory
 for each run. Assertion-based checkers reject `-O` and `PYTHONOPTIMIZE`.
 
-[Download the versioned reviewer candidate](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip)
-and its [SHA-256 checksum](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip.sha256).
+This repository is the artifact: clone it (or download a tagged revision) and
+run the command above from its root.
 The [reviewer guide](docs/REVIEWER_GUIDE.md) explains extraction, integrity checks,
 scenario expectations, and how to rebuild the archive.
 
@@ -236,8 +236,6 @@ build instructions, and editorial history.
   the flight–hotel diagnostic.
 - [Research scope decision](docs/TRIP_CLOSURE_CANDIDATE.md): why trip expansion and
   reserve optimization are outside the note's contribution.
-- [Release candidate](paper/release/README.md): prepared artifact and reproduction
-  records.
 - [arXiv submission guide](paper/ARXIV_SUBMISSION_GUIDE.md): publication and access logistics.
 
 The code, Lean models, scripts, tests, evidence and technical documentation are

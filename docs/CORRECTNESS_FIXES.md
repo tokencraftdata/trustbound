@@ -126,3 +126,15 @@ use arXiv's non-exclusive distribution license (`paper/LICENSE.md`).
 `RIGHTS_PENDING.txt` is removed; dated historical manifests that hash it are
 left unchanged as records of earlier exports. Reviewer candidate
 `1.1.0-review.5` packages `LICENSE` in its place.
+
+## 8. Validate direct ledger inputs
+
+`AtomicLedger` now independently requires nonnegative integer budgets and
+reservations within SQLite's signed 64-bit range. Booleans, fractional values,
+strings, negative values, and overflowing integers are rejected before mutation.
+An invalid reservation returns `invalid_amount` and cannot consume a transaction
+identity or create capacity. Invalid initialization raises `invalid_budget`.
+Zero remains a valid amount. Tests cover restart, identity reuse after rejection,
+overspending attempts, and the exact integer boundaries. This fixes the direct
+API validation gap; it does not repair historical databases containing invalid
+reservations or prove composed approval-to-dispatch monetary correctness.

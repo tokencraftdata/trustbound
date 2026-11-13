@@ -251,45 +251,70 @@ class StripeGate:
             "requires_authoritative_reconciliation": True,
         }
 
-    def observe(self, row: PaymentObservation) -> None:
-        # Caller supplies a fresh authenticated retrieval. This function does
-        # not prove that retrieval occurred or that the provider is truthful.
-        # Validation conflicts are committed BEFORE raising; raising inside the
-        # transaction would roll back the very evidence that blocks resolution.
+    def reconcile(
+        self, payment_id: str, retrieve: Callable[[str], PaymentObservation]
+    ) -> None:
+        """Serialize a trusted provider read and its application across workers.
+
+        The journal write transaction spans retrieval. The callback must use
+        bounded transport timeouts and must not re-enter this journal. A slow
+        read blocks other journal writers; this is not a provider snapshot or
+        a guarantee against stale/cached responses from the provider itself.
+        """
         def operation() -> Exception | None:
-            prior = self.db.execute(
-                "SELECT amount,status,received,capturable FROM payment WHERE id=?",
-                (row.get("id"),),
-            ).fetchone()
-            if prior is None:
+            if self.db.execute("SELECT 1 FROM payment WHERE id=?", (payment_id,)).fetchone() is None:
                 raise ValueError("unknown_payment")
-            amount, previous_status, previous_received, previous_capturable = prior
-            previous_state = (previous_status, previous_received, previous_capturable)
-            if not _observation_matches_scope(row, amount):
-                self._conflict(row["id"], "observation_scope_mismatch")
-                return ValueError("observation_scope_mismatch")
-            state = _observation_state(row, amount)
-            if previous_status != "uncertain" and state != previous_state:
-                self._conflict(row["id"], "terminal_observation_changed")
-                return RuntimeError("terminal_observation_changed")
-            # Even an uncertain observation may record money already received.
-            # Refunds are outside this contract: a later smaller receipt must not
-            # erase that evidence or turn a partial paid history into cancellation.
-            if row["amount_received"] < previous_received:
-                self._conflict(row["id"], "received_amount_regressed")
-                return RuntimeError("received_amount_regressed")
-            if row["amount_received"] > 0 and not self._capture_claimed(row["id"]):
-                self._conflict(row["id"], "paid_without_claimed_capture")
-                return RuntimeError("paid_without_claimed_capture")
-            self.db.execute(
-                "UPDATE payment SET status=?,received=?,capturable=? WHERE id=?",
-                (*state, row["id"]),
-            )
-            return None
+            row = retrieve(payment_id)
+            if row.get("id") != payment_id:
+                self._conflict(payment_id, "observation_identity_mismatch")
+                return ValueError("observation_identity_mismatch")
+            return self._observe(row)
 
         error = self._transaction(operation)
         if error is not None:
             raise error
+
+    def observe(self, row: PaymentObservation) -> None:
+        """Apply trusted evidence conservatively; use reconcile for concurrent reads.
+
+        This low-level API cannot establish the order of an already-fetched row.
+        Conflicts commit before raising so their evidence survives rollback paths.
+        """
+        error = self._transaction(lambda: self._observe(row))
+        if error is not None:
+            raise error
+
+    def _observe(self, row: PaymentObservation) -> Exception | None:
+        """Validate/apply within the caller's transaction; return durable conflicts."""
+        prior = self.db.execute(
+            "SELECT amount,status,received,capturable FROM payment WHERE id=?",
+            (row.get("id"),),
+        ).fetchone()
+        if prior is None:
+            raise ValueError("unknown_payment")
+        amount, previous_status, previous_received, previous_capturable = prior
+        previous_state = (previous_status, previous_received, previous_capturable)
+        if not _observation_matches_scope(row, amount):
+            self._conflict(row["id"], "observation_scope_mismatch")
+            return ValueError("observation_scope_mismatch")
+        state = _observation_state(row, amount)
+        if previous_status != "uncertain" and state != previous_state:
+            self._conflict(row["id"], "terminal_observation_changed")
+            return RuntimeError("terminal_observation_changed")
+        # Even an uncertain observation may record money already received.
+        # Refunds are outside this contract: a later smaller receipt must not
+        # erase that evidence or turn a partial paid history into cancellation.
+        if row["amount_received"] < previous_received:
+            self._conflict(row["id"], "received_amount_regressed")
+            return RuntimeError("received_amount_regressed")
+        if row["amount_received"] > 0 and not self._capture_claimed(row["id"]):
+            self._conflict(row["id"], "paid_without_claimed_capture")
+            return RuntimeError("paid_without_claimed_capture")
+        self.db.execute(
+            "UPDATE payment SET status=?,received=?,capturable=? WHERE id=?",
+            (*state, row["id"]),
+        )
+        return None
 
     def snapshot(self) -> dict[str, Any]:
         """Read one consistent view, persisting any missing-provenance conflicts."""

@@ -1,4 +1,4 @@
-"""Check concurrent safety scenarios and reproduce the stale-read limitation."""
+"""Check concurrent safety scenarios and verify serialized provider reconciliation."""
 import pytest
 
 from research.concurrent_clients.evaluate import (
@@ -34,13 +34,12 @@ def test_fence_and_retry_during_capture_cancel_race(tmp_path, order, fault):
 
 
 @pytest.mark.parametrize("terminal", ["succeeded", "canceled"])
-def test_older_truthful_read_creates_persistent_false_conflict(tmp_path, terminal):
-    # This documents a current availability limitation, not desired recovery.
+def test_overlapping_truthful_reads_resolve_without_false_conflict(tmp_path, terminal):
     result = stale_reconciliation(tmp_path, terminal)
-    assert not result["conflict_free_reconciliation"]
-    assert not result["resolved"]
+    assert result["conflict_free_reconciliation"]
+    assert result["resolved"]
     assert result["outstanding_rights"] == 0
-    assert result["observation_conflicts"] == 1
+    assert result["observation_conflicts"] == 0
 
 
 class RepeatClaim(StripeGate):
@@ -71,3 +70,13 @@ class DropIdentity(StripeGate):
 def test_checker_rejects_duplicate_send_early_closure_and_missing_identity(tmp_path, gate_type, message):
     with pytest.raises(ValueError, match=message):
         contention(tmp_path, 2, 2, "pending_last", gate_type=gate_type)
+
+
+class UnserializedRead(StripeGate):
+    def reconcile(self, payment_id, retrieve):
+        self.observe(retrieve(payment_id))
+
+
+def test_checker_rejects_unserialized_provider_read(tmp_path):
+    with pytest.raises(ValueError, match="provider read was not serialized|overtook"):
+        stale_reconciliation(tmp_path, "canceled", gate_type=UnserializedRead)

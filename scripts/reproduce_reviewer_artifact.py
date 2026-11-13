@@ -22,6 +22,7 @@ SERVICE_TESTS = (
     "tests/test_trace_evidence.py", "tests/test_reviewer_artifact.py",
     "tests/test_generated_schedules.py",
     "tests/test_agent_behaviors.py", "tests/test_concurrent_clients.py",
+    "tests/test_reconciliation_ordering.py",
 )
 
 
@@ -59,7 +60,7 @@ def main():
         "artifact_content_id": manifest["content_id"] if manifest else None,
         "jobs": {}, "provider_requests": 0,
         "universal_implementation_refinement": False, "deployment_assumptions_established": False,
-        "scope": "Conditional model proofs, selected service tests, bounded schedules, scripted clients, bounded concurrent-worker checks (including a documented stale-read conflict) and finite supplied-evidence consistency checks.",
+        "scope": "Conditional model proofs, selected service tests, bounded schedules, scripted clients, bounded concurrent-worker checks (including serialized provider reconciliation) and finite supplied-evidence consistency checks.",
     }
     env = dict(os.environ, PYTHONPATH=str(ROOT / "src"), PYTHONNOUSERSITE="1",
                PYTEST_DISABLE_PLUGIN_AUTOLOAD="1", PYTHONDONTWRITEBYTECODE="1")
@@ -106,7 +107,7 @@ def main():
         suites = list(ET.parse(output / "service-tests.xml").getroot().iter("testsuite"))
         counts = {key: sum(int(suite.get(key, "0")) for suite in suites)
                   for key in ("tests", "failures", "errors", "skipped")}
-        if counts["tests"] < 157 or any(counts[key] for key in ("failures", "errors", "skipped")):
+        if counts["tests"] < 164 or any(counts[key] for key in ("failures", "errors", "skipped")):
             raise RuntimeError(f"incomplete service test run: {counts}")
         if any(hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != digest
                for name, digest in source_hashes.items()):

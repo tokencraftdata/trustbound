@@ -81,7 +81,7 @@ class CommandService:
 
     def _reconcile(self) -> None:
         for entry in self.gate.snapshot()["records"]:
-            self.gate.observe(self.provider.retrieve(entry["id"]))
+            self.gate.reconcile(entry["id"], self.provider.retrieve)
 
     def _public_snapshot(self) -> dict[str, Any]:
         snapshot = self.gate.snapshot()

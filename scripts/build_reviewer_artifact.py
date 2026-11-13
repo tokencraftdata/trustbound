@@ -25,7 +25,7 @@ FILES = (
     "research/agent_behaviors/evaluate.py", "research/agent_behaviors/README.md",
     "research/agent_behaviors/evidence/results.json", "tests/test_agent_behaviors.py",
     "research/concurrent_clients/evaluate.py", "research/concurrent_clients/README.md",
-    "research/concurrent_clients/evidence/results.json", "tests/test_concurrent_clients.py",
+    "research/concurrent_clients/evidence/results.json", "tests/test_concurrent_clients.py", "tests/test_reconciliation_ordering.py",
     "research/service_refinement/evidence/traces.json",
     "results/evidence_only_2026-11-01/closure_benchmark.json",
     "tests/test_closure_experiment.py", "tests/test_stripe_gate.py",

@@ -1,4 +1,4 @@
-"""Bounded concurrent-worker experiments, including a stale-read limitation.
+"""Bounded concurrent-worker experiments, including serialized provider reconciliation.
 
 Workers have separate SQLite connections and call the real command interface.
 The bundled socket listener remains serial. This harness does not prove general
@@ -366,48 +366,103 @@ def admission_race(directory, operation, winner):
             **result, "history": experiment.trace.events}
 
 
-def stale_reconciliation(directory, terminal):
-    experiment = Experiment(directory)
+def stale_reconciliation(directory, terminal, gate_type=StripeGate):
+    """A delayed pending read must commit before a competing terminal read."""
+    experiment = Experiment(directory, gate_type=gate_type)
     target = min(experiment.amounts)
     entered, release = threading.Event(), threading.Event()
-    with closing(StripeGate(experiment.path, EPOCH)) as gate:
+    capture_entered, capture_release = threading.Event(), threading.Event()
+    fresh_ready, fresh_start = threading.Event(), threading.Event()
+    fresh_attempt, fresh_read = threading.Event(), threading.Event()
+    with closing(gate_type(experiment.path, EPOCH)) as gate:
         gate.fence()
+        if terminal == "succeeded":
+            for identity in experiment.amounts:
+                if identity != target:
+                    require(experiment.dispatch(gate, "payment-client", identity)["ok"], "setup capture failed")
 
-    def hold(identity, row):
+    def hold_capture(identity):
+        require(identity == target, "unexpected paused capture")
+        capture_entered.set()
+        wait(capture_release)
+
+    def hold_read(identity, row):
         if identity == target:
-            require(row["status"] == "requires_capture", "stale read not staged before completion")
+            require(row["status"] == "requires_capture", "delayed read not staged before completion")
             entered.set()
             wait(release)
-    stale_provider = Provider(experiment.provider.path, experiment.amounts, experiment.trace, after_read=hold)
 
-    def worker():
-        with closing(StripeGate(experiment.path, EPOCH)) as gate:
-            return experiment.request(gate, "old-reconciler", {"op": "reconcile"}, stale_provider)
-    with ThreadPoolExecutor(max_workers=1) as pool:
-        future = pool.submit(worker)
+    def mark_fresh_read(identity, row):
+        if identity == target:
+            fresh_read.set()
+
+    delayed_provider = Provider(experiment.provider.path, experiment.amounts, experiment.trace, after_read=hold_read)
+    fresh_provider = Provider(experiment.provider.path, experiment.amounts, experiment.trace, after_read=mark_fresh_read)
+    capture_provider = Provider(experiment.provider.path, experiment.amounts, experiment.trace, before_capture=hold_capture)
+
+    def capture_worker():
+        with closing(gate_type(experiment.path, EPOCH)) as gate:
+            return experiment.request(gate, "payment-client", {"op": "dispatch", "command_id": experiment.commands[target]}, capture_provider)
+
+    def delayed_worker():
+        with closing(gate_type(experiment.path, EPOCH)) as gate:
+            return experiment.request(gate, "delayed-reconciler", {"op": "reconcile"}, delayed_provider)
+
+    def fresh_worker():
+        with closing(gate_type(experiment.path, EPOCH)) as gate:
+            # Open the connection before the delayed read holds its transaction.
+            fresh_ready.set()
+            wait(fresh_start)
+            gate.db.set_trace_callback(lambda sql: fresh_attempt.set() if sql == "BEGIN IMMEDIATE" else None)
+            return experiment.request(gate, "fresh-reconciler", {"op": "reconcile"}, fresh_provider)
+
+    with ThreadPoolExecutor(max_workers=3) as pool:
+        fresh = pool.submit(fresh_worker)
         try:
+            wait(fresh_ready)
+            capture = None
+            if terminal == "succeeded":
+                capture = pool.submit(capture_worker)
+                wait(capture_entered)
+            delayed = pool.submit(delayed_worker)
             wait(entered)
-            with closing(StripeGate(experiment.path, EPOCH)) as gate:
+            if terminal == "canceled":
                 for identity in experiment.amounts:
-                    if terminal == "canceled":
-                        experiment.provider.cancel(identity)
-                    else:
-                        experiment.dispatch(gate, "payment-client", identity)
-            experiment.reconcile()
-            statuses = dict.fromkeys(experiment.amounts, terminal)
-            captures = list(experiment.amounts) if terminal == "succeeded" else []
-            experiment.checkpoint(statuses, captures=captures)
+                    experiment.provider.cancel(identity)
+            else:
+                capture_release.set()
+                require(capture.result(timeout=TIMEOUT)["ok"], "in-flight capture failed")
+            require(set(experiment.provider.state()["statuses"].values()) == {terminal}, "source not terminal")
+            # A separate zero-wait connection proves that the journal write lock
+            # covers the paused read; no scheduling delay is used as the oracle.
+            locked = False
+            with closing(sqlite3.connect(experiment.path, timeout=0)) as probe:
+                try:
+                    probe.execute("BEGIN IMMEDIATE")
+                except sqlite3.OperationalError as exc:
+                    if exc.sqlite_errorcode != sqlite3.SQLITE_BUSY:
+                        raise
+                    locked = True
+                finally:
+                    probe.rollback()
+            require(locked, "provider read was not serialized with its journal update")
+            fresh_start.set()
+            wait(fresh_attempt)
+            require(not fresh_read.is_set(), "competing retrieval overtook the delayed read")
             release.set()
-            reply = future.result(timeout=TIMEOUT)
-            require(not reply["ok"], "stale observation unexpectedly accepted")
+            require(delayed.result(timeout=TIMEOUT)["ok"], "delayed reconciliation rejected")
+            require(fresh.result(timeout=TIMEOUT)["ok"], "fresh reconciliation rejected")
         finally:
             release.set()
-    # Fresh evidence and database reopen do not clear this persistent conflict.
+            capture_release.set()
+            fresh_start.set()
     experiment.reconcile()
-    result = experiment.checkpoint(statuses, captures=captures, conflict=target)
+    statuses = dict.fromkeys(experiment.amounts, terminal)
+    captures = list(experiment.amounts) if terminal == "succeeded" else []
+    result = experiment.checkpoint(statuses, captures=captures)
     return {"family": "stale_reconciliation", "terminal": terminal,
-            "conflict_free_reconciliation": False,
-            "finding": "A truthful older nonterminal read arriving after terminal evidence permanently blocks closure.",
+            "conflict_free_reconciliation": True,
+            "finding": "Serialized read/application prevents a competing terminal read from overtaking a delayed pending response.",
             **result, "history": experiment.trace.events}
 
 

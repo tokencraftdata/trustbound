@@ -138,3 +138,21 @@ Zero remains a valid amount. Tests cover restart, identity reuse after rejection
 overspending attempts, and the exact integer boundaries. This fixes the direct
 API validation gap; it does not repair historical databases containing invalid
 reservations or prove composed approval-to-dispatch monetary correctness.
+
+## 9. Serialize provider retrieval with observation
+
+The command service now calls `StripeGate.reconcile(payment_id, retrieve)`.
+A SQLite write transaction covers both the trusted retrieval and validation of
+its result, preventing competing service workers from applying a newer read
+before an older in-flight read. The returned identity must match the requested
+identity. Genuine contradictions still commit durable conflicts; no existing
+conflict is cleared or report silently discarded. Direct `observe` remains a
+low-level API requiring externally ordered trusted evidence.
+
+The revised 84-case evaluation resolves 66 cases, leaves 18 genuinely pending,
+and records no false conflicts. The old six-conflict run is retained as historical
+evidence. Tests additionally reject the old unserialized behavior, preserve real
+contradictions, and check lock release after retrieval failure and worker death.
+The write lock spans the external read, so it can block all journal writers.
+Adapters must enforce bounded timeouts and avoid re-entering the journal. Cached
+provider responses and historical conflicts remain outside this repair.

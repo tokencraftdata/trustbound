@@ -133,21 +133,23 @@ resolution. The undrained scenario deliberately demonstrates the last limitation
 See the [reviewer guide](REVIEWER_GUIDE.md) for the single reproduction command,
 expected outputs, archive checks, and precise limits of independent reproduction.
 
-## Concurrent-worker evidence and current limitation
+## Concurrent-worker evidence and observation ordering
 
 The [concurrency experiment](../research/concurrent_clients/README.md) runs actual
 command-service workers on separate SQLite connections over the same journal.
-It extends the earlier serial policy comparison to multiple payment identities,
-contending claims, admission/fence ordering, and cancellation during dispatch.
 The source simulator serializes its own irreversible outcomes. These are bounded
 threaded checks; the bundled socket server itself remains serial.
 
-Truthful reads can arrive out of order: a paused nonterminal retrieval can be
-applied after a second worker has recorded a terminal outcome. The gate retains
-the terminal evidence but persists a conflict, so even later fresh reconciliation
-does not restore closure. The 84-case run reports six such blocked cases
-separately from 18 genuinely pending cases and 60 resolved cases. This is an
-availability/observation-ordering limitation under concurrent workers. The
-experiment does not fix it or establish universal safety, monetary correctness,
-or eventual progress. Provider-version evidence or serialized reconciliation
-needs its own design and validation.
+The original run exposed six false conflicts when an older pending read arrived
+after terminal evidence. `StripeGate.reconcile` now holds a journal write
+transaction across each trusted retrieval and its application. The revised
+84-case run has 66 resolved cases, 18 genuinely pending cases, and no conflicts.
+A zero-wait lock probe and an unserialized-read mutation check the ordering repair.
+True contradictions and identity mismatches still produce durable conflicts;
+existing conflicts are never cleared automatically.
+
+A slow provider read blocks all journal writers. Trusted callbacks must enforce
+bounded timeouts and avoid journal re-entry. Source truth, freshness of sequential
+provider reads, and irreversible terminality remain assumptions. The change does
+not provide an atomic multi-object provider snapshot, universal refinement,
+monetary correctness, or eventual progress. The Lean contract is unchanged.

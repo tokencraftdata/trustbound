@@ -22,16 +22,12 @@ import threading
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
+from research.support import require, write_report
 from trustbound.credential_service import CommandService
 from trustbound.stripe_gate import StripeGate
 
 EPOCH = "concurrent-epoch"
 TIMEOUT = 15
-
-
-def require(condition, message):
-    if not condition:
-        raise ValueError(message)
 
 
 def wait(event):
@@ -502,7 +498,7 @@ def run_suite(repeats=3):
             "python": platform.python_version(), "platform": platform.platform(),
             "scope": "Bounded threaded workers with separate SQLite connections, 2/4 payments and 2/4/8 contending clients; controlled races and three default repetitions, not exhaustive concurrency or the serial socket server.",
             "source_sha256": {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in (
-                "research/concurrent_clients/evaluate.py", "src/trustbound/stripe_gate.py", "src/trustbound/credential_service.py")},
+                "research/concurrent_clients/evaluate.py", "research/support.py", "src/trustbound/stripe_gate.py", "src/trustbound/credential_service.py")},
             "cases": results}
 
 
@@ -511,15 +507,7 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--repeats", type=int, default=3)
     args = parser.parse_args()
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    with args.output.open("x") as output:
-        try:
-            report = run_suite(args.repeats)
-        except Exception as exc:
-            json.dump({"checks_passed": False, "error": str(exc)}, output, indent=2)
-            raise
-        json.dump(report, output, indent=2)
-        output.write("\n")
+    report = write_report(args.output, lambda: run_suite(args.repeats))
     print(json.dumps({k: v for k, v in report.items() if k not in {"cases", "source_sha256"}}))
 
 

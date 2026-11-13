@@ -1,8 +1,36 @@
 # Artifact release candidates
 
-## Reviewer candidate 1.1.0-review.5
+## Reviewer candidate 1.1.0-review.6
 
-The current [reviewer ZIP](TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip) and
+The [reviewer ZIP](TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip) and
+[checksum](TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip.sha256) contain 45
+entries. This version includes serialized retrieval/application, six new
+reconciliation regression cases, an additional concurrency mutation, shared
+experiment support, and reviewer timeout diagnostics. The ledger fix is tested
+in the broader suite and remains outside this selected package.
+
+The revised 84-case run resolves 66, leaves 18 genuinely pending, and has no
+observation conflicts. No identity has more than one capture invocation or
+payment effect. The six overlapping-read cases test the prevented ordering;
+the original six-conflict run remains in the repository and the prior ZIP.
+Retrieval holds the journal write lock, so slow reads block writers. Provider
+freshness and terminality remain assumptions; genuine conflicts are retained.
+
+The extracted package passed all 170 selected tests and the full reviewer
+workflow in the existing pinned Python 3.12.14 environment with Lean 4.19.0.
+The broader suite passed 403 tests. The formal 14/8/9/2,048 counts, six histories
+with 64 transitions, 864 schedules, and 40 serial client cases are unchanged.
+See the [local verification record](reviewer-verification-v1.1.0-review.6.json).
+Reproduction reused the local environment; it is not independent scientific review.
+The manifest binds the exact source inputs. Earlier CI records below concern
+earlier revisions; they are not evidence for this repaired package.
+
+The existing MIT code license and separate manuscript terms are preserved.
+Generating this candidate does not submit the paper, create a public mirror, or assign a DOI. Earlier archives remain immutable historical evidence.
+
+## Historical reviewer candidate 1.1.0-review.5
+
+The historical [reviewer ZIP](TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip) and
 [checksum](TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip.sha256) contain 43
 entries. This version adds the terminal-claim repair
 ([correctness fixes, section 6](../../docs/CORRECTNESS_FIXES.md)) and replaces

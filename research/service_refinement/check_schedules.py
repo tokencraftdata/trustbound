@@ -15,72 +15,12 @@ import sys
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
+from research.support import PAYMENT, SinglePaymentProvider, require, write_report
 from trustbound.stripe_gate import StripeGate
 
-PAYMENT = "pi_Schedule1"
 FAULTS = ("normal", "lost_reply", "abandoned_claim")
-
-
-def require(condition, message):
-    if not condition:
-        raise ValueError(message)
-
-
-class Provider:
-    """Separate durable simulator: cancellation and success are irreversible."""
-
-    def __init__(self, path):
-        self.db = sqlite3.connect(path)
-        self.db.executescript("""
-            CREATE TABLE IF NOT EXISTS state(status TEXT NOT NULL);
-            CREATE TABLE IF NOT EXISTS calls(action TEXT NOT NULL);
-            CREATE TABLE IF NOT EXISTS effects(identity TEXT NOT NULL);
-        """)
-        if not self.db.execute("SELECT 1 FROM state").fetchone():
-            with self.db:
-                self.db.execute("INSERT INTO state VALUES ('requires_payment_method')")
-        self.lose_reply = False
-
-    @property
-    def status(self):
-        return self.db.execute("SELECT status FROM state").fetchone()[0]
-
-    def observation(self):
-        return {
-            "id": PAYMENT, "object": "payment_intent", "livemode": False,
-            "amount": 200, "currency": "usd", "confirmation_method": "manual",
-            "capture_method": "manual", "payment_method_types": ["card"],
-            "payment_method": None, "customer": None, "status": self.status,
-            "amount_received": 200 if self.status == "succeeded" else 0,
-            "amount_capturable": 200 if self.status == "requires_capture" else 0,
-        }
-
-    def request(self, method, path, body, idem):
-        action = path.rsplit("/", 1)[-1]
-        require(method == "POST" and path == f"/v1/payment_intents/{PAYMENT}/{action}", "wrong dispatch target")
-        require(action in {"confirm", "capture"}, "unsupported dispatch")
-        require(body == ({"payment_method": "pm_card_visa"} if action == "confirm" else {}), "wrong dispatch body")
-        require(idem == f"schedule-epoch:dispatch:{1 if action == 'confirm' else 2}", "wrong command identity")
-        paid = False
-        with self.db:
-            self.db.execute("INSERT INTO calls VALUES (?)", (action,))
-            if action == "confirm" and self.status == "requires_payment_method":
-                self.db.execute("UPDATE state SET status='requires_capture'")
-            elif action == "capture" and self.status == "requires_capture":
-                self.db.execute("UPDATE state SET status='succeeded'")
-                self.db.execute("INSERT INTO effects VALUES (?)", (PAYMENT,))
-                paid = True
-            else:
-                return 400, {}
-        if paid and self.lose_reply:
-            raise TimeoutError("injected lost reply after provider commit")
-        return 200, self.observation()
-
-    def cancel(self):
-        with self.db:
-            if self.status == "requires_capture":
-                self.db.execute("UPDATE state SET status='canceled'")
 
 
 @dataclass
@@ -167,7 +107,7 @@ def run_case(directory, order, fault, restart, gate_type=StripeGate):
     require(fault in FAULTS, "unknown fault")
     gate_path, provider_path = directory / "gate.db", directory / "provider.db"
     gate = gate_type(gate_path, "schedule-epoch")
-    provider = Provider(provider_path)
+    provider = SinglePaymentProvider(provider_path)
     oracle = Oracle()
     history = []
     try:
@@ -210,7 +150,7 @@ def run_case(directory, order, fault, restart, gate_type=StripeGate):
                 gate.close()
                 provider.db.close()
                 gate = gate_type(gate_path, "schedule-epoch")
-                provider = Provider(provider_path)
+                provider = SinglePaymentProvider(provider_path)
                 oracle.check(gate, provider)
         return {"order": order, "fault": fault, "restart_after_each_action": restart,
                 "paid_effects": int(oracle.provider == "succeeded"),
@@ -241,16 +181,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    # Reserve the output first, so an existing result is never overwritten.
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    with args.output.open("x") as output:
-        try:
-            report = run_suite()
-        except Exception as exc:
-            json.dump({"checks_passed": False, "error": str(exc)}, output, indent=2)
-            raise
-        json.dump(report, output, indent=2)
-        output.write("\n")
+    report = write_report(args.output, run_suite)
     print(json.dumps({key: report[key] for key in ("checks_passed", "generated_cases", "resolved_cases", "unresolved_cases")}))
 
 

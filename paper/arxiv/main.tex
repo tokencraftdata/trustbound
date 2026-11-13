@@ -35,8 +35,9 @@ registration before activation and keeps unregistered objects inert. We check
 its mapping to the admission model and test the proofs' dependence on key
 assumptions. Implementation evidence comprises six service histories checked
 in Lean, bounded operation schedules, and five scripted client behaviors.
-Concurrent-worker experiments additionally expose a persistent reconciliation
-conflict when truthful provider reads arrive out of order.
+Concurrent-worker experiments expose a reconciliation conflict from reordered
+provider reads; serializing retrieval and journal updates removes this conflict
+in the tested cases, while blocking journal writers during each retrieval.
 These experiments distinguish protection against repeated dispatch from the
 outcome evidence required for closure. The contribution is a payment-specific
 formalization of established closure principles with explicit trust
@@ -115,8 +116,8 @@ relating inert object creation, registered activation, and irreversible
 source terminality to those closure obligations (Section~\ref{sec:mapping}).
 \item Reproducible implementation evidence: six histories projected into Lean,
 bounded operation schedules, and scripted request-only clients that exercise
-dispatch and reconciliation separately. Concurrent-worker cases identify a
-limitation in reconciling out-of-order observations (Section~\ref{sec:eval}).
+dispatch and reconciliation separately. Concurrent-worker cases identify and test a repair for
+reordered observations (Section~\ref{sec:eval}).
 \end{enumerate}
 The payment-specific content is the connection between provider-object
 activation, outstanding execution authority, and identity-bound outcomes.
@@ -482,10 +483,12 @@ establish the remaining deployment premises.}
 \label{sec:eval}
 We evaluate the conditional Lean models and selected local implementation
 behaviors. Table~\ref{tab:evidence} separates proof obligations from finite
-checks. Reviewer artifact \code{1.1.0-review.4} adds the concurrent-worker
-experiment to the serial client comparison. The Lean declarations and production
-service code are unchanged. The new experiment and artifact were recorded at
-revision \code{85f0846}. An earlier Stripe test-mode run is reported separately in
+checks. The service revision adds serialized provider retrieval and validates
+direct-ledger inputs. Reviewer artifact \code{1.1.0-review.6} includes the retrieval
+repair and maintained experiment tools; ledger tests remain in the broader suite.
+The reconciliation repair is recorded at \code{771e4e0}; the archive manifest
+identifies the exact sources used below. The Lean declarations are unchanged.
+An earlier Stripe test-mode run is reported separately in
 Section~\ref{sec:historical}. It is the only experiment here that made provider
 requests.
 
@@ -499,9 +502,9 @@ Abstract model proofs & 14 exported results; eight premise-removal mutations rej
 Projected service histories & Six histories, 64 transitions; five closed states and one undrained state. & Other executions and completeness of event capture. \\
 Generated Python schedules & 864 cases pass: 768 resolve, 96 remain unresolved; four broken variants rejected. & Unbounded or concurrent executions; additional Lean certificates. \\
 Scripted clients & Five policies, 40 cases; 12 resolved after clients, 30 after operator reconciliation. & LLM capability, concurrent clients, and untested provider behavior. \\
-Concurrent workers & 84 cases: 60 resolved, 18 pending, six blocked by stale-read conflicts. & Exhaustive interleavings, a concurrent socket server, and conflict-free reconciliation. \\
-Regression suites & 158 selected tests in the reviewer package; 375 in the full repository. & Full correctness. The selected tests are a subset of the full suite. \\
-Extracted-package reproduction & Matching content ID passes locally and on Linux and macOS CI workers. & Independent scientific review and real-provider contract validation. \\
+Concurrent workers & 84 cases: 66 resolved, 18 pending, no observation conflicts. & Exhaustive interleavings, a concurrent socket server, and universal reconciliation progress. \\
+Regression suites & 170 selected tests in the reviewer package; 403 in the full repository. & Full correctness. The selected tests are a subset of the full suite. \\
+Extracted-package reproduction & The revised package passes locally; earlier packages also passed Linux/macOS CI. & Independent scientific review and real-provider contract validation. \\
 \bottomrule
 \end{tabularx}
 \caption{Claim-to-evidence map at the recorded code revision. Counts describe
@@ -509,13 +512,12 @@ different kinds of checks and must not be summed as independent results.}
 \label{tab:evidence}
 \end{table}
 
-The archive passed outside the checkout using Python 3.12.14 and Lean 4.19.0
-in the existing local reviewer environment. Separate Ubuntu 24.04 and macOS 15
-Intel CI workers reproduced the same content ID using fresh pinned environments,
-with Python 3.12.16 and 3.12.10 respectively and Lean 4.19.0. Both reproduced all
-formal, trace, schedule, serial-client, and concurrent-worker results. Appendix~\ref{app:artifact} identifies
-the retained summaries and exact run. These executions are not an independent
-research team's review.
+The revised archive passed outside the checkout using Python 3.12.14 and
+Lean 4.19.0 in the existing local reviewer environment. Earlier archive
+\code{1.1.0-review.4} also passed on Ubuntu and macOS CI workers; those runs
+predate the repair and are retained as historical evidence. Appendix~\ref{app:artifact}
+identifies the run records. These executions are not an independent research
+team's review.
 
 \subsection{Formal checks}
 All eight exported admission results and all six provider-contract results
@@ -580,14 +582,16 @@ For a \$200 operation, an uncertain report of \$100 received cannot be replaced
 by a later report of zero. The earlier receipt remains, a durable conflict is
 recorded, and closure stays blocked. This conservative rule does not decide
 which contradictory report is true or interpret a decrease as a refund.
-The 158 selected tests cover gate behavior, observation integrity, interface
+The 170 selected tests cover gate behavior, observation integrity, interface
 and process-crash cases, trace auditing, packaging, schedules, scripted clients,
 and the concurrent-worker experiment.
 
 We ran the actual Python/SQLite gate through six sequential scenarios with a
 local provider simulator. Table~\ref{tab:service_traces} lists their expected
 and observed outcomes. Lean accepted all six projected histories, comprising
-64 transitions. Five final states instantiate the existing exact-closure
+64 transitions. A terminal observation now blocks unclaimed commands before
+transport; the late-capture history therefore contains two fewer transitions
+than the earlier 66-transition run. Five final states instantiate the existing exact-closure
 theorem; the abandoned claim remains undrained. These cases were chosen to
 exercise closure boundaries, not to estimate production workload frequencies.
 
@@ -602,7 +606,7 @@ Capture across the fence & Unresolved until the post-fence payment is observed; 
 Lost reply and reopen & Repeat dispatch rejected; closed after reconciliation. \\
 Two payments resolve separately & Unresolved with one pending; closed after its cancellation. \\
 Claim abandoned before send & No effect yet; one right remains and closure is withheld. \\
-Late capture after cancellation & Gate refuses the claim once cancellation is observed; no provider call; closure is preserved. \\
+Late capture after cancellation & Gate refuses the claim after observed cancellation; no provider call; closure is preserved. \\
 \bottomrule
 \end{tabularx}
 \caption{Six local service executions. All listed outcomes matched the checks.
@@ -662,8 +666,8 @@ subprocess tests separately exercise 15 dispatch killpoints. The 864 cases add
 Python evidence, not new Lean-certified histories.
 
 The closure results do not establish general monetary correctness. Separate
-checkout and spending-allocation repairs, including a remaining direct-ledger
-validation gap, are documented in Appendix~\ref{app:implementation}.
+checkout and spending-allocation repairs, including direct-ledger
+input validation, are documented in Appendix~\ref{app:implementation}.
 
 \subsection{Scripted agent behaviors}
 \label{sec:agents}
@@ -731,7 +735,8 @@ trusted service workers sharing one journal, each using its own SQLite connectio
 and the existing command interface. The bundled socket listener remains serial;
 these experiments exercise a possible multiple-worker arrangement. A separate
 SQLite provider simulator serializes irreversible outcomes for each identity.
-Neither service nor Lean code was changed for this experiment.
+The service now serializes retrieval and journal application; the Lean models
+are unchanged.
 
 Table~\ref{tab:concurrent} summarizes three repetitions of 28 configurations.
 Contention cases synchronize 2, 4, or 8 clients over 2 or 4 payments; each client
@@ -753,14 +758,14 @@ Scenario family & Cases & Resolved & Pending & Read conflict \\
 Contending dispatch and retries & 54 & 36 & 18 & 0 \\
 Capture versus cancellation & 12 & 12 & 0 & 0 \\
 Admission versus fencing & 12 & 12 & 0 & 0 \\
-Older read after terminal evidence & 6 & 0 & 0 & 6 \\
+Overlapping provider reads & 6 & 6 & 0 & 0 \\
 \midrule
-Total & 84 & 60 & 18 & 6 \\
+Total & 84 & 66 & 18 & 0 \\
 \bottomrule
 \end{tabularx}
 \caption{Concurrent-worker outcomes after operator reconciliation. Pending cases
-retain source authority; read-conflict cases have terminal source outcomes but
-cannot establish closure through the current service. Repetitions are not
+retain source authority. The six overlapping-read cases resolve after serialized
+reconciliation. Repetitions are not
 independent statistical samples or an exhaustive concurrency search.}
 \label{tab:concurrent}
 \end{table}
@@ -771,26 +776,40 @@ synchronized checkpoints, including after reopening the gate. Across these
 cases, each identity had at most one capture invocation and one paid effect.
 No premature closure, omitted effect or right, or admission after fencing was
 observed. The simulator logs every invocation, including repeated calls; its
-terminality rule does not hide duplicate sends from this check. Nineteen
-regression tests include three deliberately broken variants for repeated claims,
-premature closure, and a missing journal identity.
+terminality rule does not hide duplicate sends from this check. Twenty concurrency
+regression tests include four broken variants: repeated claims, premature closure,
+a missing journal identity, and unserialized retrieval. Six additional tests
+exercise contradictions, identity binding, retrieval failure, and worker death.
 
-The six stale-read cases reveal a limitation. One reconciler reads
-\code{requires\_capture} and pauses before applying the response. Another worker
-completes or cancels both payments and records their terminal outcomes. When the
-older response arrives, both reports are truthful at their respective read
-times. The gate retains the terminal evidence but persists \code{terminal\_observation\_changed}. Fresh reconciliation and database
-reopening do not clear this conflict. The source has no remaining right, yet the
-service cannot close its records. The current observation interface does not
-distinguish benign read reordering from contradictory source behavior.
+The earlier run exposed six false conflicts. A reconciler read
+\code{requires\_capture} and paused; another recorded a terminal outcome before
+that older response arrived. Both reports were truthful at their read times,
+yet the gate persisted \code{terminal\_observation\_changed}, preventing closure.
+The earlier run and its source remain available as historical evidence.
 
-All scenario assertions passed, including explicit reproduction of this
-limitation; conflict-free concurrent reconciliation did not hold. The experiment
-does not fix the issue. Serializing reconciliation or using trustworthy provider
-versions requires separate validation, since discarding apparently stale reports
-could conceal a real source-contract violation. Event transcripts and failure
-prefixes are retained. These bounded Python runs add no Lean certificates or
-real-provider evidence; their thread schedules and timing are not exhaustive.
+The revised service holds a SQLite write transaction across each trusted
+retrieval and its journal update. A competing reconciler cannot overtake the
+in-flight read. The six revised cases pause a pending read while an already
+claimed capture completes or the provider cancels the payments. A separate
+zero-wait connection checks that the journal write lock remains held, and a
+competing worker attempts reconciliation before the read is released. Both
+reconcilers then complete; fresh reconciliation and database reopen establish
+closure. The unserialized-read mutation fails the lock check. This tests the
+prevented ordering rather than reproducing the old interleaving unchanged.
+
+All 84 cases passed: 66 resolved, 18 retained genuinely pending authority, and
+none produced an observation conflict. Separate tests confirm that contradictory
+terminal reports and identity mismatches still persist conflicts. A retrieval
+exception rolls back, and process termination during retrieval releases the
+transaction. Existing conflicts are not cleared automatically; direct
+\code{observe} calls still require trusted ordering.
+
+Each external read holds the journal write lock; trusted adapters must bound
+timeouts and avoid journal re-entry. Sequential provider freshness and truth
+remain assumed. The repair does not detect cached responses or provide a
+multi-object atomic snapshot. These finite Python runs add no Lean certificates
+or real-provider evidence and establish neither exhaustive coverage nor
+universal progress.
 
 \subsection{Historical processor observation}
 \label{sec:historical}
@@ -860,7 +879,7 @@ for our question than a receipts-only comparison. Our Op comparison uses the unv
 2026; we draw no historical priority conclusion from that mutable text.
 
 \paragraph{Payment protocols, profiles and closure receipts.}
-Jiang et al. analyze x402, MPP, ACP, and AP2 in Tamarin, covering correspondence,
+Jiang et al. analyze x403, MPP, ACP, and AP2 in Tamarin, covering correspondence,
 authorization, finality, and compensation~\cite{protocolanalysis}. Those protocol
 properties have different scopes from our epoch-wide accounting predicate.
 HoldSpec checks a bounded hold lifecycle with explicit provider
@@ -919,7 +938,7 @@ refinement: it must represent every effect and remaining right and connect
 concrete drainage and observation evidence to Theorem~1. The current
 membership-only bridge does not do this. A separate initial-state invariant
 would be needed to import work from an earlier epoch. On the implementation
-side, concurrency beyond the bounded cases here, observation ordering,
+side, concurrency beyond the bounded cases here, provider-side observation freshness,
 explicit settlement of claimed allowances, and provider-specific recovery evidence would strengthen
 the case for a deployment. None follows from the present finite checks.
 
@@ -927,23 +946,25 @@ the case for a deployment. None follows from the present finite checks.
 \section{Artifact availability}
 \label{app:artifact}
 The code and instructions are maintained at
-\url{https://github.com/tokencraftdata/trustbound}. The concurrent-worker experiment is recorded at revision \code{85f0846}; the
-unchanged service was previously tested at \code{fa218e4}. The versioned
+\url{https://github.com/tokencraftdata/trustbound}. The service repair is recorded
+at revision \code{771e4e0}; the archive manifest binds the maintenance revision's
+exact source hashes to its reproduction results. The versioned
 reviewer ZIP can be supplied directly and reproduced without a repository
-account. Repository access remains private; an anonymous/public mirror,
-permanent archive URL or DOI, and release terms remain pending.
+account. Repository access remains private; an anonymous/public mirror and
+a permanent archive URL or DOI remain pending. Code and technical
+documentation use the existing MIT license; the manuscript is excluded.
 
 \paragraph{Versioned reviewer package.}
-The selected package is \path{TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip}
-in \code{paper/release/}, alongside its checksum. It contains 43 entries,
+The selected package is \path{TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip}
+in \code{paper/release/}, alongside its checksum. It contains 45 entries,
 including a per-file manifest, Lean sources and checkers, selected Python code
 and tests, reference traces, and pinned reviewer dependencies. Its SHA-256 is:
 \begin{quote}\footnotesize\ttfamily
-398d85b793bf7269aec4c64a64725ecf08b70d55b07dbb774ac85c27170347d1
+ee94062ad505bb9d5efc785679b6190066aab4ad07cc3429aea59b8e619a3f93
 \end{quote}
 The content ID derived from member hashes is:
 \begin{quote}\footnotesize\ttfamily
-a3cffb9395b23753b821113c4e48034dde429bf78319591924696b11ba8a49f5
+a64936b80a004eec5d33992f6dfb999072ddd756558cfe94f409e1478adab969
 \end{quote}
 \begin{samepage}
 \paragraph{Reproduction.}
@@ -962,22 +983,16 @@ and \code{checks\_passed: true} in \code{summary.json}, with Table~
 \ref{tab:evidence}'s counts, nine diagnostic tests, and 2,048 records.
 The 40 serial client cases are recorded in {\small\path{agent-behaviors.json}};
 {\small\path{concurrent-clients.json}} records the 84 concurrent-worker cases,
-including the six expected stale-read conflicts.
+including six successful overlapping-read cases.
 {\small\path{docs/REVIEWER_GUIDE.md}} explains all outputs and labels historical
 reference traces. After setup no network or provider credentials are needed.
 
-\paragraph{Cross-platform evidence and scope.}
-\href{https://github.com/tokencraftdata/trustbound/actions/runs/43351357979}{CI run 43351357979}
-passed for revision \code{85f0846} (package \code{1.1.0-review.4}) on Linux and macOS,
-including all 40 serial client cases and 84 concurrent-worker cases. A separate Linux job passed 374 repository tests.
-Package \code{1.1.0-review.5} adds the terminal-claim repair and the MIT license; it was
-reproduced locally on Linux from a fresh extraction, and the full suite passed 375 tests. Each package job
-extracts outside the checkout and uses a fresh environment. Downloaded summaries
-are retained in \code{paper/release/ci-run-43351357979/}; full CI attachments
-have 30-day retention. The local record is
-{\small\path{paper/release/reviewer-verification-v1.1.0-review.5.json}}.
-Full-suite dependencies are recorded but not all pinned; the selected
-package's complete Python dependency set is pinned.
+\paragraph{Reproduction evidence.}
+The local run is recorded in
+{\footnotesize\path{paper/release/reviewer-verification-v1.1.0-review.6.json}}.
+Historical \href{https://github.com/tokencraftdata/trustbound/actions/runs/43351357979}{CI run 43351357979}
+predates these repairs. Reviewer dependencies are fully pinned; the broader
+suite records its resolved versions.
 
 \paragraph{Use of generative AI.}
 OpenAI ChatGPT and Codex assisted with literature exploration, code development,
@@ -987,27 +1002,23 @@ for the manuscript and accompanying artifact.
 
 \section{Supplementary implementation details}
 \label{app:implementation}
-Two adjacent repairs concern authorization and spending allowances. Booking
-facts now come from the authenticated checkout: a signed \$200 checkout paired
-with separate \$1 facts is rejected. This local profile does not establish
-generic UCP/AP2 conformance.
+Authorization now uses facts extracted from the authenticated checkout: a
+signed \$200 checkout paired with separate \$1 facts is rejected. This local
+profile does not establish generic UCP/AP2 conformance.
 
-A trusted coordinator must atomically claim an allowance before work starts.
-For a \$500 trip, a claimed \$300 allowance stays reserved after retirement,
-leaving at most \$200 for another allowance. Unclaimed retired allowances can
-be released because further claims are blocked. The coordinator need not be
-an AI agent, and reserving a cap does not transfer money. Claimed capacity is
-not automatically reclaimed after expiry, restart, or a lost response;
-settlement requires additional accounting not implemented here.
+A trusted coordinator atomically claims a spending allowance before work starts.
+For a \$500 trip, a claimed \$300 allowance remains reserved after retirement;
+an unclaimed retired allowance can be released. A cap is not a money transfer.
+Settlement and automatic reclamation of claimed capacity are not implemented.
 
-These SDK-dependent modules are covered by the full suite and excluded from
-the reviewer package. The closure theorem does not verify their monetary rules.
-The standalone ledger still accepts negative reservations through its direct
-API; the checked protocol path rejects negative checkout facts. General monetary
-safety and composed approval-to-dispatch checks remain unestablished.
-Section~\ref{sec:concurrent} addresses only bounded worker concurrency.
+The direct ledger rejects negative amounts, booleans, nonintegers, and values
+outside SQLite's signed integer range before mutation; zero remains valid.
+Tests cover invalid budgets, capacity creation, identity reuse after rejection,
+restart, and integer boundaries. Historical invalid rows are not repaired.
+These modules are tested in the full suite and excluded from the reviewer ZIP.
+Their monetary rules and composed approval-to-dispatch behavior are not proved
+by the closure theorem.
 
-\clearpage
 \begingroup
 \small
 \raggedright

@@ -49,7 +49,7 @@ Success means exit status 0 and `checks_passed: true` in `summary.json`:
 
 - `core/`: **14 exported Lean results**, **eight rejected premise-removal
   mutations**, **nine diagnostic tests**, and **2,048 synthetic records**.
-- `service-tests.xml`: at least 158 selected gate/interface/crash, observation,
+- `service-tests.xml`: at least 170 selected gate/interface/crash, observation,
   trace-audit, packaging, and generated-checker tests, all passing with no skips.
   The exact count is recorded in `summary.json`.
 - `traces/traces.json`: **six executed histories**, **64 projected transitions**,
@@ -67,10 +67,10 @@ Success means exit status 0 and `checks_passed: true` in `summary.json`:
 - `agent-behaviors.json`: five scripted request-only policies across four provider
   modes and two restart choices; 40 cases, 12 resolved after the client stops,
   30 after separately labeled operator reconciliation, and 10 still pending.
-- `concurrent-clients.json`: 84 threaded-worker cases: 60 resolved, 18 pending,
-  and six blocked by a stale-read conflict despite terminal provider outcomes.
-  `checks_passed` includes reproduction of this known limitation;
-  `conflict_free_concurrent_reconciliation` is **false**.
+- `concurrent-clients.json`: 84 threaded-worker cases: 66 resolved, 18 pending,
+  and no observation conflicts. The six overlapping-read cases verify serialized
+  retrieval/application; `conflict_free_concurrent_reconciliation` is **true**
+  for this bounded run. The earlier false-conflict run is retained historically.
 - `summary.json` and job logs: tool versions, selected source hashes, dependency
   versions, test counts, command results, and explicit evidence limits.
 
@@ -91,8 +91,8 @@ acceptance function. They are not an independent algorithm comparison.
 5. **Abandoned claim:** a command is durably claimed but never sent. Reopening
    and observing the provider do not discharge its right. The epoch stays open
    for exact closure even though admission has been fenced.
-6. **Late dispatch after cancellation:** simulator terminality prevents an
-   already-granted capture from producing a new payment.
+6. **Late dispatch after observed cancellation:** the gate rejects the unclaimed
+   command before transport; no provider invocation occurs.
 
 These are chosen finite cases. The event mapping and assumptions explaining
 their authority accounting are in the [research contract](RESEARCH_CONTRACT.md).
@@ -141,9 +141,12 @@ The [concurrency experiment](../research/concurrent_clients/README.md) uses
 separate trusted workers and SQLite connections. The bundled socket listener
 remains serial. It compares 2/4/8 contending clients over 2/4 payments, forces
 cancellation/capture and admission/fence orderings, and delays an older provider
-read behind newer evidence. Three repetitions of 28 configurations give 84 cases.
-The stale-read cases expose a persistent conservative conflict, not a duplicate
-payment. No recovery fix is included; read ordering/versioning remains open.
+read while a competing reconciler attempts to run. Three repetitions of 28
+configurations give 84 cases. The service now serializes retrieval and application
+under the journal write lock; the six overlapping-read cases resolve. Genuine
+contradictions remain conflicts. Reads block journal writers, so adapters must
+bound their transport waits and avoid re-entry. Provider-side stale responses
+and existing conflicts are not repaired.
 
 ```sh
 .venv/bin/python research/concurrent_clients/evaluate.py \
@@ -170,7 +173,7 @@ rejected. Tests also deliberately corrupt traces and require rejection.
 
 ```sh
 .venv/bin/python scripts/build_reviewer_artifact.py \
-  --output results/TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip
+  --output results/TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip
 ```
 
 The builder uses an explicit source list. It includes Lean sources and checkers,
@@ -189,8 +192,8 @@ independent signature or attestation of the author.
 For macOS, verify and extract the package with:
 
 ```sh
-shasum -a 256 -c TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip.sha256
-unzip TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip -d reviewer-artifact
+shasum -a 256 -c TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip.sha256
+unzip TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip -d reviewer-artifact
 cd reviewer-artifact
 ```
 
@@ -204,9 +207,9 @@ execute it on their own machine to establish independent reproduction.
 The repository's `paper/release/` directory holds the versioned reviewer candidate
 and checksum. Access to that branch or to a separately supplied archive is still
 necessary. A private repository link alone does not provide reviewer access.
-Public/anonymous distribution and a permanent archive URL or DOI are publication
-decisions; generating this package does not make them. The packaged code and
-documentation are released under the MIT license in `LICENSE`.
+Public/anonymous distribution and a permanent archive URL or DOI remain
+publication decisions. The existing MIT license covers the packaged code and
+technical documentation; manuscript terms are in paper/LICENSE.md.
 
 ## Boundaries of the result
 
@@ -217,3 +220,12 @@ The broader protocol/allocation fixes are documented in
 [correctness changes](CORRECTNESS_FIXES.md) and tested by the full repository
 suite; their SDK-dependent code is outside this selected package. Behavior beyond
 the constrained provider contract requires separate mechanisms and evidence.
+
+## Maintenance boundaries
+
+`research/support.py` holds the shared one-payment simulator, explicit check
+helper, and report writer. Each evaluator retains its own expected-state oracle;
+no oracle imports production transition logic. The reviewer runner separates
+dependency checks, job commands, execution, result validation, and reporting.
+Timeouts retain partial stdout/stderr and mark the failed job in `summary.json`.
+An existing report path is never overwritten or silently rerun.

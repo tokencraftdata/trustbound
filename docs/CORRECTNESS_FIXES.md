@@ -156,3 +156,14 @@ contradictions, and check lock release after retrieval failure and worker death.
 The write lock spans the external read, so it can block all journal writers.
 Adapters must enforce bounded timeouts and avoid re-entering the journal. Cached
 provider responses and historical conflicts remain outside this repair.
+
+## 10. Maintain the evaluation and reviewer workflow
+
+Shared simulator and reporting code lives in `research/support.py`; the serial
+schedule and agent evaluators no longer import one another. Their independent
+oracles are unchanged. The concurrent simulator remains separate because it has
+different state and transaction semantics. The reviewer runner now has named
+stages for dependency validation, job execution, output validation, and summary
+writing. Failed and timed-out jobs preserve diagnostic logs and exit/timeout
+metadata. Reference results are regenerated after these source changes; earlier
+versioned archives and the original concurrency findings remain historical.

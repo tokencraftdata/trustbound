@@ -19,13 +19,13 @@
   "pending_after_operator": 10,
   "max_capture_invocations_per_case": 1,
   "max_paid_effects_per_case": 1,
-  "python": "3.13.18",
-  "platform": "Linux-6.18.44-fc-v445-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "platform": "macOS-26.7.1-arm64-arm-64bit",
   "source_sha256": {
-    "research/agent_behaviors/evaluate.py": "342d4df7a8d36f9050e37d5263f1a14a081c6e44502e60efec076921da53fc6e",
-    "research/service_refinement/check_schedules.py": "15d520805b8369507558ba0e700117bbd5d36bda5c2202250c5180298e3aea59",
-    "src/trustbound/stripe_gate.py": "e651f5efd0f9452a8144f5080da25e9d5974cd6ab87d1878efb2782808df0c16",
-    "src/trustbound/credential_service.py": "5fb0ec9da8e8a1d479c306eb2ca1c1c9c23bcf5c78ca4f883823adb94f19ebee"
+    "research/agent_behaviors/evaluate.py": "c59f507f14f36017ee0d31ebcb20cd4b9a8377a39776ce3e702ffbcc695de67b",
+    "research/support.py": "793256ace434fbd33db63eec54d031aeef27d73ff9fd918e01c84f338b8ae663",
+    "src/trustbound/stripe_gate.py": "0dc0c4c3c16eecbbb415f87fd21f07ed2971036ce1ed4710525a487e73592238",
+    "src/trustbound/credential_service.py": "c853798fe266b9629569714b17c69e73caa0c6f3350135c0cdd60f5e8641febb"
   },
   "scope": "Five scripted request-only policies; four provider modes; with/without close-reopen after each request. One payment, serial execution, no LLMs, real-provider calls, host-isolation proof or new Lean certificates.",
   "per_policy": [

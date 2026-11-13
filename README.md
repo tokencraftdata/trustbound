@@ -100,8 +100,8 @@ python3 -m venv .venv
 Replace the Lean path with your installed compiler. Use a new output directory
 for each run. Assertion-based checkers reject `-O` and `PYTHONOPTIMIZE`.
 
-[Download the versioned reviewer candidate](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip)
-and its [SHA-256 checksum](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip.sha256).
+[Download the versioned reviewer candidate](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip)
+and its [SHA-256 checksum](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip.sha256).
 The [reviewer guide](docs/REVIEWER_GUIDE.md) explains extraction, integrity checks,
 scenario expectations, and how to rebuild the archive.
 
@@ -132,10 +132,12 @@ a consistency control, not an independent product comparison or validation of
 theorem soundness; the comparison implements no witnessing protocol.
 
 The [concurrent-worker experiment](research/concurrent_clients/README.md) adds
-84 cases with multiple clients and payment identities. It finds a conservative
-stale-read conflict: an older truthful response can permanently block closure
-after a newer terminal outcome. Successful reproduction includes that finding;
-it does not establish conflict-free concurrent reconciliation.
+84 cases with multiple clients and payment identities. The revised run resolves
+66 and leaves 18 genuinely pending, with no false observation conflicts.
+Serialized retrieval/application prevents the earlier read-overtaking failure,
+at the cost of holding the journal write lock during each provider retrieval.
+The historical failure remains documented; the bounded checks do not establish
+universal conflict-free reconciliation or eventual progress.
 
 A successful run is a **reproduction report**, not a closure certificate for a
 real merchant. It makes no processor requests and does not establish deployment

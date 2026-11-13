@@ -17,7 +17,7 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "src"))
-from research.service_refinement.check_schedules import PAYMENT, Provider, require
+from research.support import PAYMENT, SinglePaymentProvider, require, write_report
 from trustbound.credential_service import CommandService
 from trustbound.stripe_gate import StripeGate
 
@@ -64,7 +64,7 @@ def run_policy(name, exchange):
         exchange(SNAPSHOT)
 
 
-class BehaviorProvider(Provider):
+class BehaviorProvider(SinglePaymentProvider):
     """The schedule simulator plus retrieval and an indefinitely pending request.
 
     Pending mode records a transport invocation but leaves the source nonterminal.
@@ -237,7 +237,7 @@ def run_suite():
             "max_paid_effects_per_case": max(r["paid_effects"] for r in results),
             "python": platform.python_version(), "platform": platform.platform(),
             "source_sha256": {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in (
-                "research/agent_behaviors/evaluate.py", "research/service_refinement/check_schedules.py",
+                "research/agent_behaviors/evaluate.py", "research/support.py",
                 "src/trustbound/stripe_gate.py", "src/trustbound/credential_service.py")},
             "scope": "Five scripted request-only policies; four provider modes; with/without close-reopen after each request. One payment, serial execution, no LLMs, real-provider calls, host-isolation proof or new Lean certificates.",
             "per_policy": rows, "cases": results}
@@ -247,15 +247,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    with args.output.open("x") as output:
-        try:
-            report = run_suite()
-        except Exception as exc:
-            json.dump({"checks_passed": False, "error": str(exc)}, output, indent=2)
-            raise
-        json.dump(report, output, indent=2)
-        output.write("\n")
+    report = write_report(args.output, run_suite)
     print(json.dumps({key: report[key] for key in (
         "checks_passed", "generated_cases", "resolved_after_agent", "resolved_after_operator",
         "pending_after_operator", "max_capture_invocations_per_case", "max_paid_effects_per_case", "per_policy")}))

@@ -9,7 +9,7 @@ import re
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.1.0-review.5"
+VERSION = "1.1.0-review.6"
 FILES = (
     "LICENSE", "requirements-reviewer.txt", "requirements-core.txt",
     "docs/REVIEWER_GUIDE.md", "docs/RESEARCH_CONTRACT.md", "docs/CORRECTNESS_FIXES.md",
@@ -21,7 +21,7 @@ FILES = (
     "scripts/reproduce_core_claim.py", "scripts/reproduce_reviewer_artifact.py",
     "scripts/build_reviewer_artifact.py", "scripts/check_trace_evidence.py",
     "research/service_refinement/check_traces.py",
-    "research/service_refinement/check_schedules.py", "tests/test_generated_schedules.py",
+    "research/support.py", "research/service_refinement/check_schedules.py", "tests/test_generated_schedules.py",
     "research/agent_behaviors/evaluate.py", "research/agent_behaviors/README.md",
     "research/agent_behaviors/evidence/results.json", "tests/test_agent_behaviors.py",
     "research/concurrent_clients/evaluate.py", "research/concurrent_clients/README.md",

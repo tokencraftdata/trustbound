@@ -513,9 +513,9 @@ different kinds of checks and must not be summed as independent results.}
 \end{table}
 
 The revised archive passed outside the checkout using Python 3.12.14 and
-Lean 4.19.0 in the existing local reviewer environment. Earlier archive
-\code{1.1.0-review.4} also passed on Ubuntu and macOS CI workers; those runs
-predate the repair and are retained as historical evidence. Appendix~\ref{app:artifact}
+Lean 4.19.0 in the existing local reviewer environment. The repository's CI
+workflow also rebuilds the package from each pushed revision and reproduces it
+on Ubuntu and macOS workers. Appendix~\ref{app:artifact}
 identifies the run records. These executions are not an independent research
 team's review.
 
@@ -990,8 +990,7 @@ reference traces. After setup no network or provider credentials are needed.
 \paragraph{Reproduction evidence.}
 The local run is recorded in
 {\footnotesize\path{paper/release/reviewer-verification-v1.1.0-review.6.json}}.
-Historical \href{https://github.com/tokencraftdata/trustbound/actions/runs/43351357979}{CI run 43351357979}
-predates these repairs. Reviewer dependencies are fully pinned; the broader
+Reviewer dependencies are fully pinned; the broader
 suite records its resolved versions.
 
 \paragraph{Use of generative AI.}

@@ -1,14 +1,14 @@
 {
   "title": "TrustBound: Payment-Epoch Completeness Reproducibility Artifact",
   "upload_type": "software",
-  "version": "1.0.0",
+  "version": "1.1.0-review.6",
   "creators": [
     {
       "name": "Nandi, Sandip",
       "affiliation": "Independent Researcher"
     }
   ],
-  "description": "Selected reproducibility artifact accompanying TrustBound: A Mechanized Note on Payment-Epoch Completeness. Contains the Lean admission and provider-contract models and checkers, eight premise-removal mutations, a finite evidence-rule diagnostic and nine tests, source-isolated reproduction runner, reference results and redacted execution evidence, and the supplementary finite flight-hotel diagnostic. The core checks 14 exported results and reproduces 2,048 records. A service supplement includes the repaired SQLite gate, 66 selected tests, and six finite service histories checked against the existing model (66 transitions, five closure instances and one undrained final state); two deliberately invalid inputs are rejected. The projection and event capture remain trusted, so this is not a universal implementation refinement. It establishes conditional model results under a trusted-service contract, not completeness of a real processor deployment or a new general closure principle. Existing tools are required; no credentials, provider calls, SDK or Docker are needed. Proposed release terms for author-owned software and accompanying documentation: MIT; author approval remains pending. Manuscript distribution terms are separate.",
+  "description": "Reviewer artifact accompanying TrustBound: A Mechanized Note on Payment-Epoch Completeness (TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip, 45 entries with a per-file manifest). Contains the Lean admission and provider-contract models and checkers (14 exported results, eight rejected premise-removal mutations), a finite evidence-rule diagnostic with nine tests reproducing 2,048 records, the experimental SQLite payment gate with 170 selected tests, six service histories with 64 transitions checked against the Lean model (five closed, one undrained; two invalid inputs rejected), 864 generated operation schedules, 40 scripted-client cases and 84 concurrent-worker cases. It establishes conditional model results under a trusted-service contract, not completeness of a real processor deployment or a new general closure principle. Requires Python 3.11+ and Lean 4.19.0; no credentials, provider calls, SDK or Docker are needed. Code, Lean models and documentation are MIT-licensed; the manuscript is distributed separately under its own terms.",
   "access_right": "open",
   "license": "mit",
   "keywords": [

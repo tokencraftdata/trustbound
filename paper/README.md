@@ -44,11 +44,9 @@ The existing MIT code license and separate manuscript terms are retained.
 The SDK-dependent protocol/allocation/ledger modules remain outside the selected
 archive. No real-provider request was made by the new checks.
 
-[CI run 43351357979](https://github.com/tokencraftdata/trustbound/actions/runs/43351357979)
-is historical: it verified the earlier 85f0846 revision on Linux and macOS with
-six expected stale-read conflicts. Its [retained summaries](release/ci-run-43351357979/run.json)
-do not certify the repaired revision. The workflow runs on each new push;
-observed results must be identified by the tested revision and content ID.
+The repository's `Reviewer artifact` CI workflow rebuilds the package from each
+pushed revision and reproduces it on Ubuntu and macOS workers. Observed results
+must be identified by the tested revision and content ID.
 
 ## Build
 

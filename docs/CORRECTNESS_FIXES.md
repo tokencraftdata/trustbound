@@ -91,8 +91,8 @@ fencing, repeated claims, premature closure, and missing journal records. These
 tests assess the checker itself. The full generated case list and outcomes are
 included in reproduction output; failed runs preserve a replayable prefix.
 
-The new reviewer candidate is `1.1.0-review.2`; the earlier ZIP is immutable
-historical evidence. The generated cases extend testing but do not change the
+These fixes were first packaged in reviewer candidate `1.1.0-review.2`, which
+is no longer kept in the repository. The generated cases extend testing but do not change the
 Lean theorems or certify concurrent executions, process isolation, real-provider
 behavior, or eventual resolution. Close/reopen tests are distinguished from the
 existing subprocess crash tests in the reviewer guide.
@@ -123,9 +123,8 @@ The Lean models are unchanged.
 Code, Lean models, scripts, tests, evidence and technical documentation are
 released under the MIT license (`LICENSE`). The manuscript is excluded and will
 use arXiv's non-exclusive distribution license (`paper/LICENSE.md`).
-`RIGHTS_PENDING.txt` is removed; dated historical manifests that hash it are
-left unchanged as records of earlier exports. Reviewer candidate
-`1.1.0-review.5` packages `LICENSE` in its place.
+`RIGHTS_PENDING.txt` is removed, and the reviewer candidate packages `LICENSE`
+in its place.
 
 ## 8. Validate direct ledger inputs
 

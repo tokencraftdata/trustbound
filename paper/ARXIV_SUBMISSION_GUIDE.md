@@ -54,11 +54,11 @@ The copyable title, abstract, and comments use ASCII characters as required by
 ## Artifact access
 
 The private GitHub repository is a working copy, not public reader access.
-The prepared `TrustBound_Core_Artifact.zip` isolates the paper's existing core
+The reviewer artifact in `release/` (currently
+`TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip`) isolates the paper's core
 without provider probes, credentials, raw provider records, account details,
 conference template, or unrelated research. Its README explains what running it
-achieves; its manifest pins every packaged file. It currently retains a
-rights-pending notice and must not be described as an open-source release.
+achieves; its manifest pins every packaged file. Code is MIT-licensed.
 
 Recommended release: publish this frozen selected-core package with the agreed
 software terms, retain its checksum and version, and add its stable public URL

@@ -18,7 +18,6 @@ remain independent. **403 repository tests** and **170 selected package tests**
 passed. The Lean sources, Theorem 1, proof, and A1–A5 are unchanged. Six projected
 histories now contain 64 transitions after the remote terminal-claim repair;
 The 864 serial schedules and the 40-case client comparison are reproduced.
-See the [repair and maintenance audit](PAPER_MAINTENANCE_AUDIT_2026-11-13.json).
 
 | Version | PDF | Source | Length |
 |---|---|---|---|
@@ -27,10 +26,8 @@ See the [repair and maintenance audit](PAPER_MAINTENANCE_AUDIT_2026-11-13.json).
 
 The author version names **Sandip Nandi — Independent Researcher**. The anonymous
 copy uses the official AAAI 2027 format and has not been synchronized with this
-revision. Both retain the AI-assistance disclosure. Historical audits describe
-[the original concurrency finding](PAPER_CONCURRENCY_AUDIT_2026-11-12.json),
-[the research pass](PAPER_RESEARCH_PASS_AUDIT_2026-11-12.json), and
-[the earlier revision](PAPER_REVISION_AUDIT_2026-11-12.json).
+revision. Both retain the AI-assistance disclosure. Earlier editorial audits and review
+responses were removed from the working tree and remain in the git history.
 
 ## Artifact access and reproduction
 
@@ -65,7 +62,7 @@ The [anonymous build instructions](workshop/README.md) also require BibTeX.
 
 **Publication remains on hold at the author's request.** This work does not
 submit the paper, publish a public release, assign a DOI, or change the existing license terms.
-The author reports an arXiv account and endorsement. See
-[submission status](SUBMISSION_STATUS.md), [submission guide](ARXIV_SUBMISSION_GUIDE.md),
+The author reports an arXiv account and endorsement. See the
+[submission guide](ARXIV_SUBMISSION_GUIDE.md)
 and [prepared metadata](arxiv-metadata.json). Reviewer access, final venue format,
 venue requirements and the final processed-PDF check remain outstanding.

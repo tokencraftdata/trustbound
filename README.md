@@ -222,8 +222,8 @@ payment was executed. See [provider evidence](docs/PROVIDERS.md) and
 
 Provider scripts are separate from ordinary reproduction. They require explicitly
 supplied test credentials and may create, capture, book, or cancel test-account
-objects. The [export manifest](EXPORT_MANIFEST.json) describes the repository's
-contents; credentials and raw private provider records are excluded.
+objects. Credentials and raw private provider records are not included in the
+repository.
 
 ## Paper and licensing
 
@@ -238,8 +238,7 @@ build instructions, and editorial history.
   reserve optimization are outside the note's contribution.
 - [Release candidate](paper/release/README.md): prepared artifact and reproduction
   records.
-- [Submission status](paper/SUBMISSION_STATUS.md) and
-  [submission guide](paper/ARXIV_SUBMISSION_GUIDE.md): publication and access logistics.
+- [arXiv submission guide](paper/ARXIV_SUBMISSION_GUIDE.md): publication and access logistics.
 
 The code, Lean models, scripts, tests, evidence and technical documentation are
 released under the [MIT license](LICENSE). The manuscript is not MIT-licensed; it

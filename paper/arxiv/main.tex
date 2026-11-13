@@ -500,7 +500,7 @@ Projected service histories & Six histories, 64 transitions; five closed states 
 Generated Python schedules & 864 cases pass: 768 resolve, 96 remain unresolved; four broken variants rejected. & Unbounded or concurrent executions; additional Lean certificates. \\
 Scripted clients & Five policies, 40 cases; 12 resolved after clients, 30 after operator reconciliation. & LLM capability, concurrent clients, and untested provider behavior. \\
 Concurrent workers & 84 cases: 60 resolved, 18 pending, six blocked by stale-read conflicts. & Exhaustive interleavings, a concurrent socket server, and conflict-free reconciliation. \\
-Regression suites & 157 selected tests in the reviewer package; 374 in the full repository. & Full correctness. The selected tests are a subset of the full suite. \\
+Regression suites & 158 selected tests in the reviewer package; 375 in the full repository. & Full correctness. The selected tests are a subset of the full suite. \\
 Extracted-package reproduction & Matching content ID passes locally and on Linux and macOS CI workers. & Independent scientific review and real-provider contract validation. \\
 \bottomrule
 \end{tabularx}
@@ -580,7 +580,7 @@ For a \$200 operation, an uncertain report of \$100 received cannot be replaced
 by a later report of zero. The earlier receipt remains, a durable conflict is
 recorded, and closure stays blocked. This conservative rule does not decide
 which contradictory report is true or interpret a decrease as a refund.
-The 157 selected tests cover gate behavior, observation integrity, interface
+The 158 selected tests cover gate behavior, observation integrity, interface
 and process-crash cases, trace auditing, packaging, schedules, scripted clients,
 and the concurrent-worker experiment.
 
@@ -934,16 +934,16 @@ account. Repository access remains private; an anonymous/public mirror,
 permanent archive URL or DOI, and release terms remain pending.
 
 \paragraph{Versioned reviewer package.}
-The selected package is \path{TrustBound_Reviewer_Artifact_v1.1.0-review.4.zip}
+The selected package is \path{TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip}
 in \code{paper/release/}, alongside its checksum. It contains 43 entries,
 including a per-file manifest, Lean sources and checkers, selected Python code
 and tests, reference traces, and pinned reviewer dependencies. Its SHA-256 is:
 \begin{quote}\footnotesize\ttfamily
-c107d58b419f268a15f5a087432b4ec8a8cd456333643ff2201f9fab484ffe02
+1b7d51112aa6735becc4fb83f6aeb321c7da737fef1e2878c3cf62917c823b10
 \end{quote}
 The content ID derived from member hashes is:
 \begin{quote}\footnotesize\ttfamily
-c35ad516a5e6fdcbd68fe5b85820da5aee9e6e28d7462bc8f362d8ffb1cc8620
+544cc369c7d436ae9fb39b5759b97e6a668577d55b80e4c54d7c0dd8dea0c027
 \end{quote}
 \begin{samepage}
 \paragraph{Reproduction.}
@@ -968,12 +968,14 @@ reference traces. After setup no network or provider credentials are needed.
 
 \paragraph{Cross-platform evidence and scope.}
 \href{https://github.com/tokencraftdata/trustbound/actions/runs/43351357979}{CI run 43351357979}
-passed for revision \code{85f0846} on Linux and macOS, including all 40 serial
-client cases and 84 concurrent-worker cases. A separate Linux job passed 374 repository tests. Each package job
+passed for revision \code{85f0846} (package \code{1.1.0-review.4}) on Linux and macOS,
+including all 40 serial client cases and 84 concurrent-worker cases. A separate Linux job passed 374 repository tests.
+Package \code{1.1.0-review.5} adds the terminal-claim repair and the MIT license; it was
+reproduced locally on Linux from a fresh extraction, and the full suite passed 375 tests. Each package job
 extracts outside the checkout and uses a fresh environment. Downloaded summaries
 are retained in \code{paper/release/ci-run-43351357979/}; full CI attachments
 have 30-day retention. The local record is
-{\small\path{paper/release/reviewer-verification-v1.1.0-review.4.json}}.
+{\small\path{paper/release/reviewer-verification-v1.1.0-review.5.json}}.
 Full-suite dependencies are recorded but not all pinned; the selected
 package's complete Python dependency set is pinned.
 

@@ -49,10 +49,10 @@ Success means exit status 0 and `checks_passed: true` in `summary.json`:
 
 - `core/`: **14 exported Lean results**, **eight rejected premise-removal
   mutations**, **nine diagnostic tests**, and **2,048 synthetic records**.
-- `service-tests.xml`: at least 157 selected gate/interface/crash, observation,
+- `service-tests.xml`: at least 158 selected gate/interface/crash, observation,
   trace-audit, packaging, and generated-checker tests, all passing with no skips.
   The exact count is recorded in `summary.json`.
-- `traces/traces.json`: **six executed histories**, **66 projected transitions**,
+- `traces/traces.json`: **six executed histories**, **64 projected transitions**,
   **five closed final states**, and **one undrained final state**.
 - `traces/lean/`: generated Lean certificates and compiler logs, including
   **two rejected invalid trace inputs**. These are separate from the eight
@@ -170,7 +170,7 @@ rejected. Tests also deliberately corrupt traces and require rejection.
 
 ```sh
 .venv/bin/python scripts/build_reviewer_artifact.py \
-  --output results/TrustBound_Reviewer_Artifact_v1.1.0-review.4.zip
+  --output results/TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip
 ```
 
 The builder uses an explicit source list. It includes Lean sources and checkers,
@@ -189,8 +189,8 @@ independent signature or attestation of the author.
 For macOS, verify and extract the package with:
 
 ```sh
-shasum -a 256 -c TrustBound_Reviewer_Artifact_v1.1.0-review.4.zip.sha256
-unzip TrustBound_Reviewer_Artifact_v1.1.0-review.4.zip -d reviewer-artifact
+shasum -a 256 -c TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip.sha256
+unzip TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip -d reviewer-artifact
 cd reviewer-artifact
 ```
 

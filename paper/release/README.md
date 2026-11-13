@@ -1,8 +1,28 @@
 # Artifact release candidates
 
-## Reviewer candidate 1.1.0-review.4
+## Reviewer candidate 1.1.0-review.5
 
-The current [reviewer ZIP](TrustBound_Reviewer_Artifact_v1.1.0-review.4.zip) and
+The current [reviewer ZIP](TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip) and
+[checksum](TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip.sha256) contain 43
+entries. This version adds the terminal-claim repair
+([correctness fixes, section 6](../../docs/CORRECTNESS_FIXES.md)) and replaces
+`RIGHTS_PENDING.txt` with the MIT `LICENSE`. The gate now refuses to claim a
+command once its payment is observed terminal, so the late-capture history has
+one rejected operation instead of a provider call: the six Lean-checked
+histories now total 64 transitions (previously 66). All other formal,
+diagnostic, schedule, client and concurrent-worker counts are unchanged, and
+the stale-read limitation is still not fixed.
+
+The extracted ZIP passed the full reviewer command on Linux (Python 3.13, Lean
+4.19.0) in a fresh environment; all 158 selected tests passed and the full
+repository suite passed 375 tests. The
+[local verification record](reviewer-verification-v1.1.0-review.5.json) binds
+the code revision, package content ID and recorded results. This is not an
+independent review, and CI has not yet been re-run for this revision.
+
+## Historical reviewer candidate 1.1.0-review.4
+
+The historical [reviewer ZIP](TrustBound_Reviewer_Artifact_v1.1.0-review.4.zip) and
 [checksum](TrustBound_Reviewer_Artifact_v1.1.0-review.4.zip.sha256) contain 43
 entries. This version adds the [concurrent-worker evaluation](../../research/concurrent_clients/README.md),
 19 regression tests, and full reference event transcripts. Its code revision is

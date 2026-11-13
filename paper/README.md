@@ -48,10 +48,10 @@ Historical run records, the test retry, field definitions and the flight–hotel
 diagnostic are in [the supplementary record](SUPPLEMENTARY_RECORD.md).
 The [current release candidate](release/README.md) retains the original formal
 core and includes the repaired service, schedule checker, and scripted clients.
-Its 157 selected tests are a subset of the 374 full-repository tests. The six
+Its 158 selected tests are a subset of the 375 full-repository tests. The six
 Lean-checked histories remain distinct from both the 864 Python schedules and
 40 serial client cases and 84 concurrent-worker cases. The current version is
-`1.1.0-review.4`; its ZIP and checksum
+`1.1.0-review.5`; its ZIP and checksum
 can be handed directly to a reviewer without granting repository access.
 The SDK-dependent protocol and allocation repairs are outside this selected
 package. A successful run checks conditional models and specified local

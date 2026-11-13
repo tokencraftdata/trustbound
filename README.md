@@ -100,8 +100,8 @@ python3 -m venv .venv
 Replace the Lean path with your installed compiler. Use a new output directory
 for each run. Assertion-based checkers reject `-O` and `PYTHONOPTIMIZE`.
 
-[Download the versioned reviewer candidate](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.2.zip)
-and its [SHA-256 checksum](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.2.zip.sha256).
+[Download the versioned reviewer candidate](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip)
+and its [SHA-256 checksum](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip.sha256).
 The [reviewer guide](docs/REVIEWER_GUIDE.md) explains extraction, integrity checks,
 scenario expectations, and how to rebuild the archive.
 

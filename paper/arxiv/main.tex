@@ -496,7 +496,7 @@ requests.
 Evidence & Recorded result & What remains outside it \\
 \midrule
 Abstract model proofs & 14 exported results; eight premise-removal mutations rejected. & Implementation refinement and truth of A1--A5 in a deployment. \\
-Projected service histories & Six histories, 66 transitions; five closed states and one undrained state. & Other executions and completeness of event capture. \\
+Projected service histories & Six histories, 64 transitions; five closed states and one undrained state. & Other executions and completeness of event capture. \\
 Generated Python schedules & 864 cases pass: 768 resolve, 96 remain unresolved; four broken variants rejected. & Unbounded or concurrent executions; additional Lean certificates. \\
 Scripted clients & Five policies, 40 cases; 12 resolved after clients, 30 after operator reconciliation. & LLM capability, concurrent clients, and untested provider behavior. \\
 Concurrent workers & 84 cases: 60 resolved, 18 pending, six blocked by stale-read conflicts. & Exhaustive interleavings, a concurrent socket server, and conflict-free reconciliation. \\
@@ -587,7 +587,7 @@ and the concurrent-worker experiment.
 We ran the actual Python/SQLite gate through six sequential scenarios with a
 local provider simulator. Table~\ref{tab:service_traces} lists their expected
 and observed outcomes. Lean accepted all six projected histories, comprising
-66 transitions. Five final states instantiate the existing exact-closure
+64 transitions. Five final states instantiate the existing exact-closure
 theorem; the abandoned claim remains undrained. These cases were chosen to
 exercise closure boundaries, not to estimate production workload frequencies.
 
@@ -602,7 +602,7 @@ Capture across the fence & Unresolved until the post-fence payment is observed; 
 Lost reply and reopen & Repeat dispatch rejected; closed after reconciliation. \\
 Two payments resolve separately & Unresolved with one pending; closed after its cancellation. \\
 Claim abandoned before send & No effect yet; one right remains and closure is withheld. \\
-Late capture after cancellation & Simulator rejects the call; closure is preserved. \\
+Late capture after cancellation & Gate refuses the claim once cancellation is observed; no provider call; closure is preserved. \\
 \bottomrule
 \end{tabularx}
 \caption{Six local service executions. All listed outcomes matched the checks.

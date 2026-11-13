@@ -48,7 +48,7 @@ class MissingJournal(StripeGate):
 
 @pytest.mark.parametrize("gate_type,order,reason", [
     (MissingFence, ("fence", "grant", "dispatch", "observe"), "expected rejected, got ok"),
-    (RepeatClaim, ("grant", "dispatch", "fence", "observe"), "expected rejected, got ok"),
+    (RepeatClaim, ("grant", "dispatch", "dispatch", "fence", "observe"), "expected rejected, got ok"),
     (PrematureClosure, ("grant", "fence", "dispatch", "observe"), "premature or missing closure"),
     (MissingJournal, ("grant", "fence", "dispatch", "observe"), "journal or observations"),
 ])

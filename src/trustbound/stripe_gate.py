@@ -193,8 +193,9 @@ class StripeGate:
         return self._transaction(operation)
 
     def claim(self, command_id: int) -> tuple[str, str]:
-        # An already granted request may execute after the fence. Crash after
-        # claim is uncertain; no automatic redispatch. Resolve the known object.
+        # An already granted request may execute after the fence, but not after
+        # its payment is observed terminal. Crash after claim is uncertain; no
+        # automatic redispatch. Resolve the known object.
         def operation() -> tuple[str, str]:
             row = self.db.execute(
                 "SELECT payment_id,action,claimed FROM command WHERE id=?",
@@ -206,6 +207,13 @@ class StripeGate:
             if claimed:
                 raise RuntimeError("command_unknown_or_already_claimed")
             self._unconflicted(payment_id)
+            # A terminal observation discharges unclaimed authority at the gate,
+            # so closure does not rely on the provider rejecting a late request.
+            status = self.db.execute(
+                "SELECT status FROM payment WHERE id=?", (payment_id,)
+            ).fetchone()
+            if status != ("uncertain",):
+                raise RuntimeError("payment_terminal")
             self.db.execute("UPDATE command SET claimed=1 WHERE id=?", (command_id,))
             return payment_id, action
 

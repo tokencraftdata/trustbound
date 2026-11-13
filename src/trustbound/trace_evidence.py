@@ -32,8 +32,8 @@ SCENARIOS = {
         "steps": 8, "effects": 0, "rights": 1, "resolved": False,
     },
     "canceled_then_late_dispatch": {
-        "description": "Irreversible simulator cancellation prevents a previously granted late capture.",
-        "steps": 9, "effects": 0, "rights": 0, "resolved": True,
+        "description": "After an observed irreversible cancellation, the gate refuses a previously granted late capture without contacting the provider.",
+        "steps": 7, "effects": 0, "rights": 0, "resolved": True,
     },
 }
 

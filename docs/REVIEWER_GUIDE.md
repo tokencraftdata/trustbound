@@ -205,8 +205,8 @@ The repository's `paper/release/` directory holds the versioned reviewer candida
 and checksum. Access to that branch or to a separately supplied archive is still
 necessary. A private repository link alone does not provide reviewer access.
 Public/anonymous distribution and a permanent archive URL or DOI are publication
-decisions; generating this package does not make those decisions or grant a
-license. Existing terms remain in [RIGHTS_PENDING.txt](../RIGHTS_PENDING.txt).
+decisions; generating this package does not make them. The packaged code and
+documentation are released under the MIT license in `LICENSE`.
 
 ## Boundaries of the result
 

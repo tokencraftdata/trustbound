@@ -104,7 +104,7 @@ class Oracle:
         elif action == "fence":
             self.fenced = True
         elif action == "dispatch":
-            if not self.granted or self.claimed:
+            if not self.granted or self.claimed or self.observed != "uncertain":
                 return "rejected"
             self.claimed = True
             if fault != "abandoned_claim":

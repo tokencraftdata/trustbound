@@ -96,3 +96,33 @@ historical evidence. The generated cases extend testing but do not change the
 Lean theorems or certify concurrent executions, process isolation, real-provider
 behavior, or eventual resolution. Close/reopen tests are distinguished from the
 existing subprocess crash tests in the reviewer guide.
+
+## 6. Discharge unclaimed commands once a payment is terminal
+
+Review found that `StripeGate.snapshot()` could report `known_manifest_resolved`
+while a granted command for a terminal payment was still unclaimed, and that
+`claim()` would still accept it. Closure then relied on the provider rejecting
+the late request, which is weaker than the Lean premise that no rights remain.
+
+`claim()` now refuses (`payment_terminal`) any command whose payment has been
+observed `succeeded` or `canceled`, in the same transaction that records claims.
+Once a terminal observation commits, unclaimed authority for that identity can no
+longer reach the transport, across restarts. Commands already claimed before the
+terminal observation are unchanged: they remain in-flight work governed by the
+provider's terminality contract, as before.
+
+The late-capture trace now records one rejected operation instead of a provider
+call, so the six projected histories have 64 transitions (previously 66). The
+schedule oracle rejects dispatch after a terminal observation, and the
+repeat-claim mutant is exercised before observation. A regression test covers
+both commands, the absence of any transport call, and reopening the database.
+The Lean models are unchanged.
+
+## 7. Release licensing
+
+Code, Lean models, scripts, tests, evidence and technical documentation are
+released under the MIT license (`LICENSE`). The manuscript is excluded and will
+use arXiv's non-exclusive distribution license (`paper/LICENSE.md`).
+`RIGHTS_PENDING.txt` is removed; dated historical manifests that hash it are
+left unchanged as records of earlier exports. Reviewer candidate
+`1.1.0-review.5` packages `LICENSE` in its place.

@@ -9,9 +9,9 @@ import re
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "1.1.0-review.4"
+VERSION = "1.1.0-review.5"
 FILES = (
-    "RIGHTS_PENDING.txt", "requirements-reviewer.txt", "requirements-core.txt",
+    "LICENSE", "requirements-reviewer.txt", "requirements-core.txt",
     "docs/REVIEWER_GUIDE.md", "docs/RESEARCH_CONTRACT.md", "docs/CORRECTNESS_FIXES.md",
     "formal/lean-toolchain", "formal/Admission.lean", "formal/StripeGate.lean",
     "formal/check_admission.py", "formal/check_stripe_gate.py",
@@ -48,8 +48,8 @@ python3 -m venv .venv
 
 Use a new output directory. Lean 4.19.0 must be installed separately.
 No provider credentials, SDKs, real payments, or network are needed after setup.
-See RIGHTS_PENDING.txt for the existing licensing status. This review package
-does not grant a license or imply a public release, DOI, or independent review.
+The code and documentation are released under the MIT license (see LICENSE).
+This package does not imply a DOI or independent review.
 """
 
 

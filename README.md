@@ -117,7 +117,7 @@ directory:
 - **`core/baseline/closure_benchmark.json`**: **2,048 synthetic diagnostic records**
   reproduce the saved result. Command logs and source hashes record the run's inputs.
 - **`service-tests.xml`**: selected service, crash, trace-audit, and packaging tests.
-- **`traces/`**: six histories with 66 transitions checked against Lean; five
+- **`traces/`**: six histories with 64 transitions checked against Lean; five
   closed cases, one undrained case, and two rejected invalid inputs.
 - **`exported-trace-audit.json`**: a separate audit of the exported histories,
   checking event mappings, authority/effect coverage, and expected outcomes.
@@ -157,7 +157,7 @@ The repository includes a narrow formal core and a broader experimental codebase
   implements the persistent gate; [credential_service.py](src/trustbound/credential_service.py)
   exposes a restricted request interface. Neither establishes hostile-host isolation.
 - **Service-to-model examples:** [service_refinement/](research/service_refinement/README.md)
-  checks six service histories with 66 projected transitions: five reach the
+  checks six service histories with 64 projected transitions: five reach the
   closure theorem and one remains undrained. These selected executions do not
   prove refinement for all implementation behavior.
   [trace_evidence.py](src/trustbound/trace_evidence.py) separately checks the
@@ -239,6 +239,8 @@ build instructions, and editorial history.
 - [Submission status](paper/SUBMISSION_STATUS.md) and
   [submission guide](paper/ARXIV_SUBMISSION_GUIDE.md): publication and access logistics.
 
-No open-source license has been granted. See [rights status](RIGHTS_PENDING.txt)
-for the pending terms. Prepared manuscripts and artifacts do not imply publication,
-a DOI deposit, or an arXiv submission.
+The code, Lean models, scripts, tests, evidence and technical documentation are
+released under the [MIT license](LICENSE). The manuscript is not MIT-licensed; it
+will be posted under arXiv's non-exclusive distribution license (see
+[paper/LICENSE.md](paper/LICENSE.md)). Prepared manuscripts and artifacts do not
+imply publication, a DOI deposit, or an arXiv submission.

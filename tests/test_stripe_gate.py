@@ -107,3 +107,35 @@ def test_duplicate_command_and_epoch_mismatch(tmp_path):
     gate.close()
     with pytest.raises(ValueError, match="epoch_identity_mismatch"):
         StripeGate(path, "other-epoch")
+
+
+def test_terminal_observation_discharges_unclaimed_commands(tmp_path):
+    # Review finding: closure was reported while granted commands for a
+    # terminal payment could still be claimed and dispatched.
+    gate = StripeGate(tmp_path / "gate.db", "epoch-terminal")
+    gate.register(intent())
+    confirm = gate.grant("pi_Test1", "confirm")
+    capture = gate.grant("pi_Test1", "capture")
+    gate.fence()
+    gate.observe(intent(status="canceled"))
+    assert gate.snapshot()["known_manifest_resolved"]
+    for command in (confirm, capture):
+        with pytest.raises(RuntimeError, match="payment_terminal"):
+            gate.claim(command)
+    calls = []
+
+    class Transport:
+        def request(self, *args):
+            calls.append(args)
+            return 200, {}
+
+    with pytest.raises(RuntimeError, match="payment_terminal"):
+        gate.dispatch(capture, Transport())
+    assert calls == []
+    gate.close()
+    reopened = StripeGate(tmp_path / "gate.db", "epoch-terminal")
+    with pytest.raises(RuntimeError, match="payment_terminal"):
+        reopened.claim(capture)
+    snapshot = reopened.snapshot()
+    assert snapshot["known_manifest_resolved"]
+    assert all(not command["claimed"] for command in snapshot["commands"])

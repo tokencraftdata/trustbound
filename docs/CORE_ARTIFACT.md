@@ -14,8 +14,8 @@ provider probes; those are outside the selected-core checks below. See
 
 Prepared 5 November 2026 for the manuscript *TrustBound: A Mechanized Case Study
 of Payment-Epoch Completeness*. This is a preparation package, not an arXiv
-submission or a provider certification. Release licensing is pending; see
-RIGHTS_PENDING.txt. No provider account or credentials are needed to run it.
+submission or a provider certification. The code is released under the MIT
+license (see LICENSE). No provider account or credentials are needed to run it.
 
 ## What a successful run gives you
 

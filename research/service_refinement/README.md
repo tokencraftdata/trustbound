@@ -12,7 +12,10 @@ evidence to fail. The trace checker now refuses Python optimization and enforces
 Lean 4.19.0 before running; it writes `projection-audit.json` with the scenario
 catalog and event mapping alongside its existing outputs.
 
-These additions do not change the original six scenarios or 66 transitions.
+These additions do not change the original six scenarios. Since 13 November 2026 the
+gate refuses to claim a command once its payment is observed terminal, so the
+late-capture scenario records one rejected operation instead of a provider call;
+the six histories now have 64 transitions (previously 66).
 The evidence is finite and supplied by trusted instrumentation; omitted real
 routes, universal refinement, and eventual resolution remain unproved. See the
 [research contract](../../docs/RESEARCH_CONTRACT.md) for the exact boundary.

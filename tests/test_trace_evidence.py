@@ -19,7 +19,7 @@ def traces(tmp_path_factory):
 def test_executed_histories_match_declared_scenarios(traces):
     report = audit_traces(traces)
     assert report["checks_passed"]
-    assert sum(case["steps"] for case in report["scenarios"]) == 66
+    assert sum(case["steps"] for case in report["scenarios"]) == 64
     assert sum(case["resolved"] for case in report["scenarios"]) == 5
 
 

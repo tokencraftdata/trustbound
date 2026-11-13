@@ -19,12 +19,12 @@
   "pending_after_operator": 10,
   "max_capture_invocations_per_case": 1,
   "max_paid_effects_per_case": 1,
-  "python": "3.12.14",
-  "platform": "macOS-26.7.1-arm64-arm-64bit",
+  "python": "3.13.18",
+  "platform": "Linux-6.18.44-fc-v445-x86_64-with-glibc2.39",
   "source_sha256": {
     "research/agent_behaviors/evaluate.py": "342d4df7a8d36f9050e37d5263f1a14a081c6e44502e60efec076921da53fc6e",
-    "research/service_refinement/check_schedules.py": "1e80dbcd1c3d34255336780abdf1dae600f8895cea3f823dafe98a90bcecce93",
-    "src/trustbound/stripe_gate.py": "1309fec462158661a12d51e206afdaffd7fc45bccd526af162e5cc724183b529",
+    "research/service_refinement/check_schedules.py": "15d520805b8369507558ba0e700117bbd5d36bda5c2202250c5180298e3aea59",
+    "src/trustbound/stripe_gate.py": "e651f5efd0f9452a8144f5080da25e9d5974cd6ab87d1878efb2782808df0c16",
     "src/trustbound/credential_service.py": "5fb0ec9da8e8a1d479c306eb2ca1c1c9c23bcf5c78ca4f883823adb94f19ebee"
   },
   "scope": "Five scripted request-only policies; four provider modes; with/without close-reopen after each request. One payment, serial execution, no LLMs, real-provider calls, host-isolation proof or new Lean certificates.",

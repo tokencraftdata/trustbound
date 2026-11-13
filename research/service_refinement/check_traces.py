@@ -240,7 +240,7 @@ def scenarios(directory):
 
     h = Harness(directory, "canceled_then_late_dispatch")
     h.allocate(p); h.register(p); command = h.grant(p, "capture"); h.fence()
-    h.cancel(p); h.observe(p); h.dispatch(command)
+    h.cancel(p); h.observe(p); h.reject(lambda: h.gate.dispatch(command, h))
     traces.append(h.finish())
     return traces
 

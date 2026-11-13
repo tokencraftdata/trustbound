@@ -131,6 +131,12 @@ share one acceptance function, and both weak labels share another. Agreement is
 a consistency control, not an independent product comparison or validation of
 theorem soundness; the comparison implements no witnessing protocol.
 
+The [concurrent-worker experiment](research/concurrent_clients/README.md) adds
+84 cases with multiple clients and payment identities. It finds a conservative
+stale-read conflict: an older truthful response can permanently block closure
+after a newer terminal outcome. Successful reproduction includes that finding;
+it does not establish conflict-free concurrent reconciliation.
+
 A successful run is a **reproduction report**, not a closure certificate for a
 real merchant. It makes no processor requests and does not establish deployment
 assumptions A1–A5. See the [reviewer guide](docs/REVIEWER_GUIDE.md) for the current

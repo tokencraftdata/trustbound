@@ -21,7 +21,7 @@ SERVICE_TESTS = (
     "tests/test_dispatch_crashes.py", "tests/test_credential_service.py",
     "tests/test_trace_evidence.py", "tests/test_reviewer_artifact.py",
     "tests/test_generated_schedules.py",
-    "tests/test_agent_behaviors.py",
+    "tests/test_agent_behaviors.py", "tests/test_concurrent_clients.py",
 )
 
 
@@ -59,7 +59,7 @@ def main():
         "artifact_content_id": manifest["content_id"] if manifest else None,
         "jobs": {}, "provider_requests": 0,
         "universal_implementation_refinement": False, "deployment_assumptions_established": False,
-        "scope": "Conditional model proofs, selected service tests, bounded schedules, scripted request-only agent behaviors and finite supplied-evidence consistency checks.",
+        "scope": "Conditional model proofs, selected service tests, bounded schedules, scripted clients, bounded concurrent-worker checks (including a documented stale-read conflict) and finite supplied-evidence consistency checks.",
     }
     env = dict(os.environ, PYTHONPATH=str(ROOT / "src"), PYTHONNOUSERSITE="1",
                PYTEST_DISABLE_PLUGIN_AUTOLOAD="1", PYTHONDONTWRITEBYTECODE="1")
@@ -78,6 +78,8 @@ def main():
                                 str(output / "generated-schedules.json")],
         "agent_behaviors": ["research/agent_behaviors/evaluate.py", "--output",
                             str(output / "agent-behaviors.json")],
+        "concurrent_clients": ["research/concurrent_clients/evaluate.py", "--output",
+                               str(output / "concurrent-clients.json")],
     }
     try:
         for name, arguments in jobs.items():
@@ -92,6 +94,9 @@ def main():
         traces = json.loads((output / "traces/summary.json").read_text())
         schedules = json.loads((output / "generated-schedules.json").read_text())
         agents = json.loads((output / "agent-behaviors.json").read_text())
+        concurrent = json.loads((output / "concurrent-clients.json").read_text())
+        if concurrent["checks_passed"] is not True or concurrent["generated_cases"] != 84:
+            raise RuntimeError("incomplete concurrent-worker run")
         if schedules["checks_passed"] is not True or schedules["generated_cases"] != 864:
             raise RuntimeError("incomplete generated schedule run")
         if core["checks_passed"] is not True or traces["checks_passed"] is not True:
@@ -101,7 +106,7 @@ def main():
         suites = list(ET.parse(output / "service-tests.xml").getroot().iter("testsuite"))
         counts = {key: sum(int(suite.get(key, "0")) for suite in suites)
                   for key in ("tests", "failures", "errors", "skipped")}
-        if counts["tests"] < 138 or any(counts[key] for key in ("failures", "errors", "skipped")):
+        if counts["tests"] < 157 or any(counts[key] for key in ("failures", "errors", "skipped")):
             raise RuntimeError(f"incomplete service test run: {counts}")
         if any(hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != digest
                for name, digest in source_hashes.items()):
@@ -113,6 +118,10 @@ def main():
             "agent_behavior_results": {key: agents[key] for key in (
                 "generated_cases", "resolved_after_agent", "resolved_after_operator",
                 "pending_after_operator", "max_capture_invocations_per_case", "max_paid_effects_per_case")},
+            "concurrent_client_results": {key: concurrent[key] for key in (
+                "generated_cases", "resolved_cases", "pending_cases", "stale_read_conflict_cases",
+                "conflict_free_concurrent_reconciliation", "max_capture_invocations_per_identity",
+                "max_paid_effects_per_identity")},
             "core_results": {key: core[key] for key in (
                 "exported_results_checked", "premise_removal_mutations_rejected", "baseline_records", "baseline_test_counts")},
             "trace_results": {key: traces[key] for key in (
@@ -125,7 +134,7 @@ def main():
     report["logs_sha256"] = {str(path.relative_to(output)): hashlib.sha256(path.read_bytes()).hexdigest()
                              for path in output.rglob("*.log")}
     (output / "summary.json").write_text(json.dumps(report, indent=2) + "\n")
-    print(json.dumps({key: report.get(key) for key in ("checks_passed", "core_results", "service_test_counts", "trace_results", "generated_schedule_results", "agent_behavior_results", "error")}))
+    print(json.dumps({key: report.get(key) for key in ("checks_passed", "core_results", "service_test_counts", "trace_results", "generated_schedule_results", "agent_behavior_results", "concurrent_client_results", "error")}))
     raise SystemExit(0 if report["checks_passed"] else 1)
 
 

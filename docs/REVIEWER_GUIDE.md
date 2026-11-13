@@ -1,7 +1,7 @@
 # Reproduce the reviewer artifact
 
 This workflow checks the formal core, selected service tests, six implementation
-histories, their exported evidence, 864 generated operation schedules, and 40 scripted agent-behavior cases. Start with the
+histories, their exported evidence, 864 generated operation schedules, 40 scripted agent-behavior cases, and 84 concurrent-worker cases. Start with the
 [research contract](RESEARCH_CONTRACT.md) for the contribution, agent role,
 terminology, assumptions, and event mapping.
 
@@ -49,7 +49,7 @@ Success means exit status 0 and `checks_passed: true` in `summary.json`:
 
 - `core/`: **14 exported Lean results**, **eight rejected premise-removal
   mutations**, **nine diagnostic tests**, and **2,048 synthetic records**.
-- `service-tests.xml`: at least 138 selected gate/interface/crash, observation,
+- `service-tests.xml`: at least 157 selected gate/interface/crash, observation,
   trace-audit, packaging, and generated-checker tests, all passing with no skips.
   The exact count is recorded in `summary.json`.
 - `traces/traces.json`: **six executed histories**, **66 projected transitions**,
@@ -67,6 +67,10 @@ Success means exit status 0 and `checks_passed: true` in `summary.json`:
 - `agent-behaviors.json`: five scripted request-only policies across four provider
   modes and two restart choices; 40 cases, 12 resolved after the client stops,
   30 after separately labeled operator reconciliation, and 10 still pending.
+- `concurrent-clients.json`: 84 threaded-worker cases: 60 resolved, 18 pending,
+  and six blocked by a stale-read conflict despite terminal provider outcomes.
+  `checks_passed` includes reproduction of this known limitation;
+  `conflict_free_concurrent_reconciliation` is **false**.
 - `summary.json` and job logs: tool versions, selected source hashes, dependency
   versions, test counts, command results, and explicit evidence limits.
 
@@ -131,6 +135,24 @@ request interface. Five policies × four provider modes × two restart choices g
 client behavior from later recovery. These are Python checks of scripted clients,
 not LLM benchmarks, additional Lean certificates, or a process-isolation proof.
 
+## Concurrent clients and multiple payments
+
+The [concurrency experiment](../research/concurrent_clients/README.md) uses
+separate trusted workers and SQLite connections. The bundled socket listener
+remains serial. It compares 2/4/8 contending clients over 2/4 payments, forces
+cancellation/capture and admission/fence orderings, and delays an older provider
+read behind newer evidence. Three repetitions of 28 configurations give 84 cases.
+The stale-read cases expose a persistent conservative conflict, not a duplicate
+payment. No recovery fix is included; read ordering/versioning remains open.
+
+```sh
+.venv/bin/python research/concurrent_clients/evaluate.py \
+  --output results/concurrent-clients.json
+```
+
+Thread interleavings are not exhaustive or exactly replayable. Recorded event
+orders explain observed runs; event barriers reproduce the controlled races.
+
 ## Check an exported trace independently of the generator
 
 ```sh
@@ -148,7 +170,7 @@ rejected. Tests also deliberately corrupt traces and require rejection.
 
 ```sh
 .venv/bin/python scripts/build_reviewer_artifact.py \
-  --output results/TrustBound_Reviewer_Artifact_v1.1.0-review.3.zip
+  --output results/TrustBound_Reviewer_Artifact_v1.1.0-review.4.zip
 ```
 
 The builder uses an explicit source list. It includes Lean sources and checkers,
@@ -167,8 +189,8 @@ independent signature or attestation of the author.
 For macOS, verify and extract the package with:
 
 ```sh
-shasum -a 256 -c TrustBound_Reviewer_Artifact_v1.1.0-review.3.zip.sha256
-unzip TrustBound_Reviewer_Artifact_v1.1.0-review.3.zip -d reviewer-artifact
+shasum -a 256 -c TrustBound_Reviewer_Artifact_v1.1.0-review.4.zip.sha256
+unzip TrustBound_Reviewer_Artifact_v1.1.0-review.4.zip -d reviewer-artifact
 cd reviewer-artifact
 ```
 

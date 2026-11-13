@@ -132,3 +132,22 @@ resolution. The undrained scenario deliberately demonstrates the last limitation
 
 See the [reviewer guide](REVIEWER_GUIDE.md) for the single reproduction command,
 expected outputs, archive checks, and precise limits of independent reproduction.
+
+## Concurrent-worker evidence and current limitation
+
+The [concurrency experiment](../research/concurrent_clients/README.md) runs actual
+command-service workers on separate SQLite connections over the same journal.
+It extends the earlier serial policy comparison to multiple payment identities,
+contending claims, admission/fence ordering, and cancellation during dispatch.
+The source simulator serializes its own irreversible outcomes. These are bounded
+threaded checks; the bundled socket server itself remains serial.
+
+Truthful reads can arrive out of order: a paused nonterminal retrieval can be
+applied after a second worker has recorded a terminal outcome. The gate retains
+the terminal evidence but persists a conflict, so even later fresh reconciliation
+does not restore closure. The 84-case run reports six such blocked cases
+separately from 18 genuinely pending cases and 60 resolved cases. This is an
+availability/observation-ordering limitation under concurrent workers. The
+experiment does not fix it or establish universal safety, monetary correctness,
+or eventual progress. Provider-version evidence or serialized reconciliation
+needs its own design and validation.

@@ -1,8 +1,43 @@
 # Artifact release candidates
 
-## Reviewer candidate 1.1.0-review.3
+## Reviewer candidate 1.1.0-review.4
 
-The current [reviewer ZIP](TrustBound_Reviewer_Artifact_v1.1.0-review.3.zip) and
+The current [reviewer ZIP](TrustBound_Reviewer_Artifact_v1.1.0-review.4.zip) and
+[checksum](TrustBound_Reviewer_Artifact_v1.1.0-review.4.zip.sha256) contain 43
+entries. This version adds the [concurrent-worker evaluation](../../research/concurrent_clients/README.md),
+19 regression tests, and full reference event transcripts. Its code revision is
+`85f0846eeb06333b25e05bda537eda0c6d2ae976`.
+
+The 84 cases include 60 resolved epochs, 18 genuinely pending epochs, and six
+blocked by persistent stale-read conflicts despite terminal provider outcomes.
+No identity has more than one observed capture invocation or payment effect.
+**Successful reproduction includes this known limitation:** conflict-free
+concurrent reconciliation is false. No production service code or Lean theorem
+was changed, and the reconciliation limitation is not fixed.
+
+The extracted ZIP passed the full reviewer command in the existing pinned
+Python 3.12.14 environment with Lean 4.19.0. All 157 selected tests passed;
+the broader repository suite separately passed 374 tests. The original formal,
+diagnostic, trace, serial-schedule and serial-policy counts remain unchanged.
+The [local verification record](reviewer-verification-v1.1.0-review.4.json)
+binds the source hashes, package content ID and recorded results. This reused
+local environment is not an independent review or a fresh setup.
+
+[CI run 43351357979](https://github.com/tokencraftdata/trustbound/actions/runs/43351357979)
+also passed all three jobs: extracted-package reproduction on Ubuntu 24.04 and
+macOS 15 Intel, plus the full Linux regression suite. The
+[retained records](ci-run-43351357979/run.json) bind the results to `85f0846`.
+Both package content IDs and all reported counts match the local reproduction,
+including the six stale-read conflicts. These workers are not an independent
+scientific review.
+
+The versioned ZIP can be supplied directly without granting repository access.
+An anonymous/public mirror, DOI, and release terms remain pending. Earlier
+archives remain immutable historical records.
+
+## Historical reviewer candidate 1.1.0-review.3
+
+The historical [reviewer ZIP](TrustBound_Reviewer_Artifact_v1.1.0-review.3.zip) and
 [checksum](TrustBound_Reviewer_Artifact_v1.1.0-review.3.zip.sha256) contain 39
 entries, including the manifest. This version adds the
 [scripted-client evaluation](../../research/agent_behaviors/README.md), its

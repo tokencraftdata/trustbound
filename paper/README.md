@@ -1,20 +1,25 @@
 # TrustBound manuscripts
 
-The author draft was revised on **12 November 2026** to state three concrete
-contributions, explain Theorem 1 through successive hotel-payment states, and
-separate enforced rules from deployment assumptions. Detailed checkout and
-allowance repairs are now in Appendix B. The abstract describes the proof
-content rather than counting exported declarations.
+The author draft was revised on **12 November 2026** with a concurrent-worker
+evaluation in **Section 5.6 and Table 8**. Its 84 cases exercise 2/4/8 contending
+clients, 2/4 payments, cancellation during dispatch, admission versus fencing,
+and delayed provider observations. The experiment is recorded at `85f0846`.
 
-Section 5.5 reports a new comparison of **five scripted client policies across
-40 cases**, using the actual restricted command service. These are request
-behaviors, not LLM models. The experiment and reviewer artifact are recorded at
-`aa82826`, with **355 full-repository tests**, **138 selected package tests**,
-and the unchanged formal core, six projected histories, and 864 schedules.
-Theorem 1, its proof, A1–A5, and the Lean sources remain unchanged.
-See the [new research-pass audit](PAPER_RESEARCH_PASS_AUDIT_2026-11-12.json);
-the [earlier revision audit](PAPER_REVISION_AUDIT_2026-11-12.json) describes the
-preceding file state.
+The result includes a concrete limitation: **60 cases resolve, 18 remain pending,
+and six are blocked by stale-read conflicts despite terminal source outcomes**.
+An older truthful nonterminal response can arrive after terminal evidence and
+persist a conflict that fresh reconciliation does not clear. The tests reproduce
+this behavior; they do not fix it or establish conflict-free concurrency.
+
+The earlier five-policy, 40-case serial comparison remains in Section 5.5.
+The current suite passed **374 repository tests** and **157 selected package
+tests**. The formal core, six Lean-projected histories and 864 serial schedules
+are unchanged. Theorem 1, its proof, A1–A5, the Lean sources, and production
+service code are unchanged. The shipped socket listener is still serial;
+the new harness uses separate trusted workers and SQLite connections.
+See the [concurrency revision audit](PAPER_CONCURRENCY_AUDIT_2026-11-12.json).
+The [research-pass audit](PAPER_RESEARCH_PASS_AUDIT_2026-11-12.json) and
+[earlier revision audit](PAPER_REVISION_AUDIT_2026-11-12.json) describe prior states.
 
 The scenario table and mapping remain documented in the
 [review response](ASTRA_REVIEW_RESPONSE_2026-11-10.md) and
@@ -22,7 +27,7 @@ The scenario table and mapping remain documented in the
 
 | Version | PDF | Source | Length |
 |---|---|---|---|
-| Author / arXiv, 12 November | [Author draft](TrustBound_Draft.pdf) | [LaTeX archive](TrustBound_arXiv_Source.zip) | 19 pages, 2 figures, 7 tables |
+| Author / arXiv, 12 November | [Author draft](TrustBound_Draft.pdf) | [LaTeX archive](TrustBound_arXiv_Source.zip) | 20 pages, 2 figures, 8 tables |
 | Earlier anonymous review copy, 10 November | [Review copy](TrustBound_Workshop_Anonymous.pdf) | [LaTeX archive](TrustBound_Workshop_Source.zip) | 8 pages including references, 1 figure |
 
 These are versions of the same note. **The anonymous copy has not yet been
@@ -43,24 +48,24 @@ Historical run records, the test retry, field definitions and the flight–hotel
 diagnostic are in [the supplementary record](SUPPLEMENTARY_RECORD.md).
 The [current release candidate](release/README.md) retains the original formal
 core and includes the repaired service, schedule checker, and scripted clients.
-Its 138 selected tests are a subset of the 355 full-repository tests. The six
+Its 157 selected tests are a subset of the 374 full-repository tests. The six
 Lean-checked histories remain distinct from both the 864 Python schedules and
-40 client cases. The current version is `1.1.0-review.3`; its ZIP and checksum
+40 serial client cases and 84 concurrent-worker cases. The current version is
+`1.1.0-review.4`; its ZIP and checksum
 can be handed directly to a reviewer without granting repository access.
 The SDK-dependent protocol and allocation repairs are outside this selected
 package. A successful run checks conditional models and specified local
 behaviors, not a merchant's real payments.
 
-[CI run 43293947080](https://github.com/tokencraftdata/trustbound/actions/runs/43293947080)
-passed for `aa82826` on Linux and macOS, including all 40 client cases. The full
-355-test suite also passed in a separate Linux job. Downloaded
-[Ubuntu](release/ci-run-43293947080/ubuntu-summary.json) and
-[macOS](release/ci-run-43293947080/macos-summary.json) summaries and the
-[full-suite JUnit record](release/ci-run-43293947080/development-tests.xml) are
-retained because complete CI attachments expire after 30 days. Both package
-content IDs match version `1.1.0-review.3`. These are independent workers,
-not an independent research team's reproduction. The earlier version's CI
-summaries remain historical records in `release/ci-run-43196526546/`.
+[CI run 43351357979](https://github.com/tokencraftdata/trustbound/actions/runs/43351357979)
+passed for `85f0846` on Linux and macOS, reproducing all 84 concurrent-worker
+outcomes, including the six stale-read conflicts. A separate Linux job passed
+all 374 repository tests. Retained [Ubuntu](release/ci-run-43351357979/ubuntu-summary.json)
+and [macOS](release/ci-run-43351357979/macos-summary.json) summaries match the
+local package content ID; the [full-suite JUnit record](release/ci-run-43351357979/development-tests.xml)
+is also retained because full CI attachments expire after 30 days. Separate CI
+workers are not an independent research team's review. Earlier run directories
+remain historical records.
 
 ## Build
 

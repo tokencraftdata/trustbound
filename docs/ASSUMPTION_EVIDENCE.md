@@ -1,5 +1,11 @@
 # From the trust contract to implementation evidence
 
+The current [reviewer workflow](REVIEWER_GUIDE.md) adds an executable audit of
+the exported histories, declared scenario outcomes, and tests that corrupt
+evidence and require rejection. The [research contract](RESEARCH_CONTRACT.md)
+connects those checks to the implementation mechanisms and deployment obligations.
+The dated matrix below retains the scope of the original execution evidence.
+
 This matrix accompanies the 10 November manuscript clarification. It identifies
 what would justify A1–A5 in a deployment and what the current artifact actually
 checks. It adds no experiment, proof, provider contract or infrastructure.
@@ -44,6 +50,10 @@ all-executions refinement premises or prove eventual resolution.
 The versioned 1.0.0 candidate includes the Lean source, checkers, selected tests,
 recorded traces, hashes and reproduction commands. It pins Lean 4.19.0 and
 pytest 9.0.2; the executed Python version is recorded as 3.12.14. Its extraction
-checks ran on the same host with existing tools. The archive is still private
-and unpublished. Public or anonymous reviewer access remains necessary for
-independent assessment, subject to the author's existing publication hold.
+checks ran on the same host with existing tools. That candidate's access status
+is historical. The new versioned reviewer package and checksum are in
+`paper/release/`; its sources and builder are on the review branch. The
+[reviewer guide](REVIEWER_GUIDE.md) gives the portable command and expected outputs.
+Access to a private branch would still require an invitation or separate archive
+delivery; packaging alone does not establish public access, a license grant, or
+independent execution by a reviewer.

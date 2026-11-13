@@ -1,0 +1,102 @@
+name: Reviewer artifact
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  extracted-artifact:
+    name: Extracted artifact (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15-intel]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned Lean release
+        run: |
+          set -euo pipefail
+          case "$(uname -s)/$(uname -m)" in
+            Linux/x86_64) platform=linux ;;
+            Darwin/arm64) platform=darwin_aarch64 ;;
+            Darwin/x86_64) platform=darwin ;;
+            *) exit 1 ;;
+          esac
+          python -m venv "$RUNNER_TEMP/bootstrap"
+          "$RUNNER_TEMP/bootstrap/bin/python" -m pip install zstandard==0.25.0
+          curl --fail --location --retry 3 \
+            "https://github.com/leanprover/lean4/releases/download/v4.19.0/lean-4.19.0-${platform}.tar.zst" \
+            --output "$RUNNER_TEMP/lean.tar.zst"
+          "$RUNNER_TEMP/bootstrap/bin/python" - <<'PY'
+          import os, pathlib, tarfile, zstandard
+          root = pathlib.Path(os.environ['RUNNER_TEMP'])
+          with (root / 'lean.tar.zst').open('rb') as source:
+              with zstandard.ZstdDecompressor().stream_reader(source) as stream:
+                  with tarfile.open(fileobj=stream, mode='r|') as archive:
+                      archive.extractall(root, filter='data')
+          PY
+          echo "LEAN_BINARY=$RUNNER_TEMP/lean-4.19.0-${platform}/bin/lean" >> "$GITHUB_ENV"
+      - name: Build and extract this revision's package
+        run: |
+          set -euo pipefail
+          python scripts/build_reviewer_artifact.py --output "$RUNNER_TEMP/reviewer.zip" > "$RUNNER_TEMP/archive-build.json"
+          python -m zipfile -e "$RUNNER_TEMP/reviewer.zip" "$RUNNER_TEMP/reviewer"
+          python -m venv "$RUNNER_TEMP/reviewer-venv"
+          "$RUNNER_TEMP/reviewer-venv/bin/python" -m pip install -r "$RUNNER_TEMP/reviewer/requirements-reviewer.txt"
+      - name: Reproduce outside the checkout
+        working-directory: ${{ runner.temp }}/reviewer
+        run: |
+          "$RUNNER_TEMP/reviewer-venv/bin/python" scripts/reproduce_reviewer_artifact.py \
+            --lean "$LEAN_BINARY" --output "$RUNNER_TEMP/reviewer-results"
+      - name: Retain package, manifest and check results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: reviewer-${{ matrix.os }}-${{ github.sha }}
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/reviewer.zip
+            ${{ runner.temp }}/reviewer.zip.sha256
+            ${{ runner.temp }}/archive-build.json
+            ${{ runner.temp }}/reviewer/ARTIFACT_MANIFEST.json
+            ${{ runner.temp }}/reviewer-results/
+
+  development-tests:
+    name: Full Python regression suite
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - run: |
+          python -m venv .venv
+          .venv/bin/python -m pip install -e '.[dev]'
+          .venv/bin/python -m pip freeze > development-dependencies.txt
+          .venv/bin/python -m pytest -q --junitxml=development-tests.xml
+      - if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: development-tests-${{ github.sha }}
+          retention-days: 30
+          path: |
+            development-tests.xml
+            development-dependencies.txt

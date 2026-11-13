@@ -1,0 +1,12 @@
+{
+  "run_url": "https://github.com/tokencraftdata/trustbound/actions/runs/43196526546",
+  "code_revision": "fa218e4e2fe54a4c6d1c04e308343773afd49388",
+  "source": "Downloaded GitHub Actions result archives; summary JSON retained byte-for-byte.",
+  "artifact_content_id": "4cd865edd91bb2e565080af07b09b539472cca5430e6913465e735a18cdcabac",
+  "summaries_sha256": {
+    "ubuntu-summary.json": "c4e2df99ece2acc2baa8376155dd83912249e3126d6ed27aaac348b4911a37c4",
+    "macos-summary.json": "c7880f108981c1c477bd769eab4d080661d3d5bdad1003b91e4f07750a2a0d11"
+  },
+  "full_ci_attachment_retention_days": 30,
+  "independent_researcher_reproduction": false
+}

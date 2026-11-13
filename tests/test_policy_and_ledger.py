@@ -1,4 +1,7 @@
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import closing
+
+import pytest
 
 from trustbound.experiment import manifest, scenario_fact
 from trustbound.ledger import AtomicLedger
@@ -29,4 +32,38 @@ def test_replay_is_rejected():
     ledger.initialize("trip", 1_000)
     assert ledger.reserve("trip", "same", 100).permitted
     assert ledger.reserve("trip", "same", 100).reason == "replay"
+
+
+@pytest.mark.parametrize("amount", [-10_000, True, False, 1.5, "100", None, 2**63])
+def test_invalid_reservation_cannot_create_capacity_or_consume_identity(tmp_path, amount):
+    path = tmp_path / "ledger.db"
+    with closing(AtomicLedger(path)) as ledger:
+        ledger.initialize("trip", 50_000)
+        assert ledger.reserve("trip", "invalid", amount).reason == "invalid_amount"
+        assert ledger.context("trip") == (0, 0)
+        assert ledger.reserve("trip", "oversized", 60_000).reason == "aggregate_budget"
+    with closing(AtomicLedger(path)) as ledger:
+        assert ledger.context("trip") == (0, 0)
+        assert ledger.reserve("trip", "invalid", 50_000).permitted
+        assert ledger.reserve("trip", "extra", 1).reason == "aggregate_budget"
+
+
+@pytest.mark.parametrize("limit", [-1, True, False, 1.5, "100", None, 2**63])
+def test_invalid_budget_is_rejected_before_initialization(limit):
+    with closing(AtomicLedger()) as ledger:
+        with pytest.raises(ValueError, match="invalid_budget"):
+            ledger.initialize("trip", limit)
+        with pytest.raises(KeyError):
+            ledger.context("trip")
+        ledger.initialize("trip", 100)
+        assert ledger.reserve("trip", "valid", 100).permitted
+
+
+@pytest.mark.parametrize("limit", [0, 2**63 - 1])
+def test_exact_integer_budget_boundaries(limit):
+    with closing(AtomicLedger()) as ledger:
+        ledger.initialize("trip", limit)
+        assert ledger.reserve("trip", "valid", limit).permitted
+        assert ledger.context("trip") == (limit, 1)
+        assert ledger.reserve("trip", "extra", 1).reason == "aggregate_budget"
 

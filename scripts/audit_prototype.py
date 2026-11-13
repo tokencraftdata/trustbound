@@ -1,4 +1,7 @@
-"""Regression probes for four former defects, not a deployment security proof."""
+"""Check terminality, signing-key persistence, and reservation accounting.
+
+These are local regression probes, not a deployment security proof.
+"""
 import argparse
 import json
 from pathlib import Path

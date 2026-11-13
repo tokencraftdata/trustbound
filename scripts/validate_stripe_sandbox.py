@@ -156,7 +156,7 @@ def run(key, root):
         check("retry_after_injected_loss_same_object", code == 200 and h.get("id") == h_original["id"])
         code, captured = api.request("POST", f"/v1/payment_intents/{f['id']}/capture", {}, run_id + ":flight-capture")
         check("flight_capture_succeeded", code == 200 and captured.get("amount_received") == 600)
-        # Fresh GET, rather than the POST reply, supplies the applied observation.
+        # Fresh retrieval supplies the observation used for reconciliation.
         fo = observer.retrieve(f["id"])
         check("fresh_get_confirms_flight", fo["status"] == "confirmed" and fo["amount_minor"] == 600)
         flight.apply_receipt(run_id + ":flight", fo["status"])

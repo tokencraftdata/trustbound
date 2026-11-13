@@ -1,0 +1,32 @@
+{
+  "id": 43293947080,
+  "head_sha": "aa828267859186abe77d1e15ee18cd6124190177",
+  "status": "completed",
+  "conclusion": "success",
+  "html_url": "https://github.com/tokencraftdata/trustbound/actions/runs/43293947080",
+  "jobs": [
+    {
+      "id": 131447126560,
+      "name": "Extracted artifact (ubuntu-24.04)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 131447126923,
+      "name": "Extracted artifact (macos-15-intel)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 131447127085,
+      "name": "Full Python regression suite",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "retained_files": [
+    "ubuntu-summary.json",
+    "development-tests.xml",
+    "macos-summary.json"
+  ]
+}

@@ -1,0 +1,7 @@
+# Complete runtime dependency set for the Linux/macOS reviewer workflow.
+# Python 3.11+; no AP2/UCP SDKs or provider credentials are required.
+iniconfig==2.3.1
+packaging==26.3
+pluggy==1.7.0
+Pygments==2.21.0
+pytest==9.0.2

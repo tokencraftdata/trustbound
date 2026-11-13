@@ -1,7 +1,7 @@
 """Evidence-only synthetic comparison. Ground truth is used ONLY by the grader.
 
-This replaces the 2026-10-27 oracle-contaminated benchmark. It is not a PSP
-simulation or performance measurement. All arms receive identical Evidence.
+All arms receive identical Evidence. This is not a PSP simulation or
+performance measurement.
 """
 
 from __future__ import annotations

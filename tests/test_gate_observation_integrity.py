@@ -95,7 +95,7 @@ def test_conflict_is_visible_through_request_only_interface(tmp_path):
 
 def test_legacy_paid_row_without_provenance_cannot_resolve(tmp_path):
     path = tmp_path / "gate.db"
-    # Exact previous schema: migration may not trust a historical resolved flag.
+    # A stored terminal status alone does not establish capture provenance.
     with sqlite3.connect(path) as db:
         db.executescript("""
         CREATE TABLE epoch(id TEXT PRIMARY KEY, closed INTEGER NOT NULL);
@@ -110,3 +110,55 @@ def test_legacy_paid_row_without_provenance_cannot_resolve(tmp_path):
     state = gate.snapshot()
     assert state["has_contract_conflicts"] and not state["known_manifest_resolved"]
     gate.close()
+
+
+@pytest.mark.parametrize("first_status", ["succeeded", "processing"])
+@pytest.mark.parametrize("later_status,received", [("canceled", 0), ("processing", 0), ("processing", 50)])
+@pytest.mark.parametrize("restart_before_conflict", [False, True])
+def test_positive_receipt_cannot_be_erased_by_a_later_observation(
+    tmp_path, first_status, later_status, received, restart_before_conflict,
+):
+    path = tmp_path / "gate.db"
+    gate = StripeGate(path, "epoch")
+    gate.register(intent())
+    gate.claim(gate.grant("pi_Boundary1", "capture"))
+    gate.fence()
+    gate.observe({**intent(first_status), "amount_received": 100, "amount_capturable": 0})
+    assert gate.snapshot()["records"][0]["received"] == 100
+    if restart_before_conflict:
+        gate.close()
+        gate = StripeGate(path, "epoch")
+    with pytest.raises(RuntimeError, match="received_amount_regressed"):
+        gate.observe({**intent(later_status), "amount_received": received, "amount_capturable": 0})
+    gate.close()
+    reopened = StripeGate(path, "epoch")
+    try:
+        snapshot = reopened.snapshot()
+        assert snapshot["records"][0]["received"] == 100
+        assert snapshot["has_contract_conflicts"]
+        assert not snapshot["known_manifest_resolved"]
+        assert snapshot["retained_minor"] == 200
+        assert {"payment_id": "pi_Boundary1", "reason": "received_amount_regressed"} in snapshot["contract_conflicts"]
+        # A subsequent complete receipt does not clear committed contradictory evidence.
+        reopened.observe(intent("succeeded"))
+        assert reopened.snapshot()["has_contract_conflicts"]
+        assert not reopened.snapshot()["known_manifest_resolved"]
+    finally:
+        reopened.close()
+
+
+def test_matching_or_increasing_received_amount_remains_observable(tmp_path):
+    gate = StripeGate(tmp_path / "gate.db", "epoch")
+    try:
+        gate.register(intent())
+        gate.claim(gate.grant("pi_Boundary1", "capture"))
+        gate.fence()
+        partial = {**intent("processing"), "amount_received": 100, "amount_capturable": 0}
+        gate.observe(partial)
+        gate.observe(partial)
+        assert not gate.snapshot()["known_manifest_resolved"]
+        gate.observe(intent("succeeded"))
+        assert gate.snapshot()["records"][0]["received"] == 200
+        assert not gate.snapshot()["has_contract_conflicts"]
+    finally:
+        gate.close()

@@ -9,6 +9,11 @@ from pathlib import Path
 from .models import Decision
 
 
+def _valid_minor_amount(value: int) -> bool:
+    """Accept nonnegative integer minor units that SQLite can store exactly."""
+    return type(value) is int and 0 <= value <= 2**63 - 1
+
+
 class AtomicLedger:
     """SQLite ledger with one serializable reservation transaction per attempt."""
 
@@ -26,6 +31,8 @@ class AtomicLedger:
         self._connection.commit()
 
     def initialize(self, itinerary_id: str, limit_minor: int) -> None:
+        if not _valid_minor_amount(limit_minor):
+            raise ValueError("invalid_budget")
         with self._lock:
             self._connection.execute(
                 "INSERT OR IGNORE INTO itinerary(id, limit_minor, spent_minor) VALUES (?, ?, 0)",
@@ -44,6 +51,8 @@ class AtomicLedger:
         return int(row[0]), int(row[1])
 
     def reserve(self, itinerary_id: str, transaction_id: str, amount_minor: int) -> Decision:
+        if not _valid_minor_amount(amount_minor):
+            return Decision(False, "invalid_amount")
         with self._lock:
             connection = self._connection
             connection.execute("BEGIN IMMEDIATE")

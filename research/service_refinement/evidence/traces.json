@@ -5002,125 +5002,7 @@
         }
       },
       {
-        "source_event": "claimed_command_at_transport_entry",
-        "identity": 1,
-        "model_step": "waitOrReject",
-        "service_snapshot": {
-          "closed": true,
-          "records": [
-            {
-              "id": "pi_Trace1",
-              "amount": 200,
-              "status": "canceled",
-              "received": 0,
-              "capturable": 0
-            }
-          ],
-          "commands": [
-            {
-              "id": 1,
-              "payment_id": "pi_Trace1",
-              "action": "capture",
-              "claimed": 1
-            }
-          ],
-          "contract_conflicts": [],
-          "has_contract_conflicts": false,
-          "known_manifest_resolved": true,
-          "deployment_completeness_proved": false,
-          "retained_minor": 0
-        },
-        "provider_objects": [
-          [
-            "pi_Trace1",
-            "canceled"
-          ]
-        ],
-        "provider_events": [
-          [
-            "canceled",
-            "pi_Trace1"
-          ]
-        ],
-        "projected_state": {
-          "objects": [
-            1
-          ],
-          "journal": [
-            1
-          ],
-          "issued": [
-            1
-          ],
-          "rights": [],
-          "effects": [],
-          "closed": true,
-          "terminal": [
-            1
-          ]
-        }
-      },
-      {
-        "source_event": "provider_rejected_call",
-        "identity": 1,
-        "model_step": "waitOrReject",
-        "service_snapshot": {
-          "closed": true,
-          "records": [
-            {
-              "id": "pi_Trace1",
-              "amount": 200,
-              "status": "canceled",
-              "received": 0,
-              "capturable": 0
-            }
-          ],
-          "commands": [
-            {
-              "id": 1,
-              "payment_id": "pi_Trace1",
-              "action": "capture",
-              "claimed": 1
-            }
-          ],
-          "contract_conflicts": [],
-          "has_contract_conflicts": false,
-          "known_manifest_resolved": true,
-          "deployment_completeness_proved": false,
-          "retained_minor": 0
-        },
-        "provider_objects": [
-          [
-            "pi_Trace1",
-            "canceled"
-          ]
-        ],
-        "provider_events": [
-          [
-            "canceled",
-            "pi_Trace1"
-          ]
-        ],
-        "projected_state": {
-          "objects": [
-            1
-          ],
-          "journal": [
-            1
-          ],
-          "issued": [
-            1
-          ],
-          "rights": [],
-          "effects": [],
-          "closed": true,
-          "terminal": [
-            1
-          ]
-        }
-      },
-      {
-        "source_event": "service_post_reply_is_not_observation",
+        "source_event": "service_rejected_operation",
         "identity": null,
         "model_step": "waitOrReject",
         "service_snapshot": {
@@ -5139,7 +5021,7 @@
               "id": 1,
               "payment_id": "pi_Trace1",
               "action": "capture",
-              "claimed": 1
+              "claimed": 0
             }
           ],
           "contract_conflicts": [],
@@ -5297,40 +5179,6 @@
         "terminal": [
           1
         ]
-      },
-      {
-        "objects": [
-          1
-        ],
-        "journal": [
-          1
-        ],
-        "issued": [
-          1
-        ],
-        "rights": [],
-        "effects": [],
-        "closed": true,
-        "terminal": [
-          1
-        ]
-      },
-      {
-        "objects": [
-          1
-        ],
-        "journal": [
-          1
-        ],
-        "issued": [
-          1
-        ],
-        "rights": [],
-        "effects": [],
-        "closed": true,
-        "terminal": [
-          1
-        ]
       }
     ],
     "final_snapshot": {
@@ -5349,7 +5197,7 @@
           "id": 1,
           "payment_id": "pi_Trace1",
           "action": "capture",
-          "claimed": 1
+          "claimed": 0
         }
       ],
       "contract_conflicts": [],

@@ -1,0 +1,88 @@
+{
+  "artifact_version": "1.1.0-review.5",
+  "code_revision": "689808ace13f6e35bbc72c95404e348f77a798c8",
+  "archive": "TrustBound_Reviewer_Artifact_v1.1.0-review.5.zip",
+  "archive_sha256": "398d85b793bf7269aec4c64a64725ecf08b70d55b07dbb774ac85c27170347d1",
+  "content_id": "a3cffb9395b23753b821113c4e48034dde429bf78319591924696b11ba8a49f5",
+  "archive_entries": 43,
+  "checks_passed": true,
+  "checks_include_documented_stale_read_limitation": true,
+  "executed_at_utc": "2026-11-13T04:35:41.987479+00:00",
+  "python": "3.13.18",
+  "platform": "Linux-6.18.44-fc-v445-x86_64-with-glibc2.39",
+  "lean": "Lean (version 4.19.0, x86_64-unknown-linux-gnu, commit 6caaee842e94, Release)",
+  "dependencies": {
+    "iniconfig": "2.3.1",
+    "packaging": "26.3",
+    "pluggy": "1.7.0",
+    "Pygments": "2.21.0",
+    "pytest": "9.0.2"
+  },
+  "fresh_python_environment": true,
+  "python_environment": "New virtual environment from requirements-reviewer.txt; executed from a new archive extraction outside the checkout.",
+  "existing_lean_installation": true,
+  "independent_machine_reproduction": false,
+  "full_repository_test_counts": {
+    "tests": 375,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "full_repository_junit_sha256": "81a04af25fc9629b03569fbeb13c66b319454e2d46a2d7625819a7bb97b73e96",
+  "selected_service_test_counts": {
+    "tests": 158,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "core_results": {
+    "exported_results_checked": 14,
+    "premise_removal_mutations_rejected": 8,
+    "baseline_records": 2048,
+    "baseline_test_counts": {
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "trace_results": {
+    "executed_service_traces": 6,
+    "projected_steps": 64,
+    "closed_trace_instances": 5,
+    "unresolved_trace_instances": 1,
+    "invalid_trace_inputs_rejected": 2,
+    "projection_audit_passed": true
+  },
+  "generated_schedule_results": {
+    "generated_cases": 864,
+    "resolved_cases": 768,
+    "unresolved_cases": 96
+  },
+  "agent_behavior_results": {
+    "generated_cases": 40,
+    "resolved_after_agent": 12,
+    "resolved_after_operator": 30,
+    "pending_after_operator": 10,
+    "max_capture_invocations_per_case": 1,
+    "max_paid_effects_per_case": 1
+  },
+  "concurrent_client_results": {
+    "generated_cases": 84,
+    "resolved_cases": 60,
+    "pending_cases": 18,
+    "stale_read_conflict_cases": 6,
+    "conflict_free_concurrent_reconciliation": false,
+    "max_capture_invocations_per_identity": 1,
+    "max_paid_effects_per_identity": 1
+  },
+  "provider_requests": 0,
+  "new_lean_theorems": 0,
+  "production_service_code_changed": true,
+  "production_service_change": "StripeGate.claim refuses commands for payments observed terminal (docs/CORRECTNESS_FIXES.md section 6).",
+  "stale_read_conflict_fixed": false,
+  "deployment_assumptions_established": false,
+  "universal_implementation_refinement": false,
+  "license": "MIT (code and documentation); manuscript excluded",
+  "output_summary_sha256": "13dc469d0b7ccb4cdf2f7d1bc254053f487569d79755e25de5fc7d1586703d1e"
+}

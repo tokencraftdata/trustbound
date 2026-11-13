@@ -1,8 +1,7 @@
 import Admission
 open TrustBoundAdmission
 
--- Reviewer diagnostic: cancel of an unissued identity is not a tombstone.
--- This is a witness about the existing rules, not an additional core guarantee.
+-- Canceling an unissued identity does not prevent a subsequent grant.
 example : Runs initial ⟨[7], [7], [], [7], false⟩ := by
   let recorded : State := ⟨[7], [], [], [], false⟩
   let granted : State := ⟨[7], [7], [7], [], false⟩

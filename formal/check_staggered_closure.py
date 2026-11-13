@@ -1,4 +1,4 @@
-"""Audit the non-novel staggered-observation corollary of the contract model."""
+"""Check accumulation of irreversible observations in the provider contract model."""
 import argparse
 from datetime import datetime, timezone
 import hashlib

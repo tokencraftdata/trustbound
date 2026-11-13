@@ -100,8 +100,7 @@ def run(key, private, output):
               rejected.get("error", {}).get("code") == "payment_intent_unexpected_state")
 
         check("prior_capture_claimable_after_fence", gate.claim(late_capture) == (paid_target["id"], "capture"))
-        # Default final_capture=true is documented; the explicit parameter was
-        # rejected in the retained initial test on this account/API version.
+        # Omitting final_capture uses the provider's default final capture.
         code, paid = action(paid_target, "capture", "post-fence-capture")
         check("earlier_right_executes_after_fence", code == 200 and paid.get("status") == "succeeded"
               and paid.get("amount_received") == 200 and paid.get("amount_capturable") == 0)

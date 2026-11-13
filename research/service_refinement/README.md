@@ -1,5 +1,46 @@
 # Service repairs and checked execution traces
 
+## Reviewer workflow addition
+
+The [reviewer command](../../docs/REVIEWER_GUIDE.md) runs the formal core, selected
+service tests, this trace checker, and a separate audit of the exported JSON.
+The [audit module](../../src/trustbound/trace_evidence.py) declares each scenario's
+expected step count, effects, rights, and closure outcome. It reconstructs the
+projection from supplied records and checks command/event deltas, unknown labels,
+and final snapshots. Tampering regression tests require inconsistent or incomplete
+evidence to fail. The trace checker now refuses Python optimization and enforces
+Lean 4.19.0 before running; it writes `projection-audit.json` with the scenario
+catalog and event mapping alongside its existing outputs.
+
+These additions do not change the original six scenarios. Since 13 November 2026 the
+gate refuses to claim a command once its payment is observed terminal, so the
+late-capture scenario records one rejected operation instead of a provider call;
+the six histories now have 64 transitions (previously 66).
+The evidence is finite and supplied by trusted instrumentation; omitted real
+routes, universal refinement, and eventual resolution remain unproved. See the
+[research contract](../../docs/RESEARCH_CONTRACT.md) for the exact boundary.
+
+## Generated operation schedules
+
+`check_schedules.py` adds 864 deterministic one-payment cases with a separately
+maintained oracle. It enumerates grant/fence/dispatch/observe orders, optionally
+cancellation, normal/lost-reply/abandoned-claim modes, and reopening after every
+action or no restart. A common suffix checks retries and post-fence admission.
+The reviewer command includes this checker and records every case outcome.
+
+These are Python tests, separate from the six histories certified by Lean.
+They cover bounded serial orderings, not every concurrent or crash execution.
+See the [reviewer guide](../../docs/REVIEWER_GUIDE.md#generated-operation-schedules)
+for bounds, reproduction, failure replay information, and checker mutation tests.
+
+## Scripted client evaluation
+
+A separate [agent-behavior evaluation](../agent_behaviors/README.md) adds 40
+request-only client cases through the actual command service. These cases are
+separate from both the 864 operation schedules and six Lean-checked histories.
+
+## Original execution record
+
 Executed 10 November 2026. No real provider requests, new infrastructure,
 publication, or repository push. This work strengthens implementation evidence;
 it establishes no new general closure principle.

@@ -192,7 +192,7 @@ def serve(
         raise ValueError("synthetic_credential_required")
     state = Path(state_dir)
     with closing(StripeGate(state / "gate.db", "boundary-epoch")) as gate:
-        # Only trusted startup provisions a fixed, previously reviewed operation.
+        # Only trusted startup provisions approved operations.
         if not gate.snapshot()["records"]:
             gate.register(intent())
             gate.grant("pi_Boundary1", "capture")

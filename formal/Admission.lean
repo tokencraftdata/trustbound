@@ -197,7 +197,7 @@ theorem bypass_breaks_coverage : ∃ s t,
 -- Generic refinement bridge makes the remaining external premise explicit.
 -- A real step may correspond to zero or several model steps. EVERY possible
 -- action, including dashboards, other credentials and delayed dispatch, must
--- satisfy `simulate`. Neither our API probes nor this theorem supply it.
+-- satisfy `simulate`. API probes and this theorem do not establish that premise.
 inductive ExternalRuns {R : Type} (step : R → R → Prop) : R → R → Prop where
   | refl (s : R) : ExternalRuns step s s
   | next {a b c : R} (one : step a b) (rest : ExternalRuns step b c) : ExternalRuns step a c

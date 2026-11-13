@@ -110,8 +110,6 @@ def test_duplicate_command_and_epoch_mismatch(tmp_path):
 
 
 def test_terminal_observation_discharges_unclaimed_commands(tmp_path):
-    # Review finding: closure was reported while granted commands for a
-    # terminal payment could still be claimed and dispatched.
     gate = StripeGate(tmp_path / "gate.db", "epoch-terminal")
     gate.register(intent())
     confirm = gate.grant("pi_Test1", "confirm")

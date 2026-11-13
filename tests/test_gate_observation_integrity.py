@@ -95,7 +95,7 @@ def test_conflict_is_visible_through_request_only_interface(tmp_path):
 
 def test_legacy_paid_row_without_provenance_cannot_resolve(tmp_path):
     path = tmp_path / "gate.db"
-    # Exact previous schema: migration may not trust a historical resolved flag.
+    # A stored terminal status alone does not establish capture provenance.
     with sqlite3.connect(path) as db:
         db.executescript("""
         CREATE TABLE epoch(id TEXT PRIMARY KEY, closed INTEGER NOT NULL);

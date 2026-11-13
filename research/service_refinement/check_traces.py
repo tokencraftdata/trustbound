@@ -1,6 +1,6 @@
 """Execute the real gate against a LOCAL SQLite provider and check trace projections.
 
-The generated Lean terms use only the existing Admission and StripeGate models.
+The generated Lean terms use the Admission and StripeGate models.
 They certify six finite projected histories, not all Python executions or a real
 processor. The Python projection and completeness of harness instrumentation are
 not proved. Synthetic provider effect commits are distinct from later reads.
@@ -332,8 +332,8 @@ def main():
         name = trace['name']
         (build/(name+'.lean')).write_text(certificate(name, trace['states'], trace['steps'], trace['claims_resolved'], paid))
         compile_file(name, True)
-    # Out-of-contract histories corresponding to the two defect probes. These
-    # are negative checker inputs, NOT simulated provider executions.
+    # Negative inputs model payment without authority and after cancellation;
+    # neither is a valid provider execution under the contract.
     for name, sequence in [('paid_without_admission', ['allocate','register','fence','paid']),
                            ('paid_after_terminal_cancel', ['allocate','register','dispatch','fence','canceled','paid'])]:
         states, steps = [initial()], []

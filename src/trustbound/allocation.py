@@ -65,7 +65,7 @@ class AllocationAuthority:
             connection.execute("PRAGMA fullfsync=ON")
             columns = {row[1] for row in connection.execute("PRAGMA table_info(allocation)")}
             if columns and not {"claimed", "issued_at", "expires_at"} <= columns:
-                # An old database cannot tell us whether exported rights were used.
+                # Missing claim metadata leaves allocation use unknown.
                 raise RuntimeError("legacy_allocation_requires_migration")
             connection.executescript("""
                 CREATE TABLE IF NOT EXISTS trip (

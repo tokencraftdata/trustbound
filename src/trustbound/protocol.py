@@ -299,8 +299,8 @@ class ProtocolHarness:
             if actual_hash != artifacts.checkout_hash:
                 return ProtocolVerification(False, "checkout_hash_mismatch")
             fact = _fact_from_checkout(jwt_payload)
-            # Retain the input field for compatibility, but never treat it as
-            # authority. Canonical comparison distinguishes booleans from integers.
+            # Supplied facts must match the authenticated checkout.
+            # Canonical comparison distinguishes booleans from integers.
             if rfc8785.dumps(fact.as_dict()) != rfc8785.dumps(artifacts.fact.as_dict()):
                 return ProtocolVerification(False, "booking_fact_mismatch")
 

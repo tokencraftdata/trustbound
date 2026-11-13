@@ -1,7 +1,7 @@
 """Comparable authorization configurations.
 
-The parity baseline intentionally receives the same itinerary facts and atomic
-state as TrustBound. This prevents a straw-man comparison.
+The parity baseline receives the same itinerary facts and atomic state as
+TrustBound.
 """
 
 from __future__ import annotations

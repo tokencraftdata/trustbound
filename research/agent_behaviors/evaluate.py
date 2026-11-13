@@ -65,7 +65,7 @@ def run_policy(name, exchange):
 
 
 class BehaviorProvider(SinglePaymentProvider):
-    """The schedule simulator plus retrieval and an indefinitely pending request.
+    """Single-payment simulator with retrieval and indefinitely pending requests.
 
     Pending mode records a transport invocation but leaves the source nonterminal.
     It represents unresolved provider work, not a claim abandoned before send.

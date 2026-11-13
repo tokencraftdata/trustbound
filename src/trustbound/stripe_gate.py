@@ -327,8 +327,7 @@ class StripeGate:
                     "SELECT id,amount,status,received,capturable FROM payment ORDER BY id"
                 )
             ]
-            # Recheck historical rows too: opening an older database must not
-            # preserve a resolved paid observation lacking capture provenance.
+            # Every persisted paid observation requires a claimed capture.
             for record in records:
                 has_paid_outcome = record["received"] > 0 or record["status"] == "succeeded"
                 if has_paid_outcome and not self._capture_claimed(record["id"]):

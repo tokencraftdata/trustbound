@@ -1,8 +1,7 @@
 import StripeGate
 
-/- Candidate audit, not a novelty claim. Accumulating irreversible observations
-is the elementary monotone-predicate argument. This module exposes that reduction
-for the existing provider CONTRACT model; it verifies no actual provider or API.
+/- Irreversible observations accumulate by preservation of monotone predicates.
+This corollary applies to the provider contract model, not an actual provider or API.
 Observation witnesses below are semantic facts, not authenticated wire receipts.
 -/
 namespace TrustBoundStaggeredClosure

@@ -56,7 +56,7 @@ class Diagram:
     def save(self,name):
         (ROOT/(name+".svg")).write_text("\n".join(self.svg)+"\n</svg>\n")
         self.image.save(ROOT/(name+".png"))
-        # Vector PDF for manuscript inclusion; no on-upload SVG conversion needed.
+        # Render manuscript figures as vector PDFs.
         import xml.etree.ElementTree as ET
         from reportlab.pdfgen.canvas import Canvas
         from reportlab.lib.colors import HexColor

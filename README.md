@@ -236,7 +236,6 @@ the PDF, LaTeX source, arXiv package and build instructions.
   the flight–hotel diagnostic.
 - [Research scope decision](docs/TRIP_CLOSURE_CANDIDATE.md): why trip expansion and
   reserve optimization are outside the paper's contribution.
-- [arXiv submission guide](paper/ARXIV_SUBMISSION_GUIDE.md): category, license and upload steps.
 
 The code, Lean models, scripts, tests, evidence and technical documentation are
 released under the [MIT license](LICENSE). The manuscript is not MIT-licensed; it

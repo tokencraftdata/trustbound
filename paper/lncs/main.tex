@@ -308,8 +308,9 @@ future work (Sect.~\ref{sec:limitations}).
 \label{sec:mapping}
 Payment providers let a service create a payment object before authorizing
 it. The provider-contract model%
-\footnote{\raggedright Defined in \code{StripeGate.lean}; the name reflects its
-original motivation, a manual-confirmation, manual-capture Stripe path.\par}
+\footnote{\raggedright Defined in \code{StripeGate.lean}, named for the Stripe
+payment flow that motivated it, in which the service confirms and captures each
+payment explicitly (\emph{manual capture}).\par}
 extends the admission model with provider objects and terminal identities.
 \emph{Allocation} creates an inert object with no payment authority.
 \emph{Registration} requires an existing object and an open epoch.
@@ -401,7 +402,7 @@ Service histories (RQ3) & 6 histories, 64 transitions accepted by Lean; 5 closed
 Generated schedules (RQ4) & 864 cases: 768 resolved, 96 correctly unresolved. \\
 Scripted clients (RQ4) & 5 policies, 40 cases; no premature closure or repeat capture. \\
 Concurrent workers (RQ4) & 84 cases: 66 resolved, 18 pending, 0 conflicts. \\
-Regression tests & 170 in the reviewer subset; 403 in total. \\
+Regression tests & 170 run by the reproduction command; 403 in total. \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -510,8 +511,8 @@ Invalid and replayed requests & 24 & 6/8 & 6/8 \\
 \end{table}
 
 However aggressively a client retries, each policy causes exactly one capture
-per case, and no case closes prematurely; all 40 forged or unsupported requests
-are rejected. The difference between policies is in what they can
+per case, and no case closes prematurely. All 40 forged or unsupported
+requests sent by the invalid-request policy (five per case) are rejected. The difference between policies is in what they can
 \emph{learn}: retries and status polls obtain no fresh provider evidence, so
 only reconciling clients resolve cases themselves. Reconciliation establishes
 terminal outcomes but correctly cannot discharge genuinely pending work, which
@@ -553,7 +554,7 @@ reports were truthful when read, but the gate recorded a conflict and could
 never close. The fix holds a write transaction across each provider retrieval
 and its journal update, so an older read cannot overtake a newer one. Six
 targeted cases pause a pending read, confirm that the lock is held, and let a
-competing worker attempt reconciliation; all now close. After the fix, all 84
+competing worker attempt reconciliation; all six close. With the fix, all 84
 cases pass with no conflicts, each identity has at most one capture invocation
 and one paid effect, and genuinely contradictory reports still raise conflicts.
 Tests reject four broken variants: repeated claims, premature closure, a
@@ -610,8 +611,9 @@ terminate, in which case closure is correctly withheld.
 models for all executions. The trace checks cover six histories, and the
 projection and event capture are trusted. Schedules and concurrent cases are
 bounded and do not enumerate all interleavings. All experiments use a provider
-simulator; an earlier Stripe test-mode run (Appendix~\ref{sec:historical}) is
-reported only as a historical observation.
+simulator. A preliminary run against Stripe's test mode
+(Appendix~\ref{sec:historical}) predates the service evaluated here and is
+reported only as an observation.
 
 \section{Conclusion}
 \label{sec:conclusion}
@@ -664,37 +666,58 @@ no network access or provider credentials are needed. The repository's CI
 reruns this command on Ubuntu and macOS for every change, and
 \code{docs/REVIEWER\_GUIDE.md} explains every output.
 
-\section{Historical Processor Observation}
+\section{Preliminary Stripe Test-Mode Observation}
 \label{sec:historical}
-An earlier Stripe test-mode run recorded 21 assertions over nine requests and
-200 test cents captured. It exercised a lost reply, database reopen, duplicate
-rejection, and recovery through fresh reads of a known operation. Reconciliation
-used the same processor and key, with non-atomic reads. A same-user process
-could read the key and journal, so this run did not satisfy the request-only
-boundary in A1 or establish complete admission coverage. It is evidence about
-those exercised paths, not validation of the provider-contract model or A1--A5.
+Before building the service evaluated in Sect.~\ref{sec:eval}, we ran a
+prototype against Stripe's test mode. The run made nine requests, checked 21
+assertions, and captured 200 test cents. It exercised a lost reply, a database
+reopen, rejection of a duplicate request, and recovery by re-reading a known
+payment from the provider. The prototype differs from the evaluated service in
+ways that matter here. Its reconciliation used the same provider key as
+dispatch, and its reads were not serialized with journal updates
+(cf.\ Sect.~\ref{sec:concurrent}). In addition, the client process ran as
+the same operating-system user as the service and could read its key and
+journal. The run therefore does not satisfy the request-only boundary of A1 and
+does not establish complete admission coverage. It is evidence about the paths
+it exercised, not a validation of the provider-contract model or of A1--A5.
 
-A separate local simulator produced identical known-object observations with
-200 versus 300 synthetic cents when a bypass was added. Its source and saved
-outputs are in the repository. Neither observation establishes production
-behavior or UCP/AP2 conformance.
+A companion local simulation illustrates the limit identified in
+Sect.~\ref{sec:diagnostic}. In two runs, one of which adds a payment that
+bypasses the service, the service's reads of the payments it knows about are
+identical, although 200 synthetic cents are captured in one run and 300 in the
+other. The source and saved outputs of both observations are in the
+repository. Neither establishes production behavior or conformance with the
+Universal Commerce Protocol (UCP) or the Agent Payments Protocol
+(AP2).
 
 \section{Supplementary Implementation Details}
 \label{app:implementation}
-Authorization now uses facts extracted from the authenticated checkout: a
-signed \$200 checkout paired with separate \$1 facts is rejected. This local
-profile does not establish generic UCP/AP2 conformance.
+\paragraph{Checkout-bound authorization.}
+The service authorizes a payment only from facts extracted from the
+authenticated checkout itself, never from facts supplied alongside it. For
+example, a signed \$200 checkout paired with separate \$1 facts is rejected.
+The service builds checkouts with the official UCP models and verifies
+mandates with the AP2 SDK, but this binding rule is our own and does not
+establish conformance with either protocol.
 
-A trusted coordinator atomically claims a spending allowance before work starts.
-For a \$500 trip, a claimed \$300 allowance remains reserved after retirement;
-an unclaimed retired allowance can be released. A cap is not a money transfer.
-Settlement and automatic reclamation of claimed capacity are not implemented.
+\paragraph{Spending allowances.}
+A trusted coordinator must atomically claim a task's spending allowance
+before any work starts. Retiring an allowance stops further use but does not
+free capacity that was claimed, because work may be in flight or funds already
+spent. For a \$500 trip, a claimed \$300 allowance therefore stays reserved
+after retirement, while an allowance that was never claimed is released. An allowance is a cap, not a money transfer; settlement and
+automatic reclamation of claimed capacity are not implemented.
 
-The direct ledger rejects negative amounts, booleans, nonintegers, and values
-outside SQLite's signed integer range before mutation; zero remains valid.
-Tests cover invalid budgets, capacity creation, identity reuse after rejection,
-restart, and integer boundaries. Historical invalid rows are not repaired.
-These modules are tested in the full suite, not by the reviewer command.
+\paragraph{Ledger input validation.}
+The spending ledger, which reserves budget atomically for each payment
+attempt, rejects negative amounts, booleans, non-integers, and values
+outside SQLite's signed 64-bit range before any write; zero is accepted. Tests
+cover invalid budgets, capacity creation, identity reuse after rejection,
+restart, and integer boundaries. Validation applies to new writes only; rows
+already in a database are not checked or repaired.
+
+These modules are covered by the full test suite but not by the
+reproduction command of Appendix~\ref{app:artifact}.
 Their monetary rules and composed approval-to-dispatch behavior are not proved
 by the closure theorem.
 

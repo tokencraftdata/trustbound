@@ -1,8 +1,0 @@
-'TrustBoundAdmission.reachable_coverage' depends on axioms: [propext, Quot.sound]
-'TrustBoundAdmission.fenced_population_immutable' depends on axioms: [propext]
-'TrustBoundAdmission.post_fence_coverage' depends on axioms: [propext, Quot.sound]
-'TrustBoundAdmission.drained_fence_effects_stable' depends on axioms: [propext]
-'TrustBoundAdmission.reconciled_fence_complete' depends on axioms: [propext, Quot.sound]
-'TrustBoundAdmission.fence_without_drain' depends on axioms: [propext]
-'TrustBoundAdmission.bypass_breaks_coverage' depends on axioms: [propext]
-'TrustBoundAdmission.refinement_transfers_coverage' depends on axioms: [propext, Quot.sound]

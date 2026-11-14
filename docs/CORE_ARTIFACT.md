@@ -166,7 +166,7 @@ The final 9 November candidate reproduced the same 14/8/9/2,048 totals in a
 new Python virtual environment with freshly downloaded pytest 9.0.2 dependencies
 and the existing Lean 4.19.0 compiler. The source files and expected result were
 unchanged. The archive uses `requirements.txt`; the full working repository uses
-`requirements-core.txt`. See [the execution record](../evidence/final_assurance_2026-11-09/README.md).
+`requirements-core.txt`.
 This remains the same host, not an independent clean-machine reproduction.
 
 ## Service-check supplement, 10 November

@@ -20,9 +20,8 @@ Differences from the author version:
 - References use the template's author–year bibliography style.
 
 Appendix A contains only artifact availability and the retained AI-assistance
-disclosure. Detailed commands, run history and the travel diagnostic are in
-[the repository supplement](../SUPPLEMENTARY_RECORD.md), with runnable commands
-in [the core guide](../../docs/CORE_ARTIFACT.md). An anonymous reviewer link is
+disclosure. Runnable commands are in
+[the core guide](../../docs/CORE_ARTIFACT.md). An anonymous reviewer link is
 pending. Do not insert the author's GitHub URL into this review copy.
 
 `aaai2027.sty` and `aaai2027.bst` are unchanged files from the

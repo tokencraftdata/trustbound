@@ -1,1 +1,0 @@
-{"all_checks_passed": true, "assertions": 40, "comparisons": {"identical_public_transcripts": true, "identical_final_gate_snapshots": true, "mediated_total_200": true, "bypass_total_300": true, "bypass_effect_after_known_manifest_resolution": true, "complete_provider_ledger_distinguishes_worlds": true}, "real_provider_calls": 0, "os_isolation_tested": false}

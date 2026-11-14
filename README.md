@@ -140,10 +140,8 @@ conflict-free reconciliation or progress for all executions.
 A successful run is a **reproduction report**, not a closure certificate for a
 real merchant. It makes no processor requests and does not establish deployment
 assumptions A1–A5. See the [reviewer guide](docs/REVIEWER_GUIDE.md) for the
-workflow, the [core artifact guide](docs/CORE_ARTIFACT.md) for the narrower
-proof-and-diagnostic command and its provenance, and the
-[recorded artifact check](evidence/final_assurance_2026-11-09/README.md) for the
-fresh dependency installation on the same host.
+workflow and the [core artifact guide](docs/CORE_ARTIFACT.md) for the narrower
+proof-and-diagnostic command and its provenance.
 
 ## Code map
 
@@ -231,11 +229,6 @@ AI Agents*, is by **Sandip Nandi, Aishwarya Bose, Apurba Bose and Soovadeep
 Bakshi (Independent Researchers)**. One LNCS version serves both the arXiv
 preprint and the NFM 2027 submission. The [paper guide](paper/README.md) lists
 the PDF, LaTeX source, arXiv package and build instructions.
-
-- [Supplementary record](paper/SUPPLEMENTARY_RECORD.md): detailed run history and
-  the flight–hotel diagnostic.
-- [Research scope decision](docs/TRIP_CLOSURE_CANDIDATE.md): why trip expansion and
-  reserve optimization are outside the paper's contribution.
 
 The code, Lean models, scripts, tests, evidence and technical documentation are
 released under the [MIT license](LICENSE). The manuscript is not MIT-licensed; it

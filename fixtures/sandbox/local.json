@@ -1,4 +1,0 @@
-[
-  {"leg":"flight","booking_provider":"fixture-flight","booking_id":"flight1","payment_id":"pi_fixtureflight","amount_minor":600,"currency":"usd","booking_status":"confirmed","payment_status":"confirmed"},
-  {"leg":"hotel","booking_provider":"fixture-hotel","booking_id":"hotel1","payment_id":"pi_fixturehotel","amount_minor":400,"currency":"usd","booking_status":"confirmed","payment_status":"confirmed"}
-]

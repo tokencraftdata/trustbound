@@ -681,19 +681,26 @@ behavior or UCP/AP2 conformance.
 
 \section{Supplementary Implementation Details}
 \label{app:implementation}
-Authorization now uses facts extracted from the authenticated checkout: a
-signed \$200 checkout paired with separate \$1 facts is rejected. This local
-profile does not establish generic UCP/AP2 conformance.
+\paragraph{Checkout-bound authorization.}
+The service authorizes a payment only from facts extracted from the
+authenticated checkout itself, never from facts supplied alongside it. For
+example, a signed \$200 checkout paired with separate \$1 facts is rejected.
+This is a local profile; it does not establish general UCP/AP2 conformance.
 
-A trusted coordinator atomically claims a spending allowance before work starts.
-For a \$500 trip, a claimed \$300 allowance remains reserved after retirement;
-an unclaimed retired allowance can be released. A cap is not a money transfer.
-Settlement and automatic reclamation of claimed capacity are not implemented.
+\paragraph{Spending allowances.}
+Before work starts, a trusted coordinator atomically claims a spending
+allowance for the task. For a \$500 trip, a claimed \$300 allowance stays
+reserved after the task is retired, while an allowance that was never claimed
+can be released. An allowance is a cap, not a money transfer; settlement and
+automatic reclamation of claimed capacity are not implemented.
 
-The direct ledger rejects negative amounts, booleans, nonintegers, and values
-outside SQLite's signed integer range before mutation; zero remains valid.
-Tests cover invalid budgets, capacity creation, identity reuse after rejection,
-restart, and integer boundaries. Historical invalid rows are not repaired.
+\paragraph{Ledger input validation.}
+The direct ledger rejects negative amounts, booleans, non-integers, and values
+outside SQLite's signed 64-bit range before any write; zero is accepted. Tests
+cover invalid budgets, capacity creation, identity reuse after rejection,
+restart, and integer boundaries. Validation applies to new writes only; rows
+already in a database are not checked or repaired.
+
 These modules are tested in the full suite, not by the reviewer command.
 Their monetary rules and composed approval-to-dispatch behavior are not proved
 by the closure theorem.

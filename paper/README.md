@@ -10,7 +10,7 @@ paper, Springer LNCS, 16 pages plus references).
 | File | What it is |
 |---|---|
 | [lncs/](lncs/) | LaTeX source (LNCS format) |
-| [TrustBound_Draft.pdf](TrustBound_Draft.pdf) | Compiled paper, 15 pages |
+| [TrustBound_Draft.pdf](TrustBound_Draft.pdf) | Compiled paper, 16 pages |
 | [TrustBound_arXiv_Source.zip](TrustBound_arXiv_Source.zip) | arXiv upload: source, figures and `llncs.cls` |
 | [arxiv-metadata.json](arxiv-metadata.json) | Title, authors, abstract, categories and comments for the arXiv form |
 | [ARXIV_SUBMISSION_GUIDE.md](ARXIV_SUBMISSION_GUIDE.md) | arXiv submission notes |

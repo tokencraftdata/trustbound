@@ -8,7 +8,7 @@ diagnostics, and a manuscript. Its contribution is a checked conditional model
 and an explicit account of the assumptions needed to apply it.
 
 [Problem](#the-problem) · [Supported result](#what-the-model-establishes) ·
-[Quick start](#quick-start-reproduce-the-reviewer-artifact) ·
+[Quick start](#quick-start-reproduce-the-results) ·
 [Code map](#code-map) · [Development](#development-and-local-checks) ·
 [Provider evidence](#provider-evidence) · [Paper and licensing](#paper-and-licensing)
 
@@ -77,17 +77,16 @@ See the [assumptions and claim boundaries](docs/CLAIMS.md),
 [implementation evidence](docs/ASSUMPTION_EVIDENCE.md), and
 [closure dependency diagram](docs/diagrams/completeness.png).
 The [research contract](docs/RESEARCH_CONTRACT.md) defines the terminology,
-positions the contribution as a mechanization note, and explains the agent role
-and the evidence still needed for deployment.
+positions the contribution, and explains the agent role and the evidence
+still needed for deployment.
 
-## Quick start: reproduce the reviewer artifact
+## Quick start: reproduce the results
 
-Run these commands from the repository or extracted reviewer-archive root on
-Linux or macOS. You need **Python 3.11+** and a separate **Lean 4.19.0** installation.
-The requirements file pins pytest 9.0.2 and its runtime dependencies. The recorded
-environment uses Python 3.12.14 on Apple Silicon macOS; this is not a tested
-platform matrix. The workflow needs no provider account, SDK, Docker, or network
-access after dependency setup.
+Clone the repository and run these commands from its root on Linux or macOS.
+You need **Python 3.11+** and a separate **Lean 4.19.0** installation. The
+requirements file pins pytest 9.0.2 and its runtime dependencies. CI runs the
+same command on Ubuntu 24.04 and macOS 15 for every push. The workflow needs no
+provider account, SDK, Docker, or network access after dependency setup.
 
 ```sh
 python3 -m venv .venv
@@ -100,10 +99,8 @@ python3 -m venv .venv
 Replace the Lean path with your installed compiler. Use a new output directory
 for each run. Assertion-based checkers reject `-O` and `PYTHONOPTIMIZE`.
 
-This repository is the artifact: clone it (or download a tagged revision) and
-run the command above from its root.
-The [reviewer guide](docs/REVIEWER_GUIDE.md) explains extraction, integrity checks,
-scenario expectations, and how to rebuild the archive.
+The [reviewer guide](docs/REVIEWER_GUIDE.md) explains each output, the
+integrity checks and the expected scenario outcomes.
 
 ### Expected results
 
@@ -132,20 +129,19 @@ a consistency control, not an independent product comparison or validation of
 theorem soundness; the comparison implements no witnessing protocol.
 
 The [concurrent-worker experiment](research/concurrent_clients/README.md) adds
-84 cases with multiple clients and payment identities. The revised run resolves
-66 and leaves 18 genuinely pending, with no false observation conflicts.
-Serialized retrieval/application prevents the earlier read-overtaking failure,
-at the cost of holding the journal write lock during each provider retrieval.
-The historical failure remains documented; the bounded checks do not establish
-universal conflict-free reconciliation or eventual progress.
+84 cases with multiple clients and payment identities. It resolves 66 and
+leaves 18 genuinely pending, with no false observation conflicts. Each provider
+retrieval and its journal update run in one write transaction, so an older read
+cannot overtake a newer one; the cost is that the journal write lock is held
+during each retrieval. The experiment's README also documents the read-overtaking
+conflict this serialization fixes. The bounded checks do not establish
+conflict-free reconciliation or progress for all executions.
 
 A successful run is a **reproduction report**, not a closure certificate for a
 real merchant. It makes no processor requests and does not establish deployment
-assumptions A1–A5. See the [reviewer guide](docs/REVIEWER_GUIDE.md) for the current
-workflow, the [core artifact guide](docs/CORE_ARTIFACT.md) for the narrower original
-core-only command and provenance, and the
-[recorded artifact check](evidence/final_assurance_2026-11-09/README.md) for the
-fresh dependency installation on the same host.
+assumptions A1–A5. See the [reviewer guide](docs/REVIEWER_GUIDE.md) for the
+workflow and the [core artifact guide](docs/CORE_ARTIFACT.md) for the narrower
+proof-and-diagnostic command and its provenance.
 
 ## Code map
 
@@ -194,8 +190,8 @@ PYTHONPATH=src .venv/bin/python -m pytest -q tests
 ```
 
 Some tests use local processes and Unix sockets. Synthetic container-configuration
-tests do not start Docker or establish OS isolation. Historical isolation helpers
-remain for test compatibility, not as a recommended deployment.
+tests do not start Docker or establish OS isolation; the isolation helpers they
+use are test fixtures, not a recommended deployment.
 See [validation notes](docs/VALIDATION.md) for the recorded environment and checks.
 
 For the separate service trace checks and selected gate/interface/crash tests,
@@ -215,7 +211,8 @@ bypass that observations of known objects miss; it is not real-provider evidence
 
 ## Provider evidence
 
-Stripe has a historical bounded **test-mode** run, not production validation.
+Stripe has one bounded **test-mode** run of an early prototype, not production
+validation.
 Adyen has a **documentation-only** contract review; no Adyen integration or test
 payment was executed. See [provider evidence](docs/PROVIDERS.md) and
 [focused references](docs/REFERENCES.md) for their distinct scopes.
@@ -227,19 +224,13 @@ repository.
 
 ## Paper and licensing
 
-The manuscript is a mechanization note on payment completeness, authored by
-**Sandip Nandi, Aishwarya Bose, Apurba Bose and Soovadeep Bakshi (Independent Researchers)**. Start with the
-[manuscript guide](paper/README.md) for the author and anonymous versions, sources,
-build instructions, and editorial history.
-
-- [Supplementary record](paper/SUPPLEMENTARY_RECORD.md): detailed run history and
-  the flight–hotel diagnostic.
-- [Research scope decision](docs/TRIP_CLOSURE_CANDIDATE.md): why trip expansion and
-  reserve optimization are outside the note's contribution.
-- [arXiv submission guide](paper/ARXIV_SUBMISSION_GUIDE.md): publication and access logistics.
+The paper, *TrustBound: Mechanized Completeness for Payment Epochs Initiated by
+AI Agents*, is by **Sandip Nandi, Aishwarya Bose, Apurba Bose and Soovadeep
+Bakshi (Independent Researchers)**. One LNCS version serves both the arXiv
+preprint and the NFM 2027 submission. The [paper guide](paper/README.md) lists
+the PDF, LaTeX source, arXiv package and build instructions.
 
 The code, Lean models, scripts, tests, evidence and technical documentation are
 released under the [MIT license](LICENSE). The manuscript is not MIT-licensed; it
 will be posted under arXiv's non-exclusive distribution license (see
-[paper/LICENSE.md](paper/LICENSE.md)). Prepared manuscripts and artifacts do not
-imply publication, a DOI deposit, or an arXiv submission.
+[paper/LICENSE.md](paper/LICENSE.md)).

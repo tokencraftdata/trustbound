@@ -38,12 +38,7 @@ ledger. It is neither a Stripe API run nor independent organizational witnessing
 Historical real Stripe test-mode results and the documentation-only Adyen review
 are described separately in [provider evidence](PROVIDERS.md).
 
-Sanitized execution summaries, test logs and JUnit results are retained in
-[`evidence/upload_2026-11-06/`](../evidence/upload_2026-11-06/). Its provenance file
-records original and exported hashes and the limited path/hostname substitutions.
-Original logs remain outside the upload. No implementation was changed to obtain
-these results. At the initial upload, the manuscript PDF and LaTeX were the existing author-review
-draft. These checks establish no novelty.
+No implementation was changed to obtain these results.
 
 ## Service repair validation — 10 November 2026
 

@@ -215,8 +215,7 @@ technical documentation; manuscript terms are in paper/LICENSE.md.
 A passing run supports conditional abstract proofs and selected implementation
 behaviors. It does not establish real-provider coverage, correctness of every
 amount, a usable trip, host isolation, universal refinement, or eventual drainage.
-The broader protocol/allocation fixes are documented in
-[correctness changes](CORRECTNESS_FIXES.md) and tested by the full repository
+The broader protocol and allocation modules are tested by the full repository
 suite; their SDK-dependent code is outside this selected package. Behavior beyond
 the constrained provider contract requires separate mechanisms and evidence.
 

@@ -11,5 +11,5 @@ under the arXiv.org perpetual, non-exclusive license to distribute
 license lets the authors later publish the work elsewhere, for example in a
 Springer LNCS proceedings volume, subject to that publisher's own agreement.
 
-Third-party material keeps its own terms; for example, `paper/workshop/aaai2027.sty`
-and `aaai2027.bst` are unchanged files from the AAAI author kit.
+Third-party material keeps its own terms; for example, the `llncs.cls` class
+file inside the arXiv source ZIP is Springer's.

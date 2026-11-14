@@ -12,10 +12,6 @@ paper, Springer LNCS, 16 pages plus references).
 | [lncs/](lncs/) | LaTeX source (LNCS format) |
 | [TrustBound_Draft.pdf](TrustBound_Draft.pdf) | Compiled paper, 16 pages |
 | [TrustBound_arXiv_Source.zip](TrustBound_arXiv_Source.zip) | arXiv upload: source, figures and `llncs.cls` |
-| [arxiv-metadata.json](arxiv-metadata.json) | Title, authors, abstract, categories and comments for the arXiv form |
-| [ARXIV_SUBMISSION_GUIDE.md](ARXIV_SUBMISSION_GUIDE.md) | arXiv submission notes |
-| [SUPPLEMENTARY_RECORD.md](SUPPLEMENTARY_RECORD.md) | Detailed run history and the flight–hotel diagnostic |
-| [workshop/](workshop/) | Earlier anonymous AAAI-27 workshop version (8 pages, not synchronized) |
 
 ## Build
 

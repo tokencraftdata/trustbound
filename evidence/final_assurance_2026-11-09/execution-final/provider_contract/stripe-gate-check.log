@@ -1,6 +1,0 @@
-'TrustBoundStripeGate.provider_step_refines' does not depend on any axioms
-'TrustBoundStripeGate.provider_runs_refine' does not depend on any axioms
-'TrustBoundStripeGate.unregistered_objects_inert' depends on axioms: [propext, Quot.sound]
-'TrustBoundStripeGate.fenced_provider_coverage' depends on axioms: [propext, Quot.sound]
-'TrustBoundStripeGate.terminal_manifest_drains' depends on axioms: [propext, Quot.sound]
-'TrustBoundStripeGate.terminal_cut_stable' depends on axioms: [propext, Quot.sound]

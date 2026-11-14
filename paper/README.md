@@ -12,7 +12,6 @@ paper, Springer LNCS, 16 pages plus references).
 | [lncs/](lncs/) | LaTeX source (LNCS format) |
 | [TrustBound_Draft.pdf](TrustBound_Draft.pdf) | Compiled paper, 16 pages |
 | [TrustBound_arXiv_Source.zip](TrustBound_arXiv_Source.zip) | arXiv upload: source, figures and `llncs.cls` |
-| [workshop/](workshop/) | Earlier anonymous AAAI-27 workshop version (8 pages, not synchronized) |
 
 ## Build
 

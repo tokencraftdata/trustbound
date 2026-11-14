@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 VERSION = "0.0.0-dev"
 FILES = (
     "LICENSE", "requirements-reviewer.txt", "requirements-core.txt",
-    "docs/REVIEWER_GUIDE.md", "docs/RESEARCH_CONTRACT.md", "docs/CORRECTNESS_FIXES.md",
+    "docs/REVIEWER_GUIDE.md", "docs/RESEARCH_CONTRACT.md",
     "formal/lean-toolchain", "formal/Admission.lean", "formal/StripeGate.lean",
     "formal/check_admission.py", "formal/check_stripe_gate.py",
     "src/trustbound/__init__.py", "src/trustbound/closure_experiment.py",

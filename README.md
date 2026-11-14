@@ -100,8 +100,8 @@ python3 -m venv .venv
 Replace the Lean path with your installed compiler. Use a new output directory
 for each run. Assertion-based checkers reject `-O` and `PYTHONOPTIMIZE`.
 
-[Download the versioned reviewer candidate](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip)
-and its [SHA-256 checksum](paper/release/TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip.sha256).
+This repository is the artifact: clone it (or download a tagged revision) and
+run the command above from its root.
 The [reviewer guide](docs/REVIEWER_GUIDE.md) explains extraction, integrity checks,
 scenario expectations, and how to rebuild the archive.
 
@@ -222,13 +222,13 @@ payment was executed. See [provider evidence](docs/PROVIDERS.md) and
 
 Provider scripts are separate from ordinary reproduction. They require explicitly
 supplied test credentials and may create, capture, book, or cancel test-account
-objects. The [export manifest](EXPORT_MANIFEST.json) describes the repository's
-contents; credentials and raw private provider records are excluded.
+objects. Credentials and raw private provider records are not included in the
+repository.
 
 ## Paper and licensing
 
 The manuscript is a mechanization note on payment completeness, authored by
-**Sandip Nandi — Independent Researcher**. Start with the
+**Sandip Nandi, Aishwarya Bose, Apurba Bose and Soovadeep Bakshi (Independent Researchers)**. Start with the
 [manuscript guide](paper/README.md) for the author and anonymous versions, sources,
 build instructions, and editorial history.
 
@@ -236,10 +236,7 @@ build instructions, and editorial history.
   the flight–hotel diagnostic.
 - [Research scope decision](docs/TRIP_CLOSURE_CANDIDATE.md): why trip expansion and
   reserve optimization are outside the note's contribution.
-- [Release candidate](paper/release/README.md): prepared artifact and reproduction
-  records.
-- [Submission status](paper/SUBMISSION_STATUS.md) and
-  [submission guide](paper/ARXIV_SUBMISSION_GUIDE.md): publication and access logistics.
+- [arXiv submission guide](paper/ARXIV_SUBMISSION_GUIDE.md): publication and access logistics.
 
 The code, Lean models, scripts, tests, evidence and technical documentation are
 released under the [MIT license](LICENSE). The manuscript is not MIT-licensed; it

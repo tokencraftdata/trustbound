@@ -1,6 +1,6 @@
 # arXiv submission guide — 9 November 2026
 
-Author: **Sandip Nandi — Independent Researcher**. Target: submit by
+Author: **Sandip Nandi, Aishwarya Bose, Apurba Bose and Soovadeep Bakshi (Independent Researchers)**. Target: submit by
 **30 November 2026**. The author reports an arXiv account and endorsement. The endorsement domain
 has not been independently inspected. Public release and submission remain
 on hold at the author's request; no paper or artifact has been published.
@@ -53,20 +53,9 @@ The copyable title, abstract, and comments use ASCII characters as required by
 
 ## Artifact access
 
-The private GitHub repository is a working copy, not public reader access.
-The prepared `TrustBound_Core_Artifact.zip` isolates the paper's existing core
-without provider probes, credentials, raw provider records, account details,
-conference template, or unrelated research. Its README explains what running it
-achieves; its manifest pins every packaged file. It currently retains a
-rights-pending notice and must not be described as an open-source release.
-
-Recommended release: publish this frozen selected-core package with the agreed
-software terms, retain its checksum and version, and add its stable public URL
-to the author manuscript. Keep the broader working repository private unless
-the author deliberately changes that decision. The final review requests a DOI-backed archive specifically. The Zenodo
-deposit candidate is prepared in `release/`. Publication approval, deposit-account
-access, and the software-license choice remain pending. Verify public download and its checksum after
-publication, then cite the issued version DOI in Appendix A.
+The repository will be made public and is the artifact. Code is MIT-licensed.
+Before submitting, tag the revision the paper describes (for example `v1.0`)
+and cite the repository URL with that tag in Appendix A.
 
 Alternatively, arXiv supports code/data under an `anc/` folder in a TeX source
 submission. These files become part of the public version; they cannot be

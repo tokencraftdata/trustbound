@@ -119,7 +119,6 @@ concrete effect multiplicity, ordering, outcomes or monetary totals.
   included, so these are reported supporting observations, not independently
   reproduced processor evidence.
 - `evidence/CORE_EXPORT_PROVENANCE.json`: original/export hashes and explicit path/hostname redaction records.
-- `SHA256SUMS.json`: hashes of every other file in this package.
 - `review/`: two separately checked Lean examples clarifying admission
   cancellation and the difference between membership coverage and a fence.
   They are not new core guarantees or part of the original 14-export count.
@@ -144,7 +143,7 @@ Complete admission coverage was not established. Its historical full-suite
 count of 222 is not part of the fresh selected-core run.
 
 The original core summary contains hashes of **original** logs. For redacted
-public logs use evidence/CORE_EXPORT_PROVENANCE.json and SHA256SUMS.json instead; do not interpret the
+public logs use evidence/CORE_EXPORT_PROVENANCE.json instead; do not interpret the
 deliberate path and hostname substitutions as a failed proof or unchanged original log.
 Hashes are integrity checks relative to supplied evidence, not independent
 attestations. Accepted logs and expected mutation failures are separate.

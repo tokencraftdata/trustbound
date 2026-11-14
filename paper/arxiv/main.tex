@@ -19,8 +19,6 @@
 \title{TrustBound: A Mechanized Note\\on Payment-Epoch Completeness}
 \begin{document}
 \maketitle
-\vspace{-2\baselineskip}
-\begin{center}\small\publicationstatus\end{center}
 \begin{abstract}
 Payment operations requested by an AI agent may remain executable, or their
 outcomes unresolved, after the agent has stopped. We study when a trusted
@@ -484,9 +482,9 @@ establish the remaining deployment premises.}
 We evaluate the conditional Lean models and selected local implementation
 behaviors. Table~\ref{tab:evidence} separates proof obligations from finite
 checks. The service revision adds serialized provider retrieval and validates
-direct-ledger inputs. Reviewer artifact \code{1.1.0-review.6} includes the retrieval
+direct-ledger inputs. The reviewer checks include the retrieval
 repair and maintained experiment tools; ledger tests remain in the broader suite.
-The reconciliation repair is recorded at \code{771e4e0}; the archive manifest
+The reconciliation repair is recorded at \code{771e4e0}; the artifact tag
 identifies the exact sources used below. The Lean declarations are unchanged.
 An earlier Stripe test-mode run is reported separately in
 Section~\ref{sec:historical}. It is the only experiment here that made provider
@@ -513,9 +511,9 @@ different kinds of checks and must not be summed as independent results.}
 \end{table}
 
 The revised archive passed outside the checkout using Python 3.12.14 and
-Lean 4.19.0 in the existing local reviewer environment. Earlier archive
-\code{1.1.0-review.4} also passed on Ubuntu and macOS CI workers; those runs
-predate the repair and are retained as historical evidence. Appendix~\ref{app:artifact}
+Lean 4.19.0 in the existing local reviewer environment. The repository's CI
+workflow also rebuilds the package from each pushed revision and reproduces it
+on Ubuntu and macOS workers. Appendix~\ref{app:artifact}
 identifies the run records. These executions are not an independent research
 team's review.
 
@@ -945,31 +943,18 @@ the case for a deployment. None follows from the present finite checks.
 \appendix
 \section{Artifact availability}
 \label{app:artifact}
-The code and instructions are maintained at
-\url{https://github.com/tokencraftdata/trustbound}. The service repair is recorded
-at revision \code{771e4e0}; the archive manifest binds the maintenance revision's
-exact source hashes to its reproduction results. The versioned
-reviewer ZIP can be supplied directly and reproduced without a repository
-account. Repository access remains private; an anonymous/public mirror and
-a permanent archive URL or DOI remain pending. Code and technical
-documentation use the existing MIT license; the manuscript is excluded.
-
-\paragraph{Versioned reviewer package.}
-The selected package is \path{TrustBound_Reviewer_Artifact_v1.1.0-review.6.zip}
-in \code{paper/release/}, alongside its checksum. It contains 45 entries,
-including a per-file manifest, Lean sources and checkers, selected Python code
-and tests, reference traces, and pinned reviewer dependencies. Its SHA-256 is:
-\begin{quote}\footnotesize\ttfamily
-ee94062ad505bb9d5efc785679b6190066aab4ad07cc3429aea59b8e619a3f93
-\end{quote}
-The content ID derived from member hashes is:
-\begin{quote}\footnotesize\ttfamily
-a64936b80a004eec5d33992f6dfb999072ddd756558cfe94f409e1478adab969
-\end{quote}
+% Set to the git tag that matches the submitted paper.
+\newcommand{\artifacttag}{v1.0}
+The artifact is the public repository
+\url{https://github.com/tokencraftdata/trustbound} at tag \code{\artifacttag}.
+The service repair is recorded at revision \code{771e4e0}. Code and technical
+documentation use the MIT license; the manuscript is excluded. The repository
+contains the Lean sources and checkers, the Python service code and tests,
+reference traces, and pinned reviewer dependencies.
 \begin{samepage}
 \paragraph{Reproduction.}
-After verifying the adjacent checksum and extracting the ZIP, use Python 3.11+
-and Lean 4.19.0. From the extracted directory, run:
+Check out the tag and use Python 3.11+ and Lean 4.19.0. From the repository
+root, run:
 \begin{verbatim}
 python3 -m venv .venv
 .venv/bin/python -m pip install -r requirements-reviewer.txt
@@ -988,16 +973,14 @@ including six successful overlapping-read cases.
 reference traces. After setup no network or provider credentials are needed.
 
 \paragraph{Reproduction evidence.}
-The local run is recorded in
-{\footnotesize\path{paper/release/reviewer-verification-v1.1.0-review.6.json}}.
-Historical \href{https://github.com/tokencraftdata/trustbound/actions/runs/43351357979}{CI run 43351357979}
-predates these repairs. Reviewer dependencies are fully pinned; the broader
+The repository's CI workflow reruns this command on Ubuntu and macOS for every
+push. Reviewer dependencies are fully pinned; the broader
 suite records its resolved versions.
 
 \paragraph{Use of generative AI.}
-OpenAI ChatGPT and Codex assisted with literature exploration, code development,
-and manuscript drafting and editing. The reported proof and test outcomes
-come from the recorded tool executions. The author retains responsibility
+OpenAI ChatGPT and Codex, and Anthropic Claude, assisted with literature
+exploration, code development, and manuscript drafting and editing. The reported proof and test outcomes
+come from the recorded tool executions. The authors retain responsibility
 for the manuscript and accompanying artifact.
 
 \section{Supplementary implementation details}
@@ -1015,7 +998,7 @@ The direct ledger rejects negative amounts, booleans, nonintegers, and values
 outside SQLite's signed integer range before mutation; zero remains valid.
 Tests cover invalid budgets, capacity creation, identity reuse after rejection,
 restart, and integer boundaries. Historical invalid rows are not repaired.
-These modules are tested in the full suite and excluded from the reviewer ZIP.
+These modules are tested in the full suite, not by the reviewer command.
 Their monetary rules and composed approval-to-dispatch behavior are not proved
 by the closure theorem.
 

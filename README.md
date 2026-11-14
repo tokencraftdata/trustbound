@@ -228,7 +228,7 @@ repository.
 ## Paper and licensing
 
 The manuscript is a mechanization note on payment completeness, authored by
-**Sandip Nandi — Independent Researcher**. Start with the
+**Sandip Nandi, Aishwarya Bose, Apurba Bose and Soovadeep Bakshi (Independent Researchers)**. Start with the
 [manuscript guide](paper/README.md) for the author and anonymous versions, sources,
 build instructions, and editorial history.
 

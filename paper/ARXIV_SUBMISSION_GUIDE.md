@@ -1,6 +1,6 @@
 # arXiv submission guide — 9 November 2026
 
-Author: **Sandip Nandi — Independent Researcher**. Target: submit by
+Author: **Sandip Nandi, Aishwarya Bose, Apurba Bose and Soovadeep Bakshi (Independent Researchers)**. Target: submit by
 **30 November 2026**. The author reports an arXiv account and endorsement. The endorsement domain
 has not been independently inspected. Public release and submission remain
 on hold at the author's request; no paper or artifact has been published.

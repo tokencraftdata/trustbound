@@ -21,10 +21,10 @@ The 864 serial schedules and the 40-case client comparison are reproduced.
 
 | Version | PDF | Source | Length |
 |---|---|---|---|
-| Author / arXiv, 13 November | [Author draft](TrustBound_Draft.pdf) | [LaTeX archive](TrustBound_arXiv_Source.zip) | 20 pages, 2 figures, 8 tables |
+| Author / arXiv, 14 November | [Author draft](TrustBound_Draft.pdf) | [LaTeX archive](TrustBound_arXiv_Source.zip) | 20 pages, 2 figures, 8 tables |
 | Earlier anonymous review copy, 10 November | [Review copy](TrustBound_Workshop_Anonymous.pdf) | [LaTeX archive](TrustBound_Workshop_Source.zip) | 8 pages including references, 1 figure |
 
-The author version names **Sandip Nandi — Independent Researcher**. The anonymous
+The author version names **Sandip Nandi, Aishwarya Bose, Apurba Bose and Soovadeep Bakshi (Independent Researchers)**. The anonymous
 copy uses the official AAAI 2027 format and has not been synchronized with this
 revision. Both retain the AI-assistance disclosure. Earlier editorial audits and review
 responses were removed from the working tree and remain in the git history.

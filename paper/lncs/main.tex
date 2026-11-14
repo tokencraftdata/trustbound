@@ -8,8 +8,6 @@
 \usepackage[hidelinks]{hyperref}
 \setlist{nosep,leftmargin=*}
 \newcommand{\code}[1]{\texttt{\small #1}}
-% Set to the git tag that matches the submitted paper.
-\newcommand{\artifacttag}{v1.0}
 \begin{document}
 \title{TrustBound: Mechanized Completeness for Payment Epochs Initiated by AI Agents}
 \titlerunning{TrustBound: Mechanized Payment-Epoch Completeness}
@@ -630,7 +628,7 @@ trace-level evidence into a guarantee for all executions.
 
 \paragraph{Artifact.}
 The Lean models, service, tests and reproduction scripts are available at
-\url{https://github.com/tokencraftdata/trustbound} (tag \code{\artifacttag})
+\url{https://github.com/tokencraftdata/trustbound}
 under the MIT license. Appendix~\ref{app:artifact} gives the reproduction
 command.
 
@@ -649,7 +647,7 @@ from recorded tool executions; the authors take responsibility for the paper.
 \section{Artifact and Reproduction}
 \label{app:artifact}
 The artifact is the public repository
-\url{https://github.com/tokencraftdata/trustbound} at tag \code{\artifacttag}. It
+\url{https://github.com/tokencraftdata/trustbound}. It
 contains the Lean sources and checkers, the Python service and tests, reference
 traces, and pinned dependencies. With Python~3.11+ and Lean~4.19.0, run from the
 repository root:

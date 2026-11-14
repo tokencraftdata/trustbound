@@ -26,9 +26,8 @@ arXiv ZIP, zip `main.tex`, `references.tex`, `figures/` and a copy of
 
 ## Artifact
 
-The artifact is this repository, cited in the paper at tag `v1.0` (set by
-`\artifacttag` in `lncs/main.tex`). Before posting, make the repository public
-and push that tag. The [reviewer guide](../docs/REVIEWER_GUIDE.md) gives the
+The artifact is this repository, which the paper links to directly. Before
+posting, make the repository public. The [reviewer guide](../docs/REVIEWER_GUIDE.md) gives the
 reproduction command; CI reruns it on Ubuntu and macOS for every push.
 
 The code is MIT-licensed; the manuscript is distributed under arXiv's

@@ -204,8 +204,7 @@ execute it on their own machine to establish independent reproduction.
 
 ## Access and publication
 
-The artifact is the public repository itself; cite a tag or commit so readers
-reproduce the same revision. The optional archive above is a self-contained
+The artifact is the public repository itself. The optional archive above is a self-contained
 subset for offline review and is not published separately. A private repository link alone does not provide reviewer access.
 Public/anonymous distribution and a permanent archive URL or DOI remain
 publication decisions. The existing MIT license covers the packaged code and
